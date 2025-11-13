@@ -1,7 +1,7 @@
 //Sau khi lam xong 10K+ Activa User thi cop code vao day de tao thanh Small Block
 import React from 'react'
 import ReactDOM from 'react-dom'
-function SmallBlock({
+function Section1SmallBlock({
     analysis,
     title
 }) {
@@ -12,4 +12,4 @@ function SmallBlock({
         </li>
     )
 }
-export default SmallBlock
+export default Section1SmallBlock
