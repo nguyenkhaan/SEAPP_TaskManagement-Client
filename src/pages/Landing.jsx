@@ -5,7 +5,6 @@ import Section2 from '../components/Landing/Section2'
 import Section3 from '../components/Landing/Section3'
 import Section4 from '../components/Landing/Section4'
 import Section5 from '../components/Landing/Section5'
-import GroupCard from '../components/GroupCard'
 function Landing()
 //Boc ngoai cung ben ngoai la LandingpageLayout. Phan tu ben trong day la landingPage. Trong landingpage thi chua nhieu section
 //Kich thuoc cua layout la 1440px, landing page lay w-full = 1440px, moi section cugn lay w-full 1440px 
@@ -15,7 +14,6 @@ function Landing()
             <Section1 />
             <Section2 />
             <Section3 />
-            <GroupCard /> 
             <Section4 />
             <Section5 />
         </div>
