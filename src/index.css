@@ -7,6 +7,10 @@
   color: rgba(255, 255, 255, 0.87);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  --color-primary: #FF6767;
+  --color-secondary: #F7F9FF;
+  --color-text: #403D3D;
+  
 }
 
 a {
