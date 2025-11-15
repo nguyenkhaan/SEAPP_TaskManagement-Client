@@ -4,7 +4,7 @@ function StepCard({
     index = 1 , title = 'Progress Tracking' , content = 'Sign up in seconds and set up your personalized workspace. No credit card required for the free trial.'
 }) {
     return (
-        <article className='w-[431px] relative h-150 rounded-2xl overflow-hidden flex flex-col'>
+        <article className='w-[431px] relative h-150 rounded-2xl overflow-hidden flex flex-col hover:shadow-lg'>
             <div className='w-[70px] h-[70px] flex absolute text-2xl font-medium items-center justify-center text-center rounded-full top-[19px] left-[15px] bg-(--color-primary) text-white'>
                 {index}
             </div>

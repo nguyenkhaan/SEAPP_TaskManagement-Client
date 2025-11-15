@@ -15,7 +15,7 @@ function Section1() {
                     {/* heading */}
                     <h2 className='text-6xl font-medium text-black'>
                         Manage your Task
-                        <span className=' text-[#ff6568] block mt-2'> Efforlessly</span>
+                        <span className=' text-(--color-primary) block mt-2'> Efforlessly</span>
                     </h2>
                     {/* paragraph */}
                     <p className='block w-120 text-black pt-6 text-2xl'>
