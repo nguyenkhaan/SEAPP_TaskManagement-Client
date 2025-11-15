@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import HeaderPhase from '../HeaderPhase'
-import FeatureCard from '../FetureCard'
+import FeatureCard from '../FeatureCard'
 function Section2() {
     return (
-        <div className='landing__section bg-white py-12'>
+        <section className='landing__section bg-white py-12'>
             <HeaderPhase title={'Features'} />
             <h2 className='mt-18 text-7xl text-black text-center w-full'>
                 Every thing you need to
@@ -38,7 +38,7 @@ function Section2() {
                 </div>
 
             </div>
-        </div>
+        </section>
     )
 }
 export default Section2

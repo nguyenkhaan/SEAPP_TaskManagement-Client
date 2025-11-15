@@ -5,13 +5,13 @@ function GroupStastic({
 })
 {
     return (
-        <div className='relative w-[300px] h-[148px] py-7 px-6 border boder-[#B3B3B3] rounded-3xl'>
-            <h2 className='font-medium text-[20px] text-black'>Total team</h2>
-            <span className='text-[48px] text-[#66FF91] font-medium'>{teamNumbers}</span>
-            <div className='absolute w-9 h-[31px] flex items-center justify-center text-sm rounded-xl top-[30px] left-[252px] text-white bg-[#ff6766]'>
-                <i class="fa-solid fa-people-group"></i>
+        <article className='relative w-[301px] h-[147px] py-7 px-6 border rounded-[23px] border-[#B3B3B3]'>
+            <h2 className='font-medium text-[20px] text-black font-[Montserrat]'>Total teams</h2>
+            <span className='text-[48px] text-[#807373] font-medium font-[Inter]'>{teamNumbers}</span>
+            <div className='absolute w-[31px] h-[31px] flex items-center justify-center text-sm rounded-full top-12 left-[252px] text-white bg-[#807373]'>
+                <i class="fa-regular fa-people-group"></i>
             </div>
-        </div>
+        </article>
     )
 }
 export default GroupStastic

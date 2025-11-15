@@ -6,12 +6,12 @@ function StatisticCard({
 })
 {
     return (
-        <div className='w-[302px] h-[238px] bg-[#f8f9fe] rounded-2xl flex items-center justify-center gap-1 flex-col'>
-            <h2 className='w-full text-center text-5xl text-[#ff6766] font-medium'>
+        <article className='w-[302px] h-[238px] bg-(--color-secondary) rounded-2xl flex items-center justify-center gap-3 flex-col'>
+            <h2 className='w-full text-center text-5xl text-(--color-primary) font-medium font-[Montserrat]'>
                 {title}
             </h2>
-            <span className='text-[#757070]'>{content}</span>
-        </div>
+            <span className='text-(--color-text-desc) font-[Inter] text-[20px]'>{content}</span>
+        </article>
     )
 }
 export default StatisticCard

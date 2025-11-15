@@ -10,7 +10,10 @@
   --color-primary: #FF6767;
   --color-secondary: #F7F9FF;
   --color-text: #403D3D;
-  
+  --color-text-desc: #757070;
+  --color-in-progress: #0224FF;
+  --color-not-started: #F21E1E;
+  --color-completed: #05A301;
 }
 
 

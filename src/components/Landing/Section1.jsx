@@ -6,7 +6,7 @@ import TaskByGroup from '../TaskByGroup'
 function Section1() {
 
     return (
-        <div className=' bg-[#f8f9fe] pt-28 pb-8 landing__section relative before:bg-[#f8f9fe] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen'>
+        <section className=' bg-[#f8f9fe] pt-28 pb-8 landing__section relative before:bg-[#f8f9fe] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen'>
             <button className='text-black rounded-3xl px-[22px] py-[13px w-[305px] h-[55px] text-base bg-white shadow-lg'>
                 Boost your productivity
             </button>
@@ -50,7 +50,7 @@ function Section1() {
                     <TaskByGroup /> 
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 export default Section1

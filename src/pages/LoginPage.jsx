@@ -5,7 +5,7 @@ import TwoColumnLayout from '../layouts/TwoColumnLayout'
 export default function LoginPage()
 {
     const leftContent = (
-        <div className='h-full w-full bg-[var(--color-primary)] ml-[50] text-white'>
+        <div className='h-full w-full bg-(--color-primary) ml-[50] text-white'>
             <div class='introduction' className='font-[Montserrat]'>
                 <h1 className='text-[54px] w-[555px] '>Welcome back to NoTask</h1>
                 <p>Continue managing your tasks and boosting your productivity.</p>

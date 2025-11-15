@@ -2,14 +2,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 function HeaderPhase({
-    title
+    title = ' Features '
 })
 {
     return (
         <div className='w-full flex items-center justify-center'>
-            <button className='rounded-4xl inline-block w-[360px] h-[68px] text-center text-[36px] shadow-[6px_0_8px_rgba(0,0,0,0.3)] border bg-[#f8f9fe] border-black px-12 text-3xl font-medium text-[#ff6766] py-3'>
+            <div className='rounded-4xl inline-block w-[368px] h-[68px] leading-[68px] text-center text-[36px] shadow-[6px_0_8px_rgba(0,0,0,0.3)] border bg-[#f8f9fe] border-black px-12 text-3xl font-medium text-[#ff6766]'>
                 {title}
-            </button>
+            </div>
         </div>
     )
 }

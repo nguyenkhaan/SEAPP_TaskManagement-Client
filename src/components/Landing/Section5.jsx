@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 function Section5() {
     return (
-        <div className='landing__section py-18  bg-[#ff6766] relative 
+        <section className='landing__section py-18  bg-[#ff6766] relative 
                         before:bg-[#ff6766] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen'>
             <div className='w-full h-full flex items-center flex-col justify-center'>
                 <h2 className='text-white w-[947px] font-medium text-[84px] leading-28 text-center'>Ready to Boost your Productivity?</h2>
@@ -17,7 +17,7 @@ function Section5() {
                 </div>
 
             </div>
-        </div>
+        </section>
     )
 }
 export default Section5
