@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import HeaderPhase from '../HeaderPhase'
-import FeatureCard from '../FeatureCard'
+import HeaderPhase from '../../components/HeaderPhase'
+import FeatureCard from '../../components/FeatureCard'
 function Section2() {
     return (
         <section className='landing__section bg-white py-12'>

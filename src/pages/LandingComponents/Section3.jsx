@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import HeaderPhase from '../HeaderPhase'
-import StepCard from '../StepCard'
+import HeaderPhase from '../../components/HeaderPhase'
+import StepCard from '../../components/StepCard'
 function Section3() {
     return (
 

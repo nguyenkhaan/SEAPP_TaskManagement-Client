@@ -29,3 +29,26 @@ Chỉnh sửa lại bố cục của thẻ body và thẻ root (Nếu khởi t�
 `npm install @mui/x-charts`
 ### 5.2. Làm cho phần viền tràn landing page 
 ``
+### 5.3. File layout 
+- Layout là file để các page có thể sử dụng trong trường gợp 1 cấu trúc dược tái sử dụng nhiều lần 
+
+Cách làm file layout: 
+- Tạo một file layout.jsx, hàm đó nhận vào 1 tham số chilren chính là page mà ta muốn hiển thị 
+```js
+function Layout({children}) 
+{
+    return (
+        <Navbar /> 
+            {children} 
+        <Footer />
+    )
+}
+```
+
+- Sau này nếu page nào muốn dùng layout này thì ta gọi Layout và truyền children vào 
+
+```js 
+<Layout>
+    {component....} 
+<Layout />
+```

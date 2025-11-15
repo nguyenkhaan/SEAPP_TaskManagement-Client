@@ -2,11 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { motion } from 'framer-motion'
 import Section1SmallBlock from './Section1SmallBlock'
-import TaskByGroup from '../TaskByGroup'
+import TaskByGroup from '../../components/TaskByGroup'
 function Section1() {
 
     return (
-        <section className=' bg-[#f8f9fe] pt-28 pb-8 landing__section relative before:bg-[#f8f9fe] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen'>
+        <div className=' bg-[#f8f9fe] pt-28 pb-8 landing__section relative before:bg-[#f8f9fe] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen'>
             <button className='text-black rounded-3xl px-[22px] py-[13px w-[305px] h-[55px] text-base bg-white shadow-lg'>
                 Boost your productivity
             </button>
@@ -15,7 +15,7 @@ function Section1() {
                     {/* heading */}
                     <h2 className='text-6xl font-medium text-black'>
                         Manage your Task
-                        <span className=' text-(--color-primary) block mt-2'> Efforlessly</span>
+                        <span className=' text-[#ff6568] block mt-2'> Efforlessly</span>
                     </h2>
                     {/* paragraph */}
                     <p className='block w-120 text-black pt-6 text-2xl'>
@@ -50,7 +50,7 @@ function Section1() {
                     <TaskByGroup /> 
                 </div>
             </div>
-        </section>
+        </div>
     )
 }
 export default Section1

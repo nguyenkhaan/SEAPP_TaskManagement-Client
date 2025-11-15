@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import StatisticCard from '../StatisticCard'
+import StatisticCard from '../../components/StatisticCard'
 function Section4() {
     return (
         <section className='landing__section bg-white py-20 flex items-center justify-center'>

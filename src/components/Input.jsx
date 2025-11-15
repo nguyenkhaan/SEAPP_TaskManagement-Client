@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 function Input({
-    title = 'Email'
+    title = 'Default title'
 }) {
     return (
         <div className='w-full mt-4'>

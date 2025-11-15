@@ -4,13 +4,14 @@ import ReactDOM from 'react-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Landing from '../pages/Landing'
-function LandingPageLayout() {
+function LandingPageLayout({
+    children 
+}) {
     return (
         <>
             <Navbar />
             <div className='w-[1440px] min-h-100 bg-yellow-500 mt-18'>   
-            {/* Cho margintop di xuong dung bang kich thuoc cua navbar, khong biet lam cach nao cho tong quat nua  */}
-                <Landing />
+                {children}
             </div>
             <Footer /> 
         </>
