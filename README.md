@@ -23,4 +23,9 @@ project/
 - Chạy lệnh `npm run dev`
 
 ## 5. Note trong quá trình làm 
-1. Chỉnh sửa lại bố cục của thẻ body và thẻ root (Nếu khởi tạo theo cách này thì thẻ root mặc định căn giữa, nền thẻ body màu đen...). Vào file `App.css` và `index.css` để chỉnh sửa 
+### 5.1. 
+Chỉnh sửa lại bố cục của thẻ body và thẻ root (Nếu khởi tạo theo cách này thì thẻ root mặc định căn giữa, nền thẻ body màu đen...). Vào file `App.css` và `index.css` để chỉnh sửa 
+### 5.1. Gói hỗ trợ làm biểu đồ
+`npm install @mui/x-charts`
+### 5.2. Làm cho phần viền tràn landing page 
+``
