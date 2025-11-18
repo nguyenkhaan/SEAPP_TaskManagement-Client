@@ -30,10 +30,10 @@ export default function LeftContent()
             <form className="mt-2 gap-4" onSubmit={handleSubmit(onSubmit)}>
                 <Input title="Full Name" formHandleMethod={formHandleMethod} />
                 {/* email */}
-                <Input title="Email Address" formType={'Email'} formHandleMethod={formHandleMethod} />
+                <Input title="Email Address" formType={'Email'} formHandleMethod={formHandleMethod} validation={true} />
                 {/* password */}
-                <Input title="Password" formType={'Password'} type='password' formHandleMethod={formHandleMethod} />
-                {/* <Input title="Confirm Password" /> */}
+                <Input title="Password" formType={'Password'} type='password' formHandleMethod={formHandleMethod} validation={true} />
+                <Input title="Confirm Password" formType={'Password'} type='password' formHandleMethod={formHandleMethod} validation={false} />
 
                 <div className="flex items-center text-(--color-primary) font-medium">
                     <Checkbox/>

@@ -37,10 +37,10 @@ export default function RightContent() {
       {/* input */}
       <form className="mt-10 gap-4" onSubmit={handleSubmit(onSubmit)} >
         {/* email */}
-        <Input title="Email Address" formType='Email' formHandleMethod={formHandleMethod} />
+        <Input title="Email Address" formType='Email' formHandleMethod={formHandleMethod} validation={true} />
         {/* password */}
         <div className="my-4">
-          <Input title="Password" type="password" formType='Password' formHandleMethod={formHandleMethod}/>
+          <Input title="Password" type="password" formType='Password' formHandleMethod={formHandleMethod} validation={true}/>
         </div>
 
         <div className="flex items-center text-(--color-primary) font-[Inter] font-medium">
@@ -64,7 +64,7 @@ export default function RightContent() {
         <div className="mt-6">
           <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google" />
         </div>
-      </form>
+      </div>
 
     </div>
   );

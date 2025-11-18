@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react';
 import ReactDOM from 'react-dom'
 import { useState } from 'react';
 import { ErrorMessage } from "@hookform/error-message";
@@ -7,7 +7,8 @@ function Input({
     title = 'Default title',
     type = 'text',
     formHandleMethod = {},
-    formType = 'default' //Dua cai formType nay de lay duoc Rule
+    formType = 'default', //Dua cai formType nay de lay duoc Rule, 
+    validation = false  //Quyet dinh xem co validation hay khong, yeu bang false thi khong, bang true thi co
 }) {
     const { register, formState: { errors } } = formHandleMethod
     const [showType, setShowType] = useState(type)
@@ -17,6 +18,9 @@ function Input({
         }
         else setShowType('password')
     }
+    //Xu li logic dieu kien de validation 
+    if (!validation) formType = 'default' 
+
     return (
         <div className='w-full mt-4 relative'>
             <h2 className='font-semibold text-[20px] font-[Montserrat] text-(--color-text) mb-2'>{title}</h2>
@@ -39,33 +43,14 @@ function Input({
                 }}
             />
             <div className={`absolute ${(formType === 'Password') ? 'block' : 'hidden'} text-black text-[24px] top-11 right-4`}>
-                {(showType === 'password') ? 
+                {(showType === 'password' && validation) ? 
                     <i class="fa-solid fa-eye-slash cursor-pointer" onClick={handleShowPasswordClick}></i>
                         :
                     <i class="fa-solid fa-eye cursor-pointer" onClick={handleShowPasswordClick}></i>
                 }
             </div>
-
-            <div className='relative'>
-                <input
-                    id={name}
-                    type={isPassword ? (showPassword ? "text" : "password") : isEmail ? "email" : "text"}
-                    required={isRequired}
-                    name={name}
-                    placeholder={placeholder}
-                    className={`w-full text-(--color-text-desc) h-[45px] text-[18px] rounded-[5px] px-3 pr-10 shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] border-[0.5px] border-(--color-text)  outline-none transition-all duration-300 ${isPassword ? 'text-security-star' : ''}`}
-                />
-                {isPassword && (
-                    <button
-                        type='button'
-                        onClick={() => setShowPassword(s => !s)}
-                        aria-label={showPassword ? "Hide password": "Show password"}
-                        className='absolute right-2 top-1/2 -translate-y-1/2 p-1 text-(--color-text-desc) hover:opacity-80'>
-                        {showPassword ? <EyeOff size={20} color='#757070'/> : <Eye size={20} color='#757070'/>}
-                    </button>
-                )}
-            </div>
         </div>
 
     )
 }
+export default Input
