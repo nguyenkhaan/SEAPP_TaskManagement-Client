@@ -109,3 +109,91 @@ Tailwind không nhận css động => Dùng thuộc tính style trong the JSX, t
 Có thể truyền nguyên 1 object styles, bên trong JSX component nhận vào và giải objec styles vào trong thuộc tính style 
 
 Thầy nhiều component được bọc bên trong 1 layout chung (1 thẻ div) => Tạo một component layout 
+
+### 5.7. Đăng nhập bằng Google 
+#### **1. Set up Google** 
+Truy cập trang web: `console.cloud.google.com`
+
+Vào dashboard -> API & Services -> Credentials -> Create an Outh ID 
+
+  Nếu đang localhost thì cập nhật 2 url: `http://localhost:5173` và `http://localhost`
+
+Tạo ra một access token để truy cập -> Copy Client ID : *802852666161-o82mhq04404uckeqv9ctn8ub5fc12vug.apps.googleusercontent.com* 
+
+**Một số chú ý**:
+
+- Sang tab Audience. Trong development thì thêm email các teseter vào, chỉ những email trong danh sách teser mới có thể đăng nhập. Khi deploy public thì sửa audience thành public để ai cũng có thể đăng nhặp. 
+- Nếu trong 6 tháng không dùng, client id sẽ bị xóa 
+
+#### **2. Set up code** 
+
+Cài đặt thư viện: `https://www.npmjs.com/package/@react-oauth/google`, document cũng ở trong đó 
+
+Trước tiên, trong file main.jsx, ta phải bọc bên ngoài bằng một thẻ `GoogleOAuthProvider`
+
+```js
+const CLIENT_ID = '802852666161-o82mhq04404uckeqv9ctn8ub5fc12vug.apps.googleusercontent.com'  
+//Sau nay deploy thi chuyen cai nay vao file .env, khong ne de nhu the nay 
+
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <StrictMode>
+      <GoogleOAuthProvider clientId={CLIENT_ID}>
+        <App />
+      </GoogleOAuthProvider>
+    </StrictMode>
+
+  </BrowserRouter>
+)
+```
+
+#### **3. Login Component** 
+Di chuyển sang trang muốn tạo login. Dùng component `<GoogleLogin />` được cấp sẵn sẽ tạo một nút Login by Google
+
+Nhận vào 2 tham số: 
+
+```js
+onSuccess = ((credentialResponse) => console.log(credentialResponse))  //Thanh cong 
+onError = ((error) => console.log(error)) //That bai 
+```
+
+Nếu đăng nhập thành công sẽ trả về một object tên là credentialResponse. Sử dụng gói `jwt-decode`, decode jet token trong đó sẽ thu được thông tin người dùng
+
+#### **4. Login Hook** 
+Dùng khi muốn custom một nút Login của riêng mình 
+
+```js
+import {useGoogleLogin} from '@react-oauth/google'
+```
+
+```jsx
+const login = useGoogleLogin({
+  onSuccess: (tokenResponse) => {
+    console.log(tokenResponse)
+  }, 
+  onError: (error) => {
+    console.log(error) 
+  }
+})
+<button onClick = {() => login}> Login </button>
+```
+
+Khi bấm button, sẽ chạy hàm login. Nếu thành công sẽ rơi vào onSuccess => Trả về 1 Bearer Token. Thất bại thì rơi vào onError 
+
+**Lấy thông tin người dùng**  
+Không dùng JWT Decode mà call API, thêm token vào headers của Request. 
+
+Link call: `https://www.googleapis.com/oauth2/v3/userinfo` 
+
+```js
+async function loginSuccess(tokenResponse) 
+{
+    const usserInfo = axios.get('https://www.googleapis.com/oauth2/v3/userinfo' , {
+      headers: {
+        'Authorization': `Bearer ${tokenResponse.access_token}`
+      }
+    }).then(res => res.data) 
+
+    console.log(userInfo) 
+}
+```

@@ -1,15 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router";
+import { GoogleLogin } from "@react-oauth/google";  //Button de hien thi ra 
+import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useGoogleOneTapLogin } from "@react-oauth/google";
+import axios from "axios";
 import Input from "../../components/Input";
 import CTA from '../../components/CTA';
 import Logo from "../../components/Logo";
 import { Checkbox } from "@mui/material";
-import { Link } from "react-router";
-function handleLogin()
-{
-
-}
+import { loginGoogleSuccess } from "../../services/loginGoogleSuccess";
+import { loginGoogleFailed } from "../../services/loginGoogleSuccess";
 
 export default function RightContent() {
 
@@ -23,6 +26,18 @@ export default function RightContent() {
   const onSubmit = (data) => {
     const {Email , Password} = data //Du lieu tra ve 
   }
+
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => loginGoogleSuccess(tokenResponse),  
+    onError: (error) => loginGoogleFailed(error) 
+  })
+
+
+  // const onetapLogin = useGoogleOneTapLogin({  //Mo chuc nang dang nhap nhanh 
+  //   onSuccess: (credentialResponse) => {
+  //     console.log('Thanh cong o one tap login' , credentialResponse)
+  //   }
+  // })
 
   return (
     <div className="box-border h-full w-full bg-white px-[100px] pt-[72px]">
@@ -66,7 +81,7 @@ export default function RightContent() {
         </div>
 
         <div className="mt-6">
-          <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google" />
+            <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google" action = {() => login()} />
         </div>
       </div>
 

@@ -7,6 +7,8 @@ import Input from '../../components/Input';
 import CTA from '../../components/CTA';
 import Logo from '../../components/Logo';
 import { Checkbox } from '@mui/material';
+import axios from 'axios';
+import { useGoogleLogin } from '@react-oauth/google';
 export default function LeftContent() {
     const formHandleMethod = useForm({
         mode: 'onChange',
@@ -31,6 +33,19 @@ export default function LeftContent() {
             ])
         if (!chk1 && !chk2) setLogMessages([]) //Dat lai thanh mang rong khi khong con loi 
     }
+
+    const login = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo' , {
+                headers: {
+                    "Authorization"  : `Bearer ${tokenResponse.access_token}`
+                }
+            }).then(res => res.data) 
+
+            console.log('Log ra tu trang LeftContent Sign up')
+            console.log('Thong tin nguoi dung' , userInfo)
+        }
+    })
     return (
         <div className='h-full w-full relative bg-white px-[100px] pt-5'>
             {/* Go back home */}
@@ -78,7 +93,7 @@ export default function LeftContent() {
                 </div>
 
                 <div className="mt-4">
-                    <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google" />
+                    <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google" action={login} />
                 </div>
             </div>
         </div>
