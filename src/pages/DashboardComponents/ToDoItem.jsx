@@ -1,0 +1,36 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import getStatusColor from '../../services/getStatusColor'
+function ToDoItem({
+    caption = 'default',
+    priority = 'Moderate',
+    createdOn = '18/10/2006'
+
+}) {
+    const color = getStatusColor(caption)
+    return (
+        <div className='border border-gray-500 rounded-xl w-[402px] h-[166px] px-6 py-3 flex flex-col justify-between relative'>
+            <div className='flex w-full items-start justify-between gap-3 flex-1 h-full'>
+                <div className='flex-2 min-w-0'>
+                    <h2 className='font-semibold text-base line-clamp-2 text-black'>Attend Nicholas birthday partyyyy yyyyyllllllllllllyyyyyyyyyyyyyyyyyyttttttttt</h2>
+                    <p className='text-(--color-text-desc) font-normal text-[14px] line-clamp-3'>Buy gifts on the way and pick to his house Buy gifts on the way and pick to his house Buy gifts on the way and pick to his house</p>
+                </div>
+                <div className='flex-1 flex items-center justify-end h-full'>
+                    <div className='w-22 h-22 rounded-2xl bg-black bg-center bg-cover bg-no-repeat'></div>
+                </div>
+
+            </div>
+
+            <div className='w-full flex items-center justify-between text-[10px] text-black'>
+                <span>Status: <span className='text-sky-600'>{priority}</span></span>
+                <span>Status: <span style={{ color: `var(${color})` }}>{caption}</span></span>
+                <span className='text-(--color-text-desc)'>Created on: {createdOn}</span>
+            </div>
+            <i
+                class="fa-regular fa-circle top-3 left-1 font-black absolute text-[12px]"
+                style={{ color: `var(${color})` }}
+            ></i>
+        </div>
+    )
+}
+export default ToDoItem

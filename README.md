@@ -102,3 +102,10 @@ tắt thì set Settribute trong thẻ body lại thành dark
 `/san-pham/ban-phim-co-akko-3098` (GOOD)
 
 - Không để thông tin người dùng (Ví dụ id, email) ngay trên thanh địa chỉ 
+
+### 5.6. CSS Động 
+Tailwind không nhận css động => Dùng thuộc tính style trong the JSX, truyền tham số vào component là các style muốn chính 
+
+Có thể truyền nguyên 1 object styles, bên trong JSX component nhận vào và giải objec styles vào trong thuộc tính style 
+
+Thầy nhiều component được bọc bên trong 1 layout chung (1 thẻ div) => Tạo một component layout 
