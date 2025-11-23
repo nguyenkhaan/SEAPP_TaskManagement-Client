@@ -118,6 +118,7 @@ function ViewTask() {
                     <div className='w-9 h-9 cursor-pointer bg-(--color-primary) rounded-lg flex items-center justify-center'>
                         <i class="fa-solid fa-trash"></i>
                     </div>
+                    {/* nghien cuu them khi xoa hay cap nhat thay doi task thi chuyen gi se xay ra */}
                 </div>
             </div>
         </WorkingLayout>

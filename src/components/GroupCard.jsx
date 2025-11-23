@@ -1,16 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 function GroupCard({
-    title = 'Default title Default title Default title Default title Default title',
-    content = 'Hoc xac suat thong ke diiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii dadf', 
+    groupTitle = 'Default title Default title Default title Default title Default title',
+    groupDesc = 'Hoc xac suat thong ke diiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii dadf', 
     icon = <i class="fa-solid fa-bicycle"></i>
 }) {
     return (
         <article className=' border border-[#A8A8A8] bg-(--color-primary) relative rounded-2xl overflow-hidden w-[301px] h-[223px]'>
             <div className='bg-white absolute flex flex-col items-start justify-between text-black w-full py-6 px-4 h-[162px] left-0 bottom-0'>
                 <div className='w-full'>
-                    <h2 className='text-black font-medium line-clamp-2 text-[18px] font-[Montserrat]'>{title}</h2>
-                    <span className='line-clamp-3 text-[11px] leading-tight my-1 text-(--color-text-desc)'>{content}</span>
+                    <h2 className='text-black font-medium line-clamp-2 text-[18px] font-[Montserrat]'>{groupTitle}</h2>
+                    <span className='line-clamp-3 text-[11px] leading-tight my-1 text-(--color-text-desc)'>{groupDesc}</span>
                 </div>
                 <ul className='text-[12px] bottom-2 px-4 left-0 absolute border-t border-t-gray-500 pt-2 w-full text-(--color-text-desc) flex items-center justify-between'>
                     <li>

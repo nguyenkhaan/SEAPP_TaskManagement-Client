@@ -9,6 +9,7 @@ import Modal from './components/modal.jsx'
 import Loading from './pages/LoadingModal.jsx'
 import MyTask from './pages/MyTask.jsx'
 import ViewTask from './pages/ViewTask.jsx'
+import ViewTeam from './pages/ViewTeam.jsx'
 function App() {
   return (
     // <>
@@ -29,7 +30,7 @@ function App() {
     //   </Routes>
     // </>
     <div>
-      <ViewTask /> 
+      <ViewTeam /> 
     </div> 
   )
 }
