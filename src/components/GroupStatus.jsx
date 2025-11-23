@@ -12,14 +12,14 @@ function GroupStatus({
 }) {
     const color = getStatusColor(caption)
     return (
-        <article className='w-[402px] relative h-[153px] px-8 py-2 flex overflow-hidden rounded-2xl border bg-transparent border-[#A1A3AB]'>
+        <article className='md:w-[402px] w-[360px] relative h-[153px] md:px-8 px-6 py-2 flex overflow-hidden rounded-2xl border bg-transparent border-[#A1A3AB]'>
             <div className='flex-3 flex-col flex items-start justify-between '>
                 <div className='pt-3'>
                     <h3 className='text-base line-clam-1 text-left text-black font-[Montserrat] font-medium'>{title}</h3>
-                    <p className='text-(--color-text-desc) mt-1 text-[14px] line-clamp-2 text-wrap w-full leading-tight'>{content}</p>
+                    <p className='text-(--color-text-desc) mt-1 md:text-[14px] text-[12px] md:line-clamp-2 line-clamp-3 text-wrap w-full leading-tight'>{content}</p>
                 </div>
                 <div>
-                    <p className='text-[12px] text-(--color-text-desc)'>
+                    <p className='md:text-[12px] text-[10px] text-(--color-text-desc)'>
                         Status:
                         <span style={{ color: `var(${color})` }}> {caption}</span>
                     </p>

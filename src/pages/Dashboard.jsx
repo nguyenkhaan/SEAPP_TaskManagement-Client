@@ -39,7 +39,7 @@ function Dashboard() {
                         <TodoTask />
                         <CompletedTask />
                     </div>
-                    <div className='flex-1 h-[720px] flex flex-col justify-between gap-3 '>
+                    <div className='flex-1 h-[720px] flex flex-col max-md:w-[392px] justify-between gap-3 '>
                         <TaskStatus />
                         <GroupStatus />
                     </div>
