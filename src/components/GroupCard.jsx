@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 function GroupCard({
-    title = 'Default title Default title Default title Default title Default title',
-    content = 'Hoc xac suat thong ke diiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii dadf', 
+    groupTitle = 'Default title Default title Default title Default title Default title',
+    groupDesc = 'Hoc xac suat thong ke diiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii dadf', 
     icon = <i class="fa-solid fa-bicycle"></i>
 }) {
     return (

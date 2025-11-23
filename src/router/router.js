@@ -4,6 +4,9 @@ import SignUpPage from "../pages/SignUpPage"
 import Dashboard from "../pages/Dashboard"
 import Team from "../pages/Team"
 import CreateTask from "../pages/CreateTask"
+import ViewTask from "../pages/ViewTask"
+import MyTask from "../pages/MyTask"
+import ViewTeam from "../pages/ViewTeam"
 const routes = [
     {
         path: '/',
@@ -34,6 +37,21 @@ const routes = [
         path: '/app/create-task', 
         element: CreateTask, 
         desc: 'Trang tao them task moi'
+    }, 
+    {
+        path: '/app/my-tasks', 
+        element: MyTask, 
+        desc: 'Trang hien thi thong tin ve cac task'
+    }, 
+    {
+        path: '/app/view-task', 
+        element: ViewTask, 
+        desc: 'Trang xem chi tiet noi dung ve task'
+    }, 
+    {
+        path: '/app/view-team', 
+        desc: 'Trang xem thong tin ve 1 nhom cu the', 
+        element: ViewTeam
     }
     //my-task , setting ... 
 ]

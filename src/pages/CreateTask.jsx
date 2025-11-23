@@ -15,8 +15,10 @@ import TitleInput from './TextEditorComponents/TitleInput'
 import PriorityChoice from './TextEditorComponents/PriorityChoice'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router'
+import { getCurrentDate } from '../services/getDate'
 function CreateTask() {
 
+    const {day , month , year , weekDay} = getCurrentDate() 
     const [data, setData] = useState({})
     const [taskImage, setTaskImage] = useState(null)
     const [previewTaskImage, setPreviewTaskImage] = useState(null)
@@ -75,6 +77,7 @@ function CreateTask() {
         formData.append('priority', priority)
         formData.append('content', editor.getHTML())
         formData.append('image', taskImage)
+        formData.append('date' , {day , month , year}) //Ngay thang tao task, cai nay server tu ghi nhan cung duoc 
         console.log(formData) //Du lieu thu duoc 
     }
 
@@ -82,13 +85,13 @@ function CreateTask() {
         <WorkingLayout>
             <div className='w-full h-[880px]  border p-6 pt-14 rounded-xl border-gray-500 mb-10'>
                 <Link onClick={() => {
-                    if (window.history.length > 1) naviagte(-1)
+                    if (window.history.length > 1) navigate(-1)
                     else navigate('/')
                 }}>
                 <span
                     className="absolute cursor-pointer top-5 right-10 text-lg text-(--color-primary) underline font-semibold"
                     onClick={() => {
-                        if (window.history.length > 1) naviagte(-1)
+                        if (window.history.length > 1) navigate(-1)
                         else navigate('/')
                     }}
                 >
@@ -103,7 +106,7 @@ function CreateTask() {
                         <TitleInput formHandle={formHandle} onTitleChange={(value) => setTitle(value)} />
                         <PriorityChoice formHandle={formHandle} onPriorityChange={value => setPriority(value)} />
                         <p className='mt-4 text-black'>Status: <span className='text-(--color-not-started)'>Not started</span></p>
-                        <p className='text-sm text-(--color-text-desc) mt-4'>Created On <span></span></p>
+                        <p className='text-sm text-(--color-text-desc) mt-4'>Created On <span>{day}/{month}/{year}</span></p>
                     </div>
                 </div>
 
@@ -121,7 +124,7 @@ function CreateTask() {
                 </button>
             </form>
         </div>
-        </WorkingLayout >
+        </WorkingLayout>
     )
 }
 export default CreateTask

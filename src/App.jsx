@@ -7,6 +7,9 @@ import routes from './router/router.js'
 import CreateTask from './pages/CreateTask.jsx'
 import Modal from './components/modal.jsx'
 import Loading from './pages/LoadingModal.jsx'
+import MyTask from './pages/MyTask.jsx'
+import ViewTask from './pages/ViewTask.jsx'
+import ViewTeam from './pages/ViewTeam.jsx'
 function App() {
   return (
     <>
@@ -27,9 +30,8 @@ function App() {
       </Routes>
     </>
     // <div>
-    //   <Loading /> 
-
-    // </div>
+    //   <ViewTeam /> 
+    // </div> 
   )
 }
 

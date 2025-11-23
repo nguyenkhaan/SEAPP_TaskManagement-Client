@@ -1,29 +1,33 @@
-import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import MessageLog from "./MessageLog";
-
-function Modal({ showModal, code }) {
-  const [copyStatus, setCopyStatus] = useState("read-text"); //Trang thai read = chua copy gi
-  const [copiedText, setCopiedText] = useState(undefined);
-  const handleClick = (e) => {
-    e.stopPropagation();
-    console.log("Parent click");
-    showModal(false);
-  };
-  const handleCopy = async () => {
-    const text = await navigator.clipboard.writeText(code);
-    setCopyStatus("write-text");
-  };
-  useEffect(() => {
-    if (copyStatus && copyStatus === "write-text") {
-      const timeoutID = setTimeout(() => {
-        setCopyStatus("read-text");
-      }, 4000);
-      return () => clearTimeout(timeoutID); //Xoa timeout de tranh leak memory
+import React, { useEffect } from 'react'
+import ReactDOM from 'react-dom'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import MessageLog from './MessageLog'
+import Spinner from './Spinner'  //Then loading vao ben trong 
+function Modal({
+    showModal,
+    code
+}) {
+    const [copyStatus, setCopyStatus] = useState('read-text') //Trang thai read = chua copy gi 
+    const [copiedText, setCopiedText] = useState(undefined)
+    const handleClick = (e) => {
+        e.stopPropagation()
+        console.log('Parent click')
+        showModal(false)
     }
-  }, [copyStatus]);
+    const handleCopy = async () => {
+        const text = await navigator.clipboard.writeText(code)
+        setCopyStatus('write-text')
+
+    }
+    useEffect(() => {
+        if (copyStatus && copyStatus === 'write-text') {
+            const timeoutID = setTimeout(() => {
+                setCopyStatus('read-text')
+            }, 4000)
+            return () => clearTimeout(timeoutID)  //Xoa timeout de tranh leak memory 
+        }
+    }, [copyStatus])
 
   return (
     <div

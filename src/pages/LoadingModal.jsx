@@ -12,7 +12,7 @@ function LoadingModal() {
             transition={{  ease: 'easeInOut', duration: '0.5' }}
             exit={{ y: '100%',  opacity: 0 }}
         >
-            <Spinner top={'1/2'} left={'1/2'} />
+            <Spinner position={{top: '50%', left: '50%'}} isLoading={true} />
         </motion.div>
 
     )
