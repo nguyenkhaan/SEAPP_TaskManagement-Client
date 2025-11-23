@@ -7,10 +7,10 @@ function StepsSection() {
 
         <section className='landing__section bg-[#f8f9fe] relative before:bg-[#f8f9fe] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen py-16'>
             <HeaderPhase title={'How It Works?'} />
-            <h2 className='mt-18 text-7xl text-black text-center w-full'>
+            <h2 className='mt-18 text-7xl text-black text-center w-full font-[Montserrat]'>
                 Get Started In
             </h2>
-            <h2 className='mt-2 text-7xl text-[#ff6766] text-center w-full'>
+            <h2 className='mt-2 text-7xl text-[#ff6766] text-center w-full font-[Montserrat]'>
                 Three Simple Steps
             </h2>
             <div className='mt-32 grid grid-cols-12'>

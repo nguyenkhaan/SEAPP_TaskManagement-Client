@@ -45,7 +45,9 @@ function Spinner({ width = 80, height = 80, position = {top : '50%', left : '50%
                 Waiting is happiness...
             </div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
 export default Spinner

@@ -15,13 +15,16 @@ export default function CTA({
     return (
         <button 
             style={{ width: width, height: height, backgroundColor: backgroundColor, color: color }} 
-            className={` font-medium rounded-lg cursor-pointer text-[22px] font-[Inter] cursor ${border && 'border border-(--color-text-desc)'}`}
+            className={` font-medium rounded-lg cursor-pointer text-[22px] cursor ${border && 'border border-(--color-text-desc)'} flex `}
             type={type}
             onClick={action}
             >
-            {icon && <i class="fa-brands fa-google"></i>}
-            <div className={`inline-block ${icon && 'ml-2'} `}>
-                {title}
+            <div className='mx-auto flex items-center'>
+                {icon && <img className='size-6' src={`${google}`}/>}
+                <div className={`inline-block mx-auto ${icon && 'ml-4'} `}>
+                    {title}
+                </div>
+
             </div>
         </button>
     )

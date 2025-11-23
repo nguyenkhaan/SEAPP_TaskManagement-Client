@@ -12,7 +12,7 @@ function GroupStatus({
 }) {
     const color = getStatusColor(caption)
     return (
-        <article className='w-[402px] relative h-[153px] px-8 py-2 flex overflow-hidden rounded-2xl border bg-transparent border-[#A1A3AB] font-[Inter]'>
+        <article className='w-[402px] relative h-[153px] px-8 py-2 flex overflow-hidden rounded-2xl border bg-transparent border-[#A1A3AB]'>
             <div className='flex-3 flex-col flex items-start justify-between '>
                 <div className='pt-3'>
                     <h3 className='text-base line-clam-1 text-left text-black font-[Montserrat] font-medium'>{title}</h3>

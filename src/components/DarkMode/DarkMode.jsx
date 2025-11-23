@@ -6,10 +6,10 @@ import "./DarkMode.css";
 
 const DarkMode = () => {
     const setDarkMode = () => {
-        document.querySelector('body').setAttribute('app-data-theme' , 'dark')
+        document.querySelector('body').setAttribute('data-app-theme' , 'dark')
     }
     const setLightMode = () => {
-        document.querySelector('body').setAttribute('app-data-theme' , 'light')
+        document.querySelector('body').setAttribute('data-app-theme' , 'light')
     }
     const toggleTheme = (e) => {
         if (e.target.checked) setDarkMode() 
