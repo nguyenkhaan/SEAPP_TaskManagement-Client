@@ -6,6 +6,7 @@ import Team from "../pages/Team"
 import CreateTask from "../pages/CreateTask"
 import ViewTask from "../pages/ViewTask"
 import MyTask from "../pages/MyTask"
+import ViewTeam from "../pages/ViewTeam"
 const routes = [
     {
         path: '/',
@@ -46,6 +47,11 @@ const routes = [
         path: '/app/view-task', 
         element: ViewTask, 
         desc: 'Trang xem chi tiet noi dung ve task'
+    }, 
+    {
+        path: '/app/view-team', 
+        desc: 'Trang xem thong tin ve 1 nhom cu the', 
+        element: ViewTeam
     }
     //my-task , setting ... 
 ]

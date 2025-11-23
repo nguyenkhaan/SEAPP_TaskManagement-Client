@@ -5,8 +5,7 @@ import { valueFormatter , desktopOS } from '../../services/webUsage';
 import { legendClasses } from '@mui/x-charts/ChartsLegend';
 function ChartViewTeam() {
     return (
-        <div className='w-full min-h-60 mt-5'>
-            <h2 className='font-md text-2xl text-black w-full'>Thống kê</h2>
+        <div className='w-full min-h-60 mt-5 flex flex-col items-start justify-between'>
             <div className='mt-4 flex items-center justify-start w-full min-h-50'>
                 <PieChart
                     series={[

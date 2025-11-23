@@ -4,7 +4,7 @@ function ViewTeamHeader({
     groupTitle = 'Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê',
 }) {
     return (
-        <div className='w-full h-[210px] flex py-6 px-8 font-md items-center justify-between bg-(--color-primary) rounded-3xl shadow-xl gap-12'>
+        <div className='w-full h-[220px] flex py-6 px-8 font-md items-center justify-between bg-(--color-primary) rounded-3xl shadow-xl gap-12'>
             <div className='flex flex-2 flex-col h-full gap-5 justify-between items-start text-white'>
                 <h2 className='text-[48px] line-clamp-2'>
                     {groupTitle}
