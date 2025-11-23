@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import Logo from './Logo'
 import FooterList from './FooterList'
 import DarkMode from './DarkMode/DarkMode'
-function Footer() {
+export default function Footer() {
     return (
-        <footer className='w-[1440px] relative px-16 h-120  py-18'>
+        <footer className='w-[1440px] relative px-16 h-120  pt-18'>
             <div className='grid grid-cols-12 border-b border-[#989898]'>
                 <div className='col-span-6 flex items-start flex-col justify-start'>
                     <Logo width={220} height={58} />
@@ -23,7 +23,7 @@ function Footer() {
                 </div>
             </div>
 
-            <div className='w-full flex relative pt-10 pb-7 items-center pl-8 justify-between'>
+            <div className='w-full flex relative pt-10 items-center justify-between'>
                 <span className='block text-xl text-black'>© 2025 NoTask. All rights reserved.</span>
                 <div className='flex items-center justify-between text-(--color-text-desc) gap-6'>
                     <span className='text-xl'>Privacy Policy</span>
@@ -32,9 +32,6 @@ function Footer() {
                 </div>
                 
             </div>
-
-
         </footer>
     )
 }
-export default Footer
