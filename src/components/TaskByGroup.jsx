@@ -3,25 +3,21 @@ import ReactDOM from 'react-dom'
 import TaskByGroupHeader from './TaskByGroupHeader'
 import TaskOverview from './TaskOverview'
 function TaskByGroup({
-    width = 670, 
-    height = 500 
+    width = 984,
+    height = 680,
+    groupTitle = 'Xác suất thống kê'
 }) {
+    //lat nua tao them mot color picker o day 
     return (
-        <article className={`rounded-2xl flex flex-col items-start justify-between shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black`} style={{width , height}}>
-            <TaskByGroupHeader />
+        <article className={`rounded-2xl flex flex-col items-start justify-between shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black`} style={{ width, height }}>
+            <TaskByGroupHeader groupTitle={groupTitle} />
             <ul className='w-full flex-1 py-5 px-8 overflow-y-scroll overflow-x-hidden wrapper h-full flex flex-col items-center pb-6'>
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
-                <TaskOverview width={609} /> 
+                <TaskOverview width={850} taskTitle='Landing Page Design' priority='Moderate' status={'Completed'} />
+                <TaskOverview width={850} taskTitle='Landing Page Design' priority='Moderate' status={'Completed'} />
+                <TaskOverview width={850} taskTitle='Landing Page Design' priority='Moderate' status={'Completed'} />
+                <TaskOverview width={850} taskTitle='Landing Page Design' priority='Moderate' status={'Completed'} />
+                <TaskOverview width={850} taskTitle='Landing Page Design' priority='Moderate' status={'Completed'} />
+                <TaskOverview width={850} taskTitle='Landing Page Design' priority='Moderate' status={'Completed'} />
                 <li className='h-10'></li>
             </ul>
         </article>

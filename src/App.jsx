@@ -7,29 +7,30 @@ import routes from './router/router.js'
 import CreateTask from './pages/CreateTask.jsx'
 import Modal from './components/modal.jsx'
 import Loading from './pages/LoadingModal.jsx'
+import MyTask from './pages/MyTask.jsx'
+import ViewTask from './pages/ViewTask.jsx'
 function App() {
   return (
-    <>
-      <Routes>
+    // <>
+    //   <Routes>
 
-        {
-          routes.map((route) => {
-            return (
-              <Route element={React.createElement(route.element, null, null)} path={route.path} >
+    //     {
+    //       routes.map((route) => {
+    //         return (
+    //           <Route element={React.createElement(route.element, null, null)} path={route.path} >
 
-              </Route>
-            )
-          })
+    //           </Route>
+    //         )
+    //       })
 
-        }
-        {/* Loi 404 Not Found */}
-        <Route path='*' element={<NotFound />}></Route>
-      </Routes>
-    </>
-    // <div>
-    //   <Loading /> 
-
-    // </div>
+    //     }
+    //     {/* Loi 404 Not Found */}
+    //     <Route path='*' element={<NotFound />}></Route>
+    //   </Routes>
+    // </>
+    <div>
+      <ViewTask /> 
+    </div> 
   )
 }
 
