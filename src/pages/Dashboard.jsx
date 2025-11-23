@@ -12,15 +12,15 @@ function Dashboard() {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        const id = setTimeout(() => setIsLoading(false), 6000)
+        const id = setTimeout(() => setIsLoading(false), 0)
         return () => clearTimeout(id)
     }, [])
     const currentPage = (   //currentPage la trang hien tai 
         <WorkingLayout>
-            <div className='w-full h-full mb-20'>
-                <div className='w-full flex items-center justify-between'>
-                    <h2 className='font-medium text-4xl text-black'>Welcome back Cloudian</h2>
-                    <div className='items-center justify-evenly flex gap-6'>
+            <div className='md:w-full md:h-full w-screen md:mb-20 mb-8 overflow-x-hidden flex flex-col items-center justify-between'>
+                <div className='w-full flex max-md:flex-col md:items-center items-start gap-3 md:gap-4 justify-between px-4 md:px-0'>
+                    <h2 className='font-medium text-3xl md:text-4xl text-black'>Welcome back Cloudian</h2>
+                    <div className='items-center md:justify-evenly max-md:w-full max-md:justify-between max-md:pr-2 flex gap-6'>
                         <ul className='flex items-center justify-start gap-1'>
                             <li className='rounded-lg bg-black w-9 h-9'></li>
                             <li className='rounded-lg bg-black w-9 h-9'></li>
@@ -34,12 +34,12 @@ function Dashboard() {
                     </div>
                 </div>
 
-                <div className='mt-8 border overflow-y-scroll wrapper flex items-start gap-3 border-gray-600 bg-[#F5F8FF] min-h-[760px] w-full shadow-2xl p-6'>
-                    <div className='flex-1 h-[720px] flex flex-col justify-between gap-3'>
+                <div className='mt-8 container-- border overflow-y-auto overflow-x-hidden wrapper flex max-md:flex-col items-center md:items-start gap-3 border-gray-600 bg-[#F5F8FF] min-h-[760px] w-full shadow-2xl p-6'>
+                    <div className='flex-1 h-[720px] flex flex-col md:items-start items-center justify-between gap-3'>
                         <TodoTask />
                         <CompletedTask />
                     </div>
-                    <div className='flex-1 h-[720px] flex flex-col justify-between gap-3'>
+                    <div className='flex-1 h-[720px] flex flex-col justify-between gap-3 '>
                         <TaskStatus />
                         <GroupStatus />
                     </div>

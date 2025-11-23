@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Spinner({ width = 80, height = 80, position = {top : '50%', left : '50%' } , isLoading = false }) {
+function Spinner({ width = 80, height = 80, position = { top: '50%', left: '50%' }, isLoading = false }) {
     if (!isLoading) return null //Neu khong loading thi khong return ve cai gi ca 
     return (
         <div
@@ -45,9 +45,7 @@ function Spinner({ width = 80, height = 80, position = {top : '50%', left : '50%
                 Waiting is happiness...
             </div>
         </div>
-      </div>
-    </div>
-  );
+    )
 }
 
 export default Spinner

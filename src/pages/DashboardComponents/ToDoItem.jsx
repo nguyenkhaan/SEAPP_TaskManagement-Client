@@ -9,14 +9,14 @@ function ToDoItem({
 }) {
     const color = getStatusColor(caption)
     return (
-        <div className='border border-gray-500 rounded-xl w-[402px] h-[166px] px-6 py-3 flex flex-col justify-between relative'>
+        <div className='border border-gray-500 rounded-xl w-[360px] md:w-[402px] h-[166px] px-6 py-3 flex flex-col justify-between relative'>
             <div className='flex w-full items-start justify-between gap-3 flex-1 h-full'>
                 <div className='flex-2 min-w-0'>
                     <h2 className='font-semibold text-base line-clamp-2 text-black'>Attend Nicholas birthday partyyyy yyyyyllllllllllllyyyyyyyyyyyyyyyyyyttttttttt</h2>
-                    <p className='text-(--color-text-desc) font-normal text-[14px] line-clamp-3'>Buy gifts on the way and pick to his house Buy gifts on the way and pick to his house Buy gifts on the way and pick to his house</p>
+                    <p className='text-(--color-text-desc) font-normal text-[12px] mt-1 md:mt-0 md:text-[14px] line-clamp-3'>Buy gifts on the way and pick to his house Buy gifts on the way and pick to his house Buy gifts on the way and pick to his house</p>
                 </div>
                 <div className='flex-1 flex items-center justify-end h-full'>
-                    <div className='w-22 h-22 rounded-2xl bg-black bg-center bg-cover bg-no-repeat'></div>
+                    <div className='md:w-22 md:h-22 w-20 h-20 rounded-2xl bg-black bg-center bg-cover bg-no-repeat'></div>
                 </div>
 
             </div>

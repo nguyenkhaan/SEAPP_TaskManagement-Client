@@ -192,3 +192,12 @@ input[type="password"]::-webkit-textfield-decoration {
     @apply text-lg font-bold
   }
 }
+/* Ẩn scrollbar nhưng vẫn scroll được */
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE, Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
