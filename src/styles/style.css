@@ -48,7 +48,7 @@
 
 @media screen and (max-width: 768px){
     .task__overview {
-        width: 380px !important; 
+        width: 370px !important; 
     }
     .task__group {
         width: 400px !important

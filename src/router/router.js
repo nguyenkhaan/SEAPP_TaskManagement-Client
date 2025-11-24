@@ -49,7 +49,7 @@ const routes = [
         desc: 'Trang xem chi tiet noi dung ve task'
     }, 
     {
-        path: '/app/view-team', 
+        path: '/app/view-team',   //Da responsive 
         desc: 'Trang xem thong tin ve 1 nhom cu the', 
         element: ViewTeam
     }
