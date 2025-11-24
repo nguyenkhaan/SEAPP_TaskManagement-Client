@@ -11,17 +11,17 @@ function MyTask() {
         <WorkingLayout>
             <div className='w-full min-h-200 pb-20'>
                 {/* Header */}
-                <div className='w-full flex items-center justify-between'>
-                    <h2 className='font-md text-[40px]'>
+                <div className='w-full flex max-md:px-6 items-center justify-between'>
+                    <h2 className='font-md text-[28px] md:text-[40px]'>
                         My Tasks
                     </h2>
-                    <div className='w-11 h-11 bg-(--color-primary) rounded-lg flex items-center justify-center'>
-                        <i class="fa-solid fa-filter font-semibold text-white text-2xl"></i>
+                    <div className='md:w-11 md:h-11 w-10 h-10 bg-(--color-primary) rounded-md md:rounded-lg flex items-center justify-center'>
+                        <i class="fa-solid fa-filter font-semibold text-white text-xl md:text-2xl"></i>
                     </div>
 
                 </div>
-                <span className='block font-md text-xl text-black'>Manage and monitor your tasks</span>
-                <div className='flex w-full min-h-30 flex-col items-start justify-start mt-6 gap-6'>
+                <span className='block font-md text-base max-md:px-6 md:text-xl text-black'>Manage and monitor your tasks</span>
+                <div className='flex w-full min-h-30 flex-col md:items-start items-center justify-start mt-6 gap-6'>
                     <TaskByGroup width={'100%'} groupTitle={'Xác suất thống kê'} />
                     <TaskByGroup width={'100%'} groupTitle={'Pháp luật đại cương'} />
                     <TaskByGroup width={'100%'} groupTitle={'Kinh tế chính trị Mác - Lê Nin'} />

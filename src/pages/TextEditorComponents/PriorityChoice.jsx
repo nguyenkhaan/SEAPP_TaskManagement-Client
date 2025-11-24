@@ -16,7 +16,7 @@ function PriorityChoice({
     } , [value])
     return (
         <>
-            <p className='text-black flex items-center justify-start gap-12 text-base mt-4'>
+            <p className='text-black flex items-center justify-start gap-5 md:gap-12 text-base mt-4'>
                 Priority
                 <span>
                     <label htmlFor='Moderate' className='mr-2'>Moderate</label>
@@ -52,7 +52,7 @@ function PriorityChoice({
                 render={({ messages }) => {
                     if (!messages) return null
                     const msgs = ((Array.isArray(messages)) ? messages : Object.values(messages))
-                    return msgs.map((msg, index) => <p key={index}  className='text-red-600 mt-2 italic my-1 font-medium text-base'>{msg}</p>)
+                    return msgs.map((msg, index) => <p key={index}  className='text-red-600 mt-2 italic my-1 font-medium md:text-base text-sm'>{msg}</p>)
                 }}
             />
         </>
