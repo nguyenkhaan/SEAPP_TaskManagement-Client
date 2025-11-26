@@ -15,7 +15,7 @@ function TitleInput({
     return (
         <>
             <input 
-                className='font-semibold text-2xl w-full line-clamp-2 text-black px-3 py-2 rounded-md border-2 border-slate-300' 
+                className='font-semibold text-xl md:text-2xl w-full line-clamp-2 text-black px-3 py-2 rounded-md border-2 border-slate-300' 
                 {...register("createTaskTitleInput" , {
                     required: "*Không được bỏ trống tiêu đề bạn ơi*"
                 })}
@@ -26,7 +26,7 @@ function TitleInput({
                 render={({ messages }) => {
                     if (!messages) return null
                     const msgs = ((Array.isArray(messages)) ? messages : Object.values(messages))
-                    return msgs.map((msg, index) => <p key={index}  className='text-red-600 italic my-1 font-medium text-base'>{msg}</p>)
+                    return msgs.map((msg, index) => <p key={index}  className='text-red-600 italic my-1 font-medium md:text-base text-sm'>{msg}</p>)
                 }}
             />
         </>

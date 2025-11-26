@@ -83,7 +83,7 @@ function CreateTask() {
 
     return (
         <WorkingLayout>
-            <div className='w-full h-[880px]  border p-6 pt-14 rounded-xl border-gray-500 mb-10'>
+            <div className='w-full min-h-[880px] md:h-[880px]  border p-6 pt-14 rounded-xl border-gray-500 mb-10'>
                 <Link onClick={() => {
                     if (window.history.length > 1) navigate(-1)
                     else navigate('/')
@@ -100,7 +100,7 @@ function CreateTask() {
             </Link>
             <form className='relative' onSubmit={handleSubmit(onSubmit)}>
                 {/* Header */}
-                <div className='flex items-start justify-start gap-6'>
+                <div className='flex max-md:flex-col items-start justify-start gap-6'>
                     <ImageUpload hooks={{ taskImage, setTaskImage, previewTaskImage, setPreviewTaskImage }} />
                     <div className='flex-1'>
                         <TitleInput formHandle={formHandle} onTitleChange={(value) => setTitle(value)} />
@@ -111,14 +111,14 @@ function CreateTask() {
                 </div>
 
                 {/* MainEditorLayout */}
-                <div className='text-lg min-h-[540px] mt-8'>
+                <div className='text-lg min-h-[540px] md:mt-8 mt-6'>
                     {/* MenuBar */}
                     <MenuBar editor={editor} />
                     {/* RichTextEditor */}
                     <RichTextEditor editor={editor} />
                 </div>
                 <button type='submit'
-                    className='px-4 top-40 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
+                    className='px-4 top-35 md:top-40 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
                             font-semibold cursor-pointer shadow-lg rounded-md'>
                     Create Task
                 </button>

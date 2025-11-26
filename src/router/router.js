@@ -24,32 +24,32 @@ const routes = [
         desc: 'Trang dang nhap', 
     }, 
     {
-        path: 'app/teams', 
+        path: 'app/teams',   //Da responsive 
         element: Team, 
         desc: 'Trang team'
     }, 
     {
-        path: '/app/dashboard', 
+        path: '/app/dashboard', //Da responsive 
         element: Dashboard, 
         desc: 'Trang dashboard'
     }, 
-    {
-        path: '/app/create-task', 
+    { 
+        path: '/app/create-task',   //Da responsive 
         element: CreateTask, 
         desc: 'Trang tao them task moi'
     }, 
     {
-        path: '/app/my-tasks', 
+        path: '/app/my-tasks',   //Da responsive 
         element: MyTask, 
         desc: 'Trang hien thi thong tin ve cac task'
     }, 
     {
-        path: '/app/view-task', 
+        path: '/app/view-task',   //Da responsive 
         element: ViewTask, 
         desc: 'Trang xem chi tiet noi dung ve task'
     }, 
     {
-        path: '/app/view-team', 
+        path: '/app/view-team',   //Da responsive 
         desc: 'Trang xem thong tin ve 1 nhom cu the', 
         element: ViewTeam
     }

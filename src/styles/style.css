@@ -45,3 +45,12 @@
     padding-left: 40px; 
     padding-right: 40px; 
 }
+
+@media screen and (max-width: 768px){
+    .task__overview {
+        width: 370px !important; 
+    }
+    .task__group {
+        width: 400px !important
+    }
+}

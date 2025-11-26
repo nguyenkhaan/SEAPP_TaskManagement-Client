@@ -20,7 +20,7 @@ function WorkingLayout({
             <WorkingNavbar />
             <div className='w-[1440px] left-0'>
                 <WorkingSidebar />
-                <div className='absolute w-[984px] left-110 -mt-5'>
+                <div className='absolute overflow-x-hidden w-screen min-h-screen md:w-[984px] scrollbar-none md:left-110 -mt-5'>
                     {children}
                 </div>
             </div>

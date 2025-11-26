@@ -5,7 +5,7 @@ function Logo({
     width = 160, height = 28
 }) {
     return (
-        <span className='font-[Inter] font-bold text-[40px]'>
+        <span className='font-[Inter] font-bold md:text-[40px] text-[30px]'>
             <span className='text-(--color-primary)'>No</span>
             <span className='text-(--color-text)'>Task</span>
         </span>
