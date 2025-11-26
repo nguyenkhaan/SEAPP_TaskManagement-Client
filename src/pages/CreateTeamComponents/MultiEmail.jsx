@@ -18,7 +18,7 @@ function MultiEmail({
         autoFocus={true}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
-        className='text-[18px] h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-5'
+        className='md:text-[18px] text-base h-10 md:h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-5'
         style={{
           backgroundColor: '#f5f8ff', 
           borderWidth: 1, 

@@ -13,26 +13,26 @@ import ViewTeam from './pages/ViewTeam.jsx'
 import CreateTeam from './pages/CreateTeam.jsx'
 function App() {
   return (
-    // <>
-    //   <Routes>
+    <>
+      <Routes>
 
-    //     {
-    //       routes.map((route) => {
-    //         return (
-    //           <Route element={React.createElement(route.element, null, null)} path={route.path} >
+        {
+          routes.map((route) => {
+            return (
+              <Route element={React.createElement(route.element, null, null)} path={route.path} >
 
-    //           </Route>
-    //         )
-    //       })
+              </Route>
+            )
+          })
 
-    //     }
-    //     {/* Loi 404 Not Found */}
-    //     <Route path='*' element={<NotFound />}></Route>
-    //   </Routes>
-    // </>
-    <div>
-      <CreateTeam /> 
-    </div> 
+        }
+        {/* Loi 404 Not Found */}
+        <Route path='*' element={<NotFound />}></Route>
+      </Routes>
+    </>
+    // <div>
+    //   <CreateTeam /> 
+    // </div> 
   )
 }
 

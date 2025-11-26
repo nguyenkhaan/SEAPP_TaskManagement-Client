@@ -11,6 +11,7 @@ import StarterKit from '@tiptap/starter-kit'
 import MultiEmail from './CreateTeamComponents/MultiEmail'
 import { ErrorMessage } from '@hookform/error-message'
 import MessageLog from '../components/MessageLog'
+import sendEmail from '../services/sendEmail'
 function CreateTeam() {
     const [emails, setEmails] = useState([])
     const [focused, setFocused] = useState(false)
@@ -20,7 +21,7 @@ function CreateTeam() {
         content: '<p>Hello World!</p>', // initial content
         editorProps: {
             attributes: {
-                class: "text-[18px] h-47 overflow-y-scroll w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-5"
+                class: "text-sm md:text-[18px] h-42 md:h-47 overflow-y-scroll w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5"
             }
         }
     })
@@ -30,25 +31,29 @@ function CreateTeam() {
         mode: 'onSubmit'
     })
     const onSubmit = (data) => {
-        console.log('Tu trang create team, du lieu nhan duoc la: ', data)
-        console.log('Email nhan duoc la: ', emails)
+        // console.log('Tu trang create team, du lieu nhan duoc la: ', data)
+        // console.log('Email nhan duoc la: ', emails)
         setShowLog(true) 
+        emails.forEach((email) => {
+            // sendEmail(email)  -> Mot luc sau co data roi thi hay gui 
+        })
+        
     }
     return (
         <WorkingLayout>
-            <div className='w-full h-200'>
+            <div className='w-full h-200 md:px-2 px-3 lg:px-0'>
                 <div className='w-full flex items-center justify-between'>
                     <div>
-                        <h2 className='font-md text-4xl leading-[34px]'>
+                        <h2 className='font-md text-2xl md:text-4xl leading-[34px]'>
                             Create A New Team
                         </h2>
-                        <span className='font-md text-xl block mt-3'>
+                        <span className='font-md text-base md:text-xl block mt-1 md:mt-3'>
                             Fill in the details below to set up your new team
                         </span>
                     </div>
                     <Link to='/teams'>
                         <motion.button
-                            className='rounded-2xl font-semibold cursor-pointer text-white py-2 bg-(--color-primary) px-4 text-[18px]'
+                            className='md:rounded-2xl rounded-md font-semibold cursor-pointer text-white py-2 bg-(--color-primary) md:px-4 px-2 text-base md:text-[18px]'
                             initial={{ opacity: 1 }}
                             whileHover={{ opacity: 0.8 }}
                             transition={{ duration: 0.2, ease: 'easeInOut' }}
@@ -61,10 +66,10 @@ function CreateTeam() {
                 <div className='border shadow-xl border-gray-400 overflow-hidden rounded-2xl mt-6 w-full min-h-120'>
                     <form id='create-team-form' className='w-full min-h-100 text-black py-7 px-5 flex flex-col justify-start gap-6' onSubmit={handleSubmit(onSubmit)}>
                         <div>
-                            <h3 className='font-md text-xl mb-2'>Team name</h3>
+                            <h3 className='font-md text-lg md:text-xl mb-2'>Team name</h3>
                             <input
 
-                                className='text-[18px] h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-5' placeholder='e.g. Phoenix'
+                                className='test-sm md:text-[18px] h-10 md:h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5' placeholder='e.g. Phoenix'
 
                                 {...register('teamName', {
                                     required: "Vui lòng nhập thông tin cho trường này"
@@ -84,26 +89,26 @@ function CreateTeam() {
                         </div>
 
                         <div>
-                            <h3 className='font-md text-xl mb-3'>Team name</h3>
+                            <h3 className='font-md text-lg md:text-xl mb-2'>Description</h3>
                             <EditorContent editor={editor} />
                         </div>
                         <div>
-                            <h3 className='font-md text-xl mb-2'>Invite team members</h3>
+                            <h3 className='font-md text-lg md:text-xl mb-2'>Invite team members</h3>
 
                             <MultiEmail emails={emails} setEmails={setEmails} focused={focused} setFocused={setFocused} />
-                            <span className='text-(--color-text-desc) font-md text-[18px] mt-2 block'>You can add more members after the team is created</span>
+                            <span className='text-(--color-text-desc) font-md text-sm md:text-[18px] mt-1 md:mt-2 block'>You can add more members after the team is created</span>
                         </div>
                     </form>
                     <div className='flex bg-white px-5 pt-5 pb-5 border-t border-t-gray-600 items-center justify-end gap-5 w-full h-20'>
                         <motion.button
-                            className='font-md text-black cursor-pointer text-2xl bg-gray-200 rounded-2xl px-8 py-3'
+                            className='font-md text-black cursor-pointer text-lg md:text-2xl bg-gray-200 rounded-md md:rounded-2xl px-4 md:px-8 md:py-3 py-2'
                             initial={{ scale: 1 }}
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2, ease: 'easeInOut', transition: 'all' }}
 
                         >Cancel</motion.button>
                         <motion.button
-                            className='font-md text-white cursor-pointer text-2xl bg-(--color-primary) rounded-2xl px-10 py-3'
+                            className='font-md text-white cursor-pointer text-lg md:text-2xl bg-(--color-primary) rounded-md md:rounded-2xl px-4 md:px-10 py-2 md:py-3'
                             initial={{ scale: 1 }}
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2, ease: 'easeInOut', transition: 'all' }}
@@ -112,7 +117,7 @@ function CreateTeam() {
                         >Create Team</motion.button>
                     </div>
                 </div>
-                <MessageLog showLog={showLog} setShowLog={setShowLog} /> 
+                <MessageLog showLog={showLog} setShowLog={setShowLog} message='Tạo nhóm thành công' /> 
             </div>
         </WorkingLayout>
     )
