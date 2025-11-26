@@ -16,8 +16,8 @@ function ChartViewTeam() {
                             valueFormatter,
                         },
                     ]}
-                    height={320}
-                    width={320}
+                    height={(window.innerWidth) <= 768 ? 220 : 320}
+                    width={(window.innerWidth) <= 768 ? 220 : 320}
                     slotProps={{
                         legend: {
                             sx: {
@@ -29,8 +29,8 @@ function ChartViewTeam() {
                                 },
                                 // CSS class
                                 ['.MuiChartsLegend-series']: {
-                                    gap: '8px',
-                                    fontSize: '18px',
+                                    gap: '7px',
+                                    fontSize: (window.innerWidth <= 768? 16 : 18),
                                     fontWeight: 500
 
                                 },

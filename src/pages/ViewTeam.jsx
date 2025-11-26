@@ -7,6 +7,7 @@ import getStatusColor from '../services/getStatusColor'
 import TaskByGroupViewTeam from './ViewTeamComponents/TaskByGroupViewTeam'
 import TeamMember from './ViewTeamComponents/TeamMember'
 import ChartViewTeam from './ViewTeamComponents/ChartViewTeam'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router'
 function ViewTeam({
     groupTitle = 'Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê',
@@ -36,13 +37,13 @@ function ViewTeam({
         touchStart.current = e.touches[0].clientX
     }
     const handleTouchEnd = (e) => {
-        touchEnd.current = e.touches[0].clientX
+        touchEnd.current = e.changedTouches[0].clientX
     }
     const handleTouch = (e) => {
         if (window.innerWidth <= 768) {
-            distance = touchStart.current - touchEnd.current
-            if (distance > 50) setView("team-members")   //Vuot sang phai 
-            else setView("group")  //Vuot sang trai 
+            const distance = touchStart.current - touchEnd.current
+            if (distance >= 40) setView("team-members")   //Vuot sang phai 
+            else if (distance <= -40) setView("group")  //Vuot sang trai 
         }
     }
 
@@ -87,15 +88,21 @@ function ViewTeam({
                     onTouchEnd={handleTouchEnd}
                 >
                     <div
-                        className={`flex w-[200%] h-full transition-transform duration-300`}
+                        className={`flex w-[200%] h-full transition-transform duration-300 ease-in-out`}
                         style={{
                             transform: view === "group" ? "translateX(0)" : "translateX(-50%)",
                         }}
                     >
                         {/* View 1: Team View */}
-                        <div className="w-1/2 h-full flex items-center justify-center">
+                        <motion.div 
+                            className="w-1/2 h-full flex items-center justify-center"
+                            initial={{opacity: 0}} 
+                            animate={{opacity : 1}} 
+                            transition={{duration: 0.1 , ease: 'easeInOut'}}
+                            
+                            >
                             <TaskByGroupViewTeam width="100%" />
-                        </div>
+                        </motion.div>
 
                         {/* View 2: Team Member */}
                         <div className="w-1/2 h-full flex items-center justify-center">
