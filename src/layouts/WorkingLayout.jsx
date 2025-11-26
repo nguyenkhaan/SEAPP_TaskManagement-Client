@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { useEffect } from 'react'
+import { useState } from 'react'
 import WorkingNavbar from '../components/WorkingNavbar'
 import WorkingSidebar from '../components/WorkingSidebar'
+import { AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 function WorkingLayout({
     children = true
 }) {
@@ -15,6 +17,7 @@ function WorkingLayout({
     //         document.body.style.overflow = 'auto';
     //     };
     // }, []);
+    const [showSidebar , setShowSidebar] = useState(false) 
     return (
         <div className='w-screen relative pb-10'>
             <WorkingNavbar />
