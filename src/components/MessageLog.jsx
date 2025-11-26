@@ -8,7 +8,7 @@ function MessageLog({
     if (!showLog) return <></>
     return (
         <motion.div
-            className='text-white bg-[#202124] w-110 flex items-center z-99999 justify-start px-4 shadow-2xl rounded-md h-14 font-md fixed left-6 bottom-6 text-lg'
+            className='text-white bg-[#202124] w-80 lg:w-110 flex items-center z-99999 justify-start px-4 shadow-2xl rounded-md h-12 lg:h-14 font-md fixed left-6 bottom-6 text-sm lg:text-lg'
             onClick={(e) => { e.stopPropagation() }}
             initial={{ y: 20 }}
             animate={{ y: 0 }}

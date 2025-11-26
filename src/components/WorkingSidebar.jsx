@@ -16,7 +16,7 @@ function WorkingSidebar() {
                 <Link to={'/app/teams'}>
                     <SidebarItem icon={<i class="fa-solid fa-people-group"></i>} title='Teams'/> 
                 </Link>
-                <Link to={'/app/my-task'}>
+                <Link to={'/app/my-tasks'}>
                      <SidebarItem icon={<i class="fa-solid fa-list-check"></i>} title='My Tasks'/> 
 
                 </Link>
