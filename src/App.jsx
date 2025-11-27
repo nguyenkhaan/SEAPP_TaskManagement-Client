@@ -11,6 +11,7 @@ import MyTask from './pages/MyTask.jsx'
 import ViewTask from './pages/ViewTask.jsx'
 import ViewTeam from './pages/ViewTeam.jsx'
 import CreateTeam from './pages/CreateTeam.jsx'
+import Setting from './pages/Setting.jsx'
 function App() {
   return (
     <>
@@ -30,10 +31,12 @@ function App() {
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
     </>
-    // <div>
-    //   <CreateTeam /> 
-    // </div> 
+
   )
 }
 
 export default App
+
+    // <div>
+    //   <Setting /> 
+    // </div> 
