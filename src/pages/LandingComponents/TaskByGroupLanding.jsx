@@ -7,7 +7,7 @@ function TaskByGroupLanding({
     height = 500 
 }) {
     return (
-        <article className={`rounded-2xl flex flex-col items-start px-7 justify-between shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black`} style={{width , height}}>
+        <article className={` xl:w-[670px] xl:h-[500px] lg:w-[620px] xl:ml-0 lg:-ml-25 lg:h-[480px] md:w-[670px] md:h-[500px] w-[400px] h-[500px] lg:mt-0 md:mt-5 mt-3  rounded-2xl flex flex-col items-start xl:px-7 lg:px-6 md:px-7 px-3 justify-between shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black`}>
             <TaskByGroupLandingHeader />
             <ul className='w-full flex-1 py-5 px-8 overflow-y-scroll overflow-x-hidden wrapper h-full flex flex-col items-center pb-6'>
                 <TaskOverview width={609} /> 

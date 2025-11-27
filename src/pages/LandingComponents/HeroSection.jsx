@@ -7,26 +7,26 @@ import TaskByGroupLanding from './TaskByGroupLanding'
 function HeroSection() {
 
     return (
-        <div className=' bg-[#f8f9fe] pt-28 pb-8 landing__section relative before:bg-[#f8f9fe] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen'>
-            <button className='text-black rounded-3xl px-[22px] py-[13px w-[305px] h-[55px] text-base bg-white shadow-lg'>
-                Boost your productivity
-            </button>
-            <div className='flex flex-1 gap-3 items-center justify-between pt-8'>
-                <div className='flex flex-col gap-4 flex-1'>
+        <div className=' bg-[#f8f9fe] xl:pt-28 lg:pt-25 md:pt-20 pt-15 pb-8 landing__section relative before:bg-[#f8f9fe] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen'>
+            <div className='flex gap-3 lg:flex-row flex-col items-center lg:justify-between pt-8'>
+                <div className='flex flex-col xl:gap-4 lg:gap-3 gap-2 flex-1 xl:ml-0 lg:ml-10'>
                     {/* heading */}
-                    <h2 className='text-6xl font-medium text-black'>
+                    <button className='text-black lg:mx-0 mx-auto rounded-3xl xl:px-[22px] lg:px-[18px] md:px-3.5 px-3 py-[13px xl:w-[305px] md:w-[260px] w-45 xl:h-[55px] lg:h-[50px] h-[45px] xl:text-base lg:text-[14px] text-[12px] bg-white shadow-lg'>
+                        <i class="fa-regular fa-lightbulb"></i> Boost your productivity
+                    </button>
+                    <h2 className='xl:text-6xl lg:text-5xl md:text-6xl sm:text-[32px] text-[28px] lg:text-start text-center font-medium text-black'>
                         Manage your Task
-                        <span className=' text-[#ff6568] block mt-2'> Efforlessly</span>
+                        <span className=' text-[#ff6568] lg:block mt-2'> Efforlessly</span>
                     </h2>
                     {/* paragraph */}
-                    <p className='block w-120 text-black pt-6 text-2xl'>
+                    <p className='block xl:w-130 lg:w-100 w-screen lg:px-0 md:px-3 px-5 lg:text-start text-center  text-black xl:pt-6 lg:pt-5 md:pt-4 pt-1 lg:text-2xl md:text-[22px] text-[20px] '>
                         The ultimate task management solution for teams and individuals. Stay organized, meet deadlines, and achieve your goals with NoTask.
                     </p>
                     <div>
                         {/* button sign up */}
                         <Link to={'/register'}>
                             <motion.button
-                                className='px-5 grow-0 block py-2 w-[450px] h-[90px] mt-12 rounded-[158px] shadow-xl text-2xl cursor-pointer bg-[#ff6568]'
+                                className='xl:px-5 lg:px-4 px-3 grow-0 text-white lg:mx-0 mx-auto xl:font-bold lg:font-semibold font-medium block xl:py-2 lg:py-1.5 md:py-1 py-0.5 xl:w-[450px] lg:w-[400px] md:w-[400px] w-[320px] xl:h-[90px] lg:h-20 md:h-[70px] h-[60px] mt-12 rounded-[158px] shadow-xl xl:text-2xl lg:text-[22px] md:text-xl text-[16px] cursor-pointer bg-[#ff6568]'
                                 initial={{
                                     scale: 1,
                                 }}
@@ -40,7 +40,7 @@ function HeroSection() {
                             </motion.button>
                         </Link>
                         {/* Cac so lieu danh gia */}
-                        <ul className='flex text-black items-center w-100 justify-between grow-0 mt-12 divide-x-2 divide-gray-500'>
+                        <ul className='flex lg:mx-0 mx-auto text-black items-center w-100 justify-between grow-0 lg:mt-12 mt-10 divide-x-2 divide-gray-500'>
                             <Section1SmallBlock analysis={'10K+'} title={'User Rating'} />
                             <Section1SmallBlock analysis={'10K+'} title={'User Rating'} />
                             <Section1SmallBlock analysis={'10K+'} title={'User Rating'} />
@@ -49,7 +49,7 @@ function HeroSection() {
 
                 </div>
 
-                <div className='flex-1 flex items-center justify-center'>
+                <div className='flex-1 flex items-center xl:justify-center lg:justify-start '>
                     <TaskByGroupLanding />
                 </div>
             </div>

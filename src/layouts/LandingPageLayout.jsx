@@ -10,7 +10,7 @@ function LandingPageLayout({
     return (
         <>
             <Navbar />
-            <div className='w-[1440px] min-h-100 bg-yellow-500 mt-18'>   
+            <div className='min-w-full min-h-100 bg-yellow-500 mt-18'>   
                 {children}
             </div>
             <Footer /> 
