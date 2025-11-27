@@ -26,14 +26,9 @@ function UpdatePassword() {
     return (
         <SectionSetting>
             <>
-                <h2 className='font-semibold text-[32px]'>
-                    Password
-                </h2>
-                <span className='font-md text-xl mb-4 block'>Update your password for better security.</span>
-
-                <form id='change-password-form' className='w-full grid grid-cols-2 items-center justify-between gap-x-16' onSubmit={handleSubmit}>
+                <form id='change-password-form' className='w-full grid grid-rows-2 md:grid-cols-2 items-center justify-between gap-y-4 md:gap-x-16' onSubmit={handleSubmit}>
                     <div>
-                        <label className='font-md text-xl'>Old Password</label>
+                        <label className='font-md text-lg md:text-xl'>Old Password</label>
                         <input
                             className='test-sm md:text-[18px] h-10 md:h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5'
                             type='password'
@@ -46,7 +41,7 @@ function UpdatePassword() {
 
                     </div>
                     <div>
-                        <label className='font-md text-xl'>New Password</label>
+                        <label className='font-md text-lg md:text-xl'>New Password</label>
                         <input
                             className='test-sm md:text-[18px] h-10 md:h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5'
                             type='password'
@@ -58,7 +53,7 @@ function UpdatePassword() {
                 <div className='w-full flex items-center mt-4 justify-end'>
                     <button
                         form='change-password-form'
-                        className='px-7 text-white cursor-pointer font-md bg-(--color-primary) py-3 rounded-xl'
+                        className='px-4 md:px-7 text-white cursor-pointer font-md bg-(--color-primary) py-3 rounded-xl'
                         type='submit'
                     >
                         Save Changes</button>

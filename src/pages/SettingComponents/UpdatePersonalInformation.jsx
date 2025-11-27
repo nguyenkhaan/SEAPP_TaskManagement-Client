@@ -67,18 +67,14 @@ function UpdatePersonalInformation() {
         <>
             <SectionSetting>
                 <>
-                    <h2 className='font-semibold text-[32px]'>
-                        Personal Information
-                    </h2>
-                    <span className='font-md text-xl mb-4 block'>Manage your information details, including username, birthday, email address, and phone number, to ensure your account is up to date.</span>
-                    <form className='w-full grid grid-cols-2 grid-rows-2 gap-x-18 gap-y-6'>
+                    <form className='w-full grid grid-rows-4 md:grid-cols-2 md:grid-rows-2 gap-x-18 gap-y-4 md:gap-y-6'>
                         <PersonalInput ref={nameRef} title='Full Name' value={personalInformation.name} />
                         <PersonalInput ref={emailRef} title='Email Address' value={personalInformation.email} />
                         <BirthdayInput ref={birthdayRef} />
                         <PersonalInput ref={phoneRef} title='Phone number' value={personalInformation.phoneNumber} />
                     </form>
-                    <div className='w-full flex items-center  mt-4 justify-end'>
-                        <button className='px-7 text-white cursor-pointer font-md bg-(--color-primary) py-3 rounded-xl' onClick={handleInformationClick}>Save Changes</button>
+                    <div className='w-full flex items-center mt-4 justify-end'>
+                        <button className='px-4 md:px-7 text-white cursor-pointer font-md bg-(--color-primary) py-3 rounded-xl' onClick={handleInformationClick}>Save Changes</button>
                     </div>
                 </>
             </SectionSetting>
@@ -93,16 +89,16 @@ function UpdatePersonalInformation() {
                         <h2 className='font-md text-xl'>Please Enter password again to update your email</h2>
                         <label className='text-base text-(--color-text-desc) my-2 block'>Enter your password here: </label>
                         <input name='rePassword' type='password' className='w-full rounded-md text-base bg-slate-300 p-2' />
-                        <div className='mt-2 w-full flex items-center justify-end gap-2'>
+                        <div className='mt-5 md:mt-3 w-full flex items-center justify-end gap-2'>
                             <button
-                                className='bg-gray-300 text-lg text-black shadow-lg rounded-md cursor-pointer px-4 py-2'
+                                className='bg-gray-300 text-base md:text-lg text-black shadow-lg rounded-md cursor-pointer px-4 py-2'
                                 onClick={() => setShowPasswordModal(false)}
                             >
                                 Cancel
 
                             </button>
                             <button
-                                className='bg-(--color-primary) text-lg text-white shadow-lg rounded-md cursor-pointer px-4 py-2'
+                                className='bg-(--color-primary) text-base md:text-lg text-white shadow-lg rounded-md cursor-pointer px-4 py-2'
                             >
                                 Submit
                             </button>
