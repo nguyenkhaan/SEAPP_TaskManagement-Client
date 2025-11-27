@@ -10,7 +10,7 @@ function StatisticCard({
             <h2 className='w-full text-center text-5xl text-(--color-primary) font-medium font-[Montserrat]'>
                 {title}
             </h2>
-            <span className='text-(--color-text-desc) font-[Inter] text-[20px]'>{content}</span>
+            <span className='text-(--color-text-desc) text-[20px]'>{content}</span>
         </article>
     )
 }
