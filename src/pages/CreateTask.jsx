@@ -83,7 +83,7 @@ function CreateTask() {
 
     return (
         <WorkingLayout>
-            <div className='w-full min-h-[890px] md:h-[890px] border p-6 pt-6 rounded-xl border-gray-500 mb-10'>
+            <div className='w-full min-h-[890px] md:h-[890px] border p-6 2xl:pt-6 rounded-xl border-gray-500 mb-10'>
                 <div className='w-full inline-flex items-center justify-end mb-3'>
                     <Link onClick={() => {
                         if (window.history.length > 1) navigate(-1)
