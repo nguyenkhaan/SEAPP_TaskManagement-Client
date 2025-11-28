@@ -26,7 +26,7 @@ export default function Input({
 
     return (
         <div className='w-full mt-4 relative'>
-            <label htmlFor={title} className='font-semibold text-base md:text-[20px] font-[Montserrat] text-(--color-text) mb-2'>{title}</label>
+            <label htmlFor={title} className='font-semibold text-base md:text-[20px] xl:text-[22px] font-[Montserrat] text-(--color-text) mb-2'>{title}</label>
             <div className='flex items-center relative'>
                 <input
                     className='w-full text-(--color-text-desc) h-10 md:h-[45px] text-base md:text-[18px] rounded-[5px] pr-11 px-3 shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] border-[0.5px] border-(--color-text)  outline-none transition-all duration-300'

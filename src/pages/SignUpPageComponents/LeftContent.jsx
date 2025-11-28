@@ -56,13 +56,13 @@ export default function LeftContent() {
             {/* introduction */}
             <div className="font-[Montserrat] leading-tight w-full">
                 <Logo />
-                <p className="text-(--color-text-desc) font-medium">
+                <p className="text-(--color-text-desc) font-medium">Vi
                     Create your account to get started
                 </p>
             </div>
 
             {/* input */}
-            <form className="mt-2 gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="sm:mt-6 md:mt-10 gap-4" onSubmit={handleSubmit(onSubmit)}>
                 <Input title="Full Name" formHandleMethod={formHandleMethod} registerName='Name' />
                 {/* email */}
                 <Input title="Email Address" formType={'Email'} formHandleMethod={formHandleMethod} validation={true} />

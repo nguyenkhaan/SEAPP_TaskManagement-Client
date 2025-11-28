@@ -88,14 +88,14 @@ function ViewTeam({
                     onTouchEnd={handleTouchEnd}
                 >
                     <div
-                        className={`flex w-[200%] h-full transition-transform duration-300 ease-in-out`}
+                        className={`flex max-md:w-[200%] h-full md:gap-10 duration-300 ease-in-out py-6 md:px-2 px-1`}
                         style={{
                             transform: view === "group" ? "translateX(0)" : "translateX(-50%)",
                         }}
                     >
                         {/* View 1: Team View */}
                         <motion.div 
-                            className="w-1/2 h-full flex items-center justify-center"
+                            className="max-md:w-1/2 w-[614px] h-full flex items-center justify-center"
                             initial={{opacity: 0}} 
                             animate={{opacity : 1}} 
                             transition={{duration: 0.1 , ease: 'easeInOut'}}
@@ -105,7 +105,7 @@ function ViewTeam({
                         </motion.div>
 
                         {/* View 2: Team Member */}
-                        <div className="w-1/2 h-full flex items-center justify-center">
+                        <div className="max-md:w-1/2 w-[340px] h-full flex items-center justify-center">
                             <TeamMember />
                         </div>
                     </div>

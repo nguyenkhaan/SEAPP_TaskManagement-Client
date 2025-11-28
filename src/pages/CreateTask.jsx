@@ -18,7 +18,7 @@ import { Link } from 'react-router'
 import { getCurrentDate } from '../services/getDate'
 function CreateTask() {
 
-    const {day , month , year , weekDay} = getCurrentDate() 
+    const { day, month, year, weekDay } = getCurrentDate()
     const [data, setData] = useState({})
     const [taskImage, setTaskImage] = useState(null)
     const [previewTaskImage, setPreviewTaskImage] = useState(null)
@@ -77,53 +77,55 @@ function CreateTask() {
         formData.append('priority', priority)
         formData.append('content', editor.getHTML())
         formData.append('image', taskImage)
-        formData.append('date' , {day , month , year}) //Ngay thang tao task, cai nay server tu ghi nhan cung duoc 
+        formData.append('date', { day, month, year }) //Ngay thang tao task, cai nay server tu ghi nhan cung duoc 
         console.log(formData) //Du lieu thu duoc 
     }
 
     return (
         <WorkingLayout>
-            <div className='w-full min-h-[880px] md:h-[880px]  border p-6 pt-14 rounded-xl border-gray-500 mb-10'>
-                <Link onClick={() => {
-                    if (window.history.length > 1) navigate(-1)
-                    else navigate('/')
-                }}>
-                <span
-                    className="absolute cursor-pointer top-5 right-10 text-lg text-(--color-primary) underline font-semibold"
-                    onClick={() => {
+            <div className='w-full min-h-[890px] md:h-[890px] border p-6 pt-6 rounded-xl border-gray-500 mb-10'>
+                <div className='w-full inline-flex items-center justify-end mb-3'>
+                    <Link onClick={() => {
                         if (window.history.length > 1) navigate(-1)
                         else navigate('/')
-                    }}
-                >
-                    Go back
-                </span>
-            </Link>
-            <form className='relative' onSubmit={handleSubmit(onSubmit)}>
-                {/* Header */}
-                <div className='flex max-md:flex-col items-start justify-start gap-6'>
-                    <ImageUpload hooks={{ taskImage, setTaskImage, previewTaskImage, setPreviewTaskImage }} />
-                    <div className='flex-1'>
-                        <TitleInput formHandle={formHandle} onTitleChange={(value) => setTitle(value)} />
-                        <PriorityChoice formHandle={formHandle} onPriorityChange={value => setPriority(value)} />
-                        <p className='mt-4 text-black'>Status: <span className='text-(--color-not-started)'>Not started</span></p>
-                        <p className='text-sm text-(--color-text-desc) mt-4'>Created On <span>{day}/{month}/{year}</span></p>
+                    }}>
+                        <span
+                            className="cursor-pointer text-lg text-(--color-primary) underline font-semibold"
+                            onClick={() => {
+                                if (window.history.length > 1) navigate(-1)
+                                else navigate('/')
+                            }}
+                        >
+                            Go back
+                        </span>
+                    </Link>
+                </div>
+                <form className='relative' onSubmit={handleSubmit(onSubmit)}>
+                    {/* Header */}
+                    <div className='flex max-md:flex-col items-start justify-start gap-6'>
+                        <ImageUpload hooks={{ taskImage, setTaskImage, previewTaskImage, setPreviewTaskImage }} />
+                        <div className='flex-1'>
+                            <TitleInput formHandle={formHandle} onTitleChange={(value) => setTitle(value)} />
+                            <PriorityChoice formHandle={formHandle} onPriorityChange={value => setPriority(value)} />
+                            <p className='mt-4 text-black'>Status: <span className='text-(--color-not-started)'>Not started</span></p>
+                            <p className='text-sm text-(--color-text-desc) mt-4'>Created On <span>{day}/{month}/{year}</span></p>
+                        </div>
                     </div>
-                </div>
 
-                {/* MainEditorLayout */}
-                <div className='text-lg min-h-[540px] md:mt-8 mt-6'>
-                    {/* MenuBar */}
-                    <MenuBar editor={editor} />
-                    {/* RichTextEditor */}
-                    <RichTextEditor editor={editor} />
-                </div>
-                <button type='submit'
-                    className='px-4 top-35 md:top-40 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
+                    {/* MainEditorLayout */}
+                    <div className='text-lg min-h-[540px] md:mt-8 mt-6'>
+                        {/* MenuBar */}
+                        <MenuBar editor={editor} />
+                        {/* RichTextEditor */}
+                        <RichTextEditor editor={editor} />
+                    </div>
+                    <button type='submit'
+                        className='px-4 top-35 md:top-40 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
                             font-semibold cursor-pointer shadow-lg rounded-md'>
-                    Create Task
-                </button>
-            </form>
-        </div>
+                        Create Task
+                    </button>
+                </form>
+            </div>
         </WorkingLayout>
     )
 }

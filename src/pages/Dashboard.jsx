@@ -34,12 +34,12 @@ function Dashboard() {
                     </div>
                 </div>
 
-                <div className='mt-8 container-- border overflow-y-auto overflow-x-hidden wrapper flex max-md:flex-col items-center md:items-start gap-3 border-gray-600 bg-[#F5F8FF] min-h-[760px] w-full shadow-2xl p-6'>
-                    <div className='flex-1 h-[720px] flex flex-col md:items-start items-center justify-between gap-3'>
+                <div className='mt-8 container-- border overflow-y-auto overflow-x-hidden wrapper flex max-md:flex-col items-center md:items-start xl:gap-3 md:gap-2 border-gray-600 bg-[#F5F8FF] min-h-[760px] w-full shadow-2xl md:px-1 xl:py-6 md:pb-6 max-sm:py-5'>
+                    <div className='flex-1 md:w-1/2 h-[720px] flex flex-col md:items-start  items-center justify-between gap-3'>
                         <TodoTask />
                         <CompletedTask />
                     </div>
-                    <div className='flex-1 h-[720px] flex flex-col max-md:w-[392px] justify-between gap-3 '>
+                    <div className='flex-1 max-sm:mt-3 md:w-1/2 h-[720px]  flex flex-col max-sm:w-[392px] items-start justify-between gap-3 '>
                         <TaskStatus />
                         <GroupStatus />
                     </div>
