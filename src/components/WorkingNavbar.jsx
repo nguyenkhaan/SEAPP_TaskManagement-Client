@@ -30,7 +30,7 @@ function WorkingNavbar()
                     <WorkingSmallBlock childrenIcon={<i class="fa-regular fa-bell"></i>} />
                     <WorkingSmallBlock childrenIcon={<i class="fa-regular fa-calendar"></i>}/>
                 </div>
-                <div className='flex-1 text-base font-medium lg:block hidden'>
+                <div className='flex-1 text-base font-medium xl:block hidden'>
                     <span className='block text-base font-medium text-black'>{weekDay}</span>
                     <span className='block text-base text-[#3ABEFF]'>{`${day}/${month}/${year}`}</span>
                 </div>

@@ -6,7 +6,7 @@ function GroupCard({
     icon = <i class="fa-solid fa-bicycle"></i>
 }) {
     return (
-        <article className='border border-[#A8A8A8] bg-(--color-primary) relative rounded-2xl overflow-hidden md:w-[301px] w-[190px] md:h-[223px] h-[200px] hover:shadow-lg cursor-pointer'>
+        <article className='border border-[#A8A8A8] bg-(--color-primary) relative rounded-2xl overflow-hidden w-full md:h-[223px] h-[200px] hover:shadow-lg cursor-pointer'>
             <div className='bg-white absolute flex flex-col items-start justify-between text-black w-full md:py-6 py-4 md:px-4 px-2 md:h-44 left-0 bottom-0 h-40'>
                 <div className='w-full md:mt-2'>
                     <h2 className='text-black font-medium line-clamp-2 md:text-[18px] text-[14px] font-[Montserrat]'>{groupTitle}</h2>
@@ -30,3 +30,6 @@ function GroupCard({
     )
 }
 export default GroupCard
+
+
+//md:w-full xl:w-[304px] w-[190px]

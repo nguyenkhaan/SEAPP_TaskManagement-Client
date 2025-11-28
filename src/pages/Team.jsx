@@ -16,7 +16,7 @@ function Team() {
                 <h2 className='text-black max-md:px-2 text-sm font-medium md:text-[20px] my-1'>Manage and collaborate with your friends</h2>
 
                 <input
-                    className='md:w-[602px] w-full md:h-[42px] h-9 md:rounded-xl rounded-lg px-5 text-gray-600 font-medium shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] outline-none transition-all duration-300'
+                    className='md:w-[602px] md:text-lg w-full md:h-[42px] h-9 md:rounded-xl rounded-lg px-5 text-gray-600 font-medium shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] outline-none transition-all duration-300'
                     placeholder='Enter your teamm'
                 />
 
@@ -28,20 +28,20 @@ function Team() {
 
                     </div>
                     <div className='my-4 w-full min-h-40 py-8 500 grid grid-cols-12 md:gap-x-6 gap-x-3 md:gap-y-5 gap-y-3'>
-                        <div className='md:col-span-4 col-span-6'>
+                        <div className='md:col-span-4 grow-0 col-span-6'>
                             <GroupCard />
                         </div>
-                        <div className='md:col-span-4 col-span-6'>
+                        <div className='md:col-span-4 grow-0 col-span-6'>
                             <GroupCard />
                         </div>
-                        <div className='md:col-span-4 col-span-12'>
+                        <div className='md:col-span-4 grow-0 col-span-6'>
                             <GroupCard />
                         </div>
 
                     </div>
                 </div>
                 <motion.button
-                    className='absolute bg-(--color-primary) text-sm md:text-xl shadow-lg text-white font-medium md:px-5 md:py-4 py-3 px-2 rounded-md md:rounded-xl md:top-0 top-6 md:right-0 right-4 cursor-pointer'
+                    className='absolute bg-(--color-primary) text-sm md:text-xl shadow-lg text-white font-medium md:px-5 md:py-4 py-3 px-2 rounded-md md:rounded-xl md:top-0 top-6 2xl:right-0 z-9999 right-4 cursor-pointer'
                     initial={{ scale: 1 }}
                     whileHover={{ scale: 1.08 }}
                     transition={{ transition: 'all', ease: 'easeInOut', duration: 0.3 }}

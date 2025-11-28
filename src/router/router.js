@@ -26,7 +26,7 @@ const routes = [
         desc: 'Trang dang nhap', 
     }, 
     {
-        path: 'app/teams',   //Da responsive 
+        path: 'app/teams',   //Da responsive cho tablet, phone, laptop 
         element: Team, 
         desc: 'Trang team'
     }, 
@@ -51,7 +51,7 @@ const routes = [
         desc: 'Trang xem chi tiet noi dung ve task'
     }, 
     {
-        path: '/app/view-team',   //Da responsive
+        path: '/app/view-team',   //Da responsive 
         desc: 'Trang xem thong tin ve 1 nhom cu the', 
         element: ViewTeam
     }, 

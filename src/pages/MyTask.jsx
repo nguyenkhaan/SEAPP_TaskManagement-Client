@@ -21,7 +21,7 @@ function MyTask() {
 
                 </div>
                 <span className='block font-md text-base max-md:px-6 md:text-xl text-black'>Manage and monitor your tasks</span>
-                <div className='flex w-full min-h-30 flex-col md:items-start items-center justify-start mt-6 gap-6'>
+                <div className='flex w-full min-h-30 flex-col md:items-start items-center justify-start mt-6 gap-6 md:gap-7'>
                     <TaskByGroup width={'100%'} groupTitle={'Xác suất thống kê'} />
                     <TaskByGroup width={'100%'} groupTitle={'Pháp luật đại cương'} />
                     <TaskByGroup width={'100%'} groupTitle={'Kinh tế chính trị Mác - Lê Nin'} />
