@@ -45,7 +45,7 @@ function ImageUpload({ hooks }: IObj) {
   }, [taskImage]);
   return previewTaskImage ? (
     <div
-      className={`bg-slate-100 font-medium text-lg cursor-pointer flex items-center justify-center rounded-xl md:w-[210px] md:h-[210px] w-38 h-38 mr-2 bg-cover bg-center bg-no-repeat`}
+      className={`bg-slate-100 font-medium text-lg cursor-pointer flex items-center justify-center rounded-xl w-[210px] h-[210px] mr-2 bg-cover bg-center bg-no-repeat grow-0`}
       onClick={handleClick}
       style={{
         backgroundImage: `url(${previewTaskImage})`,

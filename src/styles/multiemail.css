@@ -1,0 +1,16 @@
+.react-multi-email {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+  overflow-y: hidden !important; 
+}
+
+.react-multi-email [data-tag] {
+  flex-shrink: 0; /* không cho tag co lại */
+}
+
+.react-multi-email input {
+  flex-shrink: 0 !important;
+  width: auto !important;
+}
