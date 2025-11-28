@@ -62,7 +62,7 @@ export default function LeftContent() {
             </div>
 
             {/* input */}
-            <form className="mt-2 gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="sm:mt-6 md:mt-10 gap-4" onSubmit={handleSubmit(onSubmit)}>
                 <Input title="Full Name" formHandleMethod={formHandleMethod} registerName='Name' />
                 {/* email */}
                 <Input title="Email Address" formType={'Email'} formHandleMethod={formHandleMethod} validation={true} />
