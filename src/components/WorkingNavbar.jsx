@@ -13,7 +13,7 @@ function WorkingNavbar()
             <div className='flex-1 max-md:ml-4'>
                 <Logo />
             </div>
-            <div className='flex-4 md:w-[695px] w-full max-md:px-4 h-11 relative'>
+            <div className='flex-4 md:w-[720px] xl:w-full max-md:px-4 h-11 relative'>
                 <input
                     className='w-full md:h-full text-(--color-text-desc) md:text-base text-lg font-semibold md:rounded-lg px-5 shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] outline-none transition-all duration-300 rounded-md max-md:py-2'
                     placeholder='Search your task here...'
@@ -30,7 +30,7 @@ function WorkingNavbar()
                     <WorkingSmallBlock childrenIcon={<i class="fa-regular fa-bell"></i>} />
                     <WorkingSmallBlock childrenIcon={<i class="fa-regular fa-calendar"></i>}/>
                 </div>
-                <div className='flex-1 text-base font-medium md:block hidden'>
+                <div className='flex-1 text-base font-medium lg:block hidden'>
                     <span className='block text-base font-medium text-black'>{weekDay}</span>
                     <span className='block text-base text-[#3ABEFF]'>{`${day}/${month}/${year}`}</span>
                 </div>
