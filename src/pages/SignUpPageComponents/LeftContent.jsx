@@ -56,7 +56,7 @@ export default function LeftContent() {
             {/* introduction */}
             <div className="font-[Montserrat] leading-tight w-full">
                 <Logo />
-                <p className="text-(--color-text-desc) font-medium">
+                <p className="text-(--color-text-desc) font-medium">Vi
                     Create your account to get started
                 </p>
             </div>

@@ -11,7 +11,7 @@ function Team() {
     const [showModal, setShowModal] = useState(false)
     return (
         <WorkingLayout>
-            <div className='w-full h-full mb-20'>
+            <div className='w-full mx-auto h-full mb-20'>
                 <h2 className='text-black md:text-4xl text-3xl font-semibold max-md:px-2'>Teams</h2>
                 <h2 className='text-black max-md:px-2 text-sm font-medium md:text-[20px] my-1'>Manage and collaborate with your friends</h2>
 

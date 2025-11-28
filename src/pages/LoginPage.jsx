@@ -8,7 +8,7 @@ export default function LoginPage()
 {
     let leftContent = <LeftContent/>;
     let rightContent = <RightContent/>;
-    if (window.innerWidth <= 1280) leftContent = false 
+    if (window.innerWidth < 1280) leftContent = false 
     return (
         <TwoColumnLayout left={leftContent} right={rightContent} />
     );
