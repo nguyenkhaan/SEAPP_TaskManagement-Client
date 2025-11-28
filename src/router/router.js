@@ -41,7 +41,7 @@ const routes = [
         desc: 'Trang tao them task moi'
     }, 
     {
-        path: '/app/my-tasks',   
+        path: '/app/my-tasks',    //Da responsive cho phone, tablet, laptop 
         element: MyTask, 
         desc: 'Trang hien thi thong tin ve cac task'
     }, 
