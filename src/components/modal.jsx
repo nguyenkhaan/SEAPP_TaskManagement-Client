@@ -5,29 +5,28 @@ import { motion } from 'framer-motion'
 import MessageLog from './MessageLog'
 import Spinner from './Spinner'  //Then loading vao ben trong 
 function Modal({
-    showModal,
-    code
+  showModal,
+  code
 }) {
-    const [copyStatus, setCopyStatus] = useState('read-text') //Trang thai read = chua copy gi 
-    const [copiedText, setCopiedText] = useState(undefined)
-    const handleClick = (e) => {
-        e.stopPropagation()
-        console.log('Parent click')
-        showModal(false)
-    }
-    const handleCopy = async () => {
-        const text = await navigator.clipboard.writeText(code)
-        setCopyStatus('write-text')
+  const [copyStatus, setCopyStatus] = useState('read-text') //Trang thai read = chua copy gi 
+  const [copiedText, setCopiedText] = useState(undefined)
+  const handleClick = (e) => {
+    e.stopPropagation()
+    showModal(false)
+  }
+  const handleCopy = async () => {
+    const text = await navigator.clipboard.writeText(code)
+    setCopyStatus('write-text')
 
+  }
+  useEffect(() => {
+    if (copyStatus && copyStatus === 'write-text') {
+      const timeoutID = setTimeout(() => {
+        setCopyStatus('read-text')
+      }, 4000)
+      return () => clearTimeout(timeoutID)  //Xoa timeout de tranh leak memory 
     }
-    useEffect(() => {
-        if (copyStatus && copyStatus === 'write-text') {
-            const timeoutID = setTimeout(() => {
-                setCopyStatus('read-text')
-            }, 4000)
-            return () => clearTimeout(timeoutID)  //Xoa timeout de tranh leak memory 
-        }
-    }, [copyStatus])
+  }, [copyStatus])
 
   return (
     <div
@@ -41,7 +40,6 @@ function Modal({
         transition={{ transition: "all", ease: "easeInOut", duration: 0.3 }}
         onClick={(e) => {
           e.stopPropagation();
-          console.log("Child click");
         }}
       >
         <h2 className="text-2xl pr-6">

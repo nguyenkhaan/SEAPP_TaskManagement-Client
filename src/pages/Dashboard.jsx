@@ -12,7 +12,7 @@ function Dashboard() {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        const id = setTimeout(() => setIsLoading(false), 0)
+        const id = setTimeout(() => setIsLoading(false), 5000)
         return () => clearTimeout(id)
     }, [])
     const currentPage = (   //currentPage la trang hien tai 

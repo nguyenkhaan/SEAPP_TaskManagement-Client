@@ -6,9 +6,9 @@ import RightContent from './LoginPageComponents/RightContent'
 
 export default function LoginPage()
 {
-    const leftContent = <LeftContent/>;
-    const rightContent = <RightContent/>;
-
+    let leftContent = <LeftContent/>;
+    let rightContent = <RightContent/>;
+    if (window.innerWidth < 1024) leftContent = false 
     return (
         <TwoColumnLayout left={leftContent} right={rightContent} />
     );

@@ -5,7 +5,7 @@ import SmallBlock from '../../components/SmallBlock';
 export default function LeftContent()
 {
     return (
-        <div className='h-full w-full bg-(--color-primary) px-[50px]  text-white'>
+        <div className='lg:h-full lg:w-full lg:block bg-(--color-primary) px-[50px] text-white'>
             <div class='introduction' className='font-[Montserrat] pt-[72px]'>
                 <h1 className='text-[54px] leading-tight'>Welcome back to <span className='font-bold'>NoTask</span></h1>
                 <p className='mt-5 font-[Inter] text-[20px]'>Continue managing your tasks and boosting your productivity.</p>

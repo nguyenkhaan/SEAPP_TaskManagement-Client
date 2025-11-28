@@ -47,10 +47,10 @@ export default function LeftContent() {
         }
     })
     return (
-        <div className='h-full w-full relative bg-white px-[100px] pt-5'>
+        <div className='h-full w-full relative bg-white px-6 md:px-[100px] pt-10 md:pt-5'>
             {/* Go back home */}
             <Link to={'/'}>
-                <span className="absolute top-10 right-14 text-2xl text-(--color-primary) underline font-medium">Go back</span>
+                <span className="absolute top-6 right-8 md:top-10 md:right-10 text-lg md:text-2xl text-(--color-primary) underline font-medium">Go back</span>
             </Link>
 
             {/* introduction */}
@@ -79,13 +79,13 @@ export default function LeftContent() {
             <div className='LogMessage w-full flex my-3 flex-col font-medium text-red-600 text-base italic items-center justify-center gap-2'>
                 {
                     logMessages.map((logMessage, index) => {
-                        return <p key={index}>{logMessage}</p>
+                        return <p className='text-base md:text-lg' key={index}>{logMessage}</p>
                     })
                 }
             </div>
             {/* btn */}
             <div className="mt-3">
-                <p className="text-(--color-text) mt-2 text-center">Already have an account? <a href="/" className="text-(--color-primary) font-medium">Sign In</a></p>
+                <p className="text-(--color-text) mt-2 text-center">Already have an account? <a href="/login" className="text-(--color-primary) font-medium">Sign In</a></p>
                 <div className="flex mt-4 items-center">
                     <div className="flex-2 border border-(--color-text-desc) h-px" />
                     <p className="flex-1 text-(--color-text) text-center text-[18px]"> OR </p>

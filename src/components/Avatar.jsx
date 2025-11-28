@@ -4,8 +4,9 @@ import ReactDOM from "react-dom";
 function Avatar({
   width = 86,
   height = 86,
-  name = "Alexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  name = "Alexxxxxxxxxxxxxxxxxxxxxxxxxxx",
   email = "nguyenalex@gmail.comxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx sdfxxxxxxxxxxxx",
+  style = {}
 }) {
   const [avatar, setAvatar] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -35,25 +36,28 @@ function Avatar({
   const stop = (e) => e.stopPropagation();
 
   return (
-    <div
-      className={`flex relative bg-center bg-cover bg-no-repeat bg-black rounded-full cursor-pointer border border-gray-600`}
-      style={{
-        backgroundImage: `url(${preview})`,
-        width,
-        height,
-      }}
-      onClick={handleClick}
-    >
-      <input
-        className="w-full block h-full invisible my-avatar"
-        onChange={handleAvatarClick}
-        type="file"
-        ref={inp}
-      />
-
+    <div className="inline-flex flex-col justify-start items-center">
       <div
-        className="absolute top-full left-1/2 cursor-text -translate-x-1/2 w-[173px] text-base text-white font-semibold"
+        className={`relative bg-center bg-cover bg-no-repeat bg-black rounded-full cursor-pointer border border-gray-600`}
+        style={{
+          backgroundImage: `url(${preview})`,
+          width,
+          height,
+        }}
+        onClick={handleClick}
+      >
+        <input
+          className="w-full block h-full invisible my-avatar"
+          onChange={handleAvatarClick}
+          type="file"
+          ref={inp}
+        />
+
+      </div>
+      <div
+        className="top-full cursor-text w-[173px] text-base font-semibold"
         onClick={stop}
+        style={{...style}}
       >
         <span className="text-center w-[173px] line-clamp-2 wrap-break-word overflow-hidden font-[Montserrat]">
           {name}

@@ -43,10 +43,10 @@ export default function RightContent() {
   // })
 
   return (
-    <div className="box-border h-full w-full bg-white relative px-[100px] pt-[72px]">
+    <div className="box-border h-full w-full bg-white relative px-6 md:px-[100px] pt-10 md:pt-[72px]">
       {/* Link to go back */}
       <Link to={'/'}>
-        <span className="absolute top-10 right-10 text-2xl text-(--color-primary) underline font-medium">Go back</span>
+        <span className="absolute top-6 right-8 md:top-10 md:right-10 text-lg md:text-2xl text-(--color-primary) underline font-medium">Go back</span>
       </Link>
 
 
@@ -83,7 +83,7 @@ export default function RightContent() {
       {/* login */}
       <div className="mt-5">
 
-        <p className="text-(--color-text) mt-4 text-center">Don't have an account? <a href="/" className="text-(--color-primary) font-medium">Sign Up</a></p>
+        <p className="text-(--color-text) mt-4 text-center">Don't have an account? <a href="/register" className="text-(--color-primary) font-medium">Sign Up</a></p>
         <div className="flex mt-6 items-center">
           <div className="flex-2 border border-(--color-text-desc) h-px" />
           <p className="flex-1 text-(--color-text) text-center text-[18px]"> OR </p>
