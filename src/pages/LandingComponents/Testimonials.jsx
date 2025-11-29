@@ -1,12 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import StatisticCard from '../../components/StatisticCard'
+import AOS from 'aos'
+
 function Testimonials() {
     
     const featureItems = Array.from({length: 3}, (_, i) => ({ id: i }));
 
     return (
-        <section className='landing__section bg-white py-20 flex items-center justify-center mb-30'>
+        <section data-aos='zoom-out'
+                 className='landing__section bg-white py-20 flex items-center justify-center mb-30'>
             <div className='xl:w-full grid-cols-12 grid gap-y-6 justify-center mx-auto lg:w-[1000px] w-full'>
                 {/* <div className='col-span-4 flex items-center justify-center'>
                     <StatisticCard />

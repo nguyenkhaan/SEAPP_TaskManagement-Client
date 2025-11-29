@@ -21,7 +21,7 @@ function WorkingLayout({
     return (
         <div className='w-screen relative pb-10'>
             <WorkingNavbar />
-            <div className='w-[1440px] left-0'>
+            <div className='min-w-screen'>
                 <WorkingSidebar />
                 <div className='absolute overflow-x-hidden w-screen xl:min-h-screen xl:w-[984px] scrollbar-none md:px-3 2xl:left-110 max-2xl:flex max-2xl:items-center max-2xl:justify-center -mt-5 xl:left-50'> 
                     {children}

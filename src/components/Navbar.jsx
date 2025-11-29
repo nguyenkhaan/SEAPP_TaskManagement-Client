@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router'
 import Logo from './Logo'
+import AOS from 'aos'
 
 function Navbar() {
     return (
-        <nav className='w-screen left-0 z-99999 bg-white fixed top-0 shadow-lg h-18 xl:px-[50px] lg:px-10 md:px-[25px] px-2.5  py-8 flex items-center justify-between'>
+        <nav data-aos='fade-up'
+             className='w-screen left-0 z-99999 bg-white fixed top-0 shadow-lg h-18 xl:px-[50px] lg:px-10 md:px-[25px] px-2.5  py-8 flex items-center justify-between'>
             <Logo />
             <div className='min-h-20 flex lg:text-[22px] md:text-[18px] text-[16px] items-center font-medium  text-black lg:gap-3 md:gap-2 gap-1 justify-evenly'>
                 <Link to={'/register'}>

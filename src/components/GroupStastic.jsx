@@ -7,7 +7,7 @@ function GroupStastic({
 }) {
     return (
         <article
-            className={`relative md:w-[301px] w-[280px] md:h-[147px] h-[120px] md:py-5 py-3 md:px-6 px-4 border rounded-[23px] border-[#B3B3B3] max-md:flex max-md:flex-col max-md:items-start max-md:justify-between`}
+            className={`relative xl:w-[301px] lg:w-[336px] w-[280px] xl:h-[147px] md:h-[140px] h-[120px] md:py-5 py-3 md:px-6 px-4 border rounded-[23px] border-[#B3B3B3] max-md:flex max-md:flex-col max-md:items-start max-md:justify-between`}
             style={{ color: Color }}
         >
             <div className='flex items-center justify-between h-[42px] shrink-0'>

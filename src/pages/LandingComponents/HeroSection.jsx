@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router'
+import AOS from 'aos'
 import Section1SmallBlock from './Section1SmallBlock'
 import TaskByGroupLanding from './TaskByGroupLanding'
 function HeroSection() {
@@ -9,17 +10,17 @@ function HeroSection() {
     return (
         <div className=' bg-[#f8f9fe] xl:pt-28 lg:pt-25 md:pt-20 pt-15 pb-8 landing__section relative before:bg-[#f8f9fe] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen'>
             <div className='flex gap-3 lg:flex-row flex-col items-center lg:justify-between pt-8'>
-                <div className='flex flex-col xl:gap-4 lg:gap-3 gap-2 flex-1 xl:ml-0 lg:ml-10'>
+                <div className='flex flex-col xl:gap-4 lg:gap-3 gap-2 flex-1 xl:ml-0 lg:ml-10' data-aos='fade-right'>
                     {/* heading */}
                     <button className='text-black lg:mx-0 mx-auto rounded-3xl xl:px-[22px] lg:px-[18px] md:px-3.5 px-3 py-[13px xl:w-[305px] md:w-[260px] w-45 xl:h-[55px] lg:h-[50px] h-[45px] xl:text-base lg:text-[14px] text-[12px] bg-white shadow-lg'>
                         <i class="fa-regular fa-lightbulb"></i> Boost your productivity
                     </button>
-                    <h2 className='xl:text-6xl lg:text-5xl md:text-6xl sm:text-[32px] text-[28px] lg:text-start text-center font-medium text-black'>
+                    <h2 className='xl:text-7xl lg:text-5xl md:text-6xl sm:text-[32px] text-[28px] lg:text-start text-center font-medium text-black'>
                         Manage your Task
                         <span className=' text-[#ff6568] lg:block mt-2'> Efforlessly</span>
                     </h2>
                     {/* paragraph */}
-                    <p className='block xl:w-130 lg:w-100 w-screen lg:px-0 md:px-3 px-5 lg:text-start text-center  text-black xl:pt-6 lg:pt-5 md:pt-4 pt-1 lg:text-2xl md:text-[22px] text-[20px] '>
+                    <p className='block xl:w-170 lg:w-100 w-screen lg:px-0 md:px-3 px-5 lg:text-start text-center  text-black xl:pt-6 lg:pt-5 md:pt-4 pt-1 lg:text-2xl md:text-[22px] text-[20px] '>
                         The ultimate task management solution for teams and individuals. Stay organized, meet deadlines, and achieve your goals with NoTask.
                     </p>
                     <div>
@@ -49,7 +50,7 @@ function HeroSection() {
 
                 </div>
 
-                <div className='flex-1 flex items-center xl:justify-center lg:justify-start '>
+                <div className='flex-1 flex items-center xl:justify-center lg:justify-start' data-aos='fade-left'>
                     <TaskByGroupLanding />
                 </div>
             </div>

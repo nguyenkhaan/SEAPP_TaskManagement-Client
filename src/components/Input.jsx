@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import { useState } from 'react';
 import { ErrorMessage } from "@hookform/error-message";
 import getFormRule from '../services/formRule';
+import { Eye, EyeOff } from 'lucide-react';
+
 export default function Input({
     title = 'Default title',
     type = 'text',
@@ -39,13 +41,14 @@ export default function Input({
                     required={isRequired}
                     placeholder={placeholder}
                 />
-                <div className={`absolute right-2 ${(formType === 'Password') ? 'block' : 'hidden'} text-black text-xl md:text-[24px]`}>
-                    {(showType === 'password' && validation) ? 
-                        <i class="fa-solid fa-eye-slash cursor-pointer" onClick={handleShowPasswordClick}></i>
-                            :
-                        <i class="fa-solid fa-eye cursor-pointer" onClick={handleShowPasswordClick}></i>
-                    }
-                </div>
+                { type === "password" && (
+                    <button type='button'
+                            onClick={handleShowPasswordClick}
+                            aria-label={showType === 'password' ? 'Show password' : 'Hide password'}
+                            className='absolute right-2 text-gray-700 text-xl md:text-[24px] p-1 hover:opacity-80'>
+                        {showType === 'password' ? <EyeOff size={20}/> : <Eye size={20} /> }
+                    </button>
+                )}
 
             </div>
             <ErrorMessage
