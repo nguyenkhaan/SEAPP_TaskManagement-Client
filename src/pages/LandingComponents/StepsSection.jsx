@@ -13,7 +13,7 @@ function StepsSection() {
             <h2 className='mt-2 lg:text-7xl md:text-5xl text-3xl text-[#ff6766] text-center w-full font-[Montserrat]'>
                 Three Simple Steps
             </h2>
-            <div className='mt-32 grid grid-cols-12 xl:w-full xl:gap-x-0 lg:gap-x-2 lg:w-[1100px] mx-auto'>
+            <div className='mt-32 grid grid-cols-12 xl:w-full xl:gap-x-0 lg:gap-x-2 gap-y-6 lg:w-[1100px] mx-auto'>
                 {[1, 1, 1].map((value, index) => {
                     return (
                         <div className='lg:col-span-4 col-span-12 flex justify-center'>

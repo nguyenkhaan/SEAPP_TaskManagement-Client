@@ -6,7 +6,7 @@ function StepCard({
   content = "Sign up in seconds and set up your personalized workspace. No credit card required for the free trial.",
 }) {
   return (
-    <article className="xl:w-[431px] lg:w-[400px] md:w-[500px] w-[430px] relative h-150 rounded-2xl overflow-hidden flex flex-col hover:shadow-lg">
+    <article className="xl:w-[431px] lg:w-[400px] md:w-[500px] w-[410px] relative h-150 rounded-2xl overflow-hidden flex flex-col hover:shadow-lg">
       <div className="w-[70px] h-[70px] flex absolute text-2xl font-medium items-center justify-center text-center rounded-full top-[19px] left-[15px] bg-(--color-primary) text-white">
         {index}
       </div>
