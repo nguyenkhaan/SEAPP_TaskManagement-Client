@@ -19,12 +19,13 @@ import MessageLog from '../../components/MessageLog'
 export default function RightContent() {
 
   const formHandleMethod = useForm({
-    mode: 'onChange',
+    mode: 'onSubmit',
     criteriaMode: 'all',
     reValidateMode: "onBlur",
   })
+
   const [isLoading, setIsLoading] = useState(false)   //Bien isLoading 
-  const { register, handleSubmit, formState: { errors } } = formHandleMethod
+  const { handleSubmit, formState: { errors } } = formHandleMethod
   //Data submit 
   const onSubmit = (data) => {
     const { Email, Password } = data //Du lieu tra ve 
@@ -43,15 +44,15 @@ export default function RightContent() {
   // })
 
   return (
-    <div className="box-border h-full w-full bg-white relative px-6 md:px-[100px] pt-10 md:pt-[72px]">
+    <div className="box-border h-full w-full bg-white relative px-6 md:px-[100px] pb-10 pt-15 md:pt-[72px]">
       {/* Link to go back */}
       <Link to={'/'}>
-        <span className="absolute top-6 right-8 md:top-10 md:right-10 text-lg md:text-2xl text-(--color-primary) underline font-medium">Go back</span>
+        <span className="absolute top-6 right-8 md:top-10 md:right-10 text-lg md:text-xl text-(--color-primary) underline font-medium">Go back</span>
       </Link>
 
 
       <LoadingHandle
-        isLoading={false}
+        isLoading={isLoading}
         loadingComponent={<Spinner isLoading={false} position={{ top: '740px', left: '50%' }} height={60} />}
         finishComponent={<MessageLog showLog={true} content="Đăng nhập thành công" />}
       />
@@ -72,7 +73,7 @@ export default function RightContent() {
           <Input title="Password" type="password" formType='Password' formHandleMethod={formHandleMethod} validation={true} />
         </div>
 
-        <div className="flex items-center text-(--color-primary) font-[Inter] font-medium">
+        <div className="flex items-center text-(--color-primary) font-[Inter] font-medium mb-5">
           <Checkbox />
           <p className="text-(--color-text)">Remember me</p>
           <a className="ml-auto">Forgot password?</a>

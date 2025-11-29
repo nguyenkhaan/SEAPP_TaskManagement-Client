@@ -3,24 +3,27 @@ import ReactDOM from "react-dom";
 import HeaderPhase from "../../components/HeaderPhase";
 import FeatureCard from "../../components/FeatureCard";
 import { div } from "framer-motion/client";
+import AOS from 'aos'
+
 function FeatureSection() {
   const featureItems = Array.from({ length: 6 }, (_, i) => ({ id: i }));
 
   return (
     <section className="landing__section bg-white py-12">
       <HeaderPhase title={"Features"} />
-      <h2 className="mt-18 lg:text-7xl md:text-5xl text-3xl text-black text-center w-full font-[Montserrat]">
+      <h2 data-aos='zoom-in' className="mt-18 lg:text-7xl md:text-5xl text-3xl text-black text-center w-full font-[Montserrat]">
         Every thing you need to
       </h2>
-      <h2 className="mt-2 lg:text-7xl md:text-5xl text-3xl text-[#ff6766] text-center w-full font-[Montserrat]">
+      <h2 data-aos='zoom-in' className="mt-2 lg:text-7xl md:text-5xl text-3xl text-[#ff6766] text-center w-full font-[Montserrat]">
         Stay Progress
       </h2>
-      <span className="block lg:w-full md:w-[600px] w-[400px] mx-auto text-center lg:text-2xl md:text-[18px] text-[12px] text-black mt-6 mb-18">
+      <span data-aos='zoom-in' className="block lg:w-full md:w-[600px] w-[400px] mx-auto text-center lg:text-2xl md:text-[18px] text-[12px] text-black mt-6 mb-18">
         Powerful features designed to help you manage collaborate with teams and
         achieve more.
       </span>
 
-      <div className="mt-8 px-8 w-full grid items-start justify-center grid-cols-12 auto-rows-min gap-y-6 lg:gap-x-10 md:gap-x-15 text-center">
+      <div data-aos='flip-up' 
+           className="mt-8 px-8 w-full grid items-start justify-center grid-cols-12 auto-rows-min gap-y-6 lg:gap-x-10 md:gap-x-15 text-center">
         {featureItems.map((item) => (
           <div
             key={item.id}

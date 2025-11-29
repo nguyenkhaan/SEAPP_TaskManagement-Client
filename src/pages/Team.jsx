@@ -16,18 +16,18 @@ function Team() {
                 <h2 className='text-black max-md:px-2 text-sm font-medium md:text-[20px] my-1'>Manage and collaborate with your friends</h2>
 
                 <input
-                    className='md:w-[602px] md:text-lg w-full md:h-[42px] h-9 md:rounded-xl rounded-lg px-5 text-gray-600 font-medium shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] outline-none transition-all duration-300'
+                    className='md:w-[602px] md:text-lg w-full md:h-[42px] mt-2 h-9 md:rounded-xl rounded-lg px-5 text-gray-600 font-medium shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] outline-none transition-all duration-300'
                     placeholder='Enter your teamm'
                 />
 
-                <div className='mt-8 md:border overflow-x-hidden overflow-y-scroll wrapper border-gray-600 rounded-md py-3 px-4 min-h-[700px] w-full'>
+                <div className='mt-8 md:border overflow-x-hidden overflow-y-scroll wrapper border-gray-600 rounded-md py-5 px-4 min-h-[700px] w-full'>
                     <div className='w-full flex items-center justify-between gap-3'>
                         <GroupStastic stasticNumber={7} title='Total Teams' Color='#7f7373' />
                         <GroupStastic stasticNumber={20} title='Total Tasks' Color='#bd7d7e' />
                         <GroupStastic stasticNumber={39} title='Working Tasks' Color='#109628' />
 
                     </div>
-                    <div className='my-4 w-full min-h-40 py-8 500 grid grid-cols-12 md:gap-x-6 gap-x-3 md:gap-y-5 gap-y-3'>
+                    <div className='my-4 w-full min-h-40 xl:py-8 lg:py-6 md:py-4 py-3 500 grid grid-cols-12 md:gap-x-6 gap-x-3 md:gap-y-5 gap-y-3'>
                         <div className='md:col-span-4 grow-0 col-span-6'>
                             <GroupCard />
                         </div>

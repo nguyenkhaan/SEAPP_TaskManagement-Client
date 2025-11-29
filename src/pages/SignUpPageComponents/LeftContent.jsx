@@ -11,13 +11,14 @@ import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 export default function LeftContent() {
     const formHandleMethod = useForm({
-        mode: 'onChange',
+        mode: 'onSubmit',
         reValidateMode: 'onChange',
         criteriaMode: 'all'
     })
-    const { register, handleSubmit, formState: { errors } } = formHandleMethod
+    const { handleSubmit, formState: { errors } } = formHandleMethod
     const [logMessages, setLogMessages] = useState([])
     const checkPolicy = useRef(null)
+
     const onSubmit = (data) => {
         let chk1 = checkPolicy.current.querySelector('input').checked == false
         let chk2 = data['Password'] != data['Re-Password']
@@ -29,7 +30,7 @@ export default function LeftContent() {
         if (chk2)
             setLogMessages([
                 ...logMessages,
-                'Mật khảu nhập lại không khớp'
+                'Mật khẩu nhập lại không khớp'
             ])
         if (!chk1 && !chk2) setLogMessages([]) //Dat lai thanh mang rong khi khong con loi 
     }
@@ -47,16 +48,16 @@ export default function LeftContent() {
         }
     })
     return (
-        <div className='h-full w-full relative bg-white px-6 md:px-[100px] pt-10 md:pt-5'>
+        <div className='h-full w-full relative bg-white px-6 md:px-[100px] pt-10 md:pt-15 pb-10'>
             {/* Go back home */}
             <Link to={'/'}>
-                <span className="absolute top-6 right-8 md:top-10 md:right-10 text-lg md:text-2xl text-(--color-primary) underline font-medium">Go back</span>
+                <span className="absolute top-6 right-8 md:top-10 md:right-10 text-lg md:text-xl text-(--color-primary) underline font-medium">Go back</span>
             </Link>
 
             {/* introduction */}
             <div className="font-[Montserrat] leading-tight w-full">
                 <Logo />
-                <p className="text-(--color-text-desc) font-medium">Vi
+                <p className="text-(--color-text-desc) font-medium">
                     Create your account to get started
                 </p>
             </div>
@@ -70,13 +71,13 @@ export default function LeftContent() {
                 <Input title="Password" formType={'Password'} type='password' formHandleMethod={formHandleMethod} validation={true} />
                 <Input title="Confirm Password" formType={'Password'} type='password' formHandleMethod={formHandleMethod} validation={false} registerName='Re-Password' />
 
-                <div className="flex items-center text-(--color-primary) font-medium">
+                <div className="flex items-center text-(--color-primary) font-medium mb-3">
                     <Checkbox ref={checkPolicy} />
-                    <p className="text-(--color-text)">I agree to <span className='text-(--color-primary)'>Terms of Service</span> and <span className='text-(--color-primary)'>Privacy Policy</span></p>
+                    <p className="text-(--color-text)">I agree to <span className='text-(--color-primary)'>Terms of Service</span></p>
                 </div>
                 <CTA title='Create Account' />
             </form>
-            <div className='LogMessage w-full flex my-3 flex-col font-medium text-red-600 text-base italic items-center justify-center gap-2'>
+            <div className='LogMessage w-full flex my-3 flex-col font-medium text-red-600 text-base items-center justify-center gap-2'>
                 {
                     logMessages.map((logMessage, index) => {
                         return <p className='text-base md:text-lg' key={index}>{logMessage}</p>
