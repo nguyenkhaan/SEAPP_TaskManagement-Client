@@ -1,16 +1,16 @@
-import axios from "axios"
-async function loginGoogleSuccess(tokenResponse) 
-{
-    console.log('Log from services/loginGoogleSuccess') //Dong log de thong bao cho da log ra noi dung 
-    console.log('Thanh cong' , tokenResponse) 
-    console.log('Dang tai thong tin nguoi dung') 
-    const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo' , { //Phai dung duong link nay 
-        headers: {
-            Authorization: `Bearer ${tokenResponse.access_token}`
-        }
-    }).then(res => res.data) 
+import api from "../api/api"
 
-    console.log('Thong tin nguoi dung: ' , userInfo)
+async function loginGoogleSuccess(tokenResponse) 
+{   
+    const responseData = await api.get('/auth/verify' , {
+        params: {
+            token: tokenResponse.code //Gui ma code ve cho BE 
+        }
+    })
+    console.log('Token: ' , tokenResponse) 
+    //Tien hanh xu li viec dang nhap thanh cong 
+    //Khoi tao phien dang nhap 
+    return responseData
 }
 
 async function loginGoogleFailed(error) 
@@ -18,5 +18,16 @@ async function loginGoogleFailed(error)
     console.log('Log from services/loginGoogleSuccess') 
     console.log('Dang nhap tu google that bai' , error) 
 }
+
+
+async function initLoginSession() 
+{
+
+}
+async function logout() 
+{
+    
+}
+
 
 export {loginGoogleSuccess , loginGoogleFailed}

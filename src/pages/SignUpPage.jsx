@@ -6,8 +6,7 @@ import RightContent from './SignUpPageComponents/RightContent';
 
 export default function SignUpPage() {
     let leftContent = <LeftContent />
-    let rightContent = <RightContent />
-    if (window.innerWidth < 1280) rightContent = null 
+    let rightContent = window.innerWidth >= 1280 ? <RightContent/> : false;
     return (
         <>
             <TwoColumnLayout left={leftContent} right={rightContent} />

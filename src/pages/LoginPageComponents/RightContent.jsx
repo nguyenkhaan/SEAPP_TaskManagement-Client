@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
-import { GoogleLogin } from "@react-oauth/google";  //Button de hien thi ra 
 import { jwtDecode } from "jwt-decode";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
@@ -25,23 +24,20 @@ export default function RightContent() {
   })
 
   const [isLoading, setIsLoading] = useState(false)   //Bien isLoading 
+  const [showLog , setShowlog] = useState(false)   //Bien dung de nhay messageLog, ban dau ca 2 deu dat la false vi khong co gi de tai
   const { handleSubmit, formState: { errors } } = formHandleMethod
   //Data submit 
   const onSubmit = (data) => {
     const { Email, Password } = data //Du lieu tra ve 
+    //Luc nay thi goi ham login binh thuong 
   }
 
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => loginGoogleSuccess(tokenResponse),
-    onError: (error) => loginGoogleFailed(error)
+    onError: (error) => loginGoogleFailed(error), 
+    flow: "auth-code", 
+    scope: "openid email profile", 
   })
-
-
-  // const onetapLogin = useGoogleOneTapLogin({  //Mo chuc nang dang nhap nhanh 
-  //   onSuccess: (credentialResponse) => {
-  //     console.log('Thanh cong o one tap login' , credentialResponse)
-  //   }
-  // })
 
   return (
     <div className="box-border h-full w-full bg-white relative px-6 md:px-[100px] pb-10 pt-15 md:pt-[72px]">
@@ -54,7 +50,7 @@ export default function RightContent() {
       <LoadingHandle
         isLoading={isLoading}
         loadingComponent={<Spinner isLoading={false} position={{ top: '740px', left: '50%' }} height={60} />}
-        finishComponent={<MessageLog showLog={true} content="Đăng nhập thành công" />}
+        finishComponent={<MessageLog showLog={showLog} setShowLog={setShowlog} content="Đăng nhập thành công" />}
       />
       {/* introduction */}
       <div className="font-[Montserrat] leading-tight w-full">
@@ -93,6 +89,7 @@ export default function RightContent() {
 
         <div className="mt-6">
           <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google" action={() => login()} />
+
         </div>
       </div>
 
