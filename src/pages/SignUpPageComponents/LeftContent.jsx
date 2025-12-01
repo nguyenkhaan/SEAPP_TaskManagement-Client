@@ -13,6 +13,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import registerByEmailPassword from "../../services/register";
 import MessageLog from "../../components/MessageLog";
 import checkLogin from "../../services/checkLogin";
+import Spinner from "../../components/Spinner";
 export default function LeftContent() {
     const formHandleMethod = useForm({
         mode: "onSubmit",
@@ -46,16 +47,21 @@ export default function LeftContent() {
         if (!chk1 && !chk2) {
             try {
                 setLogMessages([]);
-                setLoading(true); // Bat loading
+                
                 // console.log(data)
                 const { Name, Email, Password } = data;
+                setLoading(true); // Bat loading
                 const responseData = await registerByEmailPassword(
                     Name,
                     Email,
                     Password
                 );
+                setLoading(false) 
                 // console.log(responseData)
-                setShowLog(1);
+                if (responseData) {
+                    setShowLog(1);
+                    setRegistered(true) //Dat da dang nap 
+                }
             } catch (error) {
                 setShowLog(-1);
                 setLoading(false);
@@ -189,6 +195,9 @@ export default function LeftContent() {
                         action={login}
                     />
                 </div>
+            </div>
+            <div className="inset-0 top-1/2 right-1/2">
+                <Spinner isLoading={loading} />
             </div>
             <MessageLog
                 showLog={showLog}

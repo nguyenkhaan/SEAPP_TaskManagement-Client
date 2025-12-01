@@ -33,28 +33,36 @@ export default function RightContent() {
         formState: { errors },
     } = formHandleMethod;
     //Data submit
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         if (checkLogin()) {
             alert("Vui lòng đăng xuất trước khi sử dụng dịch vụ");
             return;
         }
+        try {
+            const { Email, Password } = data; //Du lieu tra ve
+            setIsLoading(true) 
+            const responseData = await api.post("/auth/login", {
+                email: Email,
+                password: Password,
+            }) 
+            console.log(responseData.data.tokens.access_token) 
+            setShowLog(1) //Bao hieu viec dang nhap da thanh cong 
+            Cookies.set('user' , responseData.data.tokens.access_token , {
+                secure: true, 
+                expires: 7 
+            })
+            setIsLoading(false) 
+            setIsLogin(true)
+        }
+        catch (error) {
+            setShowLog(-1);
+            setIsLoading(false); //Bao hieu khong can tai nua
+            if (error.response?.status == 400) console.log("Bad Request");
+            if (error.response?.status == 401)
+                console.log("Method Not Allowed");
+            if (error.response?.status == 403) console.log("Network Error");
+        }
         
-        const { Email, Password } = data; //Du lieu tra ve
-
-        // setIsLoading(true) 
-        api.post("/auth/login", {
-            email: Email,
-            password: Password,
-        }).then((responseData) => {
-            setShowLog(1); 
-            Cookies.set('user' , responseData.data.token.access_token) 
-            setIsLogin(true) //Dat lai da dnag nhap thanh cong de tien hanh chuyen trang 
-        })
-        .catch((data) => {
-          setShowLog(-1); //Dang nhap that bai 
-        })
-
-        //Luc nay thi goi ham login binh thuong
     };
 
     const login = useGoogleLogin({
@@ -66,7 +74,7 @@ export default function RightContent() {
             }
             setIsLoading(true);
             try {
-                setIsLoading(false);
+                setIsLoading(true);
                 const responseData = await loginGoogleSuccess(tokenResponse);
                 // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
                 setShowLog(true); //Tien hanh in ra Log message
@@ -110,7 +118,7 @@ export default function RightContent() {
                 </span>
             </Link>
 
-            <LoadingHandle
+            {/* <LoadingHandle
                 isLoading={isLoading}
                 loadingComponent={
                     <Spinner
@@ -120,17 +128,10 @@ export default function RightContent() {
                     />
                 }
                 finishComponent={
-                    <MessageLog
-                        showLog={showLog}
-                        setShowLog={setShowLog}
-                        message={
-                            showLog == -1
-                                ? "Đăng nhập thất bại"
-                                : "Đăng nhập thành công"
-                        }
-                    />
+      
                 }
-            />
+            /> */}
+
             {/* introduction */}
             <div className="font-[Montserrat] leading-tight w-full">
                 <Logo />
@@ -197,6 +198,18 @@ export default function RightContent() {
                     />
                 </div>
             </div>
+            <div className="fixed top-1/2 right-1/2">
+                <Spinner isLoading={isLoading} />
+            </div>
+            <MessageLog
+                showLog={showLog}
+                setShowLog={setShowLog}
+                message={
+                    showLog == -1
+                        ? "Đăng nhập thất bại"
+                        : "Đăng nhập thành công"
+                }
+            />
         </div>
     );
 }

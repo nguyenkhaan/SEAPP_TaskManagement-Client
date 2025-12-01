@@ -25,8 +25,6 @@ function Landing()
         }
     }, []);
 
-
-
     const pageContent = (
         <div className='bg-[#f8f9fe]'>
             <HeroSection />
