@@ -289,3 +289,14 @@ return (
 
 ## 7. Cài đặt React-Query 
 
+## 8. Một số gói hỗ trợ dự án 
+BE: 
+- React Query 
+- Axios API 
+- CookiesJS 
+- OAuth-google 
+FE:
+- PyJWT 
+- SQLAlchemy_flask 
+- Flask_restful 
+- CORS: Chống CORS 
