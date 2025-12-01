@@ -5,7 +5,7 @@ function PersonalInput({
     title = 'Email',
     value,   //Mot lat sau them cai state vao
     setValue, 
-    ref 
+    ref, 
 }) {
     const [input , setInput] = useState(value) 
     const handleChange = (e) => {
@@ -18,8 +18,12 @@ function PersonalInput({
                 className='test-sm md:text-[18px] h-10 md:h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5' 
                 onChange={handleChange}
                 value={input}
-            ref={ref}
-
+                ref={ref}
+                readOnly={title == 'Email Address'}
+                style={title === 'Email Address'? {cursor: 'not-allowed' , opacity: 40 ,} : {}}
+                disabled={title === 'Email Address'}
+                
+            
                 />
                 
         </div>

@@ -6,7 +6,6 @@ import App from './App.jsx'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const CLIENT_ID = '802852666161-o82mhq04404uckeqv9ctn8ub5fc12vug.apps.googleusercontent.com'

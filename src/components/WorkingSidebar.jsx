@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router'
 import Avatar from './Avatar'
 import SidebarItem from './SidebarItem'
+import { useQuery } from '@tanstack/react-query'
+import Loading from '../pages/Loading'
 function WorkingSidebar() {
+    // const {isPending , error , data} = useQuery({
+    //     queryKey: ['user'], //Truyen key tuong ung voi cac route ben trong BE, 
+    //     queryFn: getUserInfo
+    // }) 
+    // if (isPending) return <Loading />    //Neu nhu con tai thi tra ve cai nay 
+    // useEffect(() => {
+    //     getUserInfo().then(data => console.log(data))
+
+    // } , [])
     return (
         <div className='w-[365px] hidden 2xl:block md:h-[868px] rounded-2xl bg-(--color-primary) fixed left-0 top-42 pt-30 shadow-[0_10px_20px_rgba(0,0,0,0.25)]'>
             <div className='top-0 -translate-y-1/4 translate-x-1/2 absolute'>
