@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { Link } from "react-router";
 import { jwtDecode } from "jwt-decode";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -16,6 +17,7 @@ import Spinner from "../../components/Spinner";
 import LoadingHandle from "../../services/loadingHandle";
 import MessageLog from "../../components/MessageLog";
 import Cookies from "js-cookie";
+import checkLogin from "../../services/checkLogin";
 export default function RightContent() {
     const formHandleMethod = useForm({
         mode: "onSubmit",
@@ -25,6 +27,8 @@ export default function RightContent() {
 
     const [isLoading, setIsLoading] = useState(false); //Bien isLoading
     const [showLog, setShowLog] = useState(0); //Bien dung de nhay messageLog, ban dau ca 2 deu dat la false vi khong co gi de tai
+    const [isLogin, setIsLogin] = useState(false);
+    const navigate = useNavigate();
     const {
         handleSubmit,
         formState: { errors },
@@ -36,14 +40,19 @@ export default function RightContent() {
     };
 
     const login = useGoogleLogin({
+      //Tao them code de ngan chan nguoi khac login them tai khoan vao 
         onSuccess: async (tokenResponse) => {
+            if (checkLogin()) {
+              alert('Vui lòng đăng xuất trước khi sử dụng lại dịch vụ')
+              return  
+            }
             setIsLoading(true);
             try {
                 const responseData = await loginGoogleSuccess(tokenResponse);
                 // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
                 setIsLoading(false);
                 setShowLog(true); //Tien hanh in ra Log message
-                console.log(responseData) 
+                // console.log(responseData);
                 const loginSession = await api.post("/auth/login-google", {
                     email: responseData.data.email,
                 });
@@ -51,11 +60,12 @@ export default function RightContent() {
                     secure: true,
                     expires: 7,
                 }); //Tien hanh luu JWT token vao trong storage
-                console.log('Da luu token vao trong storage')
-                setIsLoading(false) 
+                // console.log("Da luu token vao trong storage");
+                setIsLoading(false);
+                setIsLogin(true) 
             } catch (error) {
                 setShowLog(-1);
-                setIsLoading(false)   //Bao hieu khong can tai nua 
+                setIsLoading(false); //Bao hieu khong can tai nua
                 if (error.response?.status == 400) console.log("Bad Request");
                 if (error.response?.status == 401)
                     console.log("Method Not Allowed");
@@ -63,13 +73,20 @@ export default function RightContent() {
             }
         },
         onError: (error) => {
-            setShowLog(-1) 
-            setIsLoading(false) 
-        }, 
+            setShowLog(-1);
+            setIsLoading(false);
+        },
         flow: "auth-code",
         scope: "openid email profile",
     });
-
+    useEffect(() => {
+        if (isLogin) {
+            const timeOutID = setTimeout(() => {
+              navigate('/app/dashboard')
+            } , 4000)  //Chuyen dia diem sau 4000s 
+            return () => clearTimeout(timeOutID) 
+        }
+    } , [isLogin])
     return (
         <div className="box-border h-full w-full bg-white relative px-6 md:px-[100px] pb-10 pt-15 md:pt-[72px]">
             {/* Link to go back */}

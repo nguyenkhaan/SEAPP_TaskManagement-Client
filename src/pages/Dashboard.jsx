@@ -11,10 +11,10 @@ import Loading from './Loading'
 function Dashboard() {
     const [isLoading, setIsLoading] = useState(true)
 
-    useEffect(() => {
-        const id = setTimeout(() => setIsLoading(false), 5000)
-        return () => clearTimeout(id)
-    }, [])
+    // useEffect(() => {
+    //     const id = setTimeout(() => setIsLoading(false), 2000)
+    //     return () => clearTimeout(id)
+    // }, [])
     const currentPage = (   //currentPage la trang hien tai 
         <WorkingLayout>
             <div className='md:w-full md:h-full w-screen md:mb-20 mb-8 overflow-x-hidden flex flex-col items-center justify-between'>
@@ -48,10 +48,11 @@ function Dashboard() {
         </WorkingLayout>
     )
     return (
-        <Loading 
-            isLoading={isLoading} 
-            children={currentPage}
-        /> 
+        // <Loading 
+        //     isLoading={isLoading} 
+        //     children={currentPage}
+        // /> 
+        currentPage
     )
 }
 
