@@ -11,8 +11,7 @@ import Input from "../../components/Input";
 import CTA from "../../components/CTA";
 import Logo from "../../components/Logo";
 import { Checkbox } from "@mui/material";
-import { loginGoogleSuccess } from "../../services/loginGoogleSuccess";
-import { loginGoogleFailed } from "../../services/loginGoogleSuccess";
+import { loginGoogleSuccess } from "../../services/loginGoogle";
 import Spinner from "../../components/Spinner";
 import LoadingHandle from "../../services/loadingHandle";
 import MessageLog from "../../components/MessageLog";
@@ -69,7 +68,7 @@ export default function RightContent() {
             try {
                 setIsLoading(false);
                 const responseData = await loginGoogleSuccess(tokenResponse);
-                console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
+                // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
                 setShowLog(true); //Tien hanh in ra Log message
                 Cookies.set("user", responseData.data.token, {
                     secure: true,
