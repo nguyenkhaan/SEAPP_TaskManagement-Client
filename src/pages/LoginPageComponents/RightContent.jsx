@@ -35,34 +35,49 @@ export default function RightContent() {
     } = formHandleMethod;
     //Data submit
     const onSubmit = (data) => {
+        if (checkLogin()) {
+            alert("Vui lòng đăng xuất trước khi sử dụng dịch vụ");
+            return;
+        }
+        
         const { Email, Password } = data; //Du lieu tra ve
+
+        // setIsLoading(true) 
+        api.post("/auth/login", {
+            email: Email,
+            password: Password,
+        }).then((responseData) => {
+            setShowLog(1); 
+            Cookies.set('user' , responseData.data.token.access_token) 
+            setIsLogin(true) //Dat lai da dnag nhap thanh cong de tien hanh chuyen trang 
+        })
+        .catch((data) => {
+          setShowLog(-1); //Dang nhap that bai 
+        })
+
         //Luc nay thi goi ham login binh thuong
     };
 
     const login = useGoogleLogin({
-      //Tao them code de ngan chan nguoi khac login them tai khoan vao 
+        //Tao them code de ngan chan nguoi khac login them tai khoan vao
         onSuccess: async (tokenResponse) => {
             if (checkLogin()) {
-              alert('Vui lòng đăng xuất trước khi sử dụng lại dịch vụ')
-              return  
+                alert("Vui lòng đăng xuất trước khi sử dụng lại dịch vụ");
+                return;
             }
             setIsLoading(true);
             try {
-                const responseData = await loginGoogleSuccess(tokenResponse);
-                // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
                 setIsLoading(false);
+                const responseData = await loginGoogleSuccess(tokenResponse);
+                console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
                 setShowLog(true); //Tien hanh in ra Log message
-                // console.log(responseData);
-                const loginSession = await api.post("/auth/login-google", {
-                    email: responseData.data.email,
-                });
-                Cookies.set("user", loginSession.data.token, {
+                Cookies.set("user", responseData.data.token, {
                     secure: true,
                     expires: 7,
                 }); //Tien hanh luu JWT token vao trong storage
                 // console.log("Da luu token vao trong storage");
                 setIsLoading(false);
-                setIsLogin(true) 
+                setIsLogin(true);
             } catch (error) {
                 setShowLog(-1);
                 setIsLoading(false); //Bao hieu khong can tai nua
@@ -82,11 +97,11 @@ export default function RightContent() {
     useEffect(() => {
         if (isLogin) {
             const timeOutID = setTimeout(() => {
-              navigate('/app/dashboard')
-            } , 4000)  //Chuyen dia diem sau 4000s 
-            return () => clearTimeout(timeOutID) 
+                navigate("/app/dashboard");
+            }, 4000); //Chuyen dia diem sau 4000s
+            return () => clearTimeout(timeOutID);
         }
-    } , [isLogin])
+    }, [isLogin]);
     return (
         <div className="box-border h-full w-full bg-white relative px-6 md:px-[100px] pb-10 pt-15 md:pt-[72px]">
             {/* Link to go back */}
