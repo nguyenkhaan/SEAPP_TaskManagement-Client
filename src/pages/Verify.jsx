@@ -17,7 +17,7 @@ function Verify()
             setStatus('Email has been verified...Charged me...Charged me') 
             setTimeout(() => {
                 window.location.href = '/login' //Chuyen ve trang dang nhap 
-            } , 18000)
+            } , 1500)
             
         }).catch(() => {
             setStatus('Email verification failed or link is invalid...')
