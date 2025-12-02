@@ -9,6 +9,7 @@ import MyTask from "../pages/MyTask"
 import ViewTeam from "../pages/ViewTeam"
 import CreateTeam from "../pages/CreateTeam"
 import Setting from "../pages/Setting"
+import Verify from "../pages/Verify"
 const routes = [
     {
         path: '/',
@@ -64,6 +65,11 @@ const routes = [
         path: '/app/settings', //Da responsive laptop, tablet, phone 
         desc: 'Trang cài đặt', 
         element: Setting 
+    }, 
+    {
+        path: '/verify', 
+        desc: 'Trang dung de verify email', 
+        element: Verify 
     }
     //my-task , setting ... 
 ]

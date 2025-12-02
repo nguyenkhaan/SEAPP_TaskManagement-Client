@@ -10,7 +10,7 @@ import Logo from "../../components/Logo";
 import { Checkbox } from "@mui/material";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
-import registerByEmailPassword from "../../services/register";
+import RegisterServices from '../../services/register'
 import MessageLog from "../../components/MessageLog";
 import checkLogin from "../../services/checkLogin";
 import Spinner from "../../components/Spinner";
@@ -51,7 +51,7 @@ export default function LeftContent() {
                 // console.log(data)
                 const { Name, Email, Password } = data;
                 setLoading(true); // Bat loading
-                const responseData = await registerByEmailPassword(
+                const responseData = await RegisterServices.registerByEmailPassword(
                     Name,
                     Email,
                     Password
@@ -203,7 +203,7 @@ export default function LeftContent() {
                 showLog={showLog}
                 setShowLog={setShowLog}
                 message={
-                    showLog == 1 ? "Đăng ký thành công" : "Đăng ký thất bại"
+                    showLog == 1 ? "Plaease your email !!!" : "Đăng ký thất bại"
                 }
             />
         </div>
