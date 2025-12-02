@@ -1,6 +1,5 @@
 const getStatusColor = (status) => {
     status = status.toLowerCase() 
-    console.log('status: ' , status) 
     switch (status) {
         case 'in progress': return '--color-in-progress'; 
         case 'completed': return '--color-completed';  

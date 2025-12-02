@@ -8,8 +8,19 @@ async function getUserInfo() {
             "Authorization" : `Bearer ${token}`
         }
     })
-    console.log(responseData.data) 
-    return responseData.data
+    // console.log(responseData.data.data.user)  
+    return responseData.data.data.user 
+}
+
+async function updateUserInfo(info) {
+    //Tien hanh update thong tin cho user 
+    const token = Cookies.get('user') 
+    const responseData = await api.post('/user' , info , {
+        headers: {
+            "Authorization" : `Bearer ${token}`
+        }
+    })
+    return responseData 
 }
 
 export {getUserInfo}
