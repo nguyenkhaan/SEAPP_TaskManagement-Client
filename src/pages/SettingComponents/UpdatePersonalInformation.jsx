@@ -8,8 +8,8 @@ import PersonalInput from "./PersonalInput";
 import WorkingModal from "../../components/WorkingModal";
 import MessageLog from "../../components/MessageLog";
 import BirthdayInput from "./BirthdayInput";
-import { getUserInfo } from "../../services/userServices";
-import Loading from "../Loading";
+import UserService from "../../services/userServices";
+import LoadingModal from "../LoadingModal";
 function UpdatePersonalInformation({ avatar }) {
     const [showLog, setShowLog] = useState(0); //0 dai dien cho false, nen ta set lai thanh false cung se la 0
     const nameRef = useRef(null);
@@ -18,13 +18,15 @@ function UpdatePersonalInformation({ avatar }) {
     const phoneRef = useRef(null);
     //Ham React Query
     const queryClient = useQueryClient() 
-    const { data, isPending, error } = useQuery({
+    const { data, isLoading, error } = useQuery({
         queryKey: ["user"],
         queryFn: async () => {
-            const responseData = await getUserInfo();
+            const responseData = await UserService.getUserInfo() 
             console.log("Log ra tu setting: ", responseData);
             return responseData;
         },
+        staleTime: 1000 * 5 * 60, 
+        gcTime: 1000 * 8 * 60 
     });
     const updateInformation = useMutation({
         mutationFn: async (info) => {
@@ -59,7 +61,7 @@ function UpdatePersonalInformation({ avatar }) {
 
         // updateInfo(); ---> Goi ham react query de tien hanh cap nhat thong tin nguoi dung 
     };
-
+    if (isLoading) return <></>
     return (
         <>
             <SectionSetting>
@@ -105,54 +107,3 @@ function UpdatePersonalInformation({ avatar }) {
 }
 export default UpdatePersonalInformation;
 
-/*
-
-<WorkingModal showModal={showPasswordModal}>
-    <div
-        className='font-md w-100 h-60 p-6 bg-white rounded-md'
-        onClick={(e) => { e.stopPropagation() }}
-    >
-        <form onSubmit={handleRePasswordClick} >
-            <h2 className='font-md text-xl'>Please Enter password again to update your email</h2>
-            <label className='text-base text-(--color-text-desc) my-2 block'>Enter your password here: </label>
-            <input name='rePassword' type='password' className='w-full rounded-md text-base bg-slate-300 p-2' />
-            <div className='mt-5 md:mt-3 w-full flex items-center justify-end gap-2'>
-                <button
-                    className='bg-gray-300 text-base md:text-lg text-black shadow-lg rounded-md cursor-pointer px-4 py-2'
-                    onClick={() => setShowPasswordModal(false)}
-                >
-                    Canc
-                </button>
-                <button
-                    className='bg-(--color-primary) text-base md:text-lg text-white shadow-lg rounded-md cursor-pointer px-4 py-2'
-                >
-                    Submit
-                </button>
-            </di
-        </form>
-    </div>
-</WorkingModal>
-
-    const handleRePasswordClick = (e) => {
-        e.preventDefault(); //Ngan khong cho viec submit form lam tai lai trang
-        const data = new FormData(e.target);
-        const rePassword = data.get("rePassword");
-        //Goi ham de xu li xem
-        //Neu thanh cong thi goi ham onSubmit
-        onSubmit();
-        //Neu that bai thi goi ham onError()
-        // onError()
-    };
-    const onSubmit = () => {
-        //Dung khi xu li du lieu thanh cong -> Tien hanh cap nhat lai thong tin nguoi dung
-        setShowPasswordModal(false);
-        setShowLog(1); //Cai nay dai dien cho viec thanh cong, neu la 1 thi no hien thi message bao thanh cong
-        updateInfo(); //Thuc hien update lai thogn tin
-    };
-    const onError = () => {
-        //Dung khi xu li that bai -> Hien log bao that bai hoac nguoi dung bam nut Cancel
-        setShowLog(-1); //Cai nay dai dien cho viec that bai, neu la -1 thi no se hien thi message bao that bai
-    };
-
-
-*/

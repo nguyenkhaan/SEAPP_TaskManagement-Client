@@ -5,21 +5,8 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import WorkingNavbar from "../components/WorkingNavbar";
 import WorkingSidebar from "../components/WorkingSidebar";
-import { AnimatePresence } from "framer-motion";
-import { motion } from "framer-motion";
 import ProtectedRoute from "../components/ProtectedRoute";
-import { getUserInfo } from "../services/userServices";
-import Loading from "../pages/Loading";
 function WorkingLayout({ children = true }) {
-    // useEffect(() => {
-    //     // khi component mount → khóa scroll
-    //     document.body.style.overflow = 'hidden';
-
-    //     // khi component unmount → mở lại scroll
-    //     return () => {
-    //         document.body.style.overflow = 'auto';
-    //     };
-    // }, []);
     return (
         <ProtectedRoute>
             <div className="w-screen relative pb-10">

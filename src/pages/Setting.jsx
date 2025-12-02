@@ -9,21 +9,21 @@ import UpdatePersonalInformation from "./SettingComponents/UpdatePersonalInforma
 import UpdatePassword from "./SettingComponents/UpdatePassword";
 import Appearance from "./SettingComponents/Appearance";
 import Account from "./SettingComponents/Account";
-import { getUserInfo } from "../services/userServices";
-import Loading from "./Loading";
+import UserService from "../services/userServices";
+import LoadingModal from "./LoadingModal";
 function Setting() {
     const { data, isPending, error } = useQuery({
         queryKey: ["user"],
         queryFn: async () => {
-            const responseData = await getUserInfo();
+            const responseData = await UserService.getUserInfo();
             return responseData;
         },
+        staleTime: 1000 * 5 * 60,    //Rieng theo tung cai instance 
+        gcTime: 1000 * 8 * 60   //Tinh theo cai instance cuoi cung 
     });
 
     //Mot lat sau phai dowload hinh anh ve va dat thanh default avatar
-    const [avatar, setAvatar] = useState(null);
-    const [preview, setPreview] = useState(null);
-    if (isPending) return <Loading />;
+    if (isPending) return <LoadingModal />;
     return (
         <WorkingLayout>
             <div className="w-full max-sm:px-2">
@@ -39,18 +39,11 @@ function Setting() {
                             <Avatar
                                 width={110}
                                 height={110}
-                                url={data.avatar_url}
-                                name={data.name}
-                                email={data.email}
-                                avatar={avatar}
-                                setAvatar={setAvatar}
-                                preview={preview}
-                                setPreview={setPreview}
                             />
                         </>
                     </SectionSetting>
                     {/* Update thong tin ca nhan  */}
-                    <UpdatePersonalInformation avatar={avatar} />
+                    <UpdatePersonalInformation />
                     {/* Cap nhat lai Mat khau  */}
                     <UpdatePassword />
                     {/* Cap nhat lai theme giao dien  */}
