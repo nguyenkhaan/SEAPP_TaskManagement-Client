@@ -35,7 +35,7 @@ class UserService {
 
     static async updateUserInfo(info) {
         const token = this.getUserToken();
-        const res = await api.post('/user', info, {
+        const res = await api.post('/user/', info, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

@@ -31,7 +31,9 @@ function UpdatePersonalInformation({ avatar }) {
     const updateInformation = useMutation({
         mutationFn: async (info) => {
             try {
-                setShowLog(1) 
+                const responseData = await UserService.updateUserInfo(info) 
+                if (responseData)
+                    setShowLog(1) 
             } 
             catch (error) {
                 setShowLog(-1) 
@@ -58,6 +60,7 @@ function UpdatePersonalInformation({ avatar }) {
             // phoneNumber: phoneRef.current.value,
             //Thuc hien update thong tin nguoi dung -> Fix lai cai avatar sao cho chuan 
         };
+        updateInformation.mutate(newInfo) //Tien hanh update lai du lieu 
 
         // updateInfo(); ---> Goi ham react query de tien hanh cap nhat thong tin nguoi dung 
     };

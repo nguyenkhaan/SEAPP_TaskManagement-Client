@@ -28,6 +28,7 @@ function Avatar({
 
     const avatarUpdateMutation = useMutation({  //Ham dung de update avatar 
         mutationFn: async (avatarFile) => {
+            console.log('Da update avatar thanh cong') 
             UserService.updateUserAvatar(avatarFile) 
         }, 
         onSuccess: () => {
