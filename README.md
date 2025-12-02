@@ -300,3 +300,19 @@ FE:
 - SQLAlchemy_flask 
 - Flask_restful 
 - CORS: Chống CORS 
+
+
+
+## 9. Mot so chu y ve React Query 
+- React Query cache dua tren co che key -> Nhung ham cache co cung key thi se chia se chyung nguon du lieu duoc cached 
+  + queryKey: Key dung de quan li viec cache 
+  + queryFn: Ham bat dong bo, thuc hien viec lay du lieu cho bien data. Thuong ket hop voi Axios API 
+  + data: Bien cua react query, chua du lieu call duoc tu API 
+  + isPending (boolean): Xac dinhx em du lieu da duoc 
+- Mutation: 
+  - Dung de thuc hie viec update du lieu, delete , insert 
+  - Co che: Chay ham va se cap nhat lai cache cho cac query co key tuong ung duoc khai bao 
+  - mutationFn: Ham bat dong bo de chay insert (chi nhan 1 tham so duy nhat)
+  - onSuccess(): Ham se chay khi mutationFn thanh cong 
+  - onError(): Ham se chay khi mutationFn that bai 
+  - queryClient.valite([])...: Dungde quyet dinh xem key nao se duoc refetch (lam moi) du lieu sau khi update. Thuowng dat cac nay trong onSuccess() 

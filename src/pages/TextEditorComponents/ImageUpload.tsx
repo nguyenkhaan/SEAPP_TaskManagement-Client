@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { useRef, useEffect, useState } from "react";
 interface IHook {
-  taskImage: any;
-  setTaskImage: any;
-  previewTaskImage: any;
-  setPreviewTaskImage: any;
+  image: any;
+  setImage: any;
+  previewImage: any;
+  setPreviewImage: any;
 }
 
 interface IObj {
@@ -13,7 +13,7 @@ interface IObj {
 }
 
 function ImageUpload({ hooks }: IObj) {
-  const { taskImage, setTaskImage, previewTaskImage, setPreviewTaskImage } =
+  const { image, setImage, previewImage, setPreviewImage } =
     hooks;
   const [props, setProps] = useState(false);
 
@@ -24,31 +24,31 @@ function ImageUpload({ hooks }: IObj) {
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length == 0) {
-      setTaskImage(null);
+      setImage(null);
       return;
     }
-    setTaskImage(e.target.files[0]);
+    setImage(e.target.files[0]);
   };
 
   useEffect(() => {
-    if (taskImage) {
-      const url: string = URL.createObjectURL(taskImage);
+    if (image) {
+      const url: string = URL.createObjectURL(image);
       if (url) {
         if (!props) setProps(true); //Bat tinh nang len
-        setPreviewTaskImage(url);
+        setPreviewImage(url);
         return () => URL.revokeObjectURL(url); //Xoa hinh anhn cua di, tranh gay leak memory
       } else {
         alert("Lỗi hiển thị hình ảnh");
         return;
       }
     }
-  }, [taskImage]);
-  return previewTaskImage ? (
+  }, [image]);
+  return previewImage ? (
     <div
       className={`bg-slate-100 font-medium text-lg cursor-pointer flex items-center justify-center rounded-xl w-[210px] h-[210px] mr-2 bg-cover bg-center bg-no-repeat grow-0`}
       onClick={handleClick}
       style={{
-        backgroundImage: `url(${previewTaskImage})`,
+        backgroundImage: `url(${previewImage})`,
       }}
     >
       <input
@@ -67,7 +67,7 @@ function ImageUpload({ hooks }: IObj) {
       } rounded-xl w-[210px] h-[210px] mr-2 bg-cover bg-center bg-no-repeat`}
       onClick={handleClick}
       style={{
-        backgroundImage: `url(${previewTaskImage})`,
+        backgroundImage: `url(${previewImage})`,
       }}
     >
       {props || <span className="m-auto text-base md:text-lg">Click here to upload</span>}

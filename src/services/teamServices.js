@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 class TeamServies 
 {
-    getUserToken() 
+    static getUserToken() 
     {
         return Cookies.get('user') 
     }
@@ -40,7 +40,7 @@ class TeamServies
             throw error 
         } 
     } 
-    static async createTeam(teamName = '' , icon = null , banner = null , description = '') 
+    static async createTeam(teamName = 'Cloudian Team' , icon = null , banner = null , description = '') 
     {
         try {
             const token = this.getUserToken() 
@@ -48,8 +48,16 @@ class TeamServies
 
             formData.append('teamName' , teamName)  
             formData.append('description' , description) 
-            formData.banner('icon' , icon) 
-            formData.append('banner' , banner) 
+            if (icon) formData.append('icon' , icon) 
+            if (banner) formData.append('banner' , banner) 
+            console.log(formData) 
+            const responseData = await api.post('/teams/' , formData , {
+                headers: {
+                    'Authorization' : `Bearer ${token}`
+                }
+            })
+            console.log(responseData)
+            return responseData
         } 
         catch (error) {
             console.log(error) 

@@ -17,7 +17,6 @@ function Avatar({
         queryFn: async () => {
             //Dung de lay avatar nguoi dung
             const responseData = await UserService.getUserInfo() //Tiep tuc fix o day 
-            console.log(responseData)
             return responseData
         },
         staleTime: 1000 * 5 * 60, 
@@ -28,7 +27,6 @@ function Avatar({
 
     const avatarUpdateMutation = useMutation({  //Ham dung de update avatar 
         mutationFn: async (avatarFile) => {
-            console.log('Da update avatar thanh cong') 
             UserService.updateUserAvatar(avatarFile) 
         }, 
         onSuccess: () => {

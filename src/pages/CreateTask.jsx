@@ -20,8 +20,8 @@ function CreateTask() {
 
     const { day, month, year, weekDay } = getCurrentDate()
     const [data, setData] = useState({})
-    const [taskImage, setTaskImage] = useState(null)
-    const [previewTaskImage, setPreviewTaskImage] = useState(null)
+    const [image, setImage] = useState(null)
+    const [previewImage, setPreviewImage] = useState(null)
     const [priority, setPriority] = useState('low')  //Dung de lua chon priority 
     const [title, setTitle] = useState('Default Title')
     const navigate = useNavigate()
@@ -103,7 +103,7 @@ function CreateTask() {
                 <form className='relative' onSubmit={handleSubmit(onSubmit)}>
                     {/* Header */}
                     <div className='flex max-md:flex-col items-start justify-start gap-6'>
-                        <ImageUpload hooks={{ taskImage, setTaskImage, previewTaskImage, setPreviewTaskImage }} />
+                        <ImageUpload hooks={{ image, setImage, previewImage, setPreviewImage }} />
                         <div className='flex-1'>
                             <TitleInput formHandle={formHandle} onTitleChange={(value) => setTitle(value)} />
                             <PriorityChoice formHandle={formHandle} onPriorityChange={value => setPriority(value)} />
