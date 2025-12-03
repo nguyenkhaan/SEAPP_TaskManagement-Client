@@ -33,18 +33,30 @@ function ViewTeam({
         setShowChart(!showChart);
     };
 
-    const { data, isPending, error } = useQuery({   //Lay du lieu cua team dua tren id 
+    const { data : teamQueryData , isPending : teamQueryPending, error : teamQueryError } = useQuery({   //Lay du lieu cua team dua tren id 
         queryKey: [`team-${ParamServices.getID()}`],
         queryFn: async () => {
             const id = ParamServices.getID();
             const responseData = await TeamServies.getTeamInfoFromId(id);
             console.log(responseData.data);
             return responseData; //icon, name, banner, description
+            //leader -> data.data.leader (id , email , name) 
+            //viceLeader Mang danh sach cac memebers -> data.data.viceLeader (id , email , name)
+            //members -> data.data.members (Mang , moi phan tu gom co id , email , name , avatar_url) 
         },
         staleTime: 1000 * 8 * 60,
         gcTime: 1000 * 8 * 60,
     });
 
+    const {data: roleQueryData , isPending : roleQueryPending , error: roleQueryError} = useQuery({
+        queryKey: [`team-role-${ParamServices.getID()}`], 
+        queryFn: async () => {
+            const id = ParamServices.getID() 
+            const responseData = await TeamServies.getTeamRole(id) 
+            console.log(responseData)
+            return responseData 
+        }
+    })
     //Trong day co phan GroupTaskTeam co TaskOverView, nhan vao 1 so tham so:
     //     width = 609,
     // taskTitle = 'Landing Page Design',
@@ -89,7 +101,7 @@ function ViewTeam({
             else if (distance <= -40) setView("group"); //Vuot sang trai
         }
     };
-    if (isPending || !data) return <LoadingModal />;
+    if (teamQueryPending || !teamQueryData || !roleQueryData || roleQueryPending) return <LoadingModal />;
 
     //Xu li Leave Team va Edit Team 
     const handleLeaveTeam = () => {
@@ -119,9 +131,9 @@ function ViewTeam({
             <div className="w-full h-full mb-20 ">
                 {/* Header */}
                 <ViewTeamHeader
-                    groupTitle={data.data.teamData.name}
-                    leaderName={data.data.leader.name}
-                    iconUrl={data.data.teamData.icon}
+                    groupTitle={teamQueryData.data.teamData.name}
+                    leaderName={teamQueryData.data.leader.name}
+                    iconUrl={teamQueryData.data.teamData.icon}
                     teamID={ParamServices.getID()}
                 />
                 {/* Description */}
@@ -188,12 +200,17 @@ function ViewTeam({
                                 + Create Task
                             </button>
                         </Link>
-                        <div className="flex items-center justify-end gap-2">
-                            <button className="md:w-11 md:h-11 h-9 w-9 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)">
+                        <div className="flex items-center justify-end gap-3">
+                            <button className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
                             <button 
-                                className="md:w-11 md:h-11 h-9 w-9 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
+                                className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
+                            >
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <button 
+                                className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
                                 onClick={handleLeaveTeam}
                             >
                                 <i class="fa-solid fa-right-from-bracket"></i>
@@ -227,7 +244,7 @@ function ViewTeam({
 
                         {/* View 2: Team Member */}
                         <div className="max-md:w-1/2 w-[340px] h-full flex items-center justify-center">
-                            <TeamMember />
+                            <TeamMember currentRole = {roleQueryData.data.role} leader = {teamQueryData.data.leader} viceLeader = {teamQueryData.data.viceLeader} members = {teamQueryData.data.members} />
                         </div>
                     </div>
                 </div>
