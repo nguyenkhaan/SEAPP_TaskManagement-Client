@@ -65,11 +65,11 @@ function ViewTeam({
             return responseData
         }, 
         onSuccess: async (data) => {
-            // if (data) await queryClient.invalidateQueries(['teams'])
+            queryClient.invalidateQueries(['teams'])
             setShowLog(1) 
             setTimeout(() => {
                 navigate('/app/teams')
-            } , 2000)
+            } , 200)
         }
     })
 
