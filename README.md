@@ -295,6 +295,12 @@ BE:
 - Axios API 
 - CookiesJS 
 - OAuth-google 
+- react-confirm-alert
+
+- Cac component can: 
++ MessageLog: Thong bao trang thai chay duoc hay la khong 
++ LoadingModal: Trang Modal toan man hinh dung de Loading trong khi cho tai du lieu 
++ Dialog Box: Hop thoai thong bao xac nhan 
 FE:
 - PyJWT 
 - SQLAlchemy_flask 

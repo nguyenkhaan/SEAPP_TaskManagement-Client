@@ -82,5 +82,23 @@ class TeamServies
             throw error 
         }
     }
+    static async leaveGroup(teamID) {
+        try {
+            const token = this.getUserToken();
+    
+            const responseData = await api.delete('/teams/user', {
+                data: { teamID: teamID },
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+    
+            return responseData;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    }
+    
 }
 export default TeamServies

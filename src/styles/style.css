@@ -2,7 +2,6 @@
     cursor: pointer;
 }
 
-
 .page::after { 
   content:'';
   position: absolute;
@@ -56,4 +55,15 @@
 }
 .react-date-picker__wrapper {
     border: 0 !important; 
+}
+.react-confirm-alert-overlay {
+    background-color: rgba(0,0,0,0.8) !important; 
+}
+.react-confirm-alert-button-group > button {
+    background: var(--color-primary) !important; 
+    font-size: 16px !important; 
+    font-weight: 700;
+}
+.react-confirm-alert-body {
+    color: black !important; 
 }

@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 function ViewTeamHeader({
     groupTitle = "Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê",
     leaderName = "",
-    iconUrl = ''
+    iconUrl = '', 
+    teamID = '' //Truyen vai ben trong va bat buoc phai
 }) {
     return (
         <div className="w-full h-[180px] md:h-[220px] flex py-6 px-5 md:px-8 font-md items-center justify-between bg-(--color-primary) rounded-3xl shadow-xl gap-12">

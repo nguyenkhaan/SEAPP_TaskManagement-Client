@@ -27,7 +27,7 @@ const routes = [
         desc: 'Trang dang nhap', 
     }, 
     {
-        path: 'app/teams',   //Da responsive cho tablet, phone, laptop 
+        path: '/app/teams',   //Da responsive cho tablet, phone, laptop 
         element: Team, 
         desc: 'Trang team'
     }, 
