@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useState , useRef } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router";
 import { easeInOut, motion } from "framer-motion";
 import WorkingLayout from "../layouts/WorkingLayout";
@@ -8,13 +8,13 @@ import GroupStastic from "../components/GroupStastic";
 import GroupCard from "../components/GroupCard";
 import Modal from "../components/modal";
 import { makeCode } from "../services/randomCode";
-import { useQuery , useMutation , useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import TeamServies from "../services/teamServices";
 import LoadingModal from "./LoadingModal";
 import MessageLog from "../components/MessageLog";
 function Team() {
     const [showModal, setShowModal] = useState(false);
-    const [showLog , setShowLog] = useState(0) 
+    const [showLog, setShowLog] = useState(0);
     const { data, isPending, error } = useQuery({
         queryKey: ["teams"],
         queryFn: async () => {
@@ -24,32 +24,31 @@ function Team() {
         staleTime: 1000 * 8 * 60,
         gcTime: 1000 * 8 * 60,
     });
-    const queryClient = useQueryClient() 
+    const queryClient = useQueryClient();
     const joinTeamMutation = useMutation({
         mutationFn: async (code) => {
             try {
-                const responseData = await TeamServies.joinTeamWithCode(code) 
-                return responseData
-            } 
-            catch (error) {
-                console.log(error) 
+                const responseData = await TeamServies.joinTeamWithCode(code);
+                return responseData;
+            } catch (error) {
+                console.log(error);
             }
-        }, 
+        },
         onSuccess: async (responseData) => {
-            await queryClient.invalidateQueries(['teams'])
-            setShowLog(1) 
-        }, 
+            await queryClient.invalidateQueries(["teams"]);
+            setShowLog(1);
+        },
         onError: () => {
-            setShowLog(-1) 
-        }
-    })
-    const joinRef = useRef(null) 
+            setShowLog(-1);
+        },
+    });
+    const joinRef = useRef(null);
     const handleJoinTeam = () => {
-        const code = joinRef.current.value 
-        if (!code) return 
-        joinTeamMutation.mutate(code) 
-        // console.log(code) 
-    }
+        const code = joinRef.current.value;
+        if (!code) return;
+        joinTeamMutation.mutate(code);
+        // console.log(code)
+    };
 
     if (isPending || !data) return <LoadingModal />;
     return (
@@ -75,10 +74,9 @@ function Team() {
                             maxLength={8}
                             ref={joinRef}
                         />
-                        <button 
+                        <button
                             className="w-10 h-10 text-white font-bold bg-(--color-primary) rounded-xl cursor-pointer"
-                            onClick={handleJoinTeam}
-                        >
+                            onClick={handleJoinTeam}>
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
@@ -109,10 +107,13 @@ function Team() {
                                 //team chinh la doi hien tai
                                 return (
                                     <div className="md:col-span-4 grow-0 col-span-6">
-                                        <GroupCard
-                                            groupTitle={team.name}
-                                            groupDesc={team.description}
-                                        />
+                                        <Link to={`/app/view-team?id=${team.id}`}>
+                                            <GroupCard
+                                                //id, name, icon, banner, description ,
+                                                groupTitle={team.name}
+                                                groupDesc={team.description}
+                                            />
+                                        </Link>
                                     </div>
                                 );
                             })}
@@ -135,7 +136,15 @@ function Team() {
                 </Link>
             </div>
             {showModal && <Modal showModal={setShowModal} code={makeCode(8)} />}
-            <MessageLog showLog={showLog} setShowLog={setShowLog} message={showLog == 1? 'Tham gia nhóm thành công' : 'Tham gia thất bại'}   /> 
+            <MessageLog
+                showLog={showLog}
+                setShowLog={setShowLog}
+                message={
+                    showLog == 1
+                        ? "Tham gia nhóm thành công"
+                        : "Tham gia thất bại"
+                }
+            />
         </WorkingLayout>
     );
 }

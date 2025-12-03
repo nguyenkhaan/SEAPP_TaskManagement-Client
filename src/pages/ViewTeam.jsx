@@ -3,17 +3,20 @@ import ReactDOM from 'react-dom'
 import WorkingLayout from '../layouts/WorkingLayout'
 import ViewTeamHeader from './ViewTeamComponents/ViewTeamHeader'
 import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import getStatusColor from '../services/getStatusColor'
 import TaskByGroupViewTeam from './ViewTeamComponents/TaskByGroupViewTeam'
 import TeamMember from './ViewTeamComponents/TeamMember'
 import ChartViewTeam from './ViewTeamComponents/ChartViewTeam'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router'
+import LoadingModal from './LoadingModal'
+import ParamServices from '../services/urlParams'
+import TeamServies from '../services/teamServices'
 function ViewTeam({
     groupTitle = 'Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê',
     groupDesc = 'Xin chao cac ban',
     groupTasks = [] //Danh sach group Tasks 
-
 }) {
     const [showDesc, setShowDesc] = useState(false)
     const [showChart, setShowChart] = useState(false)
@@ -24,6 +27,19 @@ function ViewTeam({
     const handleChart = () => {
         setShowChart(!showChart)
     }
+
+    const {data , isPending , error } = useQuery({
+        queryKey: [`team-${ParamServices.getID()}`], 
+        queryFn: async () => {
+            const id = ParamServices.getID() 
+            const responseData = await TeamServies.getTeamInfoFromId(id) 
+            console.log(responseData.data)
+            return responseData    //icon, name, banner, description 
+        }
+    })
+
+    
+
 
     //Trong day co phan GroupTaskTeam co TaskOverView, nhan vao 1 so tham so: 
     //     width = 609, 
@@ -47,18 +63,19 @@ function ViewTeam({
         }
     }
 
+    if (isPending || !data) return <LoadingModal /> 
     return (
         <WorkingLayout>
             <div className='w-full h-full mb-20 '>
                 {/* Header */}
-                <ViewTeamHeader />
+                <ViewTeamHeader groupTitle={data.data.teamData.name} leaderName={data.data.leader.name} iconUrl={data.data.teamData.icon} />
                 {/* Description */}
                 <div className='flex cursor-pointer items-center mt-6 md:mt-8 text-lg md:text-xl font-md text-(--color-text-desc) justify-start gap-3'>
                     {showDesc ? <i class="fa-solid fa-caret-down" onClick={handleDescription}></i> : <i class="fa-solid fa-caret-right" onClick={handleDescription}></i>}
-                    <span onClick={handleDescription}>Team Description</span>
+                    <span onClick={handleDescription}>Description</span>
                 </div>
                 {showDesc ? <p className='w-full text-base pl-2 md:pl-0 text-justify mt-2 text-(--color-text-desc) line-clamp-6'>
-                    {groupDesc}
+                    {data.data.teamData.description}
                 </p> : <></>}
 
                 {/* Thong ke */}
