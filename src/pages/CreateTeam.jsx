@@ -37,7 +37,6 @@ function CreateTeam() {
                 banner,
                 description
             );
-            console.log(responseData);
             return responseData;
         },
         onSuccess: async (responseData) => {
@@ -69,12 +68,14 @@ function CreateTeam() {
         mode: "onSubmit",
     });
     const onSubmit = async (data) => {
+        
         createTeamMutation.mutate({
             name: data.teamName, 
             icon : image, 
             banner: null, 
             description: editor.getText() //Chu y: Ham mutation chi nhan vao 1 tham so duy nhat 
-        })   
+        })      
+    //    console.log(editor.getText()) 
         // console.log(data.teamName)
         // console.log(image)
         // console.log(editor.getText())

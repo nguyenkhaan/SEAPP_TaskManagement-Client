@@ -24,7 +24,7 @@ class TeamServies
             throw error 
         }
     }
-    static async getAllTeamInfo() 
+    static async getAllTeamInfo()   //Da xu li thanh cong 
     {
         try {
             const token = this.getUserToken() 
@@ -40,14 +40,14 @@ class TeamServies
             throw error 
         } 
     } 
-    static async createTeam(teamName = 'Cloudian Team' , icon = null , banner = null , description = '') 
+    static async createTeam(teamName = 'Cloudian Team' , icon = null , banner = null , description = '')   //Da xu li thanh cong 
     {
         try {
             const token = this.getUserToken() 
             const formData = new FormData() 
 
             formData.append('teamName' , teamName)  
-            formData.append('description' , description) 
+            formData.append('teamDescription' , description) 
             if (icon) formData.append('icon' , icon) 
             if (banner) formData.append('banner' , banner) 
             console.log(formData) 
@@ -56,8 +56,26 @@ class TeamServies
                     'Authorization' : `Bearer ${token}`
                 }
             })
-            console.log(responseData)
             return responseData
+        } 
+        catch (error) {
+            console.log(error) 
+            throw error 
+        }
+    }
+    static async joinTeamWithCode(code) 
+    {
+        if (!code) return 
+        try {
+            const token = this.getUserToken() 
+            const responseData = await api.post('/teams/join' , {
+                code
+            } , {
+                headers: {
+                    'Authorization' : `Bearer ${token}`
+                }
+            })
+            return responseData 
         } 
         catch (error) {
             console.log(error) 
