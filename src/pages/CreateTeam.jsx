@@ -14,28 +14,41 @@ import MessageLog from "../components/MessageLog";
 import sendEmail from "../services/sendEmail";
 import ImageUpload from "./TextEditorComponents/ImageUpload";
 import TeamServies from "../services/teamServices";
+import Modal from "../components/modal";
 function CreateTeam() {
     const [emails, setEmails] = useState([]);
     const [focused, setFocused] = useState(false);
+    const [showCodeModal, setShowCodeModal] = useState(false);
+    const [code, setCode] = useState(null);
     const [image, setImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
     const [showLog, setShowLog] = useState(0); //Truyen nguyen cai nay vao ben trong showLog
     const queryClient = useQueryClient();
     const createTeamMutation = useMutation({
-        mutationFn: async ({name = 'Cloudian Team' , icon = null , banner = null, description = ''}) => {
-            const responseData = await TeamServies.createTeam(name , icon , banner , description) 
-            console.log(responseData) 
-
-        }, 
-        onSuccess: () => {
-            queryClient.invalidateQueries(['teams'])  //Fetch du lieu lai cho thang teams 
-            setShowLog(1) 
-
-        }, 
+        mutationFn: async ({
+            name = "Cloudian Team",
+            icon = null,
+            banner = null,
+            description = "",
+        }) => {
+            const responseData = await TeamServies.createTeam(
+                name,
+                icon,
+                banner,
+                description
+            );
+            console.log(responseData);
+            return responseData;
+        },
+        onSuccess: async (responseData) => {
+            await queryClient.invalidateQueries(["teams"]); //Fetch du lieu lai cho thang teams, them await de load xong thi moi cho hien thi UI 
+            setShowLog(1);
+            setCode(responseData.data.code);
+        },
         onError: () => {
-            setShowLog(-1) 
-        }
-    })
+            setShowLog(-1);
+        },
+    });
 
     const editor = useEditor({
         extensions: [StarterKit], // define your extension array
@@ -61,14 +74,15 @@ function CreateTeam() {
             icon : image, 
             banner: null, 
             description: editor.getText() //Chu y: Ham mutation chi nhan vao 1 tham so duy nhat 
-        })
-        // console.log(data.teamName) 
-        // console.log(image) 
-        // console.log(editor.getText()) 
+        })   
+        // console.log(data.teamName)
+        // console.log(image)
+        // console.log(editor.getText())
         emails.forEach((email) => {
             // sendEmail(email)  -> Mot luc sau co data roi thi hay gui
             //Thuc hien gui du lieu ve ben server
         });
+        setShowCodeModal(true);
     };
     return (
         <WorkingLayout>
@@ -82,15 +96,34 @@ function CreateTeam() {
                             Fill in the details below to set up your new team
                         </span>
                     </div>
-                    <Link to="/app/teams">
-                        <motion.button
-                            className="md:rounded-2xl rounded-md font-semibold cursor-pointer text-white py-2 bg-(--color-primary) md:px-4 px-2 text-base md:text-[18px]"
+                    <div className="flex items-center justify-between gap-2">
+                        <Link to="/app/teams">
+                            <motion.button
+                                className="md:rounded-2xl rounded-md font-semibold cursor-pointer text-white py-2 bg-(--color-primary) md:px-4 px-2 text-base md:text-[18px]"
+                                initial={{ opacity: 1 }}
+                                whileHover={{ opacity: 0.8 }}
+                                transition={{
+                                    duration: 0.2,
+                                    ease: "easeInOut",
+                                }}>
+                                Back to Teams
+                            </motion.button>
+                        </Link>
+                        <motion.div
+                            className="w-10 h-10 rounded-xl cursor-pointer text-white bg-(--color-primary) font-bold flex items-center justify-center text-base md:text-[18px]"
                             initial={{ opacity: 1 }}
                             whileHover={{ opacity: 0.8 }}
-                            transition={{ duration: 0.2, ease: "easeInOut" }}>
-                            Back to Teams
-                        </motion.button>
-                    </Link>
+                            transition={{
+                                duration: 0.2,
+                                ease: "easeInOut",
+                            }}
+                            onClick={() => {
+                                if (code) setShowCodeModal(true) 
+                            }}
+                            >
+                                <i class="fa-solid fa-cloud"></i>
+                            </motion.div>
+                    </div>
                 </div>
 
                 <div className="border shadow-xl border-gray-400 overflow-hidden rounded-2xl mt-6 w-full min-h-120">
@@ -192,6 +225,9 @@ function CreateTeam() {
                     setShowLog={setShowLog}
                     message="Tạo nhóm thành công"
                 />
+                {showCodeModal && (
+                    <Modal showModal={setShowCodeModal} code={code} />
+                )}
             </div>
         </WorkingLayout>
     );
