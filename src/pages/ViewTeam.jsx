@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import ReactDOM from "react-dom";
 import { confirmAlert } from "react-confirm-alert";
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import WorkingLayout from "../layouts/WorkingLayout";
 import ViewTeamHeader from "./ViewTeamComponents/ViewTeamHeader";
-import { useState } from "react"; 
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { useQuery , useQueryClient , useMutation } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import getStatusColor from "../services/getStatusColor";
 import TaskByGroupViewTeam from "./ViewTeamComponents/TaskByGroupViewTeam";
 import TeamMember from "./ViewTeamComponents/TeamMember";
@@ -22,7 +22,7 @@ function ViewTeam({
     groupDesc = "Xin chao cac ban",
     groupTasks = [], //Danh sach group Tasks
 }) {
-    const [showLog , setShowLog] = useState(0) 
+    const [showLog, setShowLog] = useState(0);
     const [showDesc, setShowDesc] = useState(false);
     const [showChart, setShowChart] = useState(false);
     const [view, setView] = useState("group"); //Neu vut sang phai thi hien team, vuot tay sang trai thi hien lai group
@@ -33,16 +33,21 @@ function ViewTeam({
         setShowChart(!showChart);
     };
 
-    const { data : teamQueryData , isPending : teamQueryPending, error : teamQueryError } = useQuery({   //Lay du lieu cua team dua tren id 
+    const {
+        data: teamQueryData,
+        isPending: teamQueryPending,
+        error: teamQueryError,
+    } = useQuery({
+        //Lay du lieu cua team dua tren id
         queryKey: [`team-${ParamServices.getID()}`],
         queryFn: async () => {
             const id = ParamServices.getID();
             const responseData = await TeamServies.getTeamInfoFromId(id);
             console.log(responseData.data);
             return responseData; //icon, name, banner, description
-            //leader -> data.data.leader (id , email , name) 
+            //leader -> data.data.leader (id , email , name)
             //viceLeader Mang danh sach cac memebers -> data.data.viceLeader (id , email , name)
-            //members -> data.data.members (Mang , moi phan tu gom co id , email , name , avatar_url) 
+            //members -> data.data.members (Mang , moi phan tu gom co id , email , name , avatar_url)
         },
         staleTime: 1000 * 8 * 60,
         gcTime: 1000 * 8 * 60,
@@ -55,27 +60,36 @@ function ViewTeam({
     // status = 'Completed',
     // due = '18/10/2006'
 
-
-
-    //Bat dau khai bao cac mutation cho react query 
-    const queryClient = useQueryClient() 
-    const navigate = useNavigate() 
-    //Mutation cho nguoi dung roi group 
+    //Bat dau khai bao cac mutation cho react query
+    const queryClient = useQueryClient();
+    const navigate = useNavigate();
+    //Mutation cho nguoi dung roi group
     const leaveGroupMutation = useMutation({
         mutationFn: async (teamID) => {
-            const responseData = await TeamServies.leaveGroup(teamID) 
-            console.log('Log ra tu nguoi dung roi team') 
-            return responseData
-        }, 
+            const responseData = await TeamServies.leaveGroup(teamID);
+            return responseData;
+        },
         onSuccess: async (data) => {
-            queryClient.invalidateQueries(['teams'])
-            setShowLog(1) 
+            queryClient.invalidateQueries(["teams"]);
+            setShowLog(1);
             setTimeout(() => {
-                navigate('/app/teams')
-            } , 200)
-        }
-    })
-
+                navigate("/app/teams");
+            }, 200);
+        },
+    });
+    const deleteTeamMutation = useMutation({
+        mutationFn: async (teamID) => {
+            const responseData = await TeamServies.deleteTeam(teamID);
+            return responseData;
+        },
+        onSuccess: async (data) => {
+            queryClient.invalidateQueries(["teams"]);
+            setShowLog(2);
+            setTimeout(() => {
+                navigate("/app/teams");
+            }, 200);
+        },
+    });
 
     const touchStart = useRef(0);
     const touchEnd = useRef(0);
@@ -94,29 +108,47 @@ function ViewTeam({
     };
     if (teamQueryPending || !teamQueryData) return <LoadingModal />;
 
-    //Xu li Leave Team va Edit Team 
+    //Xu li Leave Team va Edit Team
     const handleLeaveTeam = () => {
         confirmAlert({
-            title: 'Leave The Team', 
-            message: 'Do you really want to leave this team?', 
+            title: "Leave The Team",
+            message: "Do you really want to leave this team?",
             buttons: [
                 {
-                    label: 'Yes', 
+                    label: "Yes",
                     onClick: async () => {
-                        const teamID = ParamServices.getID()
-                        leaveGroupMutation.mutate(teamID)  
-                    }
-                }, 
+                        const teamID = ParamServices.getID();
+                        leaveGroupMutation.mutate(teamID);
+                    },
+                },
                 {
-                    label: 'No', 
-                    onClick: () => {} //Khong lam gi ca 
-                }
+                    label: "No",
+                    onClick: () => {}, //Khong lam gi ca
+                },
             ],
-            overlayClassName: 'bg-black'
-        })
-    }
+            overlayClassName: "bg-black",
+        });
+    };
+    const handleDeleteTeam = () => {
+        confirmAlert({
+            title: "Delete the team",
+            message: "Do you really want to delete this team?",
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: async () => {
+                        const teamID = ParamServices.getID();
+                        deleteTeamMutation.mutate(teamID);
+                    },
+                },
+                {
+                    label: "No",
+                    onClick: () => {},
+                },
+            ],
+        });
+    };
 
-    
     return (
         <WorkingLayout>
             <div className="w-full h-full mb-20 ">
@@ -192,18 +224,19 @@ function ViewTeam({
                             </button>
                         </Link>
                         <div className="flex items-center justify-end gap-3">
-                            <button className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button 
+                            <Link to={`/app/update-team?id=${ParamServices.getID()}`}>
+                                <button className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </Link>
+                            <button
                                 className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
-                            >
+                                onClick={handleDeleteTeam}>
                                 <i class="fa-solid fa-trash"></i>
                             </button>
-                            <button 
+                            <button
                                 className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
-                                onClick={handleLeaveTeam}
-                            >
+                                onClick={handleLeaveTeam}>
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </button>
                         </div>
@@ -235,11 +268,24 @@ function ViewTeam({
 
                         {/* View 2: Team Member */}
                         <div className="max-md:w-1/2 w-[340px] h-full flex items-center justify-center">
-                            <TeamMember currentRole = {teamQueryData.data.role} leader = {teamQueryData.data.leader} viceLeader = {teamQueryData.data.viceLeader} members = {teamQueryData.data.members} />
+                            <TeamMember
+                                currentRole={teamQueryData.data.role}
+                                leader={teamQueryData.data.leader}
+                                viceLeader={teamQueryData.data.viceLeader}
+                                members={teamQueryData.data.members}
+                            />
                         </div>
                     </div>
                 </div>
-                <MessageLog showLog={showLog} setShowLog={setShowLog} message={showLog == 1? 'Rời nhóm thành công' : 'Rời nhóm thất bại'} />
+                <MessageLog
+                    showLog={showLog}
+                    setShowLog={setShowLog}
+                    message={
+                        showLog == 1
+                            ? "Rời nhóm thành công"
+                            : "Rời nhóm thất bại"
+                    }
+                />
             </div>
         </WorkingLayout>
     );

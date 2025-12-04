@@ -76,6 +76,7 @@ export default function RightContent() {
             try {
                 setIsLoading(true);
                 const responseData = await loginGoogleSuccess(tokenResponse);
+                console.log(responseData) 
                 // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
                 setShowLog(true); //Tien hanh in ra Log message
                 Cookies.set("user", responseData.data.token, {

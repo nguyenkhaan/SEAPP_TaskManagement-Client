@@ -7,7 +7,7 @@ function TeamMember({
     leader = {},
     viceLeader = {},
     members = [],
-    currentRole = "",
+    currentRole = "", //role cua thang dang dang nhap 
 }) {
     return (
         <article

@@ -5,8 +5,9 @@ class TeamServies {
     static getUserToken() {
         return Cookies.get("user");
     }
-    static async getTeamInfoFromId(id) //Lay thong tin ve 1 team cu the
-    {
+    static async getTeamInfoFromId(
+        id //Lay thong tin ve 1 team cu the
+    ) {
         try {
             const token = this.getUserToken();
             const responseData = await api.get(`/teams/${id}`, {
@@ -20,7 +21,8 @@ class TeamServies {
             throw error;
         }
     }
-    static async getAllTeamInfo() { //Da xu li thanh cong
+    static async getAllTeamInfo() {
+        //Da xu li thanh cong
         try {
             const token = this.getUserToken();
             const responseData = await api.get("/teams/user", {
@@ -54,6 +56,7 @@ class TeamServies {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            console.log(responseData);
             return responseData;
         } catch (error) {
             console.log(error);
@@ -77,6 +80,7 @@ class TeamServies {
                     },
                 }
             );
+            console.log(responseData);
             return responseData;
         } catch (error) {
             console.log(error);
@@ -143,6 +147,34 @@ class TeamServies {
             });
             return responseData;
         } catch {}
+    }
+    static async deleteTeam(teamID) {
+        const token = this.getUserToken();
+        try {
+            const responseData = await api.delete(`/teams/${teamID}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            return responseData;
+        } catch (err) {}
+    }
+    static async updateTeam(teamID, name, icon, description) {
+        const token = this.getUserToken();
+        try {
+            const formData = new FormData();
+            console.log(teamID , name , icon , description)
+            if (name) formData.append("teamName", name);
+            if (icon) formData.append("icon", icon);
+            if (description) formData.append("teamDescription", description);
+            const responseData = await api.put(`/teams/${teamID}`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(responseData)
+            return responseData;
+        } catch (err) {}
     }
 }
 export default TeamServies;

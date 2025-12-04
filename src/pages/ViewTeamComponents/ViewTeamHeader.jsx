@@ -9,7 +9,7 @@ function ViewTeamHeader({
     return (
         <div className="w-full h-[180px] md:h-[220px] flex py-6 px-5 md:px-8 font-md items-center justify-between bg-(--color-primary) rounded-3xl shadow-xl gap-12">
             <div className="flex flex-2 flex-col h-full gap-3 md:gap-5 justify-between items-start text-white">
-                <h2 className="md:text-[48px] text-[30px] line-clamp-2">
+                <h2 className="md:text-[38px] text-[30px] line-clamp-2">
                     {groupTitle}
                 </h2>
                 <div className="flex md:w-[320px] 2-60 max-md:text-sm items-center justify-between">

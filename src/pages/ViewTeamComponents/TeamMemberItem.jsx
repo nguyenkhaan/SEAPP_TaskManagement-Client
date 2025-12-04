@@ -57,9 +57,6 @@ function TeamMemberItem({
         },
         onSuccess: async (data) => {
             queryClient.invalidateQueries([`team-${ParamServices.getID()}`]);
-            queryClient.invalidateQueries([
-                `team-role-${ParamServices.getID()}`,
-            ]);
 
             setShowLog(1);
         },
