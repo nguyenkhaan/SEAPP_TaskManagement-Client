@@ -6,7 +6,7 @@ import MessageLog from "../../components/MessageLog";
 function TeamMemberItem({
     id = "",
     name = "",
-    role = "Member",
+    role = "Member",  //Cai de hien thi len the cho nguoi dung 
     avatar_url = "",
     currentRole = "member",
 }) {
@@ -38,9 +38,6 @@ function TeamMemberItem({
         },
         onSuccess: async (data) => {
             queryClient.invalidateQueries([`team-${ParamServices.getID()}`]);
-            queryClient.invalidateQueries([
-                `team-role-${ParamServices.getID()}`,
-            ]);
             setShowLog(1);
         },
         onError: () => {
@@ -112,7 +109,7 @@ function TeamMemberItem({
                         {addViceLeaderPermission()}
                     </>
                 );
-            case "vice":
+            case "vice_leader":
                 return <>{addViceLeaderPermission()}</>;
             case "member":
                 return (

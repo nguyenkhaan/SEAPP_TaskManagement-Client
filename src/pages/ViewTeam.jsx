@@ -48,15 +48,6 @@ function ViewTeam({
         gcTime: 1000 * 8 * 60,
     });
 
-    const {data: roleQueryData , isPending : roleQueryPending , error: roleQueryError} = useQuery({
-        queryKey: [`team-role-${ParamServices.getID()}`], 
-        queryFn: async () => {
-            const id = ParamServices.getID() 
-            const responseData = await TeamServies.getTeamRole(id) 
-            console.log(responseData)
-            return responseData 
-        }
-    })
     //Trong day co phan GroupTaskTeam co TaskOverView, nhan vao 1 so tham so:
     //     width = 609,
     // taskTitle = 'Landing Page Design',
@@ -101,7 +92,7 @@ function ViewTeam({
             else if (distance <= -40) setView("group"); //Vuot sang trai
         }
     };
-    if (teamQueryPending || !teamQueryData || !roleQueryData || roleQueryPending) return <LoadingModal />;
+    if (teamQueryPending || !teamQueryData) return <LoadingModal />;
 
     //Xu li Leave Team va Edit Team 
     const handleLeaveTeam = () => {
@@ -151,7 +142,7 @@ function ViewTeam({
                 </div>
                 {showDesc ? (
                     <p className="w-full text-base pl-2 md:pl-0 text-justify mt-2 text-(--color-text-desc) line-clamp-6">
-                        {data.data.teamData.description}
+                        {teamQueryData.data.teamData.description}
                     </p>
                 ) : (
                     <></>
@@ -244,7 +235,7 @@ function ViewTeam({
 
                         {/* View 2: Team Member */}
                         <div className="max-md:w-1/2 w-[340px] h-full flex items-center justify-center">
-                            <TeamMember currentRole = {roleQueryData.data.role} leader = {teamQueryData.data.leader} viceLeader = {teamQueryData.data.viceLeader} members = {teamQueryData.data.members} />
+                            <TeamMember currentRole = {teamQueryData.data.role} leader = {teamQueryData.data.leader} viceLeader = {teamQueryData.data.viceLeader} members = {teamQueryData.data.members} />
                         </div>
                     </div>
                 </div>
