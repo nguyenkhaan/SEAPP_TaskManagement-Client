@@ -17,7 +17,6 @@ class UserService {
         console.log('Log ra tu user info: ' , res.data.data) 
         return res.data.data.user 
     }
-//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 
     static async updateUserAvatar(file) {
         const token = this.getUserToken();
         const formData = new FormData();
