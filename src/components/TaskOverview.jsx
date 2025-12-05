@@ -18,7 +18,7 @@ function TaskOverview({
             <li
                 className={`w-full rounded-2xl my-1 md:my-3 task__overview h-22 py-1 border-2 border-gray-300 flex px-2 gap-4 items-center justify-between bg-[#f8f9fe]`}
                 style={{
-                    width: `calc(100% - 26px)`
+                    width: `calc(100% - 5px)`
                 }}>
                 <div className="h-full flex items-center justify-center">
                     <div

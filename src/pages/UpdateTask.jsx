@@ -101,8 +101,8 @@ function UpdateTask() {
             );
         },
 
-        onSuccess: () => {
-            queryClient.invalidateQueries([`tasks-${currentTaskID}`])
+        onSuccess: (data) => {
+            queryClient.invalidateQueries([`team-tasks-${data.data.teamId}`])  //Thuc hien fetch lai du lieu 
             //Lat nua tien hanh update them du lieu cac task cua nguoi dung //user-tasks-info 
             setShowLog(1)
         }, 

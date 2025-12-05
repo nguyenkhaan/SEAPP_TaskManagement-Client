@@ -238,8 +238,8 @@ function ViewTeam({
                 )}
 
                 {/* Hien thi so va nut tao task  */}
-                <div className="w-full mt-5 rounded-md shadow-lg bg-slate-100 p-6 gap-4 flex md:flex-row flex-col md:items-center items-end md:justify-between justify-center md:h-14 h-30">
-                    <ul className="flex flex-2 max-md:w-full items-center justify-center md:justify-start gap-5 md:gap-16 font-md md:text-lg text-base">
+                <div className="w-full mt-5 rounded-md shadow-lg bg-slate-100 p-6 gap-4 flex md:flex-row flex-col md:items-center items-end md:justify-between justify-center md:h-15 h-30">
+                    <ul className="flex flex-2 max-md:w-full items-center justify-start gap-5 xl:gap-16 font-md md:text-lg text-base">
                         <li
                             style={{
                                 color: `var(${getStatusColor("Completed")})`,
@@ -265,7 +265,7 @@ function ViewTeam({
                     <div className="flex items-center gap-4">
                         <Link
                             to={`/app/create-task?id=${ParamServices.getID()}`}>
-                            <button className="font-md text-white text-sm md:text-xl rounded-md bg-(--color-primary) px-3 md:px-6 cursor-pointer shadow-lg py-3">
+                            <button className="font-md text-white text-sm xl:text-xl rounded-md bg-(--color-primary) px-3 md:px-6 cursor-pointer shadow-lg py-3">
                                 + Create Task
                             </button>
                         </Link>

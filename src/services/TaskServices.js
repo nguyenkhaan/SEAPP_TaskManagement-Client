@@ -114,5 +114,21 @@ class TaskServices {
             throw err;
         }
     }
+    static async deleteTask(taskID) 
+    {
+        const token = this.getUserToken() 
+        try {
+            const responseData = await api.delete(`/tasks/${taskID}` , {
+                headers: {
+                    Authorization : `Bearer ${token}`
+                }
+            })
+            return responseData
+        } 
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    }
 }
 export default TaskServices;
