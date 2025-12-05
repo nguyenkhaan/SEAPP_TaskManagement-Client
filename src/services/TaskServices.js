@@ -36,7 +36,14 @@ class TaskServices {
             throw err;
         } //data : totalTasks , completedPercentage , inProgressPercentage , toDoPercentage
     }
-    static async createTask(teamID, title, description, dueTime) {
+    static async createTask(
+        teamID,
+        title,
+        description,
+        dueTime,
+        important,
+        urgent
+    ) {
         const token = this.getUserToken();
         try {
             const responseData = await api.post(
@@ -45,6 +52,8 @@ class TaskServices {
                     title,
                     description,
                     dueTime,
+                    important,
+                    urgent,
                 },
                 {
                     headers: {
@@ -52,7 +61,7 @@ class TaskServices {
                     },
                 }
             );
-            return responseData
+            return responseData;
         } catch (err) {
             console.log(err);
             throw err;

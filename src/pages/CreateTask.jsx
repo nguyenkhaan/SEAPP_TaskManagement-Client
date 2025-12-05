@@ -77,9 +77,9 @@ function CreateTask() {
     //Tien hanh nop form 
     const queryClient = useQueryClient() 
     const createTaskMutation = useMutation({
-        mutationFn : async ({title , description , dueTime}) => {
+        mutationFn : async ({title , description , dueTime , important , urgent}) => {
             const teamID = ParamServices.getID() 
-            const responseData = await TaskServices.createTask(teamID , title , description , dueTime)
+            const responseData = await TaskServices.createTask(teamID , title , description , dueTime , important , urgent)
             console.log('Log ra tu create task' , responseData)
             return responseData
         }, 
@@ -95,7 +95,7 @@ function CreateTask() {
         // const formData = new FormData(); 
         // formData.append(title , )
         createTaskMutation.mutate({
-            title, description: editor.getHTML() , dueTime  
+            title, description: editor.getHTML() , dueTime, important: data.important , urgent: data.urgent 
         })
         
     }
