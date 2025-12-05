@@ -50,13 +50,11 @@ class TeamServies {
             formData.append("teamDescription", description);
             if (icon) formData.append("icon", icon);
             if (banner) formData.append("banner", banner);
-            console.log(formData);
             const responseData = await api.post("/teams/", formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log(responseData);
             return responseData;
         } catch (error) {
             console.log(error);
@@ -80,7 +78,6 @@ class TeamServies {
                     },
                 }
             );
-            console.log(responseData);
             return responseData;
         } catch (error) {
             console.log(error);
@@ -163,7 +160,6 @@ class TeamServies {
         const token = this.getUserToken();
         try {
             const formData = new FormData();
-            console.log(teamID , name , icon , description)
             if (name) formData.append("teamName", name);
             if (icon) formData.append("icon", icon);
             if (description) formData.append("teamDescription", description);
@@ -172,7 +168,6 @@ class TeamServies {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log(responseData)
             return responseData;
         } catch (err) {}
     }

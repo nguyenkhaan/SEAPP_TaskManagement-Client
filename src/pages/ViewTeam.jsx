@@ -218,7 +218,7 @@ function ViewTeam({
                         </li>
                     </ul>
                     <div className="flex items-center gap-4">
-                        <Link to={"/app/create-task"}>
+                        <Link to={`/app/create-task?id=${ParamServices.getID()}`}>
                             <button className="font-md text-white text-sm md:text-xl rounded-md bg-(--color-primary) px-3 md:px-6 cursor-pointer shadow-lg py-3">
                                 + Create Task
                             </button>

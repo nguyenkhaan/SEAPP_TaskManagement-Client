@@ -18,18 +18,15 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router'
 import { getCurrentDate } from '../services/getDate'
 import TaskServices from '../services/TaskServices'
-import DateInput from './CreateTaskComponents/DateInput'
 import { useMutation , useQueryClient } from '@tanstack/react-query'
-import ParamServices from '../services/urlParams'
-import MessageLog from '../components/MessageLog'
-function CreateTask() {
+function UpdateTask() {
 
     const { day, month, year, weekDay } = getCurrentDate()
     const [data, setData] = useState({})
-    const [dueTime , setDueTime] = useState(new Date()) 
+    const [image, setImage] = useState(null)
+    const [previewImage, setPreviewImage] = useState(null)
     const [priority, setPriority] = useState('low')  //Dung de lua chon priority 
     const [title, setTitle] = useState('Default Title')
-    const [showLog , setShowLog] = useState(0) 
     const navigate = useNavigate()
     //useForm to validation the formData 
     const formHandle = useForm({
@@ -73,45 +70,33 @@ function CreateTask() {
             }
         }
     })
-    
+
     //Tien hanh nop form 
-    const queryClient = useQueryClient() 
-    const createTaskMutation = useMutation({
-        mutationFn : async ({title , description , dueTime}) => {
-            const teamID = ParamServices.getID() 
-            const responseData = await TaskServices.createTask(teamID , title , description , dueTime)
-            console.log('Log ra tu create task' , responseData)
-            return responseData
-        }, 
-        onSuccess: (data) => {
-            setShowLog(1) 
-            // Lat nua coi nen update lai cai cached query nao 
-        },  
-        onError: (data) => {
-            setShowLog(-1) 
-        }
-    })
     const onSubmit = (data) => {
         // const formData = new FormData(); 
         // formData.append(title , )
-        createTaskMutation.mutate({
-            title, description: editor.getHTML() , dueTime  
-        })
-        
+        const formData = new FormData();
+        formData.append('taskTitle', title)
+        formData.append('priority', priority)
+        formData.append('content', editor.getHTML())
+        formData.append('image', taskImage)
+        formData.append('date', { day, month, year }) //Ngay thang tao task, cai nay server tu ghi nhan cung duoc 
+        console.log(formData) //Du lieu thu duoc 
     }
+
     return (
         <WorkingLayout>
             <div className='w-full min-h-[890px] md:h-[890px] border p-6 2xl:pt-6 rounded-xl border-gray-500 mb-10'>
                 <div className='w-full inline-flex items-center justify-end mb-3'>
                     <Link onClick={() => {
                         if (window.history.length > 1) navigate(-1)
-                        else navigate('/app/dashboard')
+                        else navigate('/')
                     }}>
                         <span
                             className="cursor-pointer text-lg text-(--color-primary) underline font-semibold"
                             onClick={() => {
                                 if (window.history.length > 1) navigate(-1)
-                                else navigate('/app/dashboard')
+                                else navigate('/')
                             }}
                         >
                             Go back
@@ -126,10 +111,7 @@ function CreateTask() {
                             <TitleInput formHandle={formHandle} onTitleChange={(value) => setTitle(value)} />
                             <PriorityChoice formHandle={formHandle} onPriorityChange={value => setPriority(value)} />
                             <p className='mt-4 text-black'>Status: <span className='text-(--color-not-started)'>Not started</span></p>
-                            <div className='w-full mb-4 mt-2 flex max-md:flex-col items-start xl:items-center justify-between'>
-                                <DateInput value={dueTime} onChange={setDueTime} /> 
-                                <p className='text-sm text-(--color-text-desc) mt-4'>Created On <span>{day}/{month}/{year}</span></p>
-                            </div>
+                            <p className='text-sm text-(--color-text-desc) mt-4'>Created On <span>{day}/{month}/{year}</span></p>
                         </div>
                     </div>
 
@@ -141,14 +123,13 @@ function CreateTask() {
                         <RichTextEditor editor={editor} />
                     </div>
                     <button type='submit'
-                        className='px-4 top-35 md:top-43 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
+                        className='px-4 top-35 md:top-40 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
                             font-semibold cursor-pointer shadow-lg rounded-md'>
                         Create Task
                     </button>
                 </form>
-                <MessageLog setShowLog={setShowLog} showLog={showLog} message={showLog == 1 ? 'Thêm nhiệm vụ thành công' : 'Thêm nhiệm vụ thất bại'}   /> 
             </div>
         </WorkingLayout>
     )
 }
-export default CreateTask
+export default UpdateTask

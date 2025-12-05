@@ -19,42 +19,20 @@ function PriorityChoice({
             <p className='text-black flex items-center justify-start gap-5 md:gap-12 text-base mt-4'>
                 Priority
                 <span>
-                    <label htmlFor='Moderate' className='mr-2'>Moderate</label>
+                    <label htmlFor='important' className='mr-2'>Important?</label>
                     <input 
-                        type='radio' name='priority' 
-                        {...register("createTaskPriority" , {
-                            required: "*Chọn thêm độ ưu tiên nhé*"
-                        })}
-                        value={'low'}
-                        
+                        type='checkbox' name='important' 
+                        {...register("important")}
                         />
                 </span>
                 <span>
-                    <label htmlFor='Moderate' className='mr-2'>Moderate</label>
+                    <label htmlFor='urgent' className='mr-2'>Urgent?</label>
                     <input 
-                        type='radio' name='priority' 
-                        {...register("createTaskPriority")}
-                        value={'medium'}
-                        />
-                </span>
-                <span>
-                    <label htmlFor='Moderate' className='mr-2'>Moderate</label>
-                    <input 
-                        type='radio' name='priority' 
-                        {...register("createTaskPriority")}
-                        value={'high'}
+                        type='checkbox' name='urgent' 
+                        {...register("urgent")}
                         />
                 </span>
             </p>
-            <ErrorMessage 
-                errors={errors} 
-                name='createTaskPriority'
-                render={({ messages }) => {
-                    if (!messages) return null
-                    const msgs = ((Array.isArray(messages)) ? messages : Object.values(messages))
-                    return msgs.map((msg, index) => <p key={index}  className='text-red-600 mt-2 italic my-1 font-medium md:text-base text-sm'>{msg}</p>)
-                }}
-            />
         </>
     )
 }
