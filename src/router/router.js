@@ -11,6 +11,7 @@ import CreateTeam from "../pages/CreateTeam"
 import Setting from "../pages/Setting"
 import Verify from "../pages/Verify"
 import UpdateTeam from "../pages/UpdateTeam"
+import UpdateTask from "../pages/UpdateTask"
 const routes = [
     {
         path: '/',
@@ -76,6 +77,11 @@ const routes = [
         path: '/app/update-team', 
         desc: 'Trang dung de update thong tin cho team', 
         element: UpdateTeam
+    }, 
+    {
+        path: '/app/update-task', 
+        desc: 'Trang dung de update task', 
+        element: UpdateTask
     }
     //my-task , setting ... 
 ]

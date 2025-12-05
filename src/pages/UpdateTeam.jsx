@@ -13,8 +13,10 @@ import Modal from "../components/modal";
 import LoadingModal from "./LoadingModal";
 import ParamServices from "../services/urlParams";
 import TeamServies from "../services/teamServices";
-
+import UrlError from "./URLError";
 function UpdateTeam() {
+    const teamID = ParamServices.getID() 
+    if (!teamID || isNaN(teamID)) return <UrlError />; 
     const {
         data: teamQueryData,
         isPending: teamQueryPending,
@@ -30,6 +32,7 @@ function UpdateTeam() {
             //viceLeader Mang danh sach cac memebers -> data.data.viceLeader (id , email , name)
             //members -> data.data.members (Mang , moi phan tu gom co id , email , name , avatar_url)
         },
+        refetchOnWindowFocus: false 
     });
 
     const [image, setImage] = useState(null);

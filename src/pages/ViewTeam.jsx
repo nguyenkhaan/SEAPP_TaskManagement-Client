@@ -18,12 +18,14 @@ import ParamServices from "../services/urlParams";
 import TeamServies from "../services/teamServices";
 import MessageLog from "../components/MessageLog";
 import TaskServices from "../services/TaskServices";
+import UrlError from "./URLError";
 function ViewTeam({
     groupTitle = "Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê Xác suất thống kê",
     groupDesc = "Xin chao cac ban",
     groupTasks = [], //Danh sach group Tasks
 }) {
     const currentTeamID = ParamServices.getID();
+    if (!currentTeamID || isNaN(currentTeamID)) return <UrlError /> 
     const [showLog, setShowLog] = useState(0);
     const [showDesc, setShowDesc] = useState(false);
     const [showChart, setShowChart] = useState(false);
@@ -270,18 +272,22 @@ function ViewTeam({
                         <div className="flex items-center justify-end gap-3">
                             <Link
                                 to={`/app/update-team?id=${ParamServices.getID()}`}>
-                                <button className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)">
+                                <button title="Edit" className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
                             </Link>
                             <button
                                 className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
-                                onClick={handleDeleteTeam}>
+                                onClick={handleDeleteTeam}
+                                title="Delete Group"
+                                >
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                             <button
                                 className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
-                                onClick={handleLeaveTeam}>
+                                onClick={handleLeaveTeam}
+                                title="Leave group"
+                                >
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </button>
                         </div>

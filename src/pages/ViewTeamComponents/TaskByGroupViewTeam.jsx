@@ -30,6 +30,8 @@ function TaskByGroupViewTeam({ width = "100%", height = "100%", teamID }) {
                 {data.data.data.tasks.map((task) => {
                     return (
                         <TaskOverview
+                            width={550}
+                            taskID={task.taskId} 
                             urgent={task.urgent}
                             important={task.important}
                             taskTitle={task.title}

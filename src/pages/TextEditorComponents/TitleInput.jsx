@@ -4,7 +4,8 @@ import { useEffect } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
 function TitleInput({
     formHandle, 
-    onTitleChange //Dung de theo doi su thay doi cua title 
+    onTitleChange, //Dung de theo doi su thay doi cua title 
+    defaultValue = '' 
 })
 {
     const { register, handleSubmit, formState: { errors } } = formHandle; 
@@ -15,6 +16,7 @@ function TitleInput({
     return (
         <>
             <input 
+                defaultValue={defaultValue}
                 className='font-semibold text-xl md:text-2xl w-full line-clamp-2 text-black px-3 py-2 rounded-md border-2 border-slate-300' 
                 {...register("createTaskTitleInput" , {
                     required: "*Không được bỏ trống tiêu đề bạn ơi*"

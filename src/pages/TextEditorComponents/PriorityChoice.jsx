@@ -4,7 +4,9 @@ import { useEffect } from 'react';
 import { ErrorMessage } from '@hookform/error-message'
 function PriorityChoice({
     formHandle, 
-    onPriorityChange
+    onPriorityChange, 
+    important = false, 
+    urgent = false 
 }) {
     const { register, handleSubmit, formState: { errors } } = formHandle; 
     const value = formHandle.watch('createTaskPriority')
@@ -21,6 +23,7 @@ function PriorityChoice({
                 <span>
                     <label htmlFor='important' className='mr-2'>Important?</label>
                     <input 
+                        defaultChecked={important}
                         type='checkbox' name='important' 
                         {...register("important")}
                         />
@@ -28,6 +31,7 @@ function PriorityChoice({
                 <span>
                     <label htmlFor='urgent' className='mr-2'>Urgent?</label>
                     <input 
+                        defaultChecked={urgent}
                         type='checkbox' name='urgent' 
                         {...register("urgent")}
                         />
