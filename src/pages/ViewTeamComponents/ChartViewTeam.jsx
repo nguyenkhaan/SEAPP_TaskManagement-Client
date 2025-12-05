@@ -1,16 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { PieChart } from '@mui/x-charts'
-import { valueFormatter , desktopOS } from '../../services/webUsage';
+import { valueFormatter ,  makePieChartData} from '../../services/webUsage';
 import { legendClasses } from '@mui/x-charts/ChartsLegend';
-function ChartViewTeam() {
+function ChartViewTeam({
+    completed = 100 , inProgress = 0, notStarted = 0 
+}) {
     return (
         <div className='w-full min-h-60 mt-5 flex flex-col items-start justify-between'>
             <div className='mt-4 flex items-center justify-start w-full min-h-50'>
                 <PieChart
                     series={[
                         {
-                            data: desktopOS,
+                            data: makePieChartData(completed , inProgress , notStarted), 
                             highlightScope: { fade: 'global', highlight: 'item' },
                             faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
                             valueFormatter,

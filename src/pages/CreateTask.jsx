@@ -75,10 +75,10 @@ function CreateTask() {
     })
     
     //Tien hanh nop form 
+    const teamID = ParamServices.getID() 
     const queryClient = useQueryClient() 
     const createTaskMutation = useMutation({
         mutationFn : async ({title , description , dueTime , important , urgent}) => {
-            const teamID = ParamServices.getID() 
             const responseData = await TaskServices.createTask(teamID , title , description , dueTime , important , urgent)
             console.log('Log ra tu create task' , responseData)
             return responseData
@@ -86,6 +86,7 @@ function CreateTask() {
         onSuccess: (data) => {
             setShowLog(1) 
             // Lat nua coi nen update lai cai cached query nao 
+            queryClient.reValidateMode([`team-tasks-${teamID}`])
         },  
         onError: (data) => {
             setShowLog(-1) 

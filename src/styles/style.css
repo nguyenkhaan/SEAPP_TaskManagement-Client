@@ -53,6 +53,9 @@
         width: 400px !important
     }
 }
+.react-datetime-picker__wrapper {
+    border: 0 !important; 
+}
 .react-date-picker__wrapper {
     border: 0 !important; 
 }
