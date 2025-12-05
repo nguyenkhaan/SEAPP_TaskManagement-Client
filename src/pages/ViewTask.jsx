@@ -12,6 +12,7 @@ import MessageLog from "../components/MessageLog";
 
 function ViewTask() {
     const currentTaskID = Number(ParamServices.getID());
+    let currentTeamId = null 
     if (!currentTaskID || Number.isNaN(currentTaskID)) return <UrlError />;
 
     const [showLog, setShowLog] = useState(0);
@@ -20,7 +21,7 @@ function ViewTask() {
         queryKey: [`tasks-${currentTaskID}`],
         queryFn: async () => {
             const response = await TaskServices.getTaskDetail(currentTaskID);
-            return response.data.data;
+            return response.data
         },
         staleTime: 1000 * 60 * 8,
         gcTime: 1000 * 60 * 8
@@ -32,15 +33,16 @@ function ViewTask() {
     const deleteMutation = useMutation({
         mutationFn: async () => {
             const res = await TaskServices.deleteTask(currentTaskID);
+            console.log(res.data) 
             return res.data; // đảm bảo có teamId
         },
         onSuccess: (resData) => {
-            queryClient.invalidateQueries([`team-tasks-${resData.teamId}`]);
+            queryClient.invalidateQueries([`team-tasks-${1}`]);
             setShowLog(1);
 
             setTimeout(() => {
-                navigate(`/app/view-team?id=${resData.teamId}`);
-            }, 1200);
+                navigate(`/app/view-team?id=${data.teamId}`);
+            }, 1800);
         },
         onError: () => {
             setShowLog(-1);
@@ -54,9 +56,9 @@ function ViewTask() {
     // BỌC LoadingModal trong WorkingLayout để tránh React mismatch
     if (isPending || !data) {
         return (
-            <WorkingLayout>
+          
                 <LoadingModal />
-            </WorkingLayout>
+          
         );
     }
 
@@ -64,7 +66,7 @@ function ViewTask() {
         <WorkingLayout>
             <div className="w-full h-[920px] md:border p-6 pt-14 rounded-xl border-gray-500 mb-10">
                 
-                <Link to={`/app/teams`}>
+                <Link to={`/app/view-team?id=${data.teamId}`}>
                     <span
                         className="absolute cursor-pointer top-12 md:top-5 right-10 text-lg text-(--color-primary) underline font-semibold"
                         title="Quay lại">
@@ -83,7 +85,7 @@ function ViewTask() {
 
                     <div className="flex-1">
                         <h2 className="font-semibold text-xl md:text-2xl text-black">
-                            {data.title}
+                            {data.data.title}
                         </h2>
 
                         <p className="text-black text-base mt-3">
@@ -93,7 +95,7 @@ function ViewTask() {
                         <p className="mt-3 text-black">
                             Status:
                             <span className="text-(--color-not-started)">
-                                {getStatusString(data.status)}
+                                {getStatusString(data.data.status)}
                             </span>
                         </p>
 
@@ -106,7 +108,7 @@ function ViewTask() {
                 <div
                     className="w-full mt-6 h-[540px] border-2 overflow-y-auto rounded-md p-1 bg-white text-black"
                     dangerouslySetInnerHTML={{
-                        __html: purify(data.description),
+                        __html: purify(data.data.description),
                     }}>
                 </div>
 
