@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Avatar from "./Avatar";
 import SidebarItem from "./SidebarItem";
 import { useQuery } from "@tanstack/react-query";
@@ -15,6 +15,35 @@ function WorkingSidebar() {
     //     getUserInfo().then(data => console.log(data))
 
     // } , [])
+
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const menuItems = [
+        {
+            path: "/app/dashboard",
+            title: "Dashboard",
+            icon: <i class="fa-regular fa-house"></i>
+        },
+        {
+            path: "/app/teams",
+            title: "Teams",
+            icon: <i class="fa-solid fa-people-group"></i>
+        },
+        {
+            path: "/app/my-tasks",
+            title: "My Tasks",
+            icon: <i class="fa-solid fa-list-check"></i>
+        },
+        {
+            path:"/app/settings",
+            title: "Settings",
+            icon: <i class="fa-solid fa-gear"></i>
+        }
+    ]
+
+    const handleClick = (route) => {navigate(route)}
+
     const [showSidebar , setShowSidebar] = useState(false) 
 
     return (
@@ -25,30 +54,20 @@ function WorkingSidebar() {
                 />
             </div>
             <ul className="w-full flex items-center justify-between flex-col gap-2">
-                <Link to={"/app/dashboard"}>
-                    <SidebarItem
-                        icon={<i class="fa-regular fa-house"></i>}
-                        title="Dashboard"
-                    />
-                </Link>
-                <Link to={"/app/teams"}>
-                    <SidebarItem
-                        icon={<i class="fa-solid fa-people-group"></i>}
-                        title="Teams"
-                    />
-                </Link>
-                <Link to={"/app/my-tasks"}>
-                    <SidebarItem
-                        icon={<i class="fa-solid fa-list-check"></i>}
-                        title="My Tasks"
-                    />
-                </Link>
-                <Link to={"/app/settings"}>
-                    <SidebarItem
-                        icon={<i class="fa-solid fa-gear"></i>}
-                        title="Settings"
-                    />
-                </Link>
+                {menuItems.map((item, index) => {
+                    const isActive = location.pathname === item.path;
+
+                    return (
+                        <Link to={item.path} key={index} className='w-full'>
+                            <SidebarItem 
+                                icon={item.icon}
+                                title={item.title}
+                                isActive={isActive}
+                                onClick={() => handleClick(item.path)}
+                            />
+                        </Link>
+                    );
+                })}
             </ul>
         </div>
     );
