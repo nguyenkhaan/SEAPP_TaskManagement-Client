@@ -146,5 +146,22 @@ class TaskServices {
             throw err;
         }
     }
+    static async getTaskGroupByTeam()  
+    {
+        const token = this.getUserToken() 
+        try {
+            const responseData = await api.get('/tasks/me' , {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log(responseData.data.data.teams) 
+            return responseData
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    }
 }
 export default TaskServices;

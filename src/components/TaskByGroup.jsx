@@ -14,17 +14,9 @@ function TaskByGroup({
     leaderName = "",
     viceLeaderName = "",
     teamID = "",
+    tasks = [] 
 }) {
-    const { data, isPending, error } = useQuery({
-        queryKey: [`team-tasks-${teamID}`],
-        queryFn: async () => {
-            const responseData = await TaskServices.getTeamTask(teamID);
-            // console.log(responseData.data.data.tasks);
-            return responseData;
-        },
-    });
     //lat nua tao them mot color picker o day
-    if (!data || isPending) return <Spinner /> 
     return (
         <article
             className={`rounded-md md:rounded-2xl w-full flex task__group flex-col items-start justify-between shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black`}>
@@ -36,10 +28,10 @@ function TaskByGroup({
             />
             <ul className="w-full flex-1 py-5 px-6 md:px-8 overflow-y-scroll overflow-x-hidden wrapper h-full flex flex-col items-center pb-4 md:pb-6">
                 {
-                    data.data.data.tasks.length == 0? 
+                    tasks.length == 0? 
                     <p className="italic text-lg">Chưa có nhiệm vụ nào, thêm nhiệm vụ để bắt đầu nhé.</p>
                     : 
-                    (data.data.data.tasks.map((task) => {
+                    (tasks.map((task) => {
                         return (
                             <TaskOverview
                                 width={850}

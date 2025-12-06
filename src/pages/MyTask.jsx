@@ -5,6 +5,7 @@ import TaskByGroup from "../components/TaskByGroup";
 import { useQuery } from "@tanstack/react-query";
 import LoadingModal from "./LoadingModal";
 import TeamServies from "../services/teamServices";
+import TaskServices from "../services/TaskServices";
 function MyTask() {
     const colorHeaders = [
         "",
@@ -15,10 +16,12 @@ function MyTask() {
         //Cap nhat lai local Storage
     ];
     const { data, isPending, error } = useQuery({
-        queryKey: ["teams"],
+        queryKey: ["tasks-me"],
         queryFn: async () => {
             const responseData = await TeamServies.getAllTeamInfo();
-            return responseData;
+            const myData = await TaskServices.getTaskGroupByTeam() 
+            console.log('Log ra tu My Tasks: ' , myData.data.data.teams) 
+            return myData.data
         },
     });
 
@@ -39,13 +42,14 @@ function MyTask() {
                     Manage and monitor your tasks
                 </span>
                 <div className="flex w-full min-h-30 flex-col md:items-start items-center justify-start mt-6 gap-6 md:gap-7">
-                    {data.data.teamData.map((taskByGroup, index) => {
+                    {data.data.teams.map((taskByGroup, index) => {
                         return (<TaskByGroup
                             width={"100%"}
-                            groupTitle={taskByGroup.name}
-                            description={taskByGroup.description}
-                            leaderName={taskByGroup.leaderName}
-                            teamID={taskByGroup.id}
+                            groupTitle={taskByGroup.teamName}
+                            description={taskByGroup.teamDescription}
+                            leaderName={taskByGroup.leader.name}
+                            teamID={taskByGroup.teamId}
+                            tasks = {taskByGroup.tasks}
                         /> ) 
                     })}
                 </div>
