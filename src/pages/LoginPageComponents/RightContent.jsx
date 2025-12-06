@@ -117,6 +117,9 @@ export default function RightContent() {
             return () => clearTimeout(timeOutID);
         }
     }, [isLogin]);
+
+
+
     return (
         <div className="box-border h-full w-full bg-white relative px-6 md:px-[100px] pb-10 pt-15 md:pt-[72px]">
             {/* Link to go back */}
@@ -171,7 +174,9 @@ export default function RightContent() {
                 <div className="flex items-center text-(--color-primary) font-[Inter] font-medium mb-5">
                     <Checkbox />
                     <p className="text-(--color-text)">Remember me</p>
-                    <a className="ml-auto">Forgot password?</a>
+                   
+                        <Link className="ml-auto cursor-pointer hover:underline" to={'/forgot-password'}>Forgot password?</Link>
+                    
                 </div>
                 <CTA title="Login" type="submit" />
             </form>

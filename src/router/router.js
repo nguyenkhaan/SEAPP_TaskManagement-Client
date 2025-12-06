@@ -13,6 +13,8 @@ import Verify from "../pages/Verify"
 import UpdateTeam from "../pages/UpdateTeam"
 import UpdateTask from "../pages/UpdateTask"
 import UrlError from "../pages/URLError"
+import ResetPassword from "../pages/ResetPassword"
+import ResetPasswordEmailPage from "../pages/ResetPasswordEmailPage"
 const routes = [
     {
         path: '/',
@@ -88,6 +90,16 @@ const routes = [
         path: '/url/error', 
         desc: 'Mia may', 
         element: UrlError
+    }, 
+    {
+        path: '/reset-password', 
+        desc: 'Trang dung de dat lai mat khau', 
+        element: ResetPassword
+    }, 
+    {
+        path: '/forgot-password', 
+        desc: 'Trang nhap email de reset password', 
+        element: ResetPasswordEmailPage
     }
     //my-task , setting ... 
 ]
