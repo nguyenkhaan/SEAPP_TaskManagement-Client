@@ -11,7 +11,7 @@ function WorkingNavbar()
     const {day , month , year , weekDay} = getCurrentDate() 
     const [showCalendar, setShowCalendar ] = useState(false);
     return (
-        <nav className='w-screen md:h-25 h-29 left-0 max-md:flex-col z-99999 bg-white fixed top-0 shadow-lg md:gap-12 md:pt-9 md:px-[60px] md:py-8 py-3 flex md:items-center items-start justify-between'>
+        <nav className='w-screen md:h-25 h-29 left-0 max-sm:flex-col z-99999 bg-white fixed top-0 shadow-lg md:gap-12 md:pt-9 md:px-[60px] md:py-8 py-3 flex md:items-center items-start justify-between'>
             <div className='flex-1 max-md:ml-4'>
                 <Logo />
             </div>
@@ -25,10 +25,10 @@ function WorkingNavbar()
                 </div>
             </div>
             <div className='flex-2  flex items-center justify-between'>
-                <span className='flex-1 block'>
+                <span className='flex-1 hidden xl:block'>
 
                 </span>
-                <div className='flex-1 justify-center flex gap-2' >
+                <div className='flex-1 justify-center max-sm:hidden flex gap-2' >
                     <div onClick={() => setShowCalendar(e => !e)}>
                         <WorkingSmallBlock childrenIcon={<i class="fa-regular fa-calendar"></i>}/>
                     </div>

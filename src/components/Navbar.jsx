@@ -9,7 +9,6 @@ import checkLogin from '../services/checkLogin'
 function Navbar() {
     const isLogin = checkLogin() 
 
-    console.log("Is login: ", isLogin)
 
     return (
         <nav data-aos='fade-up'
