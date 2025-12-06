@@ -1,48 +1,67 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useQuery , useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState, useRef, useEffect } from "react";
 import SectionSetting from "./SectionSettings";
 import PersonalInput from "./PersonalInput";
 import WorkingModal from "../../components/WorkingModal";
+import PasswordConfirmModal from "../../components/PasswordConfirmModal";
 import MessageLog from "../../components/MessageLog";
 import BirthdayInput from "./BirthdayInput";
 import UserService from "../../services/userServices";
 import LoadingModal from "../LoadingModal";
+
 function UpdatePersonalInformation({ avatar }) {
     const [showLog, setShowLog] = useState(0); //0 dai dien cho false, nen ta set lai thanh false cung se la 0
+    const [passwordModal, setPasswordModal] = useState(false);
+    const [newEmail, setNewEmail] = useState("");
     const nameRef = useRef(null);
     const birthdayRef = useRef(null);
     const emailRef = useRef(null);
     const phoneRef = useRef(null);
+
     //Ham React Query
-    const queryClient = useQueryClient() 
+    const queryClient = useQueryClient();
     const { data, isLoading, error } = useQuery({
         queryKey: ["user"],
         queryFn: async () => {
-            const responseData = await UserService.getUserInfo() 
+            const responseData = await UserService.getUserInfo();
             console.log("Log ra tu setting: ", responseData);
             return responseData;
         },
-        staleTime: 1000 * 5 * 60, 
-        gcTime: 1000 * 8 * 60 
+        staleTime: 1000 * 5 * 60,
+        gcTime: 1000 * 8 * 60,
     });
     const updateInformation = useMutation({
         mutationFn: async (info) => {
             try {
-                const responseData = await UserService.updateUserInfo(info) 
-                if (responseData)
-                    setShowLog(1) 
-            } 
-            catch (error) {
-                setShowLog(-1) 
+                const responseData = await UserService.updateUserInfo(info);
+                if (responseData) setShowLog(1);
+            } catch (error) {
+                setShowLog(-1);
             }
-        }, 
+        },
         onSuccess: () => {
-            queryClient.invalidateQueries(['user'])   //Fetch lai du lieu user => Update lai du lieu 
-        }
-    })
+            queryClient.invalidateQueries(["user"]); //Fetch lai du lieu user => Update lai du lieu
+        },
+    });
+
+    const updateEmailMutation = useMutation({
+        mutationFn: async ({ email, password }) => {
+            return await UserService.updateEmail({ email, password });
+        },
+        onSuccess: () => {
+            setShowLog(1);
+            setPasswordModal(false);
+            queryClient.invalidateQueries(["user"]);
+        },
+        onError: () => {
+            setShowLog(-1);
+        },
+    });
+
     const updateInfo = () => {
         const newInfo = {
             name: nameRef.current.value,
@@ -50,21 +69,25 @@ function UpdatePersonalInformation({ avatar }) {
             email: emailRef.current.value,
             phoneNumber: phoneRef.current.value,
         };
-        
     };
     const handleInformationClick = () => {
-        const newInfo = {
-            name: nameRef.current.value, //Khi thu hien nhan nut thi tien hanh thuc hien viec update thong tin
-            // birthDay: birthdayRef.current.value,
-            // email: emailRef.current.value,
-            // phoneNumber: phoneRef.current.value,
-            //Thuc hien update thong tin nguoi dung -> Fix lai cai avatar sao cho chuan 
-        };
-        updateInformation.mutate(newInfo) //Tien hanh update lai du lieu 
+        const emailInput = emailRef.current.value;
 
-        // updateInfo(); ---> Goi ham react query de tien hanh cap nhat thong tin nguoi dung 
+        //Nếu đổi email → mở modal nhập password
+        if (emailInput !== data.email) {
+            setNewEmail(emailInput);
+            setPasswordModal(true);
+            return;
+        }
+
+        //Không đổi email → update bình thường
+        updateInformation.mutate({
+            name: nameRef.current.value,
+            phoneNumber: phoneRef.current.value,
+        });
     };
-    if (isLoading) return <></>
+
+    if (isLoading) return <></>;
     return (
         <>
             <SectionSetting>
@@ -88,11 +111,21 @@ function UpdatePersonalInformation({ avatar }) {
                         />
                     </form>
                     <div className="w-full flex items-center mt-4 justify-end">
-                        <button
+                        <motion.button
+                            onClick={handleInformationClick}
                             className="px-4 md:px-7 text-white cursor-pointer font-md bg-(--color-primary) py-3 rounded-xl"
-                            onClick={handleInformationClick}>
+                            whileHover={{
+                                scale: 1.02,
+                                boxShadow: "0px 6px 16px rgba(0, 0, 0, 0.20)",
+                            }}
+                            whileTap={{ scale: 0.92 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 220,
+                                damping: 12,
+                            }}>
                             Save Changes
-                        </button>
+                        </motion.button>
                     </div>
                 </>
             </SectionSetting>
@@ -105,8 +138,17 @@ function UpdatePersonalInformation({ avatar }) {
                     showLog == 1 ? "Cập nhật thành công" : "Cập nhật thất bại"
                 }
             />
+            <PasswordConfirmModal
+                visible={passwordModal}
+                onClose={() => setPasswordModal(false)}
+                onConfirm={(password) => {
+                    updateEmailMutation.mutate({
+                        email: newEmail,
+                        password,
+                    });
+                }}
+            />
         </>
     );
 }
 export default UpdatePersonalInformation;
-

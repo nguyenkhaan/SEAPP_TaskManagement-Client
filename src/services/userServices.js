@@ -41,6 +41,42 @@ class UserService {
 
         return res.data;
     }
+    static async updateEmail(email , password) 
+    {
+        const token = this.getUserToken() 
+        try {
+            const responseData = await api.patch('/user/change-email' , {
+                new_email: email , password
+            } , {
+                headers : {
+                    'Authorization' : `Bearer ${token}`
+                }
+            })
+            return responseData
+        }
+        catch (err) {
+            console.log(err) 
+            throw err
+        }
+    }
+    static async changePassword(oldPassword , newPassword) 
+    {
+        const token = this.getUserToken() 
+        try {
+            const responseData = await api.patch('/user/reset-password' , {
+                old_password: oldPassword , 
+                new_password: newPassword
+            } , {
+                headers : {
+                    Authorization : `Bearer ${token}`
+                }
+            })
+            return responseData
+        } 
+        catch (err) {
+            console.log(err) 
+        }
+    }
 }
 
 export default UserService;

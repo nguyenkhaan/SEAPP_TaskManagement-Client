@@ -19,11 +19,8 @@ function PersonalInput({
                 onChange={handleChange}
                 value={input}
                 ref={ref}
-                readOnly={title == 'Email Address'}
                 style={title === 'Email Address'? {cursor: 'not-allowed' , opacity: 40 ,} : {}}
-                disabled={title === 'Email Address'}
                 
-            
                 />
                 
         </div>
