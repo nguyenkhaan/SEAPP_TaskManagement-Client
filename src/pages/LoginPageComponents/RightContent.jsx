@@ -41,6 +41,7 @@ export default function RightContent() {
         try {
             const { Email, Password } = data; //Du lieu tra ve
             setIsLoading(true) 
+            console.log("Email:", Email, "Password:", Password)
             const responseData = await api.post("/auth/login", {
                 email: Email,
                 password: Password,
@@ -59,8 +60,10 @@ export default function RightContent() {
             setIsLoading(false); //Bao hieu khong can tai nua
             if (error.response?.status == 400) console.log("Bad Request");
             if (error.response?.status == 401)
-                console.log("Method Not Allowed");
-            if (error.response?.status == 403) console.log("Network Error");
+                console.log("Unauthorized");
+            if (error.response?.status == 403) console.log("Forbidden");
+            if (error.response?.status == 500)
+                console.log("Loi server")
         }
         
     };
@@ -76,23 +79,27 @@ export default function RightContent() {
             try {
                 setIsLoading(true);
                 const responseData = await loginGoogleSuccess(tokenResponse);
-                console.log(responseData) 
+                console.log("responseData", responseData) 
                 // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
                 setShowLog(true); //Tien hanh in ra Log message
+                console.log("Token response from data",responseData.data.token)
                 Cookies.set("user", responseData.data.token, {
                     secure: true,
                     expires: 7,
                 }); //Tien hanh luu JWT token vao trong storage
                 // console.log("Da luu token vao trong storage");
-                setIsLoading(false);
+
+                
                 setIsLogin(true);
             } catch (error) {
                 setShowLog(-1);
-                setIsLoading(false); //Bao hieu khong can tai nua
                 if (error.response?.status == 400) console.log("Bad Request");
                 if (error.response?.status == 401)
-                    console.log("Method Not Allowed");
-                if (error.response?.status == 403) console.log("Network Error");
+                    console.log("Unauthorized");
+                if (error.response?.status == 403) console.log("Forbidden");
+            }
+            finally{
+                setIsLoading(false);
             }
         },
         onError: (error) => {
