@@ -163,5 +163,23 @@ class TaskServices {
             throw err;
         }
     }
+    static async searchTask(text)  
+    {
+        const token = this.getUserToken() 
+        try {
+            const responseData = await api.post('/tasks/search-tasks/user' , {
+                searchText : text 
+            } , {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            return responseData
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    }
 }
 export default TaskServices;

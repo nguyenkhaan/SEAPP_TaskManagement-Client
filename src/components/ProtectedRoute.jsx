@@ -18,7 +18,7 @@ function ProtectedRoute({ children }) {
     }
 
     // Trường hợp 2: Có param nhưng chỉ được phép có duy nhất "id"
-    if (keys.length === 1 && keys[0] === "id") {
+    if (keys.length === 1 && (keys[0] === "id" || keys[0] === "search-result")) {
         return children;
     }
 

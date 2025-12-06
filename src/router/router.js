@@ -15,6 +15,7 @@ import UpdateTask from "../pages/UpdateTask"
 import UrlError from "../pages/URLError"
 import ResetPassword from "../pages/ResetPassword"
 import ResetPasswordEmailPage from "../pages/ResetPasswordEmailPage"
+import SearchTask from "../pages/SearchTask"
 const routes = [
     {
         path: '/',
@@ -100,6 +101,11 @@ const routes = [
         path: '/forgot-password', 
         desc: 'Trang nhap email de reset password', 
         element: ResetPasswordEmailPage
+    }, 
+    {
+        path: '/app/search-task', 
+        desc: 'Trang dung de search thong tin task', 
+        element: SearchTask
     }
     //my-task , setting ... 
 ]
