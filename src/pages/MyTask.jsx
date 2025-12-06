@@ -23,6 +23,8 @@ function MyTask() {
             console.log('Log ra tu My Tasks: ' , myData.data.data.teams) 
             return myData.data
         },
+        gcTime: 8 * 1000 * 60, 
+        staleTime: 8 * 1000 * 60 
     });
 
     if (!data || isPending) return <LoadingModal />;
