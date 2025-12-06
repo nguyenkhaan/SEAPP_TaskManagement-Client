@@ -5,7 +5,8 @@ import Avatar from "./Avatar";
 import SidebarItem from "./SidebarItem";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../pages/Loading";
-function WorkingSidebar() {
+import { motion } from "framer-motion";
+function WorkingSidebar({ showSidebar = false, setShowSidebar = null }) {
     // const {isPending , error , data} = useQuery({
     //     queryKey: ['user'], //Truyen key tuong ung voi cac route ben trong BE,
     //     queryFn: getUserInfo
@@ -16,50 +17,48 @@ function WorkingSidebar() {
 
     // } , [])
 
-    const location = useLocation()
-    const navigate = useNavigate()
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const menuItems = [
         {
             path: "/app/dashboard",
             title: "Dashboard",
-            icon: <i class="fa-regular fa-house"></i>
+            icon: <i class="fa-regular fa-house"></i>,
         },
         {
             path: "/app/teams",
             title: "Teams",
-            icon: <i class="fa-solid fa-people-group"></i>
+            icon: <i class="fa-solid fa-people-group"></i>,
         },
         {
             path: "/app/my-tasks",
             title: "My Tasks",
-            icon: <i class="fa-solid fa-list-check"></i>
+            icon: <i class="fa-solid fa-list-check"></i>,
         },
         {
-            path:"/app/settings",
+            path: "/app/settings",
             title: "Settings",
-            icon: <i class="fa-solid fa-gear"></i>
-        }
-    ]
+            icon: <i class="fa-solid fa-gear"></i>,
+        },
+    ];
 
-    const handleClick = (route) => {navigate(route)}
+    const handleClick = (route) => {
+        navigate(route);
+    };
 
-    const [showSidebar , setShowSidebar] = useState(false) 
-
-    return (
-        <div className="w-[365px] hidden 2xl:block md:h-[868px] rounded-2xl bg-(--color-primary) fixed left-0 top-42 pt-30 shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
+    const sideBarLarge = (
+        <motion.div className="w-[365px] 2xl:block md:h-[868px] rounded-2xl bg-(--color-primary) fixed left-0 top-42 pt-30 shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
             <div className="top-0 -translate-y-1/4 translate-x-1/2 absolute">
-                <Avatar
-                    style={{ color: "white", pointerEvents: "none" }}
-                />
+                <Avatar style={{ color: "white", pointerEvents: "none" }} />
             </div>
             <ul className="w-full flex items-center justify-between flex-col gap-2 mt-6">
                 {menuItems.map((item, index) => {
                     const isActive = location.pathname === item.path;
 
                     return (
-                        <Link to={item.path} key={index} className='w-full'>
-                            <SidebarItem 
+                        <Link to={item.path} key={index} className="w-full">
+                            <SidebarItem
                                 icon={item.icon}
                                 title={item.title}
                                 isActive={isActive}
@@ -69,7 +68,36 @@ function WorkingSidebar() {
                     );
                 })}
             </ul>
-        </div>
+        </motion.div>
     );
+    const sidebarSmall = (
+        <motion.div
+            initial={{ x: "-100%" }} // lúc mới mount sẽ nằm ngoài màn hình bên trái
+            animate={{ x: showSidebar ? "0%" : "-100%" }} // true thì chạy vào, false thì chạy ra
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="w-[365px] 2xl:block h-[868px] z-9999999 rounded-2xl bg-(--color-primary) fixed left-0 top-42 pt-30 shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
+            <div className="top-0 -translate-y-1/4 translate-x-1/2 absolute">
+                <Avatar style={{ color: "white", pointerEvents: "none" }} />
+            </div>
+
+            <ul className="w-full flex items-center justify-between flex-col gap-2 mt-6">
+                {menuItems.map((item, index) => {
+                    const isActive = location.pathname === item.path;
+
+                    return (
+                        <Link to={item.path} key={index} className="w-full">
+                            <SidebarItem
+                                icon={item.icon}
+                                title={item.title}
+                                isActive={isActive}
+                                onClick={() => handleClick(item.path)}
+                            />
+                        </Link>
+                    );
+                })}
+            </ul>
+        </motion.div>
+    );
+    return window.innerWidth <= 1280 ? sidebarSmall : sideBarLarge;
 }
 export default WorkingSidebar;
