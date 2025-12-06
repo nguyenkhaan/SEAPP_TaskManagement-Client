@@ -8,7 +8,7 @@ function TaskByGroupViewTeam({ width = "100%", height = "100%", teamID }) {
         queryKey: [`team-tasks-${teamID}`],
         queryFn: async () => {
             const responseData = await TaskServices.getTeamTask(teamID);
-            console.log(responseData.data.data.tasks);
+            // console.log(responseData.data.data.tasks);
             return responseData;
         },
     });

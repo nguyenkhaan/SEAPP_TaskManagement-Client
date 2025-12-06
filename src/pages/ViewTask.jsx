@@ -34,7 +34,7 @@ function ViewTask() {
     const deleteMutation = useMutation({
         mutationFn: async () => {
             const res = await TaskServices.deleteTask(currentTaskID);
-            console.log(res.data);
+            // console.log(res.data);
             return res.data; // đảm bảo có teamId
         },
         onSuccess: (resData) => {

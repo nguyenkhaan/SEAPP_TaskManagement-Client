@@ -33,7 +33,7 @@ function TeamMemberItem({
                 teamID,
                 leaderID
             );
-            console.log("Thong tin cao nhat cho la: ", responseData);
+            // console.log("Thong tin cao nhat cho la: ", responseData);
             return responseData;
         },
         onSuccess: async (data) => {
@@ -52,7 +52,7 @@ function TeamMemberItem({
                 teamID,
                 viceLeaderID
             );
-            console.log("Thong tin cao nhat cho la: ", responseData);
+            // console.log("Thong tin cao nhat cho la: ", responseData);
             return responseData;
         },
         onSuccess: async (data) => {
