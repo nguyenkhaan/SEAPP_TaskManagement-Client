@@ -25,10 +25,11 @@ function ViewTeam({
     groupTasks = [], //Danh sach group Tasks
 }) {
     const currentTeamID = ParamServices.getID();
-    if (!currentTeamID || isNaN(currentTeamID)) return <UrlError /> 
+    if (!currentTeamID || isNaN(currentTeamID)) return <UrlError />;
     const [showLog, setShowLog] = useState(0);
     const [showDesc, setShowDesc] = useState(false);
     const [showChart, setShowChart] = useState(false);
+    const [showCode, setShowCode] = useState(false);
     const [view, setView] = useState("group"); //Neu vut sang phai thi hien team, vuot tay sang trai thi hien lai group
     const handleDescription = () => {
         setShowDesc(!showDesc); //Toggle len lai
@@ -128,13 +129,6 @@ function ViewTeam({
             else if (distance <= -40) setView("group"); //Vuot sang trai
         }
     };
-    if (
-        teamQueryPending ||
-        !teamQueryData ||
-        !teamTaskStatisticData ||
-        teamTaskStatisticPending
-    )
-        return <LoadingModal />;
 
     //Xu li Leave Team va Edit Team
     const handleLeaveTeam = () => {
@@ -176,6 +170,28 @@ function ViewTeam({
             ],
         });
     };
+
+    const updateCodeMutation = useMutation({
+        mutationFn: async () => {
+            const responseData = await TeamServies.refreshCode(currentTeamID)
+            return responseData
+        }, 
+        onSuccess: () => {
+            queryClient.invalidateQueries([`team-${currentTeamID}`])
+        }, 
+        onError: () => {} 
+    })
+    const handleCode = () => {
+        setShowCode(!showCode)
+    }
+
+    if (
+        teamQueryPending ||
+        !teamQueryData ||
+        !teamTaskStatisticData ||
+        teamTaskStatisticPending
+    )
+        return <LoadingModal />;
 
     return (
         <WorkingLayout>
@@ -221,6 +237,7 @@ function ViewTeam({
                     )}
                     <span onClick={handleChart}>Thống kê</span>
                 </div>
+
                 {showChart ? (
                     <ChartViewTeam
                         completed={
@@ -233,6 +250,46 @@ function ViewTeam({
                             teamTaskStatisticData.data.data.toDoPercentage
                         }
                     />
+                ) : (
+                    <></>
+                )}
+
+                <div className="flex cursor-pointer text-lg items-center mt-2 md:mt-4 md:text-xl font-md text-(--color-text-desc) justify-start gap-3">
+                    {showCode ? (
+                        <i
+                            class="fa-solid fa-caret-down"
+                            onClick={handleCode}></i>
+                    ) : (
+                        <i
+                            class="fa-solid fa-caret-right"
+                            onClick={handleCode}></i>
+                    )}
+                    <span onClick={handleCode}>Team Code</span>
+                </div>
+                {showCode ? (
+                    <div className="flex items-center jusitfy-between gap-24">
+                        <span className="text-base pl-2 md:pl-0 text-justify mt-2 text-(--color-text-desc) line-clamp-6">
+                            Team Code:
+                            <span
+                                title="Copy code"
+                                className="font-bold text-lg max-sm:text-base ml-2 cursor-pointer"
+                                onClick={() =>
+                                    navigator.clipboard.writeText(
+                                        teamQueryData.data.teamData.code
+                                    )
+                                }>
+                                {teamQueryData.data.teamData.code}
+                            </span>
+                        </span>
+                        <button 
+                            className="mt-2 rounded-md py-3 px-6 font-semibold bg-(--color-primary) text-white cursor-pointer shadow-md"
+                            onClick={() => {
+                                updateCodeMutation.mutate() //Tien hanh update code 
+                            }}
+                        >
+                            Làm mới
+                        </button>
+                    </div>
                 ) : (
                     <></>
                 )}
@@ -272,22 +329,22 @@ function ViewTeam({
                         <div className="flex items-center justify-end gap-3">
                             <Link
                                 to={`/app/update-team?id=${ParamServices.getID()}`}>
-                                <button title="Edit" className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)">
+                                <button
+                                    title="Edit"
+                                    className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
                             </Link>
                             <button
                                 className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
                                 onClick={handleDeleteTeam}
-                                title="Delete Group"
-                                >
+                                title="Delete Group">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                             <button
                                 className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
                                 onClick={handleLeaveTeam}
-                                title="Leave group"
-                                >
+                                title="Leave group">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </button>
                         </div>

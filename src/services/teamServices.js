@@ -183,5 +183,44 @@ class TeamServies {
             return responseData 
         } catch (err) {}
     }
+    static async getTeamCode(teamID) 
+    {
+        const token = this.getUserToken() 
+        try {
+            const responseData = await api.get('/teams/code/team' , {
+                params: {
+                    teamID: teamID 
+                }, 
+                headers : {
+                    Authorization : `Bearer ${token}`
+                }
+            })
+            return responseData
+        }
+        catch (err) {}
+    }
+    static async refreshCode(
+        teamID //Da check
+    ) {
+        try {
+            const token = this.getUserToken();
+            const responseData = await api.post(
+                "/teams/code/team",
+                {
+                    teamID: teamID 
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            console.log(responseData)
+            return responseData;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
 }
 export default TeamServies;

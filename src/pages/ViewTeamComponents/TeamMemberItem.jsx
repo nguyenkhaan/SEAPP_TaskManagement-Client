@@ -10,6 +10,7 @@ function TeamMemberItem({
     avatar_url = "",
     currentRole = "member",
 }) {
+    console.log('Log ra tu member: ' , currentRole)
     const [showMenu, setShowMenu] = useState(false);
     const [showLog, setShowLog] = useState(0);
     const menuRef = useRef();
