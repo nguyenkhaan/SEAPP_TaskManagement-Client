@@ -14,7 +14,6 @@ class UserService {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log('Log ra tu user info: ' , res.data.data) 
         return res.data.data.user 
     } // 
     static async updateUserAvatar(file) {
