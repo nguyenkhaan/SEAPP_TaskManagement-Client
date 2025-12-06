@@ -83,7 +83,6 @@ class TaskServices {
     }
     static async getTaskDetail(taskID) {
         const token = this.getUserToken();
-        console.log(taskID);
         try {
             const responseData = await api.get(`/tasks/${taskID}`, {
                 headers: {
@@ -98,7 +97,6 @@ class TaskServices {
     }
     static async updateTask(taskID , title , description , dueTime , important , urgent , status) {
         const token = this.getUserToken() 
-        console.log(taskID) 
         try {
             const responseData = await api.put(`/tasks/${taskID}` , {
                 title , description , dueTime , important , urgent , status

@@ -18,7 +18,6 @@ function MyTask() {
         queryKey: ["teams"],
         queryFn: async () => {
             const responseData = await TeamServies.getAllTeamInfo();
-            console.log("Log ra tu My Tasks", responseData.data);
             return responseData;
         },
     });

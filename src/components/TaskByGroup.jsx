@@ -19,7 +19,7 @@ function TaskByGroup({
         queryKey: [`team-tasks-${teamID}`],
         queryFn: async () => {
             const responseData = await TaskServices.getTeamTask(teamID);
-            console.log(responseData.data.data.tasks);
+            // console.log(responseData.data.data.tasks);
             return responseData;
         },
     });
