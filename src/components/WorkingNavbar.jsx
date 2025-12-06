@@ -1,13 +1,15 @@
-import React from 'react'
+import React, {  useState } from 'react'
 import ReactDOM from 'react-dom'
 import { motion } from 'framer-motion'
 import Logo from './Logo'
 import WorkingSmallBlock from './WorkingSmallBlock'
 import { getCurrentDate } from '../services/getDate'
+import MyCalendar from './Calendar'
 
 function WorkingNavbar() 
 {
     const {day , month , year , weekDay} = getCurrentDate() 
+    const [showCalendar, setShowCalendar ] = useState(false);
     return (
         <nav className='w-screen md:h-25 h-29 left-0 max-md:flex-col z-99999 bg-white fixed top-0 shadow-lg md:gap-12 md:pt-9 md:px-[60px] md:py-8 py-3 flex md:items-center items-start justify-between'>
             <div className='flex-1 max-md:ml-4'>
@@ -26,9 +28,12 @@ function WorkingNavbar()
                 <span className='flex-1 block'>
 
                 </span>
-                <div className='flex-1 items-center md:flex gap-2 hidden'>
-                    <WorkingSmallBlock childrenIcon={<i class="fa-regular fa-bell"></i>} />
-                    <WorkingSmallBlock childrenIcon={<i class="fa-regular fa-calendar"></i>}/>
+                <div className='flex-1 justify-center flex gap-2' >
+                    <div onClick={() => setShowCalendar(e => !e)}>
+                        <WorkingSmallBlock childrenIcon={<i class="fa-regular fa-calendar"></i>}/>
+                    </div>
+                    {showCalendar && <MyCalendar />}
+
                 </div>
                 <div className='flex-1 text-base font-medium xl:block hidden'>
                     <span className='block text-base font-medium text-black'>{weekDay}</span>

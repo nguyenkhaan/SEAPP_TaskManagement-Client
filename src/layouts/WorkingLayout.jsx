@@ -13,7 +13,7 @@ function WorkingLayout({ children = true }) {
                 <WorkingNavbar />
                 <div className="min-w-screen">
                     <WorkingSidebar />
-                    <div className="absolute overflow-x-hidden w-screen xl:min-h-screen xl:w-[984px] scrollbar-none md:px-3 2xl:left-110 max-2xl:flex max-2xl:items-start max-2xl:justify-center -mt-5 xl:top-0 xl:left-42">
+                    <div className="absolute w-screen xl:min-h-screen xl:w-[984px] scrollbar-none md:px-3 2xl:left-110 max-2xl:flex max-2xl:items-start max-2xl:justify-center -mt-5 xl:top-0 xl:left-42">
                         {children}
                     </div>
                 </div>

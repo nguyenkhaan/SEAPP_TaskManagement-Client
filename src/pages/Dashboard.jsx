@@ -43,7 +43,7 @@ function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="mt-8 container-- border overflow-x-hidden wrapper flex max-md:flex-col items-center md:items-start xl:gap-3 md:gap-2 border-gray-600 bg-[#F5F8FF] xl:min-h-[780px] max-xl:h-[900px] w-full shadow-2xl md:px-1 xl:py-6 md:pb-6 max-sm:py-5">
+                    <div className="mt-8 container-- border overflow-x-hidden wrapper flex max-md:flex-col items-center md:items-start xl:gap-3 md:gap-2 border-gray-600 bg-[#F5F8FF] xl:min-h-[780px] max-xl:h-[950px] h-[800px] w-full shadow-2xl md:px-1 xl:py-6  md:pb-6 max-sm:py-5">
                         <div className="flex-1 md:w-1/2 h-[720px] flex flex-col md:items-start  items-center justify-between gap-3">
                             <TodoTask />
                             <CompletedTask />
