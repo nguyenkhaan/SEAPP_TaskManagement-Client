@@ -1,6 +1,9 @@
 import Cookies from "js-cookie";
 function checkLogin() {
-    if (Cookies.get('user')) return 1; 
-    return false; 
+    const token = Cookies.get('user')
+    console.log("User cookies: ", token)
+    if (!token || token === "undefined")
+        return false;
+    return true;
 } 
 export default checkLogin

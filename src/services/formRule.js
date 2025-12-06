@@ -13,7 +13,7 @@ const rules = {
     }, 
     Password: {
         pattern: {
-            value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g, 
+            value: /^(?=.*[A-Za-z])(?=.*\d).{8,}$/g, 
             message: "Mật khẩu phải có ít nhất một chữ cái và một chữ số"
         }, 
         minLength: {
