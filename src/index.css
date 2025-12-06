@@ -56,7 +56,7 @@
 }
 [data-theme="dark"] {
   --body-background: #282c34; 
-  --body-color: white; 
+  --body-color: white;  /* Chinh sua dark theme o ben trong nay */ 
   --link-color: cyan; 
 }
 * {

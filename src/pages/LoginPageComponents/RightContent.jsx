@@ -46,7 +46,7 @@ export default function RightContent() {
                 email: Email,
                 password: Password,
             }) 
-            console.log(responseData.data.tokens.access_token) 
+            // console.log(responseData.data.tokens.access_token) 
             setShowLog(1) //Bao hieu viec dang nhap da thanh cong 
             Cookies.set('user' , responseData.data.tokens.access_token , {
                 secure: true, 

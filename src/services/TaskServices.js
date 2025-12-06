@@ -31,10 +31,28 @@ class TaskServices {
                     Authorization: `Bearer ${token}`,
                 },
             });
-        } catch (err) {
+            return responseData
+        } catch (err) { 
             console.log(err);
             throw err;
         } //data : totalTasks , completedPercentage , inProgressPercentage , toDoPercentage
+    }
+    static async getUserTask() 
+    {
+        const token = this.getUserToken() 
+        try {
+            const responseData = await api.get('/tasks/overview' , {
+                headers : {
+                    Authorization : `Bearer ${token}`
+                }
+            })
+            console.log(responseData) 
+            return responseData
+        }
+        catch (err) { 
+            console.log(err);
+            throw err;
+        }  
     }
     static async createTask(
         teamID,

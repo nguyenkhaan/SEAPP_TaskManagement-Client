@@ -74,7 +74,7 @@ function UpdateTask() {
                 resize: { enabled: true },
             }),
         ],
-        content: task ? task.data.data.description : "<p>Hello world</p>",
+        content: (task? task.data.data.description : "<p>Hello world</p>"),
         editorProps: {
             attributes: {
                 class:

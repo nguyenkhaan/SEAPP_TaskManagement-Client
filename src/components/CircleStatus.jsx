@@ -23,7 +23,7 @@ function CircleStatus({ statusValue = 60, caption = "default" }) {
         floodColor={"black"}
         color="black"
         fontSize={24}
-        value={60}
+        value={statusValue}
       />
       <span
         className={`text-[15px] flex items-center`}

@@ -53,7 +53,7 @@ function WorkingSidebar() {
                     style={{ color: "white", pointerEvents: "none" }}
                 />
             </div>
-            <ul className="w-full flex items-center justify-between flex-col gap-2">
+            <ul className="w-full flex items-center justify-between flex-col gap-2 mt-6">
                 {menuItems.map((item, index) => {
                     const isActive = location.pathname === item.path;
 
