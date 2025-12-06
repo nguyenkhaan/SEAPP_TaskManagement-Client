@@ -12,6 +12,7 @@ import Setting from "../pages/Setting"
 import Verify from "../pages/Verify"
 import UpdateTeam from "../pages/UpdateTeam"
 import UpdateTask from "../pages/UpdateTask"
+import UrlError from "../pages/URLError"
 const routes = [
     {
         path: '/',
@@ -82,6 +83,11 @@ const routes = [
         path: '/app/update-task', 
         desc: 'Trang dung de update task', 
         element: UpdateTask
+    }, 
+    {
+        path: '/url/error', 
+        desc: 'Mia may', 
+        element: UrlError
     }
     //my-task , setting ... 
 ]

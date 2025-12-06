@@ -9,10 +9,11 @@ import ParamServices from "../services/urlParams";
 import { getStatusString } from "../services/getStatusColor";
 import UrlError from "./URLError";
 import MessageLog from "../components/MessageLog";
+import { confirmAlert } from "react-confirm-alert";
 
 function ViewTask() {
     const currentTaskID = Number(ParamServices.getID());
-    let currentTeamId = null 
+    let currentTeamId = null;
     if (!currentTaskID || Number.isNaN(currentTaskID)) return <UrlError />;
 
     const [showLog, setShowLog] = useState(0);
@@ -21,10 +22,10 @@ function ViewTask() {
         queryKey: [`tasks-${currentTaskID}`],
         queryFn: async () => {
             const response = await TaskServices.getTaskDetail(currentTaskID);
-            return response.data
+            return response.data;
         },
         staleTime: 1000 * 60 * 8,
-        gcTime: 1000 * 60 * 8
+        gcTime: 1000 * 60 * 8,
     });
 
     const queryClient = useQueryClient();
@@ -33,7 +34,7 @@ function ViewTask() {
     const deleteMutation = useMutation({
         mutationFn: async () => {
             const res = await TaskServices.deleteTask(currentTaskID);
-            console.log(res.data) 
+            console.log(res.data);
             return res.data; // đảm bảo có teamId
         },
         onSuccess: (resData) => {
@@ -46,26 +47,38 @@ function ViewTask() {
         },
         onError: () => {
             setShowLog(-1);
-        }
+        },
     });
 
     const handleDelete = () => {
-        deleteMutation.mutate();
+        confirmAlert({
+            title: "Leave The Team",
+            message: "Do you really want to delete this team?",
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: async () => {
+                        deleteMutation.mutate();
+                    },
+                },
+                {
+                    label: "No",
+                    onClick: () => {}, //Khong lam gi ca
+                },
+            ],
+            overlayClassName: "bg-black",
+        });
+        
     };
 
     // BỌC LoadingModal trong WorkingLayout để tránh React mismatch
     if (isPending || !data) {
-        return (
-          
-                <LoadingModal />
-          
-        );
+        return <LoadingModal />;
     }
 
     return (
         <WorkingLayout>
             <div className="w-full h-[920px] md:border p-6 pt-14 rounded-xl border-gray-500 mb-10">
-                
                 <Link to={`/app/view-team?id=${data.teamId}`}>
                     <span
                         className="absolute cursor-pointer top-12 md:top-5 right-10 text-lg text-(--color-primary) underline font-semibold"
@@ -80,8 +93,7 @@ function ViewTask() {
                         style={{
                             backgroundImage:
                                 "url(https://img.lovepik.com/bg/20231226/Captivating-Blue-Sky-Background-with-Beautiful-Clouds_2490674_wh1200.png)",
-                        }}>
-                    </div>
+                        }}></div>
 
                     <div className="flex-1">
                         <h2 className="font-semibold text-xl md:text-2xl text-black">
@@ -109,11 +121,9 @@ function ViewTask() {
                     className="w-full mt-6 h-[540px] border-2 overflow-y-auto rounded-md p-1 bg-white text-black"
                     dangerouslySetInnerHTML={{
                         __html: purify(data.data.description),
-                    }}>
-                </div>
+                    }}></div>
 
                 <div className="w-full mt-5 flex justify-end gap-4 font-semibold text-white">
-                    
                     <Link to={`/app/update-task?id=${currentTaskID}`}>
                         <div
                             className="w-9 h-9 cursor-pointer bg-(--color-primary) rounded-lg flex items-center justify-center"
@@ -134,8 +144,8 @@ function ViewTask() {
                     setShowLog={setShowLog}
                     showLog={showLog}
                     message={
-                        showLog === 1 
-                            ? "Xóa nhiệm vụ thành công" 
+                        showLog === 1
+                            ? "Xóa nhiệm vụ thành công"
                             : "Xóa nhiệm vụ thất bại"
                     }
                 />

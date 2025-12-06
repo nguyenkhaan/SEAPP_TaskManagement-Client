@@ -171,5 +171,17 @@ class TeamServies {
             return responseData;
         } catch (err) {}
     }
+    static async getTeamWithTask() 
+    {
+        const token = this.getUserToken() 
+        try {
+            const responseData = await api.get('/teams/teams/tasks' , {
+                headers: {
+                    Authorization : `Bearer ${token}`
+                }
+            })
+            return responseData 
+        } catch (err) {}
+    }
 }
 export default TeamServies;
