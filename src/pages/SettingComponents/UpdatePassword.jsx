@@ -42,7 +42,7 @@ function UpdatePassword() {
         setShowLog(-1);
     };
     return (
-        <SectionSetting>
+        <SectionSetting header="Change Password" description="Enhance your account security by updating your password regularly. Create a strong, new password to protect your data and ensure continued safe access to your account.">
             <>
                 <form
                     id="change-password-form"

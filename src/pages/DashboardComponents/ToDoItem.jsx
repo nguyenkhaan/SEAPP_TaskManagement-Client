@@ -29,7 +29,13 @@ function ToDoItem({
                     <p className='text-(--color-text-desc) font-normal text-[12px] mt-1 md:mt-0 md:text-[14px] line-clamp-3'>{htmlToText(purify(description))}</p>
                 </div>
                 <div className='flex-1 flex items-center justify-end h-full'>
-                    <div className='md:w-22 md:h-22 w-20 h-20 rounded-2xl bg-black bg-center bg-cover bg-no-repeat'></div>
+                    <div 
+                        className='md:w-22 md:h-22 w-20 h-20 rounded-2xl bg-black bg-center bg-cover bg-no-repeat'
+                        style={{
+                            backgroundImage: `url(https://t4.ftcdn.net/jpg/07/29/63/29/360_F_729632931_H4FxaLdZNNvACTJC10VhLykO939Mo5fL.jpg)`
+                        }}
+                    
+                    ></div>
                 </div>
 
             </div>

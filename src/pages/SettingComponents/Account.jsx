@@ -52,7 +52,7 @@ function Account() {
 
     return (
         <>
-            <SectionSetting>
+            <SectionSetting header="Account" description="Manage your account information effortlessly, including profile details, avatar, and personal preferences. Keep everything organized and ensure your account always reflects your identity and settings.">
                 <div className="flex w-full items-center justify-end gap-8">
                     <motion.button
                         onClick={handleLogout}

@@ -17,7 +17,7 @@ function Appearance() {
         "rounded-xl font-semibold text-lg md:text-xl cursor-pointer px-10 md:px-8 py-2 md:py-3 border transition-colors";
 
     return (
-        <SectionSetting>
+        <SectionSetting header='Appearance' description='Customize your website appearance by choosing between light, dark theme. Personalize your viewing experience to make the interface more comfortable, visually appealing, and perfectly aligned with your style.'>
             <div className="flex items-center justify-between md:justify-start gap-8">
 
                 {/* LIGHT BUTTON */}

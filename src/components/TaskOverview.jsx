@@ -10,12 +10,13 @@ function TaskOverview({
     urgent = false, 
     status = "Completed",
     dueTime = new Date('18/10/2006'), 
-    width = 550
+    width = 550, 
+    style = {} 
 }) {
     const color = getStatusColor(status);
     console.log('Log ra tu overview' , status) 
     return (
-        <Link className="w-full" to={`/app/view-task?id=${taskID}`}>
+        <Link className="w-full" to={`/app/view-task?id=${taskID}`} style={{...style}}>
             <li
                 className={`w-full! rounded-2xl my-1 md:my-3 task__overview h-22 py-1 border-2 border-gray-300 flex px-2 gap-4 items-center justify-between bg-(--color-box-item)`}
                 style={{

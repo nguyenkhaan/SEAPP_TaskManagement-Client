@@ -34,7 +34,7 @@ function Setting() {
                     Manage your profile, preferences, and app settings
                 </span>
                 <div className="flex flex-col shadow-[15px_10px_25px_rgba(0,0,0,0.3)] items-start justify-start w-full bg-(--color-background-2) min-h-200 mb-16 overflow-hidden border border-gray-500 rounded-xl mt-6">
-                    <SectionSetting>
+                    <SectionSetting header="Avatar" description="Update your avatar to personalize your profile and make your account uniquely yours. Upload a new picture anytime to keep your profile fresh, recognizable, and visually appealing across the platform." >
                         <>
                             <Avatar
                                 width={110}

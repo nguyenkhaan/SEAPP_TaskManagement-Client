@@ -75,7 +75,7 @@ function Avatar({
                 style={{
                     backgroundImage: `url(${
                         preview ||
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh1ne2JlvN6c7xf6oks6n-HDHPoV7LWKkm-L3386oQQFrbMtc6sfviRkvMQgv6B3EvXAQ&usqp=CAU"
+                        "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg"
                     })`,
                     width,
                     height,

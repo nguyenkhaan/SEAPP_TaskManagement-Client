@@ -2,6 +2,27 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import HeaderPhase from '../../components/HeaderPhase'
 import StepCard from '../../components/StepCard'
+const stepCards = [
+    {
+        title: 'Create an account', 
+        url: 'https://media.istockphoto.com/id/1174106492/photo/young-businesswoman-booking-tickets-online-using-smartphone-and-credit-card.jpg?s=612x612&w=0&k=20&c=e9jwAv72vqikTbFTpvXTFdTkSQy9kq0ril6sZX5FX0A=', 
+        content: 'Sign up in seconds and set up your personalized workspace. No credit card required for the free trial.' 
+    }, 
+    {
+        title: 'Add your tasks', 
+        url: 'https://images.businessnewsdaily.com/app/uploads/2022/04/04074130/teamwork_g-stockstudio_getty.jpg', 
+        content: 'Create tasks, set priorities, and organize them into categories. Invite team members to collaborate.' 
+    }, 
+    {
+        title: 'Progress Tracking', 
+        url: 'https://www.evinex.com/wp-content/uploads/2025/02/a-man-working-from-his-home-office.jpg', 
+        content: 'Visualize your workflow, stay organized, and maintain consistent productivity across the entire website.' 
+    }
+    
+
+]
+
+
 function StepsSection() {
     return (
 
@@ -14,10 +35,10 @@ function StepsSection() {
                 Three Simple Steps
             </h2>
             <div data-aos='zoom-out' className='mt-32 grid grid-cols-12 xl:w-full xl:gap-x-0 lg:gap-x-2 gap-y-6 lg:w-[1100px] mx-auto'>
-                {[1, 1, 1].map((value, index) => {
+                {stepCards.map((value, index) => {
                     return (
                         <div className='lg:col-span-4 col-span-12 flex justify-center'>
-                            <StepCard index={index + 1} />
+                            <StepCard index={index + 1} url={value.url} title={value.title} content={value.content}  />
                         </div>
                     )
                 })}
