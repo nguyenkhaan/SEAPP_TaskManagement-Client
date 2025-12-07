@@ -47,7 +47,7 @@ function WorkingSidebar() {
     const [showSidebar , setShowSidebar] = useState(false) 
 
     return (
-        <div className="w-[365px] hidden 2xl:block md:h-[868px] rounded-2xl bg-(--color-primary) fixed left-0 top-42 pt-30 shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
+        <aside className="w-[365px] hidden 2xl:block md:h-[868px] rounded-2xl bg-(--color-primary) fixed left-0 top-42 pt-30 shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
             <div className="top-0 -translate-y-1/4 translate-x-1/2 absolute">
                 <Avatar
                     style={{ color: "white", pointerEvents: "none" }}
@@ -69,7 +69,7 @@ function WorkingSidebar() {
                     );
                 })}
             </ul>
-        </div>
+        </aside>
     );
 }
 export default WorkingSidebar;
