@@ -5,9 +5,9 @@ import StepCard from '../../components/StepCard'
 function StepsSection() {
     return (
 
-        <section className='landing__section bg-[#f8f9fe] relative before:bg-[#f8f9fe] before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen py-16'>
+        <section className='landing__section bg-(--color-background-1) relative before:bg-(--color-background-1) before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen py-16'>
             <HeaderPhase title={'How It Works?'} />
-            <h2 data-aos='zoom-in' className='mt-18 lg:text-7xl md:text-5xl text-3xl text-black text-center w-full font-[Montserrat]'>
+            <h2 data-aos='zoom-in' className='mt-18 lg:text-7xl md:text-5xl text-3xl text-(--color-text) text-center w-full font-[Montserrat]'>
                 Get Started In
             </h2>
             <h2 data-aos='zoom-in' className='mt-2 lg:text-7xl md:text-5xl text-3xl text-[#ff6766] text-center w-full font-[Montserrat]'>

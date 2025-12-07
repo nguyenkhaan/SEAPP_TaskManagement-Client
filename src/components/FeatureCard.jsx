@@ -5,7 +5,7 @@ export default function FeatureCard({
   featureContent = "Create, organize, and track tasks with ease. Set Priorities, deadlines, and custom categories",
 }) {
   return (
-    <article className="rounded-[20px] bg-(--color-secondary) flex w-[404px] h-[330px] items-start justify-center gap-4 flex-col px-7 py-5 hover:shadow-lg">
+    <article className="rounded-[20px] bg-(--color-box-item) flex w-[404px] h-[330px] items-start justify-center gap-4 flex-col px-7 py-5 hover:shadow-lg">
       <div className="w-13 h-13 bg-(--color-primary) text-white text-base rounded-2xl flex items-center justify-center">
         <i class="fa-solid fa-cloud-showers-water"></i>
       </div>

@@ -23,7 +23,7 @@
 }
     
 .wrapper::-webkit-scrollbar-thumb {
-    background-color: #ff6766;
+    background-color: var(--color-primary);
     border-right: none;
     border-left: none;
 }
@@ -98,3 +98,9 @@
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
   }
   
+  [data-app-theme="dark"] .login-left-content {
+    background: var(--color-background-2) !important;
+}
+[data-app-theme="dark"] .register-right-content {
+    background: var(--color-background-2) !important;
+}

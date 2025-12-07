@@ -121,7 +121,7 @@ export default function RightContent() {
 
 
     return (
-        <div className="box-border h-full w-full bg-white relative px-6 md:px-[100px] pb-10 pt-15 md:pt-[72px]">
+        <div className="box-border h-full w-full bg-(--color-background-1) relative px-6 md:px-[100px] pb-10 pt-15 md:pt-[72px]">
             {/* Link to go back */}
             <Link to={"/"}>
                 <span className="absolute top-6 right-8 md:top-10 md:right-10 text-lg md:text-xl text-(--color-primary) underline font-medium">
@@ -171,25 +171,25 @@ export default function RightContent() {
                     />
                 </div>
 
-                <div className="flex items-center text-(--color-primary) font-[Inter] font-medium mb-5">
-                    <Checkbox />
+                <div className="flex items-center text-(--color-text) font-[Inter] font-medium mb-5">
+                    <Checkbox style={{color: 'var(--color-text)'}}/>
                     <p className="text-(--color-text)">Remember me</p>
                    
                         <Link className="ml-auto cursor-pointer hover:underline" to={'/forgot-password'}>Forgot password?</Link>
                     
                 </div>
-                <CTA title="Login" type="submit" />
+                <CTA title="Login" type="submit" backgroundColor="var(--color-primary)" />
             </form>
 
             {/* login */}
             <div className="mt-5">
                 <p className="text-(--color-text) mt-4 text-center">
                     Don't have an account?{" "}
-                    <a
-                        href="/register"
+                    <Link
+                        to="/register"
                         className="text-(--color-primary) font-medium">
                         Sign Up
-                    </a>
+                    </Link>
                 </p>
                 <div className="flex mt-6 items-center">
                     <div className="flex-2 border border-(--color-text-desc) h-px" />

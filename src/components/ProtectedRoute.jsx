@@ -7,7 +7,7 @@ function ProtectedRoute({ children }) {
 
     // 1. Kiểm tra đăng nhập
     if (!isLogin) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
     const params = new URLSearchParams(location.search);
     const keys = [...params.keys()];

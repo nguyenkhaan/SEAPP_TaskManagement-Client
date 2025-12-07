@@ -26,7 +26,7 @@ function Landing()
     }, []);
 
     const pageContent = (
-        <div className='bg-[#f8f9fe]'>
+        <div className='bg-(--color-background-1)'>
             <HeroSection />
             <FeatureSection />
             <StepsSection />

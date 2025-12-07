@@ -42,7 +42,7 @@ export default function RightContent() {
     };
 
     return (
-        <div className="box-border h-full w-full bg-white relative px-6 md:px-[100px] pt-10 md:pt-[72px]">
+        <div className="box-border h-full bg-(--color-background-1) w-full relative px-6 md:px-[100px] pt-10 md:pt-[72px]">
             {/* Link to go back */}
             <Link to={"/"}>
                 <span className="absolute top-6 right-8 md:top-10 md:right-10 text-lg md:text-2xl text-(--color-primary) underline font-medium">
@@ -68,7 +68,7 @@ export default function RightContent() {
                         validation={true}
                     />
                 </div>
-                <CTA title="Reset Password" type="submit" />
+                <CTA title="Reset Password" type="submit" backgroundColor="var(--color-primary)" />
             </form>
             <div className="fixed top-1/2 right-1/2">
                 <Spinner isLoading={isLoading} />

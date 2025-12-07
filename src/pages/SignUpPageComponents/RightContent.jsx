@@ -5,7 +5,7 @@ import FeatureTag from '../../components/FeatureTag';
 export default function RightContent()
 {
     return (
-        <div className='w-full h-full bg-(--color-primary) px-[50px] text-white'>
+        <div className='w-full h-full bg-(--color-primary) px-[50px] text-white register-right-content'>
             {/* introduction */}
             <div className='pt-[72px]'>
                 <h1 className='text-[54px] font-medium leading-tight font-[Montserrat]'>Start managing your tasks effectively</h1>

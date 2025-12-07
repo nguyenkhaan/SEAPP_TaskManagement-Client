@@ -16,7 +16,6 @@ function App() {
   return (
     <>
       <Routes>
-
         {
           routes.map((route) => {
             return (

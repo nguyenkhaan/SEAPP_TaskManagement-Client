@@ -97,7 +97,7 @@ export default function LeftContent() {
         },
     });
     return (
-        <div className="h-full w-full relative bg-white px-6 md:px-[100px] pt-10 md:pt-15 pb-10">
+        <div className="h-full w-full relative bg-(--color-background-1) px-6 md:px-[100px] pt-10 md:pt-15 pb-10">
             {/* Go back home */}
             <Link to={"/"}>
                 <span className="absolute top-6 right-8 md:top-10 md:right-10 text-lg md:text-xl text-(--color-primary) underline font-medium">
@@ -155,7 +155,7 @@ export default function LeftContent() {
                         </span>
                     </p>
                 </div>
-                <CTA title="Create Account" />
+                <CTA title="Create Account" backgroundColor="var(--color-primary)" />
             </form>
             <div className="LogMessage w-full flex my-3 flex-col font-medium text-red-600 text-base items-center justify-center gap-2">
                 {logMessages.map((logMessage, index) => {

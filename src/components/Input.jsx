@@ -31,7 +31,7 @@ export default function Input({
             <label htmlFor={title} className='font-semibold text-base md:text-[20px] xl:text-[22px] font-[Montserrat] text-(--color-text) mb-2'>{title}</label>
             <div className='flex items-center relative'>
                 <input
-                    className='w-full text-(--color-text-desc) h-10 md:h-[45px] text-base md:text-[18px] rounded-[5px] pr-11 px-3 shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] border-[0.5px] border-(--color-text)  outline-none transition-all duration-300'
+                    className='w-full bg-(--color-background-2) text-(--color-text-desc) h-10 md:h-[45px] text-base md:text-[18px] rounded-[5px] pr-11 px-3 shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] border-[0.5px] border-(--color-border)  outline-none transition-all duration-300'
                     type={showType}
                     onPaste={() => ((type === 'password') ? false : true)}
                     {...register((registerName || formType), {
@@ -45,7 +45,7 @@ export default function Input({
                     <button type='button'
                             onClick={handleShowPasswordClick}
                             aria-label={showType === 'password' ? 'Show password' : 'Hide password'}
-                            className='absolute right-2 text-gray-700 text-xl md:text-[24px] p-1 hover:opacity-80'>
+                            className='absolute right-2 text-(--color-text) text-xl md:text-[24px] p-1 hover:opacity-80'>
                         {showType === 'password' ? <EyeOff size={20}/> : <Eye size={20} /> }
                     </button>
                 )}
@@ -57,7 +57,7 @@ export default function Input({
                 render={({ messages }) => {
                     if (!messages) return null
                     const msgs = ((Array.isArray(messages)) ? messages : Object.values(messages))
-                    return msgs.map((msg, index) => <p className='text-red-600 text-[12px] italic my-1 font-medium text-base'>{msg}</p>)
+                    return msgs.map((msg, index) => <p className='text-red-500 text-[12px] italic my-1 font-medium text-base'>{msg}</p>)
                 }}
             />
         </div>

@@ -24,7 +24,7 @@ function WorkingNavbar({
     return (
         <>
             {/* NAVBAR */}
-            <nav className='w-screen md:h-25 h-29 left-0 max-sm:flex-col z-[99999] bg-white fixed top-0 shadow-lg md:gap-12 md:pt-9 md:px-[60px] md:py-8 py-3 flex md:items-center items-start justify-between'>
+            <nav className='w-screen md:h-25 h-29 left-0 max-sm:flex-col z-[99999] bg-(--color-secondary) fixed top-0 shadow-lg md:gap-12 md:pt-9 md:px-[60px] md:py-8 py-3 flex md:items-center items-start justify-between'>
                 
                 {/* LOGO + NÚT MỞ SIDEBAR (chỉ hiện khi < 2XL) */}
                 <div className='flex-1 max-md:ml-4 flex items-center gap-4'>
@@ -58,6 +58,7 @@ function WorkingNavbar({
                         <WorkingSmallBlock childrenIcon={<i className="fa-solid fa-magnifying-glass"></i>} />
                     </div>
                 </div>
+
 
                 {/* Calendar + Date */}
                 <div className='flex-2 flex items-center justify-between'>

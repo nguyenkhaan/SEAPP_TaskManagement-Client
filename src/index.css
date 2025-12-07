@@ -10,13 +10,19 @@
   color: rgba(255, 255, 255, 0.87);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  /* Nhom cac mau chinh */ 
   --color-primary: #FF6767;
-  --color-secondary: #F7F9FF;
-  --color-text: #403D3D;
+  --color-background-1: #f8f9fe; 
+  --color-background-2: white; 
+  --color-block-item: #ff8484; 
+  --color-border: #D1D5DB; 
+  --color-text: black;
+  --color-box-item: #f4f4f4; 
   --color-text-desc: #757070;
   --color-in-progress: #0224FF;
   --color-not-started: #F21E1E;
   --color-completed: #05A301;
+
   /*Noi khai bao cac bien mau danh cho lightmode */ 
   --body-background: white; 
   --body-color: black; 
@@ -54,10 +60,15 @@
   --sidebar-border: oklch(0.92 0.004 286.32); 
   --sidebar-ring: oklch(0.705 0.015 286.067); 
 }
-[data-theme="dark"] {
-  --body-background: #282c34; 
-  --body-color: white;  /* Chinh sua dark theme o ben trong nay */ 
-  --link-color: cyan; 
+[data-app-theme="dark"] {
+  --color-primary: #FB2C36; 
+  --color-background-2: #131D31; 
+  --color-background-1: #030619; 
+  --color-block-item: #182438; 
+  --color-text: white; 
+  --color-border: #403D3D; 
+  --color-box-item: #182337; 
+  --color-text-desc: #A2A2A2; 
 }
 * {
   transition: all 0.3s ease-in-out;

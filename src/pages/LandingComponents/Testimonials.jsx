@@ -9,7 +9,7 @@ function Testimonials() {
 
     return (
         <section data-aos='zoom-out'
-                 className='landing__section bg-white py-20 flex items-center justify-center mb-30'>
+                 className='landing__section bg-(--color-background-2) py-20 flex items-center justify-center mb-30  relative before:bg-(--color-background-2) before:z-[-1] before:absolute before:top-0 before:h-full before:left-1/2 before:translate-x-[-50vw] before:w-screen'>
             <div className='xl:w-full grid-cols-12 grid gap-y-6 justify-center mx-auto lg:w-[1000px] w-full'>
                 {/* <div className='col-span-4 flex items-center justify-center'>
                     <StatisticCard />
