@@ -11,9 +11,9 @@ function TeamMember({
 }) {
     return (
         <article
-            className={`rounded-2xl flex gap-2 flex-col pb-6 items-start px-3 justify-between shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black bg-white`}
+            className={`rounded-2xl flex gap-2 flex-col pb-6 items-start px-3 justify-between shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black bg-(--color-background-2)`}
             style={{ width, height }}>
-            <div className="h-26 relative text-black flex items-center justify-between py-2 gap-1 border-b mb-3 border-b-gray-400 w-full px-2">
+            <div className="h-26 relative text-(--color-text) flex items-center justify-between py-2 gap-1 border-b mb-3 border-b-gray-400 w-full px-2">
                 <h2 className="text-[24px] font-medium">Team Members</h2>
                 <span className="">
                     <i class="fa-regular fa-user"></i> {members.length}

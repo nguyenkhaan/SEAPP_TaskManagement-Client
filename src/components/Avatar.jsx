@@ -90,7 +90,7 @@ function Avatar({
                 />
             </figure>
             <div
-                className="top-full cursor-text w-[173px] text-base font-semibold"
+                className="top-full cursor-text w-[173px] text-base font-semibold avatar-info"
                 onClick={stop}
                 style={{ ...style }}>
                 <span className="text-center w-[173px] line-clamp-2 wrap-break-word overflow-hidden font-[Montserrat]">

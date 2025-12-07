@@ -45,7 +45,7 @@ function ImageUpload({ hooks }: IObj) {
   }, [image]);
   return previewImage ? (
     <div
-      className={`bg-slate-100 font-medium text-lg cursor-pointer flex items-center justify-center rounded-xl w-[210px] h-[210px] mr-2 bg-cover bg-center bg-no-repeat grow-0`}
+      className={`bg-(color-block-item-2) font-medium text-lg cursor-pointer flex items-center justify-center rounded-xl w-[210px] h-[210px] mr-2 bg-cover bg-center bg-no-repeat grow-0`}
       onClick={handleClick}
       style={{
         backgroundImage: `url(${previewImage})`,
@@ -60,17 +60,17 @@ function ImageUpload({ hooks }: IObj) {
     </div>
   ) : (
     <div
-      className={`bg-slate-100 ${
+      className={`bg-(--color-block-item-2) ${
         props ? "" : "border-4"
       } font-medium text-lg cursor-pointer border-dashed flex items-center justify-center ${
-        props ? "" : "border-blue-300"
+        props ? "" : "border-(--color-border-image)"
       } rounded-xl w-[210px] h-[210px] mr-2 bg-cover bg-center bg-no-repeat`}
       onClick={handleClick}
       style={{
         backgroundImage: `url(${previewImage})`,
       }}
     >
-      {props || <span className="m-auto text-base md:text-lg">Click here to upload</span>}
+      {props || <span className="m-auto text-base md:text-lg text-(--color-text)">Click here to upload</span>}
       <input
         type="file"
         className="invisible w-0 h-0"

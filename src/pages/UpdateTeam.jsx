@@ -23,7 +23,7 @@ function UpdateTeam() {
         error: teamQueryError,
     } = useQuery({
         //Lay du lieu cua team dua tren id
-        queryKey: [`update-team-${ParamServices.getID()}`],
+        queryKey: [`update-team-${ParamServices.getID()}` , teamID],
         queryFn: async () => {
             const id = ParamServices.getID();
             const responseData = await TeamServies.getTeamInfoFromId(id);

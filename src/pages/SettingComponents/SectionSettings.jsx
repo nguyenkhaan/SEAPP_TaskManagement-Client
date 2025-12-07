@@ -7,10 +7,10 @@ function SectionSetting({
 }) {
     return (
         <div className='w-full px-8 py-6 border-b border-b-gray-500 min-h-20'>
-            <h2 className='font-semibold text-2xl md:text-[32px]'>
+            <h2 className='font-semibold text-2xl md:text-[32px] text-(--color-text)'>
                 {header}
             </h2>
-            <span className='font-md text-base md:text-xl mb-4 block'>{description}</span>
+            <span className='font-md text-base md:text-xl mb-4 block text-(--color-text)'>{description}</span>
             {children}
         </div>
     )

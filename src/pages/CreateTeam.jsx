@@ -54,7 +54,7 @@ function CreateTeam() {
         content: "<p>Hello World!</p>", // initial content
         editorProps: {
             attributes: {
-                class: "text-sm md:text-[18px] h-42 md:h-47 overflow-y-scroll w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5",
+                class: "text-sm md:text-[18px] h-42 md:h-47 overflow-y-scroll w-full border border-(--color-border) bg-(--color-block-item-2) text-(--color-text) font-md rounded-[10px] py-3 px-3 md:px-5",
             },
         },
     });
@@ -90,10 +90,10 @@ function CreateTeam() {
             <div className="w-full h-250 md:px-2 px-3 lg:px-0 pb-20">
                 <div className="w-full flex items-center justify-between mb-10">
                     <div>
-                        <h2 className="font-md text-2xl md:text-4xl leading-[34px]">
+                        <h2 className="font-md text-2xl text-(--color-text) md:text-4xl leading-[34px]">
                             Create A New Team
                         </h2>
-                        <span className="font-md text-base md:text-xl block mt-1 md:mt-3">
+                        <span className="font-md text-base md:text-xl text-(--color-text) block mt-1 md:mt-3">
                             Fill in the details below to set up your new team
                         </span>
                     </div>
@@ -113,6 +113,7 @@ function CreateTeam() {
                         </Link>
                         <motion.div
                             className="w-10 h-10 rounded-xl cursor-pointer text-white bg-(--color-primary) font-bold flex items-center justify-center text-base md:text-[18px]"
+                            title="Show code"
                             initial={{ opacity: 1 }}
                             whileHover={{ opacity: 0.8 }}
                             transition={{
@@ -144,11 +145,11 @@ function CreateTeam() {
                                     }}
                                 />
                             </div>
-                            <h3 className="font-md text-lg md:text-xl mb-2">
+                            <h3 className="font-md text-lg md:text-xl mb-2 text-(--color-text)">
                                 Team name
                             </h3>
                             <input
-                                className="test-sm md:text-[18px] h-10 md:h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5"
+                                className="test-sm md:text-[18px] h-10 md:h-12 w-full border border-(--color-border) bg-(--color-block-item-2) font-md rounded-[10px] py-3 px-3 md:px-5 text-(--color-text)"
                                 placeholder="e.g. Phoenix"
                                 {...register("teamName", {
                                     required:
@@ -173,13 +174,13 @@ function CreateTeam() {
                         </div>
 
                         <div>
-                            <h3 className="font-md text-lg md:text-xl mb-2">
+                            <h3 className="font-md text-lg md:text-xl mb-2 text-(--color-text)">
                                 Description
                             </h3>
                             <EditorContent editor={editor} />
                         </div>
                         <div>
-                            <h3 className="font-md text-lg md:text-xl mb-2">
+                            <h3 className="font-md text-lg md:text-xl mb-2 text-(--color-text)">
                                 Invite team members
                             </h3>
 
@@ -195,7 +196,7 @@ function CreateTeam() {
                             </span>
                         </div>
                     </form>
-                    <div className="flex bg-white px-5 pt-5 pb-5 border-t border-t-gray-600 items-center justify-end gap-5 w-full h-20">
+                    <div className="flex bg-(--color-background-2) px-5 pt-5 pb-5 border-t border-t-gray-600 items-center justify-end gap-5 w-full h-20">
                         <motion.button
                             className="font-md text-black cursor-pointer text-lg md:text-2xl bg-gray-200 rounded-md md:rounded-2xl px-4 md:px-8 md:py-3 py-2"
                             initial={{ scale: 1 }}

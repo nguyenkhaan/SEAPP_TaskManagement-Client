@@ -77,7 +77,7 @@ function TeamMemberItem({
             return (
                 <>
                     <li
-                        className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                        className="px-3 py-2 hover:bg-(--color-block-item-2) cursor-pointer"
                         onClick={leaderClick}>
                         Chỉ định làm Leader
                     </li>
@@ -90,7 +90,7 @@ function TeamMemberItem({
             return (
                 <>
                     <li
-                        className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                        className="px-3 py-2 hover:bg-(--color-block-item-2) cursor-pointer"
                         onClick={viceLeaderClick}>
                         Chỉ định làm Vice Leader
                     </li>
@@ -112,7 +112,7 @@ function TeamMemberItem({
             case "member":
                 return (
                     <>
-                        <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">
+                        <li className="px-3 py-2 hover:bg-(--color-block-item-2) cursor-pointer">
                             Dell co quyen
                         </li>
                     </>
@@ -121,7 +121,7 @@ function TeamMemberItem({
     };
 
     return (
-        <li className="w-full shrink-0 px-3 py-4 h-[82px] bg-[#f5f8ff] border border-gray-400 rounded-2xl flex items-center justify-between gap-4 relative">
+        <li className="w-full shrink-0 px-3 py-4 h-[82px] bg-(--color-block-item-2) border border-(--color-border) rounded-2xl flex items-center justify-between gap-4 relative">
             {/* Avatar */}
             <div
                 className="w-11 flex bg-cover bg-no-repeat bg-center items-center justify-center h-11 rounded-full font-md text-white bg-(--color-primary)"
@@ -135,17 +135,17 @@ function TeamMemberItem({
 
             {/* Name + Role */}
             <div className="flex-1 flex flex-col items-start justify-between ml-2">
-                <span className="line-clamp-1 text-black font-md text-xl">
+                <span className="line-clamp-1 text-(--color-text) font-md text-xl">
                     {name}
                 </span>
-                <span className="font-md text-base">{role}</span>
+                <span className="font-md text-base text-(--color-text)">{role}</span>
             </div>
 
             {/* Dấu bar ⋮ */}
             <div className="relative">
                 <button
                     onClick={() => setShowMenu(!showMenu)}
-                    className="px-2 py-1 text-xl font-bold cursor-pointer">
+                    className="px-2 py-1 text-xl font-bold cursor-pointer text-(--color-text)">
                     ⋮
                 </button>
 
@@ -153,7 +153,7 @@ function TeamMemberItem({
                 {showMenu && (
                     <ul
                         ref={menuRef}
-                        className="absolute right-0 z-99999 top-full mt-1 w-44 bg-white border shadow-lg rounded-md ">
+                        className="absolute right-0 z-99999 top-full mt-1 w-44 bg-(--color-background-2) text-(--color-text) border shadow-lg rounded-md ">
                         {permissions()}
                     </ul>
                 )}

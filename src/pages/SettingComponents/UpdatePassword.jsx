@@ -49,11 +49,11 @@ function UpdatePassword() {
                     className="w-full grid grid-rows-2 md:grid-cols-2 items-center justify-between gap-y-4 md:gap-x-16"
                     onSubmit={handleSubmit}>
                     <div>
-                        <label className="font-md text-lg md:text-xl">
+                        <label className="font-md text-lg md:text-xl text-(--color-text)">
                             Old Password
                         </label>
                         <input
-                            className="test-sm md:text-[18px] h-10 md:h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5"
+                            className="test-sm text-(--color-text) md:text-[18px] h-10 md:h-12 w-full border border-[#757070] bg-(--color-block-item-2) font-md rounded-[10px] py-3 px-3 md:px-5"
                             type="password"
                             onCopy={(e) => {
                                 e.preventDefault();
@@ -63,11 +63,11 @@ function UpdatePassword() {
                         />
                     </div>
                     <div>
-                        <label className="font-md text-lg md:text-xl">
+                        <label className="font-md text-lg md:text-xl text-(--color-text)">
                             New Password
                         </label>
                         <input
-                            className="test-sm md:text-[18px] h-10 md:h-12 w-full border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-3 md:px-5"
+                            className="test-sm text-(--color-text) md:text-[18px] h-10 md:h-12 w-full border border-[#757070] bg-(--color-block-item-2) font-md rounded-[10px] py-3 px-3 md:px-5"
                             type="password"
                             name="newPassword"
                         />

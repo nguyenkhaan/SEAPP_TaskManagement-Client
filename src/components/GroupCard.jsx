@@ -6,15 +6,15 @@ function GroupCard({
     icon = <i class="fa-solid fa-bicycle"></i>
 }) {
     return (
-        <article className='border border-[#A8A8A8] bg-(--color-primary) relative rounded-2xl overflow-hidden w-full md:h-[223px] h-[200px] hover:shadow-lg cursor-pointer'>
-            <div className='bg-white absolute flex flex-col items-start justify-between text-black w-full md:py-6 py-4 md:px-4 px-2 md:h-44 left-0 bottom-0 h-40'>
+        <article className='border border-[#A8A8A8] bg-(--color-secondary) relative rounded-2xl overflow-hidden w-full md:h-[223px] h-[200px] hover:shadow-lg cursor-pointer'>
+            <div className='bg-(--color-box-item-2) absolute flex flex-col items-start justify-between text-black w-full md:py-6 py-4 md:px-4 px-2 md:h-44 left-0 bottom-0 h-40'>
                 <div className='w-full md:mt-2'>
-                    <h2 className='text-black font-medium line-clamp-2 md:text-[18px] text-[14px] font-[Montserrat]'>{groupTitle}</h2>
-                    <p className='md:line-clamp-2 line-clamp-3 md:text-[11px] text-[10px] leading-tight my-1 text-(--color-text-desc)'>{groupDesc}</p>
+                    <h2 className='text-(--color-text) font-medium line-clamp-2 md:text-[18px] text-[14px] font-[Montserrat]'>{groupTitle}</h2>
+                    <p className='md:line-clamp-2 line-clamp-3 md:text-[12px] text-[10px] leading-tight my-1 text-(--color-text-desc)'>{groupDesc}</p>
                 </div>
                 <ul className='md:text-[12px] text-[10px] bottom-2 md:px-4 px-2 left-0 absolute border-t border-t-gray-500 pt-2 w-full text-(--color-text-desc) flex items-center justify-between'>
                     <li>
-                        <i class="fa-regular fa-user mr-1 font-medium"></i>
+                        <i class="fa-regular fa-user mr-1 font-medium text-(--color-text-desc)"></i>
                         Team leader
                     </li>
                     <li>

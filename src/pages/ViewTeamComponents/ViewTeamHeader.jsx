@@ -7,7 +7,7 @@ function ViewTeamHeader({
     teamID = '' //Truyen vai ben trong va bat buoc phai
 }) {
     return (
-        <div className="w-full h-[180px] md:h-[220px] flex py-6 px-5 md:px-8 font-md items-center justify-between bg-(--color-primary) rounded-3xl shadow-xl gap-12">
+        <div className="w-full h-[180px] md:h-[220px] flex py-6 px-5 md:px-8 font-md items-center justify-between bg-(--color-secondary) rounded-3xl shadow-xl gap-12">
             <div className="flex flex-2 flex-col h-full gap-3 md:gap-5 justify-between items-start text-white">
                 <h2 className="md:text-[38px] text-[30px] line-clamp-2">
                     {groupTitle}

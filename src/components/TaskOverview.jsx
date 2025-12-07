@@ -13,6 +13,7 @@ function TaskOverview({
     width = 550
 }) {
     const color = getStatusColor(status);
+    console.log('Log ra tu overview' , status) 
     return (
         <Link className="w-full" to={`/app/view-task?id=${taskID}`}>
             <li

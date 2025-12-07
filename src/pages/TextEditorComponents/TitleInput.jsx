@@ -17,7 +17,7 @@ function TitleInput({
         <>
             <input 
                 defaultValue={defaultValue}
-                className='font-semibold text-xl md:text-2xl w-full line-clamp-2 text-black px-3 py-2 rounded-md border-2 border-slate-300' 
+                className='font-semibold text-xl md:text-2xl w-full line-clamp-2 text-(--color-text) bg-(--color-background-2) px-3 py-2 rounded-md border-2 border-slate-300' 
                 {...register("createTaskTitleInput" , {
                     required: "*Không được bỏ trống tiêu đề bạn ơi*"
                 })}

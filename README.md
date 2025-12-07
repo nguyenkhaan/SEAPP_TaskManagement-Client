@@ -1,324 +1,134 @@
-# TỔNG QUAN DỰ ÁN 
-## 1. Cấu trúc thư mục 
-# 🗂️ Cấu trúc thư mục dự án React
+# **NOTASK WEBSITE**
 
-```md
-project/
-├── index.html               # 🔹 File HTML chính
-├── src/                     # 📁 Thư mục chứa mã nguồn
-│   ├── assets/              # 🖼️ Hình ảnh, logo, icon tĩnh của UI
-│   ├── components/          # ⚙️ Component tái sử dụng, chia theo loại (button, card, menu,...)
-│   ├── hooks/               # 🪝 Custom hooks
-│   ├── layouts/             # 🧩 Các layout component (vd: Header + Footer bọc quanh các trang)
-│   ├── lib/                 # 📚 Cấu hình / dữ liệu cần khi sử dụng thư viện ngoài
-│   ├── pages/               # 🖥️ Code riêng cho từng trang (home, dashboard, blog,...)
-│   │   └── components/      # 🔸 Component chỉ dùng trong trang cụ thể
-│   ├── router/              # 🗺️ Cấu hình React Router
-│   ├── services/            # 🔌 Hàm giao tiếp với server (API service)
-│   ├── styles/              # 🎨 File CSS / SCSS / Tailwind config
-│   └── utils/               # 🧮 Các hàm tiện ích (pure function)
+---
+
+<p align="center">
+   <a href="https://nextjs.org/">
+   <img alt="Static Badge" src="https://img.shields.io/badge/reactjs-20-%2361DBFB?style=for-the-badge&logo=react">
+   </a>
+   <a> 
+   <img alt="Static Badge" src="https://img.shields.io/badge/tailwindcss-4-blue?style=for-the-badge&logo=tailwindcss&logoColor=blue">
+   </a>
+    <a> 
+    <img alt="Static Badge" src="https://img.shields.io/badge/ReactQuery-Latest-%23FF4154?style=for-the-badge&logo=reactquery&logoColor=%23FF4154">
+   </a>
+   <img alt="Static Badge" src="https://img.shields.io/badge/python-3-%233776AB?style=for-the-badge&logo=python&logoColor=%233776AB">
+   </a>
+   <a href="https://nextjs.org/">
+   <img alt="Static Badge" src="https://img.shields.io/badge/flask-3.1.2-%23646464?style=for-the-badge&logo=flask&logoColor=%23646464">
+   </a>
+   <a href="https://nextjs.org/">
+   <img alt="Static Badge" src="https://img.shields.io/badge/sqlalchemy-3.1.1-green?style=for-the-badge&logo=sqlalchemy&logoColor=green">
+   </a>
+   <a href="https://nextjs.org/">
+   <img alt="Static Badge" src="https://img.shields.io/badge/mysql-8.4-%23F29111?style=for-the-badge&logo=mysql">
+   </a>
+   <a> 
+   <img alt="Static Badge" src="https://img.shields.io/badge/googleoauth-2-%23EA4335?style=for-the-badge&logo=googleauthenticator&logoColor=%23EA4335">
+   </a>
+   <a> 
+   <img alt="Static Badge" src="https://img.shields.io/badge/Github-latest-%23181717?style=for-the-badge&logo=GitHub&logoColor=%23181717">
+   </a>
+   <a> 
+   <img alt="Static Badge" src="https://img.shields.io/badge/Docker-ready-%232496ED?style=for-the-badge&logo=Docker&logoColor=%232496ED">
+   </a>
+      <a> 
+<img alt="Static Badge" src="https://img.shields.io/badge/Axios-Latest-%235A29E4?style=for-the-badge&logo=axios&logoColor=%235A29E4">
+
+   </a>
+</p>
+
+
+
+Welcome to the NoTask website. With features like team creation, seamless member onboarding, shared task boards, and real-time progress tracking, the platform ensures every project flows smoothly from start to finish. Whether you're managing a small group or coordinating across multiple teams, our system provides a clear and efficient way to assign tasks, monitor workloads, and work together toward common goals. Built for speed, simplicity, and teamwork — this is where productivity begins.
+
+---
+## 🏠 Features 
+- **Login/Register**: Securely authenticate or create a new account via your email to access platform
+- **Change Pasword, Email**: Update your account credentials and contact information with ease
+- **Create Team**: Form a new team and invite members to collaborate on shared tasks 
+- **Team Work**: Manage team members, assign roles, and track progress across group activities.
+- **Create Task**: Add new tasks with details, deadlines, and assignees to keep work organized.
+- **Update Task**: Update your deadline, tasks detail with ease 
+- **Update Profile**: Customize your personal information, avatar, and user settings.
+- **Dark Theme**: Dark theme provided 
+
+## 🚀 Quick start 
+### 1. Clone & Install 
+```bash 
+# Clone Front-end Repository 
+git clone https://github.com/RinWasBusted/SEAPP_TaskManagement-Client
+# Clone Back-end Repository 
+git clone https://github.com/RinWasBusted/SEAPP_TaskManagement-Server-
+```
+### 2. API Integration 
+- Create a local `.ENV` files in the root project for public API Keys 
+- Please [Contact](https://www.facebook.com/kha.an.907155) for more informations. 
+
+### 3. Docker  
+- Build and run with Docker Compose up 
+```bash
+docker compose up -d  
+```
+- **Note**: You must end process in port 3306 first. 
+```bash
+# See the PID 
+sudo lsof -i:3306 
+# End the process 
+sudo kill PID  
+```
+### 4. Dependencies 
+- Back-end 
+```bash 
+# Create a new virtual environment
+python -m venv env/
+
+# Activate the virtual environment
+source env/bin/activate
+
+# Install all required dependencies
+pip install -r requirements.txt
 ```
 
-## 2. Khởi động dự án 
-- Chạy lệnh `npm run dev`
-
-## 5. Note trong quá trình làm 
-### 5.1. 
-Chỉnh sửa lại bố cục của thẻ body và thẻ root (Nếu khởi tạo theo cách này thì thẻ root mặc định căn giữa, nền thẻ body màu đen...). Vào file `App.css` và `index.css` để chỉnh sửa 
-### 5.1. Gói hỗ trợ làm biểu đồ
-`npm install @mui/x-charts`
-### 5.2. Làm cho phần viền tràn landing page 
-``
-### 5.3. File layout 
-- Layout là file để các page có thể sử dụng trong trường gợp 1 cấu trúc dược tái sử dụng nhiều lần 
-
-Cách làm file layout: 
-- Tạo một file layout.jsx, hàm đó nhận vào 1 tham số chilren chính là page mà ta muốn hiển thị 
-```js
-function Layout({children}) 
-{
-    return (
-        <Navbar /> 
-            {children} 
-        <Footer />
-    )
-}
+- Front-end 
+```bash 
+# Install all required dependencies 
+npm -f install 
 ```
-
-- Sau này nếu page nào muốn dùng layout này thì ta gọi Layout và truyền children vào 
-
-```js 
-<Layout>
-    {component....} 
-<Layout />
+### 5. Development 
+- Back-end 
+```bash
+python -m main.py  
 ```
-
-
-
-### 5.4. Cách làm lightmode và darkmode 
-B1. Tải cái toggle Button về và viết thêm hàm. Khi button đổi thì set Attribute trong thẻ body lại thành light. Khi button 
-tắt thì set Settribute trong thẻ body lại thành dark 
-
-
-```css
-.for_light_theme {
-  --primary-color: #302ae6; 
-  --secondary-color: #536390; 
-  --font-color: #424242; 
-  --bg-color: #fff; 
-  --heading-color: #292922; 
-}
-.for_dark_theme {
-  --primary-color: #9a97f3; 
-  --secondary-color: #818cab; 
-  --font-color: #e1e1ff; 
-  --bg-color: #161625; 
-  --heading-color: #818cab; 
-}
+- Front-end 
+```bash
+npm run dev  
 ```
+### 6. Production 
+- You can visit [this website](http://localhost:5173) 
+## 🧩 Main Technologies 
+### 1. Front-end
+- **Javascript - Typescript** & logic resolve
+- **ReactJS 20** (UI, App Router, SPA)
+- **TailwindCSS 4.0** & custom design system
+- **React Query** & call API and caching 
+- **NPM** & animated, effects and toast feedback, 
+### 2. Back-end 
+- **Python** & logic back-end 
+- **Flask** (Build Server)
+- **Google OAuth** & login, register, session 
+- **JWT Token** & authentication/authorization  
+- **Mariadb** & database 
+### 3. Tools 
+- **Github** & Version management 
+- **Docker** & Docker Compose ready 
+- **Redis** & Server Caching 
 
-### 5.5. Nguyên tắc viết path tối ưu cho trang web  
+## 📄 Contact 
+- Dowload Inforgraphic:
+- Contact: Footer includes GitHub, LinkedIn, Email, Discord, Facebook links
+## 📝 License 
 
-**Về hình thức:** 
+MIT License. See [LICENSE.md](./LICENSE.md).
 
-#### 1. URL ngắn nhưng đầy đủ ngữ nghĩa 
-- URL càng dài thì Google càng hạn chế đọc      
-**Ví dụ**: /category/12345/product?id=67890 
-
-- URL cần đẩy đù, ngắn gọn và tự nhiên như cách người dùng tìm kiếm   
-**Ví dụ**: /hoc-react-co-ban 
-#### 2. Dùng dấu gạch -, tránh _ 
-- Nên tránh dấu _, cùng với các kí tự encode dài dòng: %20, &ref=abc...  
-- Hạn chế sử dụng các kí tự id vô nghĩa nếu không cần thiết 
-#### 3. Giữ URL đủ sâu ổn định 
-- Không nên để đường dẫn sâu quá, nên giữ ổn định 2 - 3 cấp  
-- Đừng để 1 nội dung mà có 2 - 3 đường dẫn khác nhau. Ví dụ: /dien-thoai/iphone-13 và /mobile/inphone-13 sẽ làm google hiểu thành duplicate 
-#### 4. Dùng chữ thường 
-
-**Về hệ thống** 
-
-- Không để lộ cấu trúc hệ thống qua URL  
-**Ví dụ**: `/index.php?page=product&id=123` (NOT)
-`/san-pham/ban-phim-co-akko-3098` (GOOD)
-
-- Không để thông tin người dùng (Ví dụ id, email) ngay trên thanh địa chỉ 
-
-### 5.6. CSS Động 
-Tailwind không nhận css động => Dùng thuộc tính style trong the JSX, truyền tham số vào component là các style muốn chính 
-
-Có thể truyền nguyên 1 object styles, bên trong JSX component nhận vào và giải objec styles vào trong thuộc tính style 
-
-Thầy nhiều component được bọc bên trong 1 layout chung (1 thẻ div) => Tạo một component layout 
-
-### 5.7. Đăng nhập bằng Google 
-#### **1. Set up Google** 
-Truy cập trang web: `console.cloud.google.com`
-
-Vào dashboard -> API & Services -> Credentials -> Create an Outh ID 
-
-  Nếu đang localhost thì cập nhật 2 url: `http://localhost:5173` và `http://localhost`
-
-Tạo ra một access token để truy cập -> Copy Client ID : *802852666161-o82mhq04404uckeqv9ctn8ub5fc12vug.apps.googleusercontent.com* 
-
-**Một số chú ý**:
-
-- Sang tab Audience. Trong development thì thêm email các teseter vào, chỉ những email trong danh sách teser mới có thể đăng nhập. Khi deploy public thì sửa audience thành public để ai cũng có thể đăng nhặp. 
-- Nếu trong 6 tháng không dùng, client id sẽ bị xóa 
-
-#### **2. Set up code** 
-
-Cài đặt thư viện: `https://www.npmjs.com/package/@react-oauth/google`, document cũng ở trong đó 
-
-Trước tiên, trong file main.jsx, ta phải bọc bên ngoài bằng một thẻ `GoogleOAuthProvider`
-
-```js
-const CLIENT_ID = '802852666161-o82mhq04404uckeqv9ctn8ub5fc12vug.apps.googleusercontent.com'  
-//Sau nay deploy thi chuyen cai nay vao file .env, khong ne de nhu the nay 
-
-createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <StrictMode>
-      <GoogleOAuthProvider clientId={CLIENT_ID}>
-        <App />
-      </GoogleOAuthProvider>
-    </StrictMode>
-
-  </BrowserRouter>
-)
-```
-
-#### **3. Login Component** 
-Di chuyển sang trang muốn tạo login. Dùng component `<GoogleLogin />` được cấp sẵn sẽ tạo một nút Login by Google
-
-Nhận vào 2 tham số: 
-
-```js
-onSuccess = ((credentialResponse) => console.log(credentialResponse))  //Thanh cong 
-onError = ((error) => console.log(error)) //That bai 
-```
-
-Nếu đăng nhập thành công sẽ trả về một object tên là credentialResponse. Sử dụng gói `jwt-decode`, decode jet token trong đó sẽ thu được thông tin người dùng
-
-#### **4. Login Hook** 
-Dùng khi muốn custom một nút Login của riêng mình 
-
-```js
-import {useGoogleLogin} from '@react-oauth/google'
-```
-
-```jsx
-const login = useGoogleLogin({
-  onSuccess: (tokenResponse) => {
-    console.log(tokenResponse)
-  }, 
-  onError: (error) => {
-    console.log(error) 
-  }
-})
-<button onClick = {() => login}> Login </button>
-```
-
-Khi bấm button, sẽ chạy hàm login. Nếu thành công sẽ rơi vào onSuccess => Trả về 1 Bearer Token. Thất bại thì rơi vào onError 
-
-**Lấy thông tin người dùng**  
-Không dùng JWT Decode mà call API, thêm token vào headers của Request. 
-
-Link call: `https://www.googleapis.com/oauth2/v3/userinfo` 
-
-```js
-async function loginSuccess(tokenResponse) 
-{
-    const usserInfo = axios.get('https://www.googleapis.com/oauth2/v3/userinfo' , {
-      headers: {
-        'Authorization': `Bearer ${tokenResponse.access_token}`
-      }
-    }).then(res => res.data) 
-
-    console.log(userInfo) 
-}
-```
-
-## 6. Tạo Rich Text Editor 
-
-**Bước 1**: Tạo editor 
-- Dùng component <Editor> cùng với ReactHook useEditor 
-
-- Khai báo cấu hình cho Editor 
-
-```js
-const editor = useEditor({
-        extensions: [
-            StarterKit.configure({
-                bulletList: {
-                    HTMLAttributes: {
-                        class: 'list-disc ml-4'
-                    }
-                },
-                orderedList: {
-                    HTMLAttributes: {
-                        class: 'list-decimal ml-4'
-                    }
-                }
-            }),
-            TextAlign.configure({
-                types: ['heading', 'paragraph'],
-            }),
-            Highlight,  //Khai bao cac extensions, co the search trong tip tap de tim cac extensions va thiet dat vao ben trong 
-            Image.configure({
-                allowBase64: true,
-                resize: {
-                    enabled: true,
-                    alwaysPreserveAspectRatio: true
-                }
-            })
-        ],
-        content: '<p>Hello world</p>',
-        editorProps: {
-            attributes: {
-                class: 'w-full h-[500px] border-2 overflow-y-auto rounded-md px-3 bg-slate-50 py-2 text-base border-slate-200  bg-white text-black outline-0'
-            }
-        }
-    }) 
-```
-
-Cấu hình được khai báo bằng cách sử dụng Hook useEditor, bên trong cung cấp: 
-
-+ Danh sách extensions (các extensiosn 
-sẽ cung cấp thêm các chức năng cho Rich Text Editor, ví dụ: Highlight, Align, Order list, chèn hình ảnh...). Muốn cài đặt extensions nào thì tra mạng để xem cách cấu hinh cho extensions đó vào mảng 
-
-+ content: Nội dung ban đầu dược hiển thị ra, viết 1 string gồm các thẻ HTML 
-
-+ editorProps: Thêm các class (tailwind), CSS cho editor 
-
-**Bước 2**: Cài đặt Menubar 
-
-Sử dụng component Menubar được cung cấp, truyền thuộc tính editor vào 
-
-Bên trong Menubar, cung cấp cho nó các options (các nút bấm) để thao tác được với editor truyền vào (Highlight, bôi đậm, in nghiêng...) 
-
-`https://tiptap.dev/docs/examples/basics/formatting`
-
-Xem cách cài đặt các nút bấm ở đường link trên 
-
-**Bước 3** Làm cho Menubar đẹp lên 
-Sau Bước 2, nút bấm đã có nhưng còn rất xấu 
-
-Để làm dược đẹp, dùng thêm gói shadcn => tạo button với các icon đẹp 
-
-`https://ui.shadcn.com/docs/components/toggle` 
-
-Truy cập đường link và cài đặt gói shadcn theo hướng dẫn 
-
-Lưu ý: Trước khi cài đặt phải cấu hình lại dự án: tạo file config.json, khai báo thêm paths bên trong ts-config và import path vào bên trong file vite.config.js 
-
-Lấy mảng các icon tại đường link: 
-
-`https://github.com/candraKriswinarto/my-rich-text-editor`
-
-```js 
-return (
-      <div className="w-full border-2 border-slate-200 rounded-md space-x-3 p-1 mb-1 z-50">
-          {
-              Options.map((option , index) => {
-                  return <Toggle key={index} onPressedChange={option.onClick} pressed={true}>{option.icon}</Toggle>
-              })
-          }
-      </div>
-  )
-```   
-
-## 7. Cài đặt React-Query 
-
-## 8. Một số gói hỗ trợ dự án 
-BE: 
-- React Query 
-- Axios API 
-- CookiesJS 
-- OAuth-google 
-- react-confirm-alert
-
-- Cac component can: 
-+ MessageLog: Thong bao trang thai chay duoc hay la khong 
-+ LoadingModal: Trang Modal toan man hinh dung de Loading trong khi cho tai du lieu 
-+ Dialog Box: Hop thoai thong bao xac nhan 
-FE:
-- PyJWT 
-- SQLAlchemy_flask 
-- Flask_restful 
-- CORS: Chống CORS 
-
-
-
-## 9. Mot so chu y ve React Query 
-- React Query cache dua tren co che key -> Nhung ham cache co cung key thi se chia se chyung nguon du lieu duoc cached 
-  + queryKey: Key dung de quan li viec cache 
-  + queryFn: Ham bat dong bo, thuc hien viec lay du lieu cho bien data. Thuong ket hop voi Axios API 
-  + data: Bien cua react query, chua du lieu call duoc tu API 
-  + isPending (boolean): Xac dinhx em du lieu da duoc 
-- Mutation: 
-  - Dung de thuc hie viec update du lieu, delete , insert 
-  - Co che: Chay ham va se cap nhat lai cache cho cac query co key tuong ung duoc khai bao 
-  - mutationFn: Ham bat dong bo de chay insert (chi nhan 1 tham so duy nhat)
-  - onSuccess(): Ham se chay khi mutationFn thanh cong 
-  - onError(): Ham se chay khi mutationFn that bai 
-  - queryClient.valite([])...: Dungde quyet dinh xem key nao se duoc refetch (lam moi) du lieu sau khi update. Thuowng dat cac nay trong onSuccess() 
+---

@@ -18,7 +18,7 @@ function PriorityChoice({
     } , [value])
     return (
         <>
-            <p className='text-black flex items-center justify-start gap-5 md:gap-12 text-base mt-4'>
+            <p className='text-(--color-text) flex items-center justify-start gap-5 md:gap-12 text-base mt-4'>
                 Priority
                 <span>
                     <label htmlFor='important' className='mr-2'>Important?</label>

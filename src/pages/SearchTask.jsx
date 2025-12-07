@@ -15,7 +15,7 @@ const mockTasks = [
         important: true,
         urgent: false,
         status: "In Progress",
-        dueTime: new Date("2025-01-10")
+        dueTime: new Date("2025-01-10"),
     },
     {
         id: 2,
@@ -23,7 +23,7 @@ const mockTasks = [
         important: false,
         urgent: true,
         status: "Not Started",
-        dueTime: new Date("2025-01-15")
+        dueTime: new Date("2025-01-15"),
     },
     {
         id: 3,
@@ -31,48 +31,53 @@ const mockTasks = [
         important: true,
         urgent: true,
         status: "Completed",
-        dueTime: new Date("2025-01-05")
-    }
+        dueTime: new Date("2025-01-05"),
+    },
 ];
 
 function SearchTask() {
-    const location = useLocation(); 
-    const query = (new URLSearchParams(window.location.search).get("search-result") || '')
-    const {data , isPending , error} = useQuery({
-        queryKey: ['search-tasks' , query], 
-        enabled: query != null, 
+    const location = useLocation();
+    const query =
+        new URLSearchParams(window.location.search).get("search-result") || "";
+    const { data, isPending, error } = useQuery({
+        queryKey: ["search-tasks", query],
+        enabled: query != null,
         queryFn: async () => {
-            const responseData = await TaskServices.searchTask(query)
+            const responseData = await TaskServices.searchTask(query);
             // console.log(responseData.data)
-            return responseData.data 
-        }
-    })
+            return responseData.data;
+        },
+    });
     useEffect(() => {
-        
-        console.log('Chuoi query la: ' , query) 
-    } , [query])
-    if (isPending || !data) return <LoadingModal /> 
+        console.log("Chuoi query la: ", query);
+    }, [query]);
+    if (isPending || !data) return <LoadingModal />;
     return (
         <WorkingLayout>
             <div className="w-full rounded-xl overflow-y-scroll pt-10 border min-h-screen mb-20 px-4 md:px-8">
                 {/* Results Title */}
-                <h3 className="md:text-3xl text-xl font-semibold mb-3">Search Results</h3>
+                <h3 className="md:text-3xl text-xl font-semibold mb-3 text-(--color-text)">
+                    Search Results
+                </h3>
 
                 {/* Task list (demo) */}
                 <ul className="w-full flex flex-col">
-                    {data.tasks.map((task) => (
-                        <TaskOverview
-                            key={task.id}
-                            taskID={task.id}
-                            taskTitle={task.title}
-                            important={task.important}
-                            urgent={task.urgent}
-                            status={task.status}
-                            dueTime={task.dueTime}
-                        />
-                    ))}
+                    {data.tasks.length == 0 ? (
+                        <p className = 'w-full text-center xl:text-lg md:text-base text-sm italic'>No Tasks Found</p>
+                    ) : (
+                        data.tasks.map((task) => (
+                            <TaskOverview
+                                key={task.id}
+                                taskID={task.id}
+                                taskTitle={task.title}
+                                important={task.important}
+                                urgent={task.urgent}
+                                status={task.status}
+                                dueTime={task.dueTime}
+                            />
+                        ))
+                    )}
                 </ul>
-
             </div>
         </WorkingLayout>
     );

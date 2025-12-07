@@ -16,9 +16,9 @@ function TaskByGroupViewTeam({ width = "100%", height = "100%", teamID }) {
     //team-tasks-id    , team-tasks-statistic-id...
     return (
         <article
-            className={`rounded-2xl flex flex-col items-start px-2 md:px-4 task__group justify-between shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black`}
+            className={`rounded-2xl bg-(--color-background-2) flex flex-col items-start px-2 md:px-4 task__group justify-between shadow-[0_0_15px_rgba(0,0,0,0.3)] overflow-hidden  text-black`}
             style={{ width, height }}>
-            <div className="md:h-26 h-20 relative text-black flex md:flex-col max-md:px-4 md:items-start items-center justify-start md:justify-center py-2 gap-1 border-b mb-3 border-b-gray-400 w-full">
+            <div className="md:h-26 h-20 relative text-(--color-text) flex md:flex-col max-md:px-4 md:items-start items-center justify-start md:justify-center py-2 gap-1 border-b mb-3 border-b-gray-400 w-full">
                 <h2 className="md:text-[32px] text-[24px] font-medium">
                     {data.data.data.tasks.length} Tasks 
                 </h2>

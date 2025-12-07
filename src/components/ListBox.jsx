@@ -22,8 +22,18 @@ function ListBox({
       onChange={handleChange}
       options={options}
       placeholder="Select the status..."
-      className="z-99999"
+      className="z-99999 bg-(--color-primary)"
       required={true}
+      styles={{
+        control: (base) => ({
+          ...base, 
+          backgroundColor: 'var(--color-background-2)'
+        }),
+        singleValue: (base) => ({
+          ...base, 
+          color: 'var(--color-text)'
+        })
+      }}
     />
   );
 }

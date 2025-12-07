@@ -10,7 +10,7 @@ function TodoTask({ todoTasks = [] }) {
             <div className="w-full flex flex-col min-h-98 overflow-x-hidden shrink-0 items-center justify-start gap-3 overflow-y-hidden">
                 {todoTasks.length === 0 ? (
                     <div className="w-full flex flex-col items-center justify-between gap-6">
-                        <p className="italic w-full text-center top-1/2 text-base">
+                        <p className="italic w-full text-center top-1/2 text-base text-(--color-text)">
                             🎉 You don't have anything today 🎉
                         </p>
 
@@ -25,7 +25,7 @@ function TodoTask({ todoTasks = [] }) {
                             <DefaultImageUpload url="https://i.pinimg.com/originals/78/56/0f/78560f1998097c570eafc8cf9e30f8a3.gif" />
                         </motion.div>
 
-                        <p className="italic w-full text-center top-1/2 text-base">
+                        <p className="italic w-full text-center top-1/2 text-base text-(--color-text)">
                             Join A Team To Started
                         </p>
                         <Link to={"/app/teams"}>

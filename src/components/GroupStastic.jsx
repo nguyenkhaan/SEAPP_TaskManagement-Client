@@ -11,7 +11,7 @@ function GroupStastic({
             style={{ color: Color }}
         >
             <div className='flex items-center justify-between h-[42px] shrink-0'>
-                <h2 className={`font-medium md:text-[18px] text-base font-[Montserrat] text-black`}>{title}</h2>
+                <h2 className={`font-medium md:text-[18px] text-base font-[Montserrat] text-(--color-text)`}>{title}</h2>
                 <div
                     className={` w-9 h-9 md:flex items-center justify-center text-sm rounded-full top-12 hidden`}
                     style={{ backgroundColor: Color }}

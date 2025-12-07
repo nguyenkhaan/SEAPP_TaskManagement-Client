@@ -107,7 +107,7 @@ function MenuBar({ editor } : TextEditor)
         <div className="w-full border-2 border-slate-200 rounded-md space-x-3 p-1 mb-1 z-50">
             {
                 Options.map((option , index) => {
-                    return <Toggle key={index} onPressedChange={option.onClick} pressed={true}>{option.icon}</Toggle>
+                    return <Toggle key={index} style={{backgroundColor: 'var(--color-background-2)' , color: 'var(--color-text)', cursor: 'pointer'}} onPressedChange={option.onClick} pressed={true}>{option.icon}</Toggle>
                 })
             }
         </div>

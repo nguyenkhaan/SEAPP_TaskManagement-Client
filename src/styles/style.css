@@ -104,3 +104,7 @@
 [data-app-theme="dark"] .register-right-content {
     background: var(--color-background-2) !important;
 }
+
+[data-app-theme="dark"] .avatar-info {
+    color: white; 
+}

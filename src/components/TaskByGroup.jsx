@@ -29,7 +29,7 @@ function TaskByGroup({
             <ul className="w-full flex-1 py-5 px-6 md:px-8 overflow-y-scroll overflow-x-hidden wrapper h-full flex flex-col items-center pb-4 md:pb-6">
                 {
                     tasks.length == 0? 
-                    <p className="italic text-lg">Chưa có nhiệm vụ nào, thêm nhiệm vụ để bắt đầu nhé.</p>
+                    <p className="italic text-lg text-(--color-text)">Chưa có nhiệm vụ nào, thêm nhiệm vụ để bắt đầu nhé.</p>
                     : 
                     (tasks.map((task) => {
                         return (

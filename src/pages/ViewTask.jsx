@@ -52,8 +52,8 @@ function ViewTask() {
 
     const handleDelete = () => {
         confirmAlert({
-            title: "Leave The Team",
-            message: "Do you really want to delete this team?",
+            title: "Delete The Task",
+            message: "Do you really want to delete this task?",
             buttons: [
                 {
                     label: "Yes",
@@ -96,17 +96,17 @@ function ViewTask() {
                         }}></div>
 
                     <div className="flex-1">
-                        <h2 className="font-semibold text-xl md:text-2xl text-black">
+                        <h2 className="font-semibold text-xl md:text-2xl text-(--color-text)">
                             {data.data.title}
                         </h2>
 
-                        <p className="text-black text-base mt-3">
+                        <p className="text-(--color-text) text-base mt-3">
                             Priority: <span>Moderate</span>
                         </p>
 
-                        <p className="mt-3 text-black">
-                            Status:
-                            <span className="text-(--color-not-started)">
+                        <p className="mt-3 text-(--color-text)">
+                            Status: 
+                            <span className="text-(--color-not-started) ml-3">
                                 {getStatusString(data.data.status)}
                             </span>
                         </p>
@@ -118,7 +118,7 @@ function ViewTask() {
                 </div>
 
                 <div
-                    className="w-full mt-6 h-[540px] border-2 overflow-y-auto rounded-md p-1 bg-white text-black"
+                    className="w-full mt-6 h-[540px] border-2 overflow-y-auto rounded-md bg-(--color-background-2) p-4 text-(--color-text)"
                     dangerouslySetInnerHTML={{
                         __html: purify(data.data.description),
                     }}></div>

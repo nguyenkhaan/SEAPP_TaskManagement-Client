@@ -11,6 +11,7 @@ const getStatusColor = (status) => {
 
 // Cac ham bo sung 
 const getStatusString = (str) => {
+    str = str.toLowerCase() 
     if (str == 'to do') return 'Not Started' 
     else if (str == 'completed') return 'Completed'
     else if (str == 'in progress') return 'In Progress' 

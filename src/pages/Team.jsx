@@ -54,22 +54,22 @@ function Team() {
     return (
         <WorkingLayout>
             <div className="w-full mx-auto h-full mb-20 overflow-auto relative">
-                <h2 className="text-black md:text-4xl text-3xl font-semibold max-md:px-2">
+                <h2 className="text-(--color-text) md:text-4xl text-3xl font-semibold max-md:px-2">
                     Teams
                 </h2>
-                <h2 className="text-black max-md:px-2 text-sm font-medium md:text-[20px] my-1">
+                <h2 className="text-(--color-text) max-md:px-2 text-sm font-medium md:text-[20px] my-1">
                     Manage and collaborate with your friends
                 </h2>
 
                 <input
-                    className="md:w-[602px] md:text-lg w-full md:h-[42px] mt-2 h-9 md:rounded-xl rounded-lg px-5 text-gray-600 font-medium shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] outline-none transition-all duration-300"
+                    className="md:w-[602px] md:text-lg w-full md:h-[42px] mt-2 h-9 md:rounded-xl rounded-lg px-5 text-(--color-text) font-medium shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] outline-none transition-all duration-300 bg-(--color-search)"
                     placeholder="Enter your teamm"
                 />
 
-                <div className="mt-8 md:border  overflow-y-scroll wrapper border-gray-600 rounded-md py-5 px-4 min-h-[700px] w-full">
+                <div className="mt-8 md:border  overflow-y-scroll wrapper border(--color-border) rounded-md py-5 px-4 min-h-[700px] w-full">
                     <div className="w-full flex items-center justify-end gap-3 mb-3">
                         <input
-                            className="w-[180px] text-base md:h-[42px] h-9 md:rounded-xl rounded-lg px-5 text-gray-600 font-medium shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] outline-none transition-all duration-300"
+                            className="w-[180px] text-base md:h-[42px] h-9 md:rounded-xl rounded-lg px-5 text-(--color-text-desc) font-medium shadow-[0_4px_10px_rgba(0,0,0,0.15)] bg-(--color-search) focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] outline-none transition-all duration-300"
                             placeholder="Enter the code"
                             maxLength={8}
                             ref={joinRef}
@@ -98,7 +98,7 @@ function Team() {
                         />
                     </div>
                     {data.data.teamData.length == 0 ? (
-                        <p className="w-full text-center text-base md:text-xl italic mt-6 md:mt-8">
+                        <p className="w-full text-center text-base md:text-xl italic mt-6 md:mt-8 text-(--color-text)">
                             You haven't joined any teams
                         </p>
                     ) : (

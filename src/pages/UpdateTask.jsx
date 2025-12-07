@@ -23,6 +23,7 @@ import MessageLog from "../components/MessageLog";
 import LoadingModal from "./LoadingModal";
 import ListBox from "../components/ListBox";
 import UrlError from "./URLError";
+import { useSearchParams } from "react-router";
 const optionMap = {
     completed: { value: "completed", label: "Completed" },
     "in progress": { value: "in progress", label: "In Progress" },
@@ -30,16 +31,18 @@ const optionMap = {
 };
 
 function UpdateTask() {
-    const currentTaskID = ParamServices.getID();
+    const [searchParams] = useSearchParams();
+    const currentTaskID = Number(searchParams.get("id"));
     if (!currentTaskID || isNaN(currentTaskID)) return <UrlError /> 
     // Query lấy data task
-    const { data: task, isPending } = useQuery({
-        queryKey: [`tasks-${currentTaskID}`],
+    const { data: task, isPending , isFetching } = useQuery({
+        queryKey: [`tasks-${currentTaskID}` , currentTaskID],
         queryFn: async () => {
             const res = await TaskServices.getTaskDetail(currentTaskID);
+            console.log(res) 
             return res;
         },
-        refetchOnWindowFocus: false,
+        refetchOnWindowFocus: false 
     });
 
     const [selectedOptions, setSelectedOptions] = useState(null);
@@ -78,7 +81,7 @@ function UpdateTask() {
         editorProps: {
             attributes: {
                 class:
-                    "w-full h-[500px] border-2 overflow-y-auto rounded-md px-3 bg-slate-50 py-2 text-base border-slate-200  bg-white text-black outline-0",
+                    "w-full h-[500px] border-2 overflow-y-auto rounded-md px-3 bg-(--color-background-2) py-2 text-base border-slate-200 text-(--color-text) outline-0",
             },
         },
     });
@@ -133,7 +136,8 @@ function UpdateTask() {
         }
     }, [task]);
 
-    if (isPending || !task) return <LoadingModal />;
+    if (isPending || task === undefined) return <LoadingModal />;
+    if (isFetching) return <LoadingModal /> 
 
     return (
         <WorkingLayout>
@@ -167,7 +171,7 @@ function UpdateTask() {
                                 urgent={task.data.data.urgent}
                             />
 
-                            <p className="mt-4 mb-1 text-black">Status:</p>
+                            <p className="mt-4 mb-1 text-(--color-text)">Status:</p>
 
                             <ListBox
                                 selectedOption={selectedOptions}

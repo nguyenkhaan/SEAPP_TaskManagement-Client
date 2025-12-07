@@ -7,7 +7,7 @@ function DateInput({ value, onChange }) {
     <div className="Sample">
       <div className="Sample__container">
         <main className="Sample__container__content">
-          <label className="mr-2">Due Time:</label>
+          <label className="mr-2 text-(--color-text)">Due Time:</label>
           <DateTimePicker
             calendarAriaLabel="Toggle calendar"
             clearAriaLabel="Clear value"
@@ -18,7 +18,7 @@ function DateInput({ value, onChange }) {
             value={value}
             yearAriaLabel="Year"
             className={
-              "test-sm md:text-base outline-0 h-11 md:h-12 w-68 z-9999 border border-[#757070] bg-[#f5f8ff] font-md rounded-[10px] py-3 px-4 md:px-6"
+              "test-sm md:text-base outline-0 h-11 md:h-12 w-68 z-9999 border border-[#757070] bg-(--color-background-2) text-(--color-text) font-md rounded-[10px] py-3 px-4 md:px-6"
             }
             required={true}
             format="dd/MM/yyyy hh:mm:ss"

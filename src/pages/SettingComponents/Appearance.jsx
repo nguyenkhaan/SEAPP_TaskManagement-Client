@@ -1,22 +1,74 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import SectionSetting from './SectionSettings'
+import { motion } from 'framer-motion'
+
 function Appearance() {
+    const currentTheme = document.body.getAttribute("data-app-theme");
+
     const setDarkMode = () => {
-        document.querySelector('body').setAttribute('data-app-theme', 'dark')
-    }
+        document.body.setAttribute('data-app-theme', 'dark');
+    };
+
     const setLightMode = () => {
-        document.querySelector('body').setAttribute('data-app-theme', 'light')
-    }
+        document.body.setAttribute('data-app-theme', 'light');
+    };
+
+    const btnBase =
+        "rounded-xl font-semibold text-lg md:text-xl cursor-pointer px-10 md:px-8 py-2 md:py-3 border transition-colors";
+
     return (
-        <>
-            <SectionSetting>
-                <div className='flex items-center justify-between md:justify-start gap-8'>
-                    <button className='rounded-xl font-semibold text-lg md:text-xl cursor-pointer text-(--color-primary) md:px-8 px-10 py-2 md:py-3 text(--color-primary) border border-(--color-primary)' onClick={setLightMode}>Light</button>
-                    <button className='rounded-xl font-semibold text-lg md:text-xl text-white px-10 md:px-8 cursor-pointer py-2 md:py-3 bg-black' onClick={setDarkMode}>Dark</button>
-                </div>
-            </SectionSetting>
-        </>
-    )
+        <SectionSetting>
+            <div className="flex items-center justify-between md:justify-start gap-8">
+
+                {/* LIGHT BUTTON */}
+                <motion.button
+                    onClick={setLightMode}
+                    whileHover={{ scale: 1.08, boxShadow: "0 0 12px rgba(255,255,255,0.3)" }}
+                    whileTap={{ scale: 0.97 }}
+                    animate={
+                        currentTheme === "light"
+                            ? { scale: 1.05, boxShadow: "0 0 14px rgba(255,255,255,0.4)" }
+                            : { scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)" }
+                    }
+                    transition={{ type: "spring", stiffness: 230, damping: 18 }}
+                    className={`
+                        ${btnBase}
+                        ${
+                            currentTheme === "light"
+                                ? "bg-white text-(--color-primary) border-(--color-primary)"
+                                : "bg-white text-gray-600 border-(--color-primary)"
+                        }
+                    `}
+                >
+                    Light
+                </motion.button>
+
+                {/* DARK BUTTON */}
+                <motion.button
+                    onClick={setDarkMode}
+                    whileHover={{ scale: 1.08, boxShadow: "0 0 16px rgba(0,0,0,0.5)" }}
+                    whileTap={{ scale: 0.97 }}
+                    animate={
+                        currentTheme === "dark"
+                            ? { scale: 1.05, boxShadow: "0 0 20px rgba(0,0,0,0.7)" }
+                            : { scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)" }
+                    }
+                    transition={{ type: "spring", stiffness: 230, damping: 18 }}
+                    className={`
+                        ${btnBase}
+                        ${
+                            currentTheme === "dark"
+                                ? "bg-black text-white border-gray-600"
+                                : "bg-black text-gray-300 border-gray-600"
+                        }
+                    `}
+                >
+                    Dark
+                </motion.button>
+
+            </div>
+        </SectionSetting>
+    );
 }
-export default Appearance
+
+export default Appearance;

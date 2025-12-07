@@ -14,7 +14,7 @@ function GroupStatus({ recentCompletedTasks = [] }) {
             <div className="w-full items-center flex flex-col overflow-x-hidden gap-3 justify-start overflow-y-hidden">
                 {recentCompletedTasks.length === 0 ? (
                     <div className="w-full flex flex-col items-center justify-between gap-6">
-                        <p className="italic w-full text-center top-1/2 text-base">
+                        <p className="italic w-full text-center top-1/2 text-base text-(--color-text)">
                             🎉 You don't have anything today 🎉
                         </p>
 

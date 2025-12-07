@@ -10,7 +10,7 @@ function CompletedTask({ inProgressTasks = [] }) {
             <div className="w-full flex flex-col items-center flex-1 justify-start gap-3 overflow-y-hidden">
                 {inProgressTasks.length === 0 ? (
                     <div className="w-full flex flex-col items-center justify-between gap-6">
-                        <p className="italic w-full text-center top-1/2 text-base">
+                        <p className="italic w-full text-center top-1/2 text-base text-(--color-text)">
                         𐔌՞. .՞𐦯 You don't have any tasks in progress  𐔌՞. .՞𐦯
                         </p>
                         <Link to={"/app/teams"}>
