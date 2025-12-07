@@ -1,20 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-//Code layout o trong day 
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Landing from '../pages/Landing'
-function LandingPageLayout({
-    children 
-}) {
-    return (
-        <>
-            <Navbar />
-            <div className='min-w-full min-h-100 bg-yellow-500 mt-18'>   
-                {children}
-            </div>
-            <Footer /> 
-        </>
-    )
+import React from "react";
+import ReactDOM from "react-dom";
+//Code layout o trong day
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Landing from "../pages/Landing";
+function LandingPageLayout({ children }) {
+  return (
+    <>
+      <Navbar />
+      <main className="min-w-full min-h-100 bg-yellow-500 mt-18">
+        {children}
+      </main>
+      <Footer />
+    </>
+  );
 }
-export default LandingPageLayout
+export default LandingPageLayout;

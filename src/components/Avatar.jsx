@@ -20,7 +20,9 @@ function Avatar({
             return responseData
         },
         staleTime: 1000 * 5 * 60, 
-        gcTime: 1000 * 8 * 60 
+        gcTime: 1000 * 8 * 60 ,
+        refetchOnWindowFocus: false,
+        retry: 5
     });
 
     const queryClient = useQueryClient() 
@@ -31,7 +33,9 @@ function Avatar({
         }, 
         onSuccess: () => {
             queryClient.invalidateQueries(['user'])
-        }
+        },
+        retry: 3,
+        networkMode: "offlineFirst"
     })
 
     const handleAvatarClick = (e) => {
@@ -66,7 +70,7 @@ function Avatar({
     if (isLoading) return <></>
     return (
         <div className="inline-flex flex-col justify-start items-center">
-            <div
+            <figure
                 className={`relative bg-center bg-cover bg-no-repeat border-0 rounded-full cursor-pointer`}
                 style={{
                     backgroundImage: `url(${
@@ -84,7 +88,7 @@ function Avatar({
                     type="file"
                     ref={inp}
                 />
-            </div>
+            </figure>
             <div
                 className="top-full cursor-text w-[173px] text-base font-semibold"
                 onClick={stop}

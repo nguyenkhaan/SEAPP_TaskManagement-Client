@@ -8,7 +8,7 @@ function TaskByGroupHeader({
     teamID = '' 
 }) {
     return (
-    <div className='h-32 bg-(--color-primary) w-full flex items-center justify-start md:px-7 px-5 py-2 md:py-3 gap-4 md:gap-8'>
+    <article className='h-32 bg-(--color-primary) w-full flex items-center justify-start md:px-7 px-5 py-2 md:py-3 gap-4 md:gap-8'>
         <i class="fa-solid fa-ranking-star text-white md:text-7xl text-5xl"></i>
         <div className='inline-flex flex-col justify-between gap-3 md:gap-2 py-3 md:py-4 flex-1'>
             <Link to={`/app/view-team?id=${teamID}`}>
@@ -28,7 +28,7 @@ function TaskByGroupHeader({
         <p className='text-white max-md:hidden font-[Inter] text-base line-clamp-4 w-[250px] ml-auto'>
             {description}
         </p>
-    </div>
+    </article>
     )
 }
 export default TaskByGroupHeader

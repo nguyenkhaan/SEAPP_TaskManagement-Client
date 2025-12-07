@@ -97,6 +97,7 @@ function CreateTeam() {
                             Fill in the details below to set up your new team
                         </span>
                     </div>
+                    
                     <div className="flex items-center justify-between gap-2">
                         <Link to="/app/teams">
                             <motion.button

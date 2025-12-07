@@ -42,7 +42,7 @@ function SidebarItem({
             initial={isActive ? activeStyle : inactiveStyle}
             animate={isActive ? activeStyle : inactiveStyle} 
             whileHover={isActive ? activeStyle : isHoverStyle}
-            transition={{duration: 0.6 , ease: 'easeInOut'}}
+            transition={{duration: 0.4 , ease: 'easeInOut'}}
         >
             {icon}
             <span className='text-xl font-semibold'>{title}</span>
