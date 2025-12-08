@@ -37,7 +37,7 @@ const customerSupports = [
 ]
 export default function Footer() {
     return (
-        <footer className='w-full relative px-16 h-120 pt-18 '>
+        <footer className='w-screen relative px-16 h-120 pt-18 '>
             <div className='grid grid-cols-12 lg:pb-0 pb-5 border-b border-(--color-border)'>
                 <div className='lg:col-span-6 col-span-12 flex items-start flex-col justify-start'>
                     <Logo width={220} height={58} />
