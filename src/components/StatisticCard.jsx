@@ -6,11 +6,11 @@ function StatisticCard({
 })
 {
     return (
-        <article className='w-[302px] h-[238px] bg-(--color-secondary) rounded-2xl flex items-center justify-center gap-3 flex-col'>
+        <article className='lg:w-[302px] w-[400px] h-[238px] bg-(--color-box-item) rounded-2xl flex items-center justify-center gap-3 flex-col'>
             <h2 className='w-full text-center text-5xl text-(--color-primary) font-medium font-[Montserrat]'>
                 {title}
             </h2>
-            <span className='text-(--color-text-desc) font-[Inter] text-[20px]'>{content}</span>
+            <span className='text-(--color-text-desc) text-[20px]'>{content}</span>
         </article>
     )
 }

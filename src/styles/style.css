@@ -2,7 +2,6 @@
     cursor: pointer;
 }
 
-
 .page::after { 
   content:'';
   position: absolute;
@@ -24,7 +23,7 @@
 }
     
 .wrapper::-webkit-scrollbar-thumb {
-    background-color: #ff6766;
+    background-color: var(--color-primary);
     border-right: none;
     border-left: none;
 }
@@ -44,4 +43,68 @@
     min-height: 320px; 
     padding-left: 40px; 
     padding-right: 40px; 
+}
+
+@media screen and (max-width: 768px){
+    .task__overview {
+        width: 370px !important; 
+    }
+    .task__group {
+        width: 400px !important
+    }
+}
+.react-datetime-picker__wrapper {
+    border: 0 !important; 
+}
+.react-date-picker__wrapper {
+    border: 0 !important; 
+}
+.react-confirm-alert-overlay {
+    background-color: rgba(0,0,0,0.8) !important; 
+}
+.react-confirm-alert-button-group > button {
+    background: var(--color-primary) !important; 
+    font-size: 16px !important; 
+    font-weight: 700;
+}
+.react-confirm-alert-body {
+    color: black !important; 
+}
+
+.nice-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  
+    background-color: #fff;
+    color: #333;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+    outline: none;
+    width: 150px;
+  
+  }
+  
+  .nice-select:hover {
+    border-color: #888;
+  }
+  
+  .nice-select:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+  }
+  
+  [data-app-theme="dark"] .login-left-content {
+    background: var(--color-background-2) !important;
+}
+[data-app-theme="dark"] .register-right-content {
+    background: var(--color-background-2) !important;
+}
+
+[data-app-theme="dark"] .avatar-info {
+    color: white; 
 }

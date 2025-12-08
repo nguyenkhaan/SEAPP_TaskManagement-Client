@@ -1,71 +1,228 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { Link } from "react-router";
+import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useGoogleOneTapLogin } from "@react-oauth/google";
+import api from "../../api/api";
 import Input from "../../components/Input";
-import CTA from '../../components/CTA';
+import CTA from "../../components/CTA";
 import Logo from "../../components/Logo";
 import { Checkbox } from "@mui/material";
-
-function handleLogin()
-{
-
-}
-
+import { loginGoogleSuccess } from "../../services/loginGoogle";
+import Spinner from "../../components/Spinner";
+import LoadingHandle from "../../services/loadingHandle";
+import MessageLog from "../../components/MessageLog";
+import Cookies from "js-cookie";
+import checkLogin from "../../services/checkLogin";
 export default function RightContent() {
+    const formHandleMethod = useForm({
+        mode: "onSubmit",
+        criteriaMode: "all",
+        reValidateMode: "onBlur",
+    });
 
-  const formHandleMethod = useForm({
-    mode: 'onChange', 
-    criteriaMode: 'all', 
-    reValidateMode: "onBlur", 
-  })
-  const {register , handleSubmit , formState : { errors }} = formHandleMethod 
-  //Data submit 
-  const onSubmit = (data) => {
-    const {Email , Password} = data //Du lieu tra ve 
-  }
-
-  return (
-    <div className="box-border h-full w-full bg-white px-[100px] pt-[72px]">
-      {/* introduction */}
-      <div className="font-[Montserrat] leading-tight w-full">
-        <Logo/>
-        <p className="text-(--color-text-desc) font-medium">
-          Welcome back! Please sign in to continue
-        </p>
-      </div>
-
-      {/* input */}
-      <form className="mt-10 gap-4" onSubmit={handleSubmit(onSubmit)} >
-        {/* email */}
-        <Input title="Email Address" formType='Email' formHandleMethod={formHandleMethod} validation={true} />
-        {/* password */}
-        <div className="my-4">
-          <Input title="Password" type="password" formType='Password' formHandleMethod={formHandleMethod} validation={true}/>
-        </div>
-
-        <div className="flex items-center text-(--color-primary) font-[Inter] font-medium">
-          <Checkbox />
-          <p className="text-(--color-text)">Remember me</p>
-          <a className="ml-auto">Forgot password?</a>
-        </div>
-        <CTA title='Login' type='submit' />
-      </form>
-
-      {/* login */}
-      <div className="mt-5">
+    const [isLoading, setIsLoading] = useState(false); //Bien isLoading
+    const [showLog, setShowLog] = useState(0); //Bien dung de nhay messageLog, ban dau ca 2 deu dat la false vi khong co gi de tai
+    const [isLogin, setIsLogin] = useState(false);
+    const navigate = useNavigate();
+    const {
+        handleSubmit,
+        formState: { errors },
+    } = formHandleMethod;
+    //Data submit
+    const onSubmit = async (data) => {
+        if (checkLogin()) {
+            alert("Vui lòng đăng xuất trước khi sử dụng dịch vụ");
+            return;
+        }
+        try {
+            const { Email, Password } = data; //Du lieu tra ve
+            setIsLoading(true) 
+            console.log("Email:", Email, "Password:", Password)
+            const responseData = await api.post("/auth/login", {
+                email: Email,
+                password: Password,
+            }) 
+            // console.log(responseData.data.tokens.access_token) 
+            setShowLog(1) //Bao hieu viec dang nhap da thanh cong 
+            Cookies.set('user' , responseData.data.tokens.access_token , {
+                secure: true, 
+                expires: 7 
+            })
+            setIsLoading(false) 
+            setIsLogin(true)
+        }
+        catch (error) {
+            setShowLog(-1);
+            setIsLoading(false); //Bao hieu khong can tai nua
+            if (error.response?.status == 400) console.log("Bad Request");
+            if (error.response?.status == 401)
+                console.log("Unauthorized");
+            if (error.response?.status == 403) console.log("Forbidden");
+            if (error.response?.status == 500)
+                console.log("Loi server")
+        }
         
-        <p className="text-(--color-text) mt-4 text-center">Don't have an account? <a href="/" className="text-(--color-primary) font-medium">Sign Up</a></p>
-        <div className="flex mt-6 items-center">
-          <div className="flex-2 border border-(--color-text-desc) h-px" />
-          <p className="flex-1 text-(--color-text) text-center text-[18px]"> OR </p>
-          <div className="flex-2 border border-(--color-text-desc) h-px" />
-        </div>
+    };
 
-        <div className="mt-6">
-          <CTA title="Continue with Google" backgroundColor="White" color="#403D3D" border="true" icon="google" />
-        </div>
-      </div>
+    const login = useGoogleLogin({
+        //Tao them code de ngan chan nguoi khac login them tai khoan vao
+        onSuccess: async (tokenResponse) => {
+            if (checkLogin()) {
+                alert("Vui lòng đăng xuất trước khi sử dụng lại dịch vụ");
+                return;
+            }
+            setIsLoading(true);
+            try {
+                setIsLoading(true);
+                const responseData = await loginGoogleSuccess(tokenResponse);
+                console.log("responseData", responseData) 
+                // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
+                setShowLog(true); //Tien hanh in ra Log message
+                console.log("Token response from data",responseData.data.token)
+                Cookies.set("user", responseData.data.token, {
+                    secure: true,
+                    expires: 7,
+                }); //Tien hanh luu JWT token vao trong storage
+                // console.log("Da luu token vao trong storage");
 
-    </div>
-  );
+                
+                setIsLogin(true);
+            } catch (error) {
+                setShowLog(-1);
+                if (error.response?.status == 400) console.log("Bad Request");
+                if (error.response?.status == 401)
+                    console.log("Unauthorized");
+                if (error.response?.status == 403) console.log("Forbidden");
+            }
+            finally{
+                setIsLoading(false);
+            }
+        },
+        onError: (error) => {
+            setShowLog(-1);
+            setIsLoading(false);
+        },
+        flow: "auth-code",
+        scope: "openid email profile",
+    });
+    useEffect(() => {
+        if (isLogin) {
+            const timeOutID = setTimeout(() => {
+                navigate("/app/dashboard");
+            }, 4000); //Chuyen dia diem sau 4000s
+            return () => clearTimeout(timeOutID);
+        }
+    }, [isLogin]);
+
+
+
+    return (
+        <div className="box-border h-full w-full bg-(--color-background-1) relative px-6 md:px-[100px] pb-10 pt-15 md:pt-[72px]">
+            {/* Link to go back */}
+            <Link to={"/"}>
+                <span className="absolute top-6 right-8 md:top-10 md:right-10 text-lg md:text-xl text-(--color-primary) underline font-medium">
+                    Go back
+                </span>
+            </Link>
+
+            {/* <LoadingHandle
+                isLoading={isLoading}
+                loadingComponent={
+                    <Spinner
+                        isLoading={false}
+                        position={{ top: "740px", left: "50%" }}
+                        height={60}
+                    />
+                }
+                finishComponent={
+      
+                }
+            /> */}
+
+            {/* introduction */}
+            <div className="font-[Montserrat] leading-tight w-full">
+                <Logo />
+                <p className="text-(--color-text-desc) font-medium">
+                    Welcome back! Please sign in to continue
+                </p>
+            </div>
+
+            {/* input */}
+            <form className="mt-10 gap-4" onSubmit={handleSubmit(onSubmit)}>
+                {/* email */}
+                <Input
+                    title="Email Address"
+                    formType="Email"
+                    formHandleMethod={formHandleMethod}
+                    validation={true}
+                />
+                {/* password */}
+                <div className="my-4">
+                    <Input
+                        title="Password"
+                        type="password"
+                        formType="Password"
+                        formHandleMethod={formHandleMethod}
+                        validation={true}
+                    />
+                </div>
+
+                <div className="flex items-center text-(--color-text) font-[Inter] font-medium mb-5">
+                    <Checkbox style={{color: 'var(--color-text)'}}/>
+                    <p className="text-(--color-text)">Remember me</p>
+                   
+                        <Link className="ml-auto cursor-pointer hover:underline" to={'/forgot-password'}>Forgot password?</Link>
+                    
+                </div>
+                <CTA title="Login" type="submit" backgroundColor="var(--color-primary)" />
+            </form>
+
+            {/* login */}
+            <div className="mt-5">
+                <p className="text-(--color-text) mt-4 text-center">
+                    Don't have an account?{" "}
+                    <Link
+                        to="/register"
+                        className="text-(--color-primary) font-medium">
+                        Sign Up
+                    </Link>
+                </p>
+                <div className="flex mt-6 items-center">
+                    <div className="flex-2 border border-(--color-text-desc) h-px" />
+                    <p className="flex-1 text-(--color-text) text-center text-[18px]">
+                        {" "}
+                        OR{" "}
+                    </p>
+                    <div className="flex-2 border border-(--color-text-desc) h-px" />
+                </div>
+
+                <div className="mt-6">
+                    <CTA
+                        title="Continue with Google"
+                        backgroundColor="White"
+                        color="#403D3D"
+                        border="true"
+                        icon="google"
+                        action={() => login()}
+                    />
+                </div>
+            </div>
+            <div className="fixed top-1/2 right-1/2">
+                <Spinner isLoading={isLoading} />
+            </div>
+            <MessageLog
+                showLog={showLog}
+                setShowLog={setShowLog}
+                message={
+                    showLog == -1
+                        ? "Đăng nhập thất bại"
+                        : "Đăng nhập thành công"
+                }
+            />
+        </div>
+    );
 }

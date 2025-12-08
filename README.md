@@ -1,104 +1,134 @@
-# TỔNG QUAN DỰ ÁN 
-## 1. Cấu trúc thư mục 
-# 🗂️ Cấu trúc thư mục dự án React
+# **NOTASK WEBSITE**
 
-```md
-project/
-├── index.html               # 🔹 File HTML chính
-├── src/                     # 📁 Thư mục chứa mã nguồn
-│   ├── assets/              # 🖼️ Hình ảnh, logo, icon tĩnh của UI
-│   ├── components/          # ⚙️ Component tái sử dụng, chia theo loại (button, card, menu,...)
-│   ├── hooks/               # 🪝 Custom hooks
-│   ├── layouts/             # 🧩 Các layout component (vd: Header + Footer bọc quanh các trang)
-│   ├── lib/                 # 📚 Cấu hình / dữ liệu cần khi sử dụng thư viện ngoài
-│   ├── pages/               # 🖥️ Code riêng cho từng trang (home, dashboard, blog,...)
-│   │   └── components/      # 🔸 Component chỉ dùng trong trang cụ thể
-│   ├── router/              # 🗺️ Cấu hình React Router
-│   ├── services/            # 🔌 Hàm giao tiếp với server (API service)
-│   ├── styles/              # 🎨 File CSS / SCSS / Tailwind config
-│   └── utils/               # 🧮 Các hàm tiện ích (pure function)
+---
+
+<p align="center">
+   <a href="https://nextjs.org/">
+   <img alt="Static Badge" src="https://img.shields.io/badge/reactjs-20-%2361DBFB?style=for-the-badge&logo=react">
+   </a>
+   <a> 
+   <img alt="Static Badge" src="https://img.shields.io/badge/tailwindcss-4-blue?style=for-the-badge&logo=tailwindcss&logoColor=blue">
+   </a>
+    <a> 
+    <img alt="Static Badge" src="https://img.shields.io/badge/ReactQuery-Latest-%23FF4154?style=for-the-badge&logo=reactquery&logoColor=%23FF4154">
+   </a>
+   <img alt="Static Badge" src="https://img.shields.io/badge/python-3-%233776AB?style=for-the-badge&logo=python&logoColor=%233776AB">
+   </a>
+   <a href="https://nextjs.org/">
+   <img alt="Static Badge" src="https://img.shields.io/badge/flask-3.1.2-%23646464?style=for-the-badge&logo=flask&logoColor=%23646464">
+   </a>
+   <a href="https://nextjs.org/">
+   <img alt="Static Badge" src="https://img.shields.io/badge/sqlalchemy-3.1.1-green?style=for-the-badge&logo=sqlalchemy&logoColor=green">
+   </a>
+   <a href="https://nextjs.org/">
+   <img alt="Static Badge" src="https://img.shields.io/badge/mysql-8.4-%23F29111?style=for-the-badge&logo=mysql">
+   </a>
+   <a> 
+   <img alt="Static Badge" src="https://img.shields.io/badge/googleoauth-2-%23EA4335?style=for-the-badge&logo=googleauthenticator&logoColor=%23EA4335">
+   </a>
+   <a> 
+   <img alt="Static Badge" src="https://img.shields.io/badge/Github-latest-%23181717?style=for-the-badge&logo=GitHub&logoColor=%23181717">
+   </a>
+   <a> 
+   <img alt="Static Badge" src="https://img.shields.io/badge/Docker-ready-%232496ED?style=for-the-badge&logo=Docker&logoColor=%232496ED">
+   </a>
+      <a> 
+<img alt="Static Badge" src="https://img.shields.io/badge/Axios-Latest-%235A29E4?style=for-the-badge&logo=axios&logoColor=%235A29E4">
+
+   </a>
+</p>
+
+
+
+Welcome to the NoTask website. With features like team creation, seamless member onboarding, shared task boards, and real-time progress tracking, the platform ensures every project flows smoothly from start to finish. Whether you're managing a small group or coordinating across multiple teams, our system provides a clear and efficient way to assign tasks, monitor workloads, and work together toward common goals. Built for speed, simplicity, and teamwork — this is where productivity begins.
+
+---
+## 🏠 Features 
+- **Login/Register**: Securely authenticate or create a new account via your email to access platform
+- **Change Pasword, Email**: Update your account credentials and contact information with ease
+- **Create Team**: Form a new team and invite members to collaborate on shared tasks 
+- **Team Work**: Manage team members, assign roles, and track progress across group activities.
+- **Create Task**: Add new tasks with details, deadlines, and assignees to keep work organized.
+- **Update Task**: Update your deadline, tasks detail with ease 
+- **Update Profile**: Customize your personal information, avatar, and user settings.
+- **Dark Theme**: Dark theme provided 
+
+## 🚀 Quick start 
+### 1. Clone & Install 
+```bash 
+# Clone Front-end Repository 
+git clone https://github.com/RinWasBusted/SEAPP_TaskManagement-Client
+# Clone Back-end Repository 
+git clone https://github.com/RinWasBusted/SEAPP_TaskManagement-Server-
+```
+### 2. API Integration 
+- Create a local `.ENV` files in the root project for public API Keys 
+- Please [Contact](https://www.facebook.com/kha.an.907155) for more informations. 
+
+### 3. Docker  
+- Build and run with Docker Compose up 
+```bash
+docker compose up -d  
+```
+- **Note**: You must end process in port 3306 first. 
+```bash
+# See the PID 
+sudo lsof -i:3306 
+# End the process 
+sudo kill PID  
+```
+### 4. Dependencies 
+- Back-end 
+```bash 
+# Create a new virtual environment
+python -m venv env/
+
+# Activate the virtual environment
+source env/bin/activate
+
+# Install all required dependencies
+pip install -r requirements.txt
 ```
 
-## 2. Khởi động dự án 
-- Chạy lệnh `npm run dev`
-
-## 5. Note trong quá trình làm 
-### 5.1. 
-Chỉnh sửa lại bố cục của thẻ body và thẻ root (Nếu khởi tạo theo cách này thì thẻ root mặc định căn giữa, nền thẻ body màu đen...). Vào file `App.css` và `index.css` để chỉnh sửa 
-### 5.1. Gói hỗ trợ làm biểu đồ
-`npm install @mui/x-charts`
-### 5.2. Làm cho phần viền tràn landing page 
-``
-### 5.3. File layout 
-- Layout là file để các page có thể sử dụng trong trường gợp 1 cấu trúc dược tái sử dụng nhiều lần 
-
-Cách làm file layout: 
-- Tạo một file layout.jsx, hàm đó nhận vào 1 tham số chilren chính là page mà ta muốn hiển thị 
-```js
-function Layout({children}) 
-{
-    return (
-        <Navbar /> 
-            {children} 
-        <Footer />
-    )
-}
+- Front-end 
+```bash 
+# Install all required dependencies 
+npm -f install 
 ```
-
-- Sau này nếu page nào muốn dùng layout này thì ta gọi Layout và truyền children vào 
-
-```js 
-<Layout>
-    {component....} 
-<Layout />
+### 5. Development 
+- Back-end 
+```bash
+python -m main.py  
 ```
-
-
-
-### 5.4. Cách làm lightmode và darkmode 
-B1. Tải cái toggle Button về và viết thêm hàm. Khi button đổi thì set Attribute trong thẻ body lại thành light. Khi button 
-tắt thì set Settribute trong thẻ body lại thành dark 
-
-
-```css
-.for_light_theme {
-  --primary-color: #302ae6; 
-  --secondary-color: #536390; 
-  --font-color: #424242; 
-  --bg-color: #fff; 
-  --heading-color: #292922; 
-}
-.for_dark_theme {
-  --primary-color: #9a97f3; 
-  --secondary-color: #818cab; 
-  --font-color: #e1e1ff; 
-  --bg-color: #161625; 
-  --heading-color: #818cab; 
-}
+- Front-end 
+```bash
+npm run dev  
 ```
+### 6. Production 
+- You can visit [this website](http://localhost:5173) 
+## 🧩 Main Technologies 
+### 1. Front-end
+- **Javascript - Typescript** & logic resolve
+- **ReactJS 20** (UI, App Router, SPA)
+- **TailwindCSS 4.0** & custom design system
+- **React Query** & call API and caching 
+- **NPM** & animated, effects and toast feedback, 
+### 2. Back-end 
+- **Python** & logic back-end 
+- **Flask** (Build Server)
+- **Google OAuth** & login, register, session 
+- **JWT Token** & authentication/authorization  
+- **Mariadb** & database 
+### 3. Tools 
+- **Github** & Version management 
+- **Docker** & Docker Compose ready 
+- **Redis** & Server Caching 
 
-### 5.5. Nguyên tắc viết path tối ưu cho trang web  
+## 📄 Contact 
+- Dowload Inforgraphic:
+- Contact: Footer includes GitHub, LinkedIn, Email, Discord, Facebook links
+## 📝 License 
 
-**Về hình thức:** 
+MIT License. See [LICENSE.md](./LICENSE.md).
 
-#### 1. URL ngắn nhưng đầy đủ ngữ nghĩa 
-- URL càng dài thì Google càng hạn chế đọc      
-**Ví dụ**: /category/12345/product?id=67890 
-
-- URL cần đẩy đù, ngắn gọn và tự nhiên như cách người dùng tìm kiếm   
-**Ví dụ**: /hoc-react-co-ban 
-#### 2. Dùng dấu gạch -, tránh _ 
-- Nên tránh dấu _, cùng với các kí tự encode dài dòng: %20, &ref=abc...  
-- Hạn chế sử dụng các kí tự id vô nghĩa nếu không cần thiết 
-#### 3. Giữ URL đủ sâu ổn định 
-- Không nên để đường dẫn sâu quá, nên giữ ổn định 2 - 3 cấp  
-- Đừng để 1 nội dung mà có 2 - 3 đường dẫn khác nhau. Ví dụ: /dien-thoai/iphone-13 và /mobile/inphone-13 sẽ làm google hiểu thành duplicate 
-#### 4. Dùng chữ thường 
-
-**Về hệ thống** 
-
-- Không để lộ cấu trúc hệ thống qua URL  
-**Ví dụ**: `/index.php?page=product&id=123` (NOT)
-`/san-pham/ban-phim-co-akko-3098` (GOOD)
-
-- Không để thông tin người dùng (Ví dụ id, email) ngay trên thanh địa chỉ 
+---

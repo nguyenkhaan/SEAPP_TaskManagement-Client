@@ -1,32 +1,111 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from "react";
+
 function GroupCard({
-    title = 'Default title Default title Default title Default title Default title',
-    content = 'Hoc xac suat thong ke diiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii dadf', 
-    icon = <i class="fa-solid fa-bicycle"></i>
+    groupTitle = "Default title Default title Default title Default title Default title",
+    groupDesc = "Hoc xac suat thong ke diiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii dadf",
+    icon = <i className="fa-solid fa-bicycle"></i>,
 }) {
     return (
-        <article className=' border border-[#A8A8A8] bg-(--color-primary) relative rounded-2xl overflow-hidden w-[301px] h-[223px]'>
-            <div className='bg-white absolute flex flex-col items-start justify-between text-black w-full py-6 px-4 h-[162px] left-0 bottom-0'>
-                <div className='w-full'>
-                    <h2 className='text-black font-medium line-clamp-2 text-[18px] font-[Montserrat]'>{title}</h2>
-                    <span className='line-clamp-3 text-[11px] leading-tight my-1 text-(--color-text-desc)'>{content}</span>
+        <article
+            className="
+            border border-[#A8A8A8] bg-(--color-secondary)
+            rounded-2xl overflow-hidden w-full
+            hover:shadow-lg cursor-pointer
+            flex flex-col
+            md:h-[223px] h-[200px]
+        "
+        >
+            <div
+                className="
+                relative
+                md:h-[70px] h-[60px]
+                flex items-center pl-4
+            "
+            >
+                <div className="
+                    absolute top-0 left-0 w-full 
+                    h-1/2 
+                    bg-(--color-secondary)
+                    z-0
+                "></div>
+                <div className="
+                    absolute bottom-0 left-0 w-full 
+                    h-1/2 
+                    bg-(--color-block-item-2)
+                    z-0
+                "></div>
+                <div
+                    className="
+                    md:size-[48px] size-[34px]
+                    md:text-xl text-base
+                    text-red-500 bg-white shadow-md
+                    flex items-center justify-center
+                    md:rounded-xl rounded-md
+                    z-10
+                "
+                >
+                    {icon}
                 </div>
-                <ul className='text-[12px] bottom-2 px-4 left-0 absolute border-t border-t-gray-500 pt-2 w-full text-(--color-text-desc) flex items-center justify-between'>
+                <div
+                    className="
+                    absolute left-0 w-full
+                    top-1/2 -translate-y-1/2
+                    h-[2px] bg-gray-300
+                    z-0
+                "
+                ></div>
+            </div>
+            <div
+                className="
+                bg-(--color-block-item-2)
+                text-black
+                flex flex-col justify-between
+                md:px-4 px-2 py-0
+                flex-1
+            "
+            >
+                <div>
+                    <h2
+                        className="
+                        text-(--color-text) font-medium line-clamp-2
+                        md:text-[18px] text-[14px] font-[Montserrat]
+                    "
+                    >
+                        {groupTitle}
+                    </h2>
+
+                    <p
+                        className="
+                        md:line-clamp-2 line-clamp-3
+                        md:text-[12px] text-[10px] leading-tight my-1
+                        text-(--color-text-desc)
+                    "
+                    >
+                        {groupDesc}
+                    </p>
+                </div>
+
+                <ul
+                    className="
+                    border-t border-t-gray-400 pt-2
+                    flex items-center justify-between
+                    md:text-[12px] text-[10px]
+                    text-(--color-text-desc)
+                    pb-2
+                "
+                >
                     <li>
-                        <i class="fa-regular fa-user mr-1 font-medium"></i>
+                        <i className="fa-regular fa-user mr-1"></i>
                         Team leader
                     </li>
                     <li>
-                        <i class="fa-regular fa-calendar mr-1 font-medium"></i>
-                        Created At
+                        <i className="fa-regular fa-user mr-1"></i>
+                        Team member
                     </li>
                 </ul>
             </div>
-            <div className='bg-white z-10 absolute size-[54px] rounded-xl top-6 left-5 shadow-md text-red-500 flex items-center justify-center text-2xl'>
-                {icon}
-            </div>
         </article>
-    )
+    );
 }
-export default GroupCard
+
+export default GroupCard;

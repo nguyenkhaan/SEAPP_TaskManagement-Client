@@ -18,4 +18,7 @@ const getCurrentDate = () => {
         weekDay: stringWeekDay(date.getDay()) 
     }
 } 
+const getDate = (date) => {
+    
+}
 export {getCurrentDate}

@@ -1,24 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 function GroupStastic({
-    stasticNumber = 7, 
-    title = 'My Teams', 
-    Color = '' 
-})
-{
+    stasticNumber = 7,
+    title = 'My Teams',
+    Color = ''
+}) {
     return (
-        <article 
-            className={`relative w-[301px] h-[147px] py-7 px-6 border rounded-[23px] border-[#B3B3B3]`}
-            style={{color: Color}}
-            >
-            <h2 className={`font-medium text-[20px]  font-[Montserrat] text-black`}>{title}</h2>
-            <span className='text-[48px]  font-medium font-[Inter]'>{stasticNumber}</span>
-            <div 
-                className={`absolute w-[31px] h-[31px] flex items-center justify-center text-sm rounded-2xl top-12 left-[252px]`}
-                style={{backgroundColor: Color}}
-            >
-                <i class="fa-brands fa-teamspeak text-white"></i>
+        <article
+            className={`relative xl:w-[301px] lg:w-[336px] w-[280px] xl:h-[147px] md:h-[140px] h-[120px] md:py-5 py-3 md:px-6 px-4 border rounded-[23px] border-[#B3B3B3] max-md:flex max-md:flex-col max-md:items-start max-md:justify-between`}
+            style={{ color: Color }}
+        >
+            <div className='flex items-center justify-between h-[42px] shrink-0'>
+                <h2 className={`font-medium md:text-[18px] text-base font-[Montserrat] text-(--color-text)`}>{title}</h2>
+                <div
+                    className={` w-9 h-9 md:flex items-center justify-center text-sm rounded-full top-12 hidden`}
+                    style={{ backgroundColor: Color }}
+                >
+                    <i class="fa-brands fa-teamspeak text-white"></i>
+                </div>
             </div>
+                <span className='md:text-[48px] flex-1 text-[38px] font-medium'>{stasticNumber}</span>
         </article>
     )
 }

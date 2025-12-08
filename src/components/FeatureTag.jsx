@@ -9,12 +9,12 @@ export default function FeatureTag({
 {
     return (
         <div className="flex items-center gap-5 mt-8">
-            <div className="bg-[#FF8F8F] size-14 rounded-xl flex items-center justify-center p-3">
+            <div className="bg-(--color-block-item) size-14 rounded-xl flex items-center justify-center p-3">
                 <i className={`${fontawesome} text-[30px] text-white`}></i>
             </div>
             <div className="flex flex-col">
-                <h2 className="font-[Montserrat] text-[28px]">{title}</h2>
-                <p className="text-[16px] -mt-1">{desc}</p>
+                <h2 className="font-[Montserrat] font-medium text-[24px]">{title}</h2>
+                <p className="text-[14px] -mt-1">{desc}</p>
             </div>
         </div>
     );
