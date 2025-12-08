@@ -4,7 +4,20 @@ import HeaderPhase from "../../components/HeaderPhase";
 import FeatureCard from "../../components/FeatureCard";
 import { div } from "framer-motion/client";
 import AOS from 'aos'
-
+const featureCards = [
+  {
+    title: 'Task Management', 
+    featureContent: 'Create, organize, and track tasks with ease. Set Priorities, deadlines, and custom categories'
+  }, 
+  {
+      title: 'Team Collaboration',
+      featureContent: 'Work seamlessly with your team. Assign tasks, review progress, and stay aligned through real-time updates.'
+  },
+  {
+      title: 'Smart Notifications',
+      featureContent: 'Get instant alerts for upcoming deadlines, task updates, and team activities to ensure nothing is missed.'
+  }
+]
 function FeatureSection() {
   const featureItems = Array.from({ length: 6 }, (_, i) => ({ id: i }));
 
@@ -30,7 +43,11 @@ function FeatureSection() {
             className={`col-span-12 md:col-span-6 lg:col-span-4 flex justify-center lg:justify-center ${item.id % 2 == 1 ? 'md:justify-start' : 'md:justify-end'}`}
           >
             <div className="w-full lg:max-w-[404px] md:max-w-[300px] h-auto flex justify-center">
-              <FeatureCard />
+              {
+                featureCards.map((card) => {
+                  return <FeatureCard title={card.title} featureContent={card.featureContent} /> 
+                })
+              }
             </div>
           </div>
         ))}

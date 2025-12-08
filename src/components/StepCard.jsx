@@ -20,7 +20,7 @@ function StepCard({
       
       ></div>
       <div className="p-3 bg-white flex-1 flex items-start justify-start pt-15 gap-2 flex-col">
-        <h2 className="text-[32px] font-medium w-full text-(--color-text) text-left font-[Montserrat]">
+        <h2 className="text-[32px] font-medium w-full text-black text-left font-[Montserrat]">
           {title}
         </h2>
         <p className="text-left xl:w-[380px] lg:w-[320px] font-normal text-2xl text-gray-600 line-clamp-4">
