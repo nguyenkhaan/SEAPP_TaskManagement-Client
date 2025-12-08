@@ -7,7 +7,7 @@ function Section1SmallBlock({
 }) {
     return (
         <li className='flex-1 flex flex-col text-center text-(--color-text) items-center justify-center px-3'>
-            <h3 className='text-2xl mb-2'>{analysis}</h3>
+            <h3 className='text-xl lg:text-2xl mb-2'>{analysis}</h3>
             <span className='text-base'>{title}</span>
         </li>
     )

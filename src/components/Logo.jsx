@@ -6,7 +6,7 @@ function Logo({
     width = 160, height = 28
 }) {
     return (
-        <Link to={'/'} className='cursor-pointer font-bold md:text-[40px] sm:text-[30px] text-[20px]'>
+        <Link to={'/'} className='cursor-pointer font-bold md:text-[42px] sm:text-[36px] text-[30px]'>
             <span className='text-[#FF6767]'>No</span>
             <span className='text-(--color-text)'>Task</span>
         </Link>

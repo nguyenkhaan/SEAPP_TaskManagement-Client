@@ -19,7 +19,7 @@ const aboutUs = [
 ]
 const customerSupports = [
     {
-        name: 'Help Center/Support', 
+        name: 'Help Center', 
         url: ''
     }, 
     {
@@ -41,7 +41,7 @@ export default function Footer() {
             <div className='grid grid-cols-12 lg:pb-0 pb-5 border-b border-(--color-border)'>
                 <div className='lg:col-span-6 col-span-12 flex items-start flex-col justify-start'>
                     <Logo width={220} height={58} />
-                    <p className='w-[440px] text-xl lg:h-[168px] h-[100px] text-(--color-text-desc)'>The ultimate task management solution for modern teams.</p>
+                    <p className='w-[440px] text-base md:text-lg xl:text-xl lg:h-[168px] h-[100px] text-(--color-text-desc)'>The ultimate task management solution for modern teams.</p>
                 </div>
                 <div className='lg:col-span-2 col-span-4'>
                     <FooterList
@@ -56,7 +56,7 @@ export default function Footer() {
                      />
                 </div>
                 <div className='lg:col-span-2 col-span-4 flex flex-col gap-3 items-start'>
-                    <span className='text-(--color-text) lg:text-2xl text-xl mb-1 font-medium'>Change theme</span>
+                    <span className='text-(--color-text) lg:text-2xl text-base md:text-lg mb-1 font-medium'>Change theme</span>
                     <DarkMode />
                 </div>
             </div>

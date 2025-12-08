@@ -9,10 +9,10 @@ export default function FeatureCard({
       <div className="w-13 h-13 bg-(--color-primary) text-white text-base rounded-2xl flex items-center justify-center">
         <i class="fa-solid fa-cloud-showers-water"></i>
       </div>
-      <h3 className="text-(--color-text) font-medium text-2xl font-[Montserrat]">
+      <h3 className="text-(--color-text) font-medium text-base md:text-xl xl:text-2xl font-[Montserrat]">
         {title}
       </h3>
-      <p className="text-[20px] text-wrap w-full text-(--color-text-desc) text-left ">
+      <p className="text-base md:text-[20px] text-wrap w-full text-(--color-text-desc) text-left ">
         {featureContent}
       </p>
     </article>

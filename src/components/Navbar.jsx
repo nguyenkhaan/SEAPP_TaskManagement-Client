@@ -57,7 +57,7 @@ function Navbar() {
         >
             <Logo />
 
-            <div className="min-h-20 flex lg:text-[22px] md:text-[18px] text-[16px] items-center font-medium text-(--color-text) lg:gap-3 md:gap-2 gap-1">
+            <div className="min-h-20 flex 2xl:text-2xl lg:text-[22px] md:text-[20px] text-sm items-center font-medium text-(--color-text) lg:gap-3 md:gap-2 gap-1">
                 
                 {/* --- SIGN OUT / SIGN UP --- */}
                 {isLogin ? (
