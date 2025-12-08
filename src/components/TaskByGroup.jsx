@@ -42,6 +42,7 @@ function TaskByGroup({
                                 status={task.status}
                                 taskID={task.taskId}
                                 dueTime={task.dueTime}
+                                saved={-1}
                             />
                         );
                     })) 

@@ -19,7 +19,7 @@ export default function MyDatePicker() {
             onChange={onChange}
             value={value}
             yearAriaLabel="Year"
-            className={'test-sm md:text-[18px] outline-0 h-10 md:h-12 w-full text-(--color-text) border border-[#757070] bg-(--color-block-item-2) font-md rounded-[10px] py-3 px-3 md:px-5'}
+            className={'test-sm md:text-[18px] outline-0 h-10 md:h-12 w-full text-(--color-text-desc) border border-[#757070] bg-(--color-block-item-2) font-md rounded-[10px] py-3 px-3 md:px-5'}
             
 
           />

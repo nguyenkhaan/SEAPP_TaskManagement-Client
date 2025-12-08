@@ -70,7 +70,7 @@ function ImageUpload({ hooks }: IObj) {
         backgroundImage: `url(${previewImage})`,
       }}
     >
-      {props || <span className="m-auto text-base md:text-lg text-(--color-text)">Click here to upload</span>}
+      {props || <span className="m-auto text-base md:text-lg text-(--color-text) text-center">Click here to upload</span>}
       <input
         type="file"
         className="invisible w-0 h-0"

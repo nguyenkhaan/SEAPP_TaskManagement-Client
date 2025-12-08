@@ -181,5 +181,44 @@ class TaskServices {
             throw err;
         }
     }
+    static async saveTask(teamID , taskID) 
+    {
+        const token = this.getUserToken() 
+        try {
+            const responseData = await api.post('/tasks/save/user' , {
+                task_id: taskID, 
+                team_id: teamID 
+            } , {
+                headers: {
+                    Authorization : `Bearer ${token}`
+                }
+            })
+            return responseData
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    }
+    static async unSaveTask(taskID) 
+    {
+        const token = this.getUserToken() 
+        try {
+            const responseData = await api.delete('/tasks/save/user' , {
+                data: {
+                    task_id : taskID 
+                },
+                headers: {
+                    'Authorization' : `Bearer ${token}`, 
+                    'Content-Type' : "application/x-www-form-urlencoded",
+                }
+            })
+            return responseData
+        } 
+        catch (err) {
+            console.log(err) 
+            throw err 
+        }
+    }
 }
 export default TaskServices;

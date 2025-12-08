@@ -78,7 +78,7 @@ function ViewTask() {
 
     return (
         <WorkingLayout>
-            <div className="w-full h-[920px] md:border p-6 pt-14 rounded-xl border-gray-500 mb-10">
+            <div className="w-full h-[920px] md:border p-6 pt-14 rounded-xl border-gray-500 mb-12">
                 <Link to={`/app/view-team?id=${data.teamId}`}>
                     <span
                         className="absolute cursor-pointer top-12 md:top-5 right-10 text-lg text-(--color-primary) underline font-semibold"
@@ -123,7 +123,7 @@ function ViewTask() {
                         __html: purify(data.data.description),
                     }}></div>
 
-                <div className="w-full mt-5 flex justify-end gap-4 font-semibold text-white">
+                <div className="w-full mt-5 items-center h-6 flex justify-end gap-4 font-semibold text-white">
                     <Link to={`/app/update-task?id=${currentTaskID}`}>
                         <div
                             className="w-9 h-9 cursor-pointer bg-(--color-primary) rounded-lg flex items-center justify-center"

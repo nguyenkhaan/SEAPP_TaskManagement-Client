@@ -296,7 +296,7 @@ function ViewTeam({
 
                 {/* Hien thi so va nut tao task  */}
                 <div className="w-full mt-5 rounded-md shadow-lg bg-(--color-box-item) p-6 gap-4 flex md:flex-row flex-col md:items-center items-end md:justify-between justify-center md:h-15 h-30">
-                    <ul className="flex flex-2 max-md:w-full items-center justify-start gap-5 xl:gap-16 font-md md:text-lg text-base">
+                    <ul className="flex flex-2 max-md:w-full items-center justify-start gap-5 xl:gap-13 font-md md:text-lg text-base">
                         <li
                             style={{
                                 color: `var(${getStatusColor("Completed")})`,
@@ -308,14 +308,14 @@ function ViewTeam({
                             style={{
                                 color: `var(${getStatusColor("in progress")})`,
                             }}>
-                            In Progress:{" "}
+                            Progress:{" "}
                             {teamTaskStatisticData.data.data.inProgressTasks}
                         </li>
                         <li
                             style={{
                                 color: `var(${getStatusColor("not started")})`,
                             }}>
-                            Not Started:{" "}
+                            To Do:{" "}
                             {teamTaskStatisticData.data.data.toDoTasks}
                         </li>
                     </ul>

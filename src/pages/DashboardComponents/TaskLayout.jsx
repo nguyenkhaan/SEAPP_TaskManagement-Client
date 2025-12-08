@@ -8,7 +8,7 @@ function TaskLayout({
 }) {
     return (
         <div 
-            className='w-full! bg-(--color-box-item-2) rounded-2xl shadow-2xl p-4'
+            className='w-full! bg-(--color-block-item-2) rounded-2xl shadow-2xl p-4'
             style={ {...styles} }
             >
             <h2 className={`text-base md:text-lg text-(--color-primary) font-medium mb-${showDay? 2 : 5}`}>{title}</h2>

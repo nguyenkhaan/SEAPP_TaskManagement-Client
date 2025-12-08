@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import 'normalize.css';
 /*---break--- */
 @custom-variant dark (&:is(.dark *));
 
@@ -68,24 +69,27 @@
   --color-primary: #FB2C36; /* Giữ nguyên */
 
   /* Nền chính – tone navy đậm sạch */
-  --color-background-1: #0B0F1A;
-  --color-background-2: #111827;
+  --color-background-1: #2b2b2b;
+  --color-background-2: #313131;
   /* Màu secondary – xanh deep để nổi primary hơn */
-  --color-secondary: #1A2333;
+  --color-secondary: #313131;
   /* Card / Block */
   --color-block-item: #1E293B;        /* xanh đen harmonic */
-  --color-block-item-2: #243044;
+  --color-block-item-2: #3f3f3f;
   --color-box-item: #1C2536;
   --color-box-item-2: #263349;
   /* Text */
   --color-text: #F3F4F6;              /* trắng-xám dễ đọc */
   --color-text-desc: #A8B0C0;         /* xám nhạt hiện đại */
+  --color-in-progress: #AEDEFC;
+  --color-not-started: #FF6363;
+  --color-completed: #B6F500;
 
   /* Border */
   --color-border: #757070;
 
   /* Search / input background */
-  --color-search: #131B2C;
+  --color-search: #3f3f3f;
   --color-border-image: #051031; 
 }
 * {

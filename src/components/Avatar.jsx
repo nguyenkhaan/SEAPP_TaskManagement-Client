@@ -74,8 +74,8 @@ function Avatar({
                 className={`relative bg-center bg-cover bg-no-repeat border-0 rounded-full cursor-pointer`}
                 style={{
                     backgroundImage: `url(${
-                        preview ||
-                        "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg"
+                        (preview? preview : 
+                        "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg") 
                     })`,
                     width,
                     height,

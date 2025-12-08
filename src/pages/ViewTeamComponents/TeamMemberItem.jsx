@@ -6,11 +6,11 @@ import MessageLog from "../../components/MessageLog";
 function TeamMemberItem({
     id = "",
     name = "",
-    role = "Member",  //Cai de hien thi len the cho nguoi dung 
+    role = "Member", //Cai de hien thi len the cho nguoi dung
     avatar_url = "",
     currentRole = "member",
 }) {
-    console.log('Log ra tu member: ' , currentRole)
+    console.log("Log ra tu member: ", currentRole);
     const [showMenu, setShowMenu] = useState(false);
     const [showLog, setShowLog] = useState(0);
     const menuRef = useRef();
@@ -124,21 +124,23 @@ function TeamMemberItem({
         <li className="w-full shrink-0 px-3 py-4 h-[82px] bg-(--color-block-item-2) border border-(--color-border) rounded-2xl flex items-center justify-between gap-4 relative">
             {/* Avatar */}
             <div
-                className="w-11 flex bg-cover bg-no-repeat bg-center items-center justify-center h-11 rounded-full font-md text-white bg-(--color-primary)"
+                className="w-11 h-11 shrink-0 flex items-center justify-center rounded-full font-md text-white bg-cover bg-center bg-no-repeat"
                 style={{
+                    backgroundColor: "var(--color-primary)", // thay vì bg-(--color-primary)
                     backgroundImage: `url(${
                         avatar_url ||
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT69Z3V7elu8UwGZHfS7lP_ii2zpEjB8DvLKm_Rq76k_XDuoSg_VC7y27g1iUYc4wl1Whc&usqp=CAU"
                     })`,
                 }}
             />
-
             {/* Name + Role */}
             <div className="flex-1 flex flex-col items-start justify-between ml-2">
                 <span className="line-clamp-1 text-(--color-text) font-md text-xl">
                     {name}
                 </span>
-                <span className="font-md text-base text-(--color-text)">{role}</span>
+                <span className="font-md text-base text-(--color-text)">
+                    {role}
+                </span>
             </div>
 
             {/* Dấu bar ⋮ */}
