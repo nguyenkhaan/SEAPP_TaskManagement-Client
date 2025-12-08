@@ -37,13 +37,13 @@ function FeatureSection() {
 
       <div data-aos='flip-up' 
            className="mt-8 px-8 w-full grid items-start justify-center grid-cols-12 auto-rows-min gap-y-6 lg:gap-x-10 md:gap-x-15 text-center">
-        {featureItems.map((item) => (
+        {featureItems.map((item , index) => (
           <div
             key={item.id}
             className={`col-span-12 md:col-span-6 lg:col-span-4 flex justify-center lg:justify-center ${item.id % 2 == 1 ? 'md:justify-start' : 'md:justify-end'}`}
           >
             <div className="w-full lg:max-w-[404px] md:max-w-[300px] h-auto flex justify-center">
-              <FeatureCard />
+              <FeatureCard title={featureCards[index].title} featureContent={featureCards[index].featureContent}   />
             </div>
           </div>
         ))}
