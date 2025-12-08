@@ -19,7 +19,7 @@ const featureCards = [
   }
 ]
 function FeatureSection() {
-  const featureItems = Array.from({ length: 6 }, (_, i) => ({ id: i }));
+  const featureItems = Array.from({ length: 3 }, (_, i) => ({ id: i }));
 
   return (
     <section className="landing__section bg-(--color-background-2) py-12">
@@ -43,11 +43,7 @@ function FeatureSection() {
             className={`col-span-12 md:col-span-6 lg:col-span-4 flex justify-center lg:justify-center ${item.id % 2 == 1 ? 'md:justify-start' : 'md:justify-end'}`}
           >
             <div className="w-full lg:max-w-[404px] md:max-w-[300px] h-auto flex justify-center">
-              {
-                featureCards.map((card) => {
-                  return <FeatureCard title={card.title} featureContent={card.featureContent} /> 
-                })
-              }
+              <FeatureCard />
             </div>
           </div>
         ))}
