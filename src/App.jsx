@@ -1,18 +1,24 @@
 import './App.css'
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { useEffect } from 'react'
+import ReactDOM from 'react-dom' 
 import { Route, Routes } from 'react-router'
 import NotFound from './components/NotFound.jsx'
 import routes from './router/router.js'
-import CreateTask from './pages/CreateTask.jsx'
-import Modal from './components/modal.jsx'
-import Loading from './pages/LoadingModal.jsx'
-import MyTask from './pages/MyTask.jsx'
-import ViewTask from './pages/ViewTask.jsx'
-import ViewTeam from './pages/ViewTeam.jsx'
-import CreateTeam from './pages/CreateTeam.jsx'
-import Setting from './pages/Setting.jsx'
 function App() {
+  useEffect(() => {
+      const mode = localStorage.getItem("theme");
+      if (mode === "dark") {
+          document
+              .querySelector("body")
+              .setAttribute("data-app-theme", "dark");
+      } 
+      else {
+          document
+              .querySelector("body")
+              .setAttribute("data-app-theme", "light");
+      }
+  }, []);
   return (
     <>
       <Routes>

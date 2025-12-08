@@ -46,7 +46,6 @@ class TaskServices {
                     Authorization : `Bearer ${token}`
                 }
             })
-            console.log(responseData) 
             return responseData
         }
         catch (err) { 
@@ -155,7 +154,6 @@ class TaskServices {
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log(responseData.data.data.teams) 
             return responseData
         }
         catch (err) {

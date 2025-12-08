@@ -40,9 +40,16 @@ function CreateTeam() {
             return responseData;
         },
         onSuccess: async (responseData) => {
-            await queryClient.invalidateQueries(["teams"]); //Fetch du lieu lai cho thang teams, them await de load xong thi moi cho hien thi UI 
+            queryClient.invalidateQueries(["teams"]); //Fetch du lieu lai cho thang teams, them await de load xong thi moi cho hien thi UI 
+            setShowCodeModal(true);
             setShowLog(1);
             setCode(responseData.data.code);
+            emails.forEach((email) => {
+                console.log('Dang tien hanh gui mail')
+                sendEmail(
+                    email , responseData.data.data.teamName , responseData.data.code  
+                )
+            })
         },
         onError: () => {
             setShowLog(-1);
@@ -75,15 +82,7 @@ function CreateTeam() {
             banner: null, 
             description: editor.getText() //Chu y: Ham mutation chi nhan vao 1 tham so duy nhat 
         })      
-    //    console.log(editor.getText()) 
-        // console.log(data.teamName)
-        // console.log(image)
-        // console.log(editor.getText())
-        emails.forEach((email) => {
-            // sendEmail(email)  -> Mot luc sau co data roi thi hay gui
-            //Thuc hien gui du lieu ve ben server
-        });
-        setShowCodeModal(true);
+       
     };
     return (
         <WorkingLayout>

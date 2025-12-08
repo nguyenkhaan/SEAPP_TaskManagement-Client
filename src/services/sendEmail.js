@@ -18,7 +18,7 @@ function sendEmail(clientEmail = '24520059@gm.uit.edu.vn' , teamName = 'CloudTea
         .then(
             (result) => {
                 // console.log('The email has been sent successfully', result)
-                window.location.reload(); // This is if you still want the page to reload (since e.preventDefault() cancelled that behavior)
+                // window.location.reload(); // This is if you still want the page to reload (since e.preventDefault() cancelled that behavior)
             },
             (error) => {
                 console.log(error.text);

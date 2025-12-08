@@ -3,6 +3,38 @@ import ReactDOM from 'react-dom'
 import Logo from './Logo'
 import FooterList from './FooterList'
 import DarkMode from './DarkMode/DarkMode'
+const aboutUs = [
+    {
+        name: 'Our Team', 
+        url: '/'
+    }, 
+    {
+        name: 'Product', 
+        url: '' 
+    }, 
+    {
+        name: 'Blog', 
+        url: '' 
+    }
+]
+const customerSupports = [
+    {
+        name: 'Help Center/Support', 
+        url: ''
+    }, 
+    {
+        name: 'FAQs', 
+        url: '' 
+    }, 
+    {
+        name: 'Contact Us', 
+        url: 'https://www.facebook.com/kha.an.907155'
+    }, 
+    {
+        name: 'Report an Issue', 
+        url: 'https://www.facebook.com/kha.an.907155' 
+    }
+]
 export default function Footer() {
     return (
         <footer className='w-full relative px-16 h-120 pt-18 '>
@@ -12,10 +44,16 @@ export default function Footer() {
                     <p className='w-[440px] text-xl lg:h-[168px] h-[100px] text-(--color-text-desc)'>The ultimate task management solution for modern teams.</p>
                 </div>
                 <div className='lg:col-span-2 col-span-4'>
-                    <FooterList />
+                    <FooterList
+                        title='About us'
+                        linkList = {aboutUs}
+                     />
                 </div>
                 <div className='lg:col-span-2 col-span-4'>
-                    <FooterList />
+                    <FooterList
+                        title='Customer Support'
+                        linkList = {customerSupports}
+                     />
                 </div>
                 <div className='lg:col-span-2 col-span-4 flex flex-col gap-3 items-start'>
                     <span className='text-(--color-text) lg:text-2xl text-xl mb-1 font-medium'>Change theme</span>

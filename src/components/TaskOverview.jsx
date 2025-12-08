@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import getStatusColor, { getPriorityString } from "../services/getStatusColor";
 import { getStatusString } from "../services/getStatusColor";
 import { QueryClient, useMutation , useQuery, useQueryClient } from "@tanstack/react-query";
+//Hội code việt nam 
 import TaskServices from "../services/TaskServices";
 function TaskOverview({
     taskID = "",
@@ -17,13 +18,13 @@ function TaskOverview({
     saved = 0, //Chuc nang danh dau co the luu
     teamID = 0 
 }) {
-    console.log("Log ra tu overview", status);
     const [saveHandle , setSaveHandle] = useState(false) 
     const color = getStatusColor(status);
     const queryClient = useQueryClient() 
     const saveMutation = useMutation({
         mutationFn: async () => {
             const responseData = await TaskServices.saveTask(teamID , taskID) 
+            console.log('Luu du lieu')
             console.log(responseData)
             return responseData
         }, 

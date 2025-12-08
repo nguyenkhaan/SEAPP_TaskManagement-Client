@@ -7,11 +7,11 @@ import "./DarkMode.css";
 const DarkMode = () => {
     const setDarkMode = () => {
         document.querySelector('body').setAttribute('data-app-theme' , 'dark')
-        localStorage.setItem('theme' , 'light')
+        localStorage.setItem('theme' , 'dark')
     }
     const setLightMode = () => {
         document.querySelector('body').setAttribute('data-app-theme' , 'light')
-        localStorage.setItem('theme' , 'dark')
+        localStorage.setItem('theme' , 'light')
     }
     const toggleTheme = (e) => {
         if (e.target.checked) setDarkMode() 
@@ -21,7 +21,18 @@ const DarkMode = () => {
         const mode = localStorage.getItem('theme');
         if (mode === 'dark') {
             const toggle = document.getElementById('darkmode-toggle');
-            if (toggle) toggle.checked = true;
+            
+            if (toggle) {
+                toggle.checked = true;
+                document.querySelector('body').setAttribute('data-app-theme' , 'dark')
+            }
+        }
+        else {
+            const toggle = document.getElementById('darkmode-toggle');
+            if (toggle) {
+                toggle.checked = false;
+                document.querySelector('body').setAttribute('data-app-theme' , 'light')
+            }
         }
     }, []);
     return (
