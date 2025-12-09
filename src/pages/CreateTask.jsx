@@ -86,8 +86,8 @@ function CreateTask() {
         onSuccess: (data) => {
             setShowLog(1) 
             // Lat nua coi nen update lai cai cached query nao 
-            queryClient.reValidateMode([`team-tasks-${teamID}`])
-            queryClient.reValidateMode([`tasks-me`])
+            queryClient.invalidateQueries([`team-tasks-${teamID}`])
+            queryClient.invalidateQueries([`tasks-me`])
         },  
         onError: (data) => {
             setShowLog(-1) 
