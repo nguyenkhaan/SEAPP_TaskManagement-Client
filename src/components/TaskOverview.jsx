@@ -24,8 +24,6 @@ function TaskOverview({
     const saveMutation = useMutation({
         mutationFn: async () => {
             const responseData = await TaskServices.saveTask(teamID , taskID) 
-            console.log('Luu du lieu')
-            console.log(responseData)
             return responseData
         }, 
         onSuccess: () => {
@@ -40,7 +38,6 @@ function TaskOverview({
     const UnsaveMutation = useMutation({
         mutationFn: async () => {
             const responseData = await TaskServices.unSaveTask(taskID) 
-            console.log(responseData)
             return responseData
         }, 
         onSuccess: () => {

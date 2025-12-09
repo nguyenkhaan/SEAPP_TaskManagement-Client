@@ -9,9 +9,10 @@ import TaskStatus from "./DashboardComponents/TaskStatus";
 import GroupStatus from "./DashboardComponents/GroupStatus";
 import LoadingModal from "./LoadingModal";
 import TaskServices from "../services/TaskServices";
+import { useSoundContext } from "../layouts/SoundContext";
 function Dashboard() {
     const [isLoading, setIsLoading] = useState(false);
-
+    const {playMusic , toggleMusic} = useSoundContext() 
     useEffect(() => {
         const prevPage = document.referrer; //Fix bug gay ra loi lap vo ha
         if (prevPage.includes("/login") || prevPage.includes("/register"))
@@ -66,7 +67,10 @@ function Dashboard() {
                                         backgroundImage: `url(https://cdn-media.sforum.vn/storage/app/media/ctv_seo8/nh%C3%A2n%20v%E1%BA%ADt%20ch%C3%ADnh%20c%E1%BB%A7a%20one%20piece/nhan-vat-chinh-cua-one-piece-1.jpg)`,
                                     }}></li>
                             </ul>
-                            <button className="w-[98px] h-9 bg-white text-(--color-primary) border-2 border-(--color-primary) rounded-lg cursor-pointer font-medium text-[14px]">
+                            <button 
+                                className="w-[98px] h-9 bg-white text-(--color-primary) border-2 border-(--color-primary) rounded-lg cursor-pointer font-medium text-[14px]"
+                                onClick={toggleMusic}
+                                >
                                 <i class="fa-solid fa-headphones mr-2"></i>
                                 Music
                             </button>

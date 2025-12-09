@@ -39,7 +39,6 @@ function UpdateTask() {
         queryKey: [`tasks-${currentTaskID}` , currentTaskID],
         queryFn: async () => {
             const res = await TaskServices.getTaskDetail(currentTaskID);
-            console.log(res) 
             return res;
         },
         refetchOnWindowFocus: false 

@@ -77,7 +77,6 @@ function UpdateTeam() {
             return responseData;
         },
         onSuccess: async (responseData) => {
-            console.log(responseData);
             await queryClient.invalidateQueries(["teams"]);
             setShowLog(1);
         },

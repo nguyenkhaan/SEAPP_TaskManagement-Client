@@ -2,18 +2,24 @@ import React from "react";
 import { useEffect } from "react";
 import SectionSetting from "./SectionSettings";
 import { motion } from "framer-motion";
-
+import useSound from "use-sound";
 function Appearance() {
+    const soundUrl = "sound/switch_on.mp3";
+    const [play, { stop }] = useSound(soundUrl, {
+        volume: 0.5,
+    });
     const currentTheme = document.body.getAttribute("data-app-theme");
 
     const setDarkMode = () => {
+        play() 
         document.body.setAttribute("data-app-theme", "dark");
-        localStorage.setItem('theme' , 'dark')
+        localStorage.setItem("theme", "dark");
     };
 
     const setLightMode = () => {
+        play() 
         document.body.setAttribute("data-app-theme", "light");
-        localStorage.setItem('theme' , 'light')
+        localStorage.setItem("theme", "light");
     };
 
     const btnBase =

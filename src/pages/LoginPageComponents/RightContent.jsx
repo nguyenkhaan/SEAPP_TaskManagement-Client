@@ -41,7 +41,6 @@ export default function RightContent() {
         try {
             const { Email, Password } = data; //Du lieu tra ve
             setIsLoading(true) 
-            console.log("Email:", Email, "Password:", Password)
             const responseData = await api.post("/auth/login", {
                 email: Email,
                 password: Password,
@@ -79,10 +78,8 @@ export default function RightContent() {
             try {
                 setIsLoading(true);
                 const responseData = await loginGoogleSuccess(tokenResponse);
-                console.log("responseData", responseData) 
                 // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
                 setShowLog(true); //Tien hanh in ra Log message
-                console.log("Token response from data",responseData.data.token)
                 Cookies.set("user", responseData.data.token, {
                     secure: true,
                     expires: 7,

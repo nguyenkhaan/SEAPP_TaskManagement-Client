@@ -7,6 +7,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { SoundProvider } from './layouts/SoundContext.jsx'
 
 const CLIENT_ID = '802852666161-o82mhq04404uckeqv9ctn8ub5fc12vug.apps.googleusercontent.com'
 //Sau nay deploy thi chuyen cai nay vao file .env, khong ne de nhu the nay
@@ -22,7 +23,9 @@ createRoot(document.getElementById('root')).render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <GoogleOAuthProvider clientId={CLIENT_ID}>
-          <App />
+          <SoundProvider>
+            <App />
+          </SoundProvider>
         </GoogleOAuthProvider>
       </QueryClientProvider>
     </StrictMode>

@@ -14,7 +14,12 @@ import RegisterServices from '../../services/register'
 import MessageLog from "../../components/MessageLog";
 import checkLogin from "../../services/checkLogin";
 import Spinner from "../../components/Spinner";
+import useSound from "use-sound";
 export default function LeftContent() {
+    const soundUrl = 'sound/pop.mp3'
+    const [play] = useSound(soundUrl , {
+        volume: 0.4 
+    })
     const formHandleMethod = useForm({
         mode: "onSubmit",
         reValidateMode: "onSubmit",
@@ -91,9 +96,6 @@ export default function LeftContent() {
                     },
                 })
                 .then((res) => res.data);
-
-            console.log("Log ra tu trang LeftContent Sign up");
-            console.log("Thong tin nguoi dung", userInfo);
         },
     });
     return (
@@ -147,7 +149,7 @@ export default function LeftContent() {
                 />
 
                 <div className="flex items-center text-(--color-primary) font-medium mb-3">
-                    <Checkbox ref={checkPolicy} />
+                    <Checkbox ref={checkPolicy} onChange={play} />
                     <p className="text-(--color-text)">
                         I agree to{" "}
                         <span className="text-(--color-primary)">

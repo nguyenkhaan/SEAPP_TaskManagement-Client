@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import { ReactComponent as Sun } from "./Sun.svg";
 import Moon from './Moon.svg?react'
 import Sun from './Sun.svg?react'
 import "./DarkMode.css";
-
+import useSound from "use-sound";
+import { PlayCircle } from "lucide-react";
 const DarkMode = () => {
+    const [isPlaying , setIsPlaying] = useState(false)  
+    const soundUrl = 'sound/switch_on.mp3'
+    const [play , {stop} ] = useSound(soundUrl , {
+        volume: 0.5, 
+    });
     const setDarkMode = () => {
         document.querySelector('body').setAttribute('data-app-theme' , 'dark')
         localStorage.setItem('theme' , 'dark')
@@ -14,6 +20,11 @@ const DarkMode = () => {
         localStorage.setItem('theme' , 'light')
     }
     const toggleTheme = (e) => {
+        // if (isPlaying) stop() 
+        //     else play() 
+        // setIsPlaying(!isPlaying)
+        play()
+            
         if (e.target.checked) setDarkMode() 
         else setLightMode()  
     }
