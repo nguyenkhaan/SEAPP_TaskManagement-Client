@@ -12,6 +12,7 @@ import MessageLog from "../components/MessageLog";
 import { confirmAlert } from "react-confirm-alert";
 
 function ViewTask() {
+    const [loading, setLoading] = useState(false);
     const currentTaskID = Number(ParamServices.getID());
     let currentTeamId = null;
     if (!currentTaskID || Number.isNaN(currentTaskID)) return <UrlError />;
@@ -37,7 +38,12 @@ function ViewTask() {
             // console.log(res.data);
             return res.data; // đảm bảo có teamId
         },
+        onMutate: () => {
+            setLoading(true);
+            setShowLog(0);
+        },
         onSuccess: (resData) => {
+            setLoading(false);
             queryClient.invalidateQueries([`team-tasks-${1}`]);
             setShowLog(1);
 
@@ -46,6 +52,7 @@ function ViewTask() {
             }, 800);
         },
         onError: () => {
+            setLoading(false);
             setShowLog(-1);
         },
     });
@@ -68,7 +75,6 @@ function ViewTask() {
             ],
             overlayClassName: "bg-black",
         });
-        
     };
 
     // BỌC LoadingModal trong WorkingLayout để tránh React mismatch
@@ -105,7 +111,7 @@ function ViewTask() {
                         </p>
 
                         <p className="mt-3 text-(--color-text)">
-                            Status: 
+                            Status:
                             <span className="text-(--color-not-started) ml-3">
                                 {getStatusString(data.data.status)}
                             </span>
@@ -124,7 +130,12 @@ function ViewTask() {
                     }}></div>
 
                 <div className="w-full mt-5 items-center h-6 flex justify-end gap-4 font-semibold text-white">
-                    <Link to={`/app/update-task?id=${currentTaskID}`}>
+                    <Link
+                        to={`/app/update-task?id=${currentTaskID}`}
+                        style={{
+                            pointerEvents: loading ? "none" : "auto",
+                            opacity: loading ? 0.7 : 1,
+                        }}>
                         <div
                             className="w-9 h-9 cursor-pointer bg-(--color-primary) rounded-lg flex items-center justify-center"
                             title="Edit">
@@ -135,7 +146,11 @@ function ViewTask() {
                     <div
                         className="w-9 h-9 cursor-pointer bg-(--color-primary) rounded-lg flex items-center justify-center"
                         title="Xóa task"
-                        onClick={handleDelete}>
+                        onClick={handleDelete}
+                        style={{
+                            pointerEvents: loading ? "none" : "auto",
+                            opacity: loading ? 0.7 : 1,
+                        }}>
                         <i className="fa-solid fa-trash"></i>
                     </div>
                 </div>

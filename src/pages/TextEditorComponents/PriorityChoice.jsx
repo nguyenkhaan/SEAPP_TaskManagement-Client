@@ -21,7 +21,7 @@ function PriorityChoice({
             <p className='text-(--color-text) flex items-center justify-start gap-5 md:gap-12 text-base mt-4'>
                 Priority
                 <span>
-                    <label htmlFor='important' className='mr-2'>Important?</label>
+                    <label htmlFor='important' className='mr-2'>Important</label>
                     <input 
                         defaultChecked={important}
                         type='checkbox' name='important' 
@@ -29,7 +29,7 @@ function PriorityChoice({
                         />
                 </span>
                 <span>
-                    <label htmlFor='urgent' className='mr-2'>Urgent?</label>
+                    <label htmlFor='urgent' className='mr-2'>Urgent</label>
                     <input 
                         defaultChecked={urgent}
                         type='checkbox' name='urgent' 

@@ -36,7 +36,12 @@ function Team() {
         },
         onSuccess: async (responseData) => {
             await queryClient.invalidateQueries(["teams"]);
-            setShowLog(1);
+            if (
+                (responseData.data.message =
+                    "You has been a member of this team")
+            )
+                setShowLog(2);
+            else setShowLog(1);
         },
         onError: () => {
             setShowLog(-1);
@@ -82,12 +87,12 @@ function Team() {
                             Color="#7f7373"
                         />
                         <GroupStastic
-                            stasticNumber={20}
+                            stasticNumber={20}  //Bo sung them cai nay 
                             title="Total Tasks"
                             Color="#bd7d7e"
                         />
                         <GroupStastic
-                            stasticNumber={39}
+                            stasticNumber={39}  //B sung them cai nay 
                             title="Working Tasks"
                             Color="#109628"
                         />
@@ -102,7 +107,8 @@ function Team() {
                                 //team chinh la doi hien tai
                                 return (
                                     <div className="md:col-span-4 grow-0 col-span-6">
-                                        <Link to={`/app/view-team?id=${team.id}`}>
+                                        <Link
+                                            to={`/app/view-team?id=${team.id}`}>
                                             <GroupCard
                                                 //id, name, icon, banner, description ,
                                                 groupTitle={team.name}
@@ -137,6 +143,8 @@ function Team() {
                 message={
                     showLog == 1
                         ? "Tham gia nhóm thành công"
+                        : showLog == 2
+                        ? "You has been a member of this team"
                         : "Tham gia thất bại"
                 }
             />

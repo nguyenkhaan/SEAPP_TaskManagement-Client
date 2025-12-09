@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import WorkingLayout from "../layouts/WorkingLayout";
 import StarterKit from "@tiptap/starter-kit";
 import { useEditor } from "@tiptap/react";
@@ -12,37 +11,92 @@ import Image from "@tiptap/extension-image";
 import { useForm } from "react-hook-form";
 import TitleInput from "./TextEditorComponents/TitleInput";
 import PriorityChoice from "./TextEditorComponents/PriorityChoice";
-import { useNavigate } from "react-router";
-import { Link } from "react-router";
-import { getCurrentDate } from "../services/getDate";
+import { useNavigate, useSearchParams, Link } from "react-router";
 import TaskServices from "../services/TaskServices";
 import DateInput from "./CreateTaskComponents/DateInput";
-import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import ParamServices from "../services/urlParams";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import MessageLog from "../components/MessageLog";
 import LoadingModal from "./LoadingModal";
 import ListBox from "../components/ListBox";
 import UrlError from "./URLError";
-import { useSearchParams } from "react-router";
+
 const optionMap = {
     completed: { value: "completed", label: "Completed" },
     "in progress": { value: "in progress", label: "In Progress" },
     "to do": { value: "to do", label: "Not Started" },
 };
 
+
+function UserMultiSelect({ users, selectedUserIds, setSelectedUserIds }) {
+    const [open, setOpen] = useState(false);
+
+    const toggleUser = (id) => {
+        if (selectedUserIds.includes(id)) {
+            setSelectedUserIds(selectedUserIds.filter((u) => u !== id));
+        } else {
+            setSelectedUserIds([...selectedUserIds, id]);
+        }
+    };
+
+    return (
+        <div className="relative w-full max-w-xs mt-4">
+            <p className="mb-2 text-(--color-text)">Assign to:</p>
+
+            <button
+                type="button"
+                onClick={() => setOpen(!open)}
+                className="w-full h-11 px-4 bg-(--color-background-2) border border-gray-500 rounded-lg text-(--color-text) flex items-center justify-between"
+            >
+                <span className="truncate">
+                    {selectedUserIds.length === 0
+                        ? "Select users..."
+                        : `${selectedUserIds.length} selected`}
+                </span>
+                <span className="text-sm">▼</span>
+            </button>
+
+            {open && (
+                <div className="absolute mt-1 w-full cursor-pointer bg-(--color-background-2) border border-gray-500 z-9999999 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                    {users.map((user) => (
+                        <label
+                            key={user.id}
+                            className="flex items-center px-3 py-2 cursor-pointer hover:bg-(--color-block-item-2)"
+                        >
+                            <input
+                                type="checkbox"
+                                checked={selectedUserIds.includes(user.id)}
+                                onChange={() => toggleUser(user.id)}
+                                className="mr-2"
+                            />
+                            <span className="text-(--color-text)">{user.name}</span>
+                        </label>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
+
 function UpdateTask() {
+    const [loading, setLoading] = useState(false);
     const [searchParams] = useSearchParams();
     const currentTaskID = Number(searchParams.get("id"));
-    if (!currentTaskID || isNaN(currentTaskID)) return <UrlError /> 
-    // Query lấy data task
-    const { data: task, isPending , isFetching } = useQuery({
-        queryKey: [`tasks-${currentTaskID}` , currentTaskID],
+
+    if (!currentTaskID || isNaN(currentTaskID)) return <UrlError />;
+
+    // Query task data
+    const { data: task, isPending, isFetching } = useQuery({
+        queryKey: [`tasks-${currentTaskID}`, currentTaskID],
         queryFn: async () => {
-            const res = await TaskServices.getTaskDetail(currentTaskID);
-            return res;
+            return await TaskServices.getTaskDetail(currentTaskID);
         },
-        refetchOnWindowFocus: false 
+        refetchOnWindowFocus: false,
     });
+
+    const navigate = useNavigate();
+    const formHandle = useForm({ mode: "all" });
+    const { register, handleSubmit } = formHandle;
 
     const [selectedOptions, setSelectedOptions] = useState(null);
     const [dueTime, setDueTime] = useState(new Date());
@@ -50,82 +104,75 @@ function UpdateTask() {
     const [title, setTitle] = useState("Default Title");
     const [showLog, setShowLog] = useState(0);
 
-    const navigate = useNavigate();
+    const sampleUsers = [
+        { id: 1, name: "Kha Nguyen" },
+        { id: 2, name: "Minh Tran" },
+        { id: 3, name: "Lan Pham" },
+        { id: 4, name: "Ngoc Le" },
+        { id: 4, name: "Ngoc Le" },
+        { id: 4, name: "Ngoc Le" },
+        { id: 4, name: "Ngoc Le" },
 
-    // React Hook Form
-    const formHandle = useForm({
-        mode: "all",
-    });
+    ];
+    const [assignedUsers, setAssignedUsers] = useState([]);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = formHandle;
-
-    // TIPTAP EDITOR
     const editor = useEditor({
         extensions: [
             StarterKit,
-            TextAlign.configure({
-                types: ["heading", "paragraph"],
-            }),
+            TextAlign.configure({ types: ["heading", "paragraph"] }),
             Highlight,
-            Image.configure({
-                allowBase64: true,
-                resize: { enabled: true },
-            }),
+            Image.configure({ allowBase64: true, resize: { enabled: true } }),
         ],
-        content: (task? task.data.data.description : "<p>Hello world</p>"),
+        content: task ? task.data.data.description : "<p>Loading...</p>",
         editorProps: {
             attributes: {
-                class:
-                    "w-full h-[500px] border-2 overflow-y-auto rounded-md px-3 bg-(--color-background-2) py-2 text-base border-slate-200 text-(--color-text) outline-0",
+                class: "w-full h-[500px] border-2 bg-(--color-background-2) overflow-y-auto rounded-md px-3 py-2 text-base border-slate-200 text-(--color-text)",
             },
         },
     });
 
-    // Mutation update Task
-    const queryClient = useQueryClient() 
+    const queryClient = useQueryClient();
     const updateMutation = useMutation({
         mutationFn: async (payload) => {
-            const { title, description, dueTime, important, urgent, status } =
-                payload;
-
             return await TaskServices.updateTask(
                 currentTaskID,
-                title,
-                description,
-                new Date(dueTime).toISOString(),
-                important,
-                urgent,
-                status
+                payload.title,
+                payload.description,
+                new Date(payload.dueTime).toISOString(),
+                payload.important,
+                payload.urgent,
+                payload.status
             );
         },
-
+        onMutate: () => {
+            setLoading(true);
+            setShowLog(0);
+        },
         onSuccess: (data) => {
-            queryClient.invalidateQueries([`team-tasks-${data.data.teamId}`])  //Thuc hien fetch lai du lieu 
-            //Lat nua tien hanh update them du lieu cac task cua nguoi dung //user-tasks-info 
-            setShowLog(1)
-        }, 
-        onError: () => setShowLog(-1),
+            setLoading(false);
+            queryClient.invalidateQueries([`team-tasks-${data.data.teamId}`]);
+            setShowLog(1);
+        },
+        onError: () => {
+            setLoading(false);
+            setShowLog(-1);
+        },
     });
 
-    //  Submit form update
     const onSubmit = (formData) => {
-        const payload = {
+        updateMutation.mutate({
             title,
             description: editor.getHTML(),
             dueTime,
             important: formData.important,
             urgent: formData.urgent,
             status: selectedOptions?.value || task.data.data.status,
-        };
 
-        updateMutation.mutate(payload);
+            // Bạn có thể gửi assignedUsers vào API của bạn
+            assignedUsers, //Bien dung de chua cac users 
+        });
     };
 
-    //  Khi load xong task -> set state
     useEffect(() => {
         if (task) {
             const t = task.data.data;
@@ -135,16 +182,13 @@ function UpdateTask() {
         }
     }, [task]);
 
-    if (isPending || task === undefined) return <LoadingModal />;
-    if (isFetching) return <LoadingModal /> 
+    if (isPending || isFetching || task === undefined) return <LoadingModal />;
 
     return (
         <WorkingLayout>
             <div className="w-full min-h-[890px] border p-6 rounded-xl border-gray-500 mb-10">
                 <div className="w-full inline-flex items-center justify-end mb-3">
-                    <Link
-                        to={`/app/view-task?id=${currentTaskID}`}
-                    >
+                    <Link to={`/app/view-task?id=${currentTaskID}`}>
                         <span className="cursor-pointer text-lg text-(--color-primary) underline font-semibold">
                             Go back
                         </span>
@@ -152,8 +196,7 @@ function UpdateTask() {
                 </div>
 
                 <form className="relative" onSubmit={handleSubmit(onSubmit)}>
-                    {/* Header */}
-                    <div className="flex max-md:flex-col items-start justify-start gap-6">
+                    <div className="flex max-md:flex-col items-start gap-6">
                         <DefaultImageUpload />
 
                         <div className="flex-1">
@@ -170,20 +213,27 @@ function UpdateTask() {
                                 urgent={task.data.data.urgent}
                             />
 
+                            {/* STATUS */}
                             <p className="mt-4 mb-1 text-(--color-text)">Status:</p>
-
                             <ListBox
                                 selectedOption={selectedOptions}
                                 setSelectedOption={setSelectedOptions}
                             />
 
-                            <div className="w-full mb-4 mt-3 flex max-md:flex-col">
+                            {/* MULTI SELECT USERS */}
+                            <UserMultiSelect
+                                users={sampleUsers}
+                                selectedUserIds={assignedUsers}
+                                setSelectedUserIds={setAssignedUsers}
+                            />
+
+                            {/* DATE */}
+                            <div className="w-full mb-4 mt-4 flex max-md:flex-col">
                                 <DateInput value={dueTime} onChange={setDueTime} />
                             </div>
                         </div>
                     </div>
 
-                    {/* Editor */}
                     <div className="text-lg min-h-[540px] mt-6">
                         <MenuBar editor={editor} />
                         <RichTextEditor editor={editor} />
@@ -191,12 +241,13 @@ function UpdateTask() {
 
                     <button
                         type="submit"
-                        title="Update Task"
-                        className="px-4 top-35 md:top-43 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 font-semibold cursor-pointer shadow-lg rounded-md"
+                        style={{
+                            pointerEvents: loading ? "none" : "auto",
+                            opacity: loading ? 0.7 : 1,
+                        }}
+                        className="px-4 top-35 md:top-43 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 font-semibold shadow-lg rounded-md"
                     >
-
-
-                        Update Task
+                        {loading ? "Updating..." : "Update"}
                     </button>
                 </form>
 

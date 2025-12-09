@@ -22,7 +22,7 @@ function TodoTask({ todoTasks = [] }) {
                                 damping: 10,
                                 stiffness: 150,
                             }}>
-                            <DefaultImageUpload url="https://i.pinimg.com/originals/78/56/0f/78560f1998097c570eafc8cf9e30f8a3.gif" />
+                            <DefaultImageUpload url="https://i.pinimg.com/originals/97/ae/28/97ae288bc10481a0152460e9a3c5faeb.gif" />
                         </motion.div>
 
                         <p className="italic w-full text-center top-1/2 text-base text-(--color-text)">

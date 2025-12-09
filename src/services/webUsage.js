@@ -2,17 +2,17 @@ function makePieChartData(value1, value2, value3)
 {
     const pieChartData = [
         {
-            color: "#05A301",
+            color: "var(--color-completed)",
             value: value1,
             label: "Completed",
         },
         {
-            color: "#0224FF",
+            color: "var(--color-in-progress)",
             value: value2,
             label: "In Progress",
         },
         {
-            color: "#F21E1E",
+            color: "var(--color-not-started)",
             value: 100 - value1  - value2,
             label: "Not Started",
         },

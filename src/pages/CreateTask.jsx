@@ -1,168 +1,228 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { useState } from 'react'
-import WorkingLayout from '../layouts/WorkingLayout'
-import StarterKit from '@tiptap/starter-kit'
-import { useEditor, EditorContent } from '@tiptap/react'
-import RichTextEditor from './TextEditorComponents/index'
-import MenuBar from './TextEditorComponents/Menubar'
-import Highlight from '@tiptap/extension-highlight'
-import TextAlign from '@tiptap/extension-text-align'
-import ImageUpload from './TextEditorComponents/ImageUpload'
-import DefaultImageUpload from '../components/DefaultImageUpload'
-import Image from '@tiptap/extension-image'
-import { useForm } from 'react-hook-form'
-import TitleInput from './TextEditorComponents/TitleInput'
-import PriorityChoice from './TextEditorComponents/PriorityChoice'
-import { useNavigate } from 'react-router'
-import { Link } from 'react-router'
-import { getCurrentDate } from '../services/getDate'
-import TaskServices from '../services/TaskServices'
-import DateInput from './CreateTaskComponents/DateInput'
-import { useMutation , useQueryClient } from '@tanstack/react-query'
-import ParamServices from '../services/urlParams'
-import MessageLog from '../components/MessageLog'
-function CreateTask() {
-    const [loading , setLoading] = useState(false) 
-    const { day, month, year, weekDay } = getCurrentDate()
-    const [data, setData] = useState({})
-    const [dueTime , setDueTime] = useState(new Date()) 
-    const [priority, setPriority] = useState('low')  //Dung de lua chon priority 
-    const [title, setTitle] = useState('Default Title')
-    const [showLog , setShowLog] = useState(0) 
-    const navigate = useNavigate()
-    //useForm to validation the formData 
-    const formHandle = useForm({
-        mode: 'all',
-        reValidateMode: 'onSubmit',
-        criteriaMode: 'all',
-    })
-    const { register, handleSubmit, formState: { errors } } = formHandle
+import React from "react";
+import ReactDOM from "react-dom";
+import { useState } from "react";
+import WorkingLayout from "../layouts/WorkingLayout";
+import StarterKit from "@tiptap/starter-kit";
+import { useEditor, EditorContent } from "@tiptap/react";
+import RichTextEditor from "./TextEditorComponents/index";
+import MenuBar from "./TextEditorComponents/Menubar";
+import Highlight from "@tiptap/extension-highlight";
+import TextAlign from "@tiptap/extension-text-align";
+import ImageUpload from "./TextEditorComponents/ImageUpload";
+import DefaultImageUpload from "../components/DefaultImageUpload";
+import Image from "@tiptap/extension-image";
+import { useForm } from "react-hook-form";
+import TitleInput from "./TextEditorComponents/TitleInput";
+import PriorityChoice from "./TextEditorComponents/PriorityChoice";
+import { useNavigate } from "react-router";
+import { Link } from "react-router";
+import { getCurrentDate } from "../services/getDate";
+import TaskServices from "../services/TaskServices";
+import DateInput from "./CreateTaskComponents/DateInput";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import ParamServices from "../services/urlParams";
+import MessageLog from "../components/MessageLog";
 
-    //Tiptap Editor
+function CreateTask() {
+    const [loading, setLoading] = useState(false);
+    const { day, month, year, weekDay } = getCurrentDate();
+    const [data, setData] = useState({});
+    const [dueTime, setDueTime] = useState(new Date());
+    const [priority, setPriority] = useState("low");
+    const [title, setTitle] = useState("Default Title");
+    const [showLog, setShowLog] = useState(0);
+    const navigate = useNavigate();
+
+    // Combobox state
+    const [showUsersDropdown, setShowUsersDropdown] = useState(false);
+
+    // --- GIẢ SỬ DANH SÁCH USERS (bạn thay bằng user thật sau) ---
+    const users = [
+        { id: 1, name: "Nguyen Van A" },   //Tai userID cua nguoi dung vao day 
+        { id: 2, name: "Tran Thi B" },
+        { id: 3, name: "Le Van C" },
+        { id: 4, name: "Pham Thi D" },
+        { id: 5, name: "John Doe" },
+    ];
+    // -------------------------------------------------------------
+
+    const formHandle = useForm({
+        mode: "all",
+        reValidateMode: "onSubmit",
+        criteriaMode: "all",
+    });
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = formHandle;
+
     const editor = useEditor({
         extensions: [
             StarterKit.configure({
-                bulletList: {
-                    HTMLAttributes: {
-                        class: 'list-disc ml-4'
-                    }
-                },
-                orderedList: {
-                    HTMLAttributes: {
-                        class: 'list-decimal ml-4'
-                    }
-                }
+                bulletList: { HTMLAttributes: { class: "list-disc ml-4" } },
+                orderedList: { HTMLAttributes: { class: "list-decimal ml-4" } }
             }),
-            TextAlign.configure({
-                types: ['heading', 'paragraph'],
-            }),
-            Highlight,  //Khai bao cac extensions, co the search trong tip tap de tim cac extensions va thiet dat vao ben trong 
-            Image.configure({
-                allowBase64: true,
-                resize: {
-                    enabled: true,
-                    alwaysPreserveAspectRatio: true
-                }
-            })
+            TextAlign.configure({ types: ["heading", "paragraph"] }),
+            Highlight,
+            Image.configure({ allowBase64: true }),
         ],
-        content: '<p>Hello world</p>',
+        content: "<p>Hello world</p>",
         editorProps: {
             attributes: {
-                class: 'w-full h-[500px] border-2 overflow-y-auto rounded-md px-3 py-2 text-base border-slate-200 bg-(--color-block-item-2) text-(--color-text) outline-0'
-            }
-        }
-    })
-    
-    //Tien hanh nop form 
-    const teamID = ParamServices.getID() 
-    const queryClient = useQueryClient() 
+                class: "w-full h-[500px] border-2 overflow-y-auto rounded-md px-3 py-2 text-base border-slate-200 bg-(--color-block-item-2) text-(--color-text) outline-0",
+            },
+        },
+    });
+
+    const teamID = ParamServices.getID();
+    const queryClient = useQueryClient();
+
     const createTaskMutation = useMutation({
-        mutationFn : async ({title , description , dueTime , important , urgent}) => {
-            const responseData = await TaskServices.createTask(teamID , title , description , dueTime , important , urgent)
-            return responseData
-        }, 
+        mutationFn: async ({ title, description, dueTime, important, urgent }) => {
+            return await TaskServices.createTask(
+                teamID,
+                title,
+                description,
+                dueTime,
+                important,
+                urgent,
+                // assignedUsers
+            );
+        },
         onMutate: () => {
-            setLoading(true) 
-            setShowLog(false)
-        }, 
-        onSuccess: (data) => {
-            setLoading(false) 
-            setShowLog(1) 
-            // Lat nua coi nen update lai cai cached query nao 
-            queryClient.invalidateQueries([`team-tasks-${teamID}`])
-            queryClient.invalidateQueries([`tasks-me`])
-        },  
-        onError: (data) => {
-            setLoading(false) 
-            setShowLog(-1) 
-        }
-    })
+            setLoading(true);
+            setShowLog(0);
+        },
+        onSuccess: () => {
+            setLoading(false);
+            setShowLog(1);
+
+            queryClient.invalidateQueries([`team-tasks-${teamID}`]);
+            queryClient.invalidateQueries([`tasks-me`]);
+
+            formHandle.reset({ important: false, urgent: false, assignedUsers: [] });
+            setTitle("Default Title");
+            setPriority("low");
+            setDueTime(new Date());
+            editor?.commands.setContent("<p></p>");
+        },
+        onError: () => {
+            setLoading(false);
+            setShowLog(-1);
+        },
+    });
+
     const onSubmit = (data) => {
-        // const formData = new FormData(); 
-        // formData.append(title , )
         createTaskMutation.mutate({
-            title, description: editor.getHTML() , dueTime, important: data.important , urgent: data.urgent 
-        })
-        
-    }
+            title,
+            description: editor.getHTML(),
+            dueTime,
+            important: data.important,
+            urgent: data.urgent,
+            // assignedUsers: data.assignedUsers || []
+        });
+        console.log('Danh sach nguoi dung duoc gan du lieu la: ' , data.assignedUsers)
+    };
+
     return (
         <WorkingLayout>
-            <div className='w-full min-h-[890px] md:h-[890px] border p-6 2xl:pt-6 rounded-xl border-gray-500 mb-10'>
-                <div className='w-full inline-flex items-center justify-end mb-3'>
+            <div className="w-full min-h-[890px] md:h-[990px] border p-6 2xl:pt-6 rounded-xl border-gray-500 mb-10">
+                
+                {/* Go Back */}
+                <div className="w-full inline-flex items-center justify-end mb-3">
                     <Link onClick={() => {
-                        if (window.history.length > 1) navigate(-1)
-                        else navigate('/app/dashboard')
+                        if (window.history.length > 1) navigate(-1);
+                        else navigate("/app/dashboard");
                     }}>
-                        <span
-                            className="cursor-pointer text-lg text-(--color-primary) underline font-semibold"
-                            onClick={() => {
-                                if (window.history.length > 1) navigate(-1)
-                                else navigate('/app/dashboard')
-                            }}
-                        >
+                        <span className="cursor-pointer text-lg text-(--color-primary) underline font-semibold">
                             Go back
                         </span>
                     </Link>
                 </div>
-                <form className='relative' onSubmit={handleSubmit(onSubmit)}>
-                    {/* Header */}
-                    <div className='flex max-md:flex-col items-start justify-start gap-6'>
-                        <DefaultImageUpload /> 
-                        <div className='flex-1'>
-                            <TitleInput formHandle={formHandle} onTitleChange={(value) => setTitle(value)} />
-                            <PriorityChoice formHandle={formHandle} onPriorityChange={value => setPriority(value)} />
-                            <p className='mt-4 text-(--color-text)'>Status: <span className='text-(--color-not-started)'>Not started</span></p>
-                            <div className='w-full mb-4 mt-2 flex max-md:flex-col items-start xl:items-center justify-between'>
-                                <DateInput value={dueTime} onChange={setDueTime} /> 
-                                <p className='text-sm text-(--color-text-desc) mt-4'>Created On <span>{day}/{month}/{year}</span></p>
+
+                <form className="relative" onSubmit={handleSubmit(onSubmit)}>
+                    
+                    {/* HEADER */}
+                    <div className="flex max-md:flex-col items-start justify-start gap-6">
+                        <DefaultImageUpload />
+                        <div className="flex-1">
+                            <TitleInput formHandle={formHandle} onTitleChange={setTitle} />
+                            <PriorityChoice formHandle={formHandle} onPriorityChange={setPriority} />
+
+                            <p className="mt-4 text-(--color-text)">
+                                Status: <span className="text-(--color-not-started)">Not started</span>
+                            </p>
+
+                            <div className="w-full mb-4 mt-2 flex max-md:flex-col items-start xl:items-center justify-between">
+                                <DateInput value={dueTime} onChange={setDueTime} />
+                                <p className="text-sm text-(--color-text-desc) mt-4">
+                                    Created On <span>{day}/{month}/{year}</span>
+                                </p>
                             </div>
                         </div>
                     </div>
+                    <div className="mt-8">
+                        <h3 className="text-lg font-semibold text-(--color-text)">Assign members</h3>
 
-                    {/* MainEditorLayout */}
-                    <div className='text-lg min-h-[540px] md:mt-8 mt-6'>
-                        {/* MenuBar */}
+                        <div className="relative inline-block w-64">
+                            <button
+                                type="button"
+                                onClick={() => setShowUsersDropdown(v => !v)}
+                                className="w-full bg-(--color-background-2) cursor-pointer border border-gray-400 rounded-lg px-3 py-2 text-left text-(--color-text)">
+                                Select members
+                            </button>
+
+                            {showUsersDropdown && (
+                                <div className="absolute mt-1 w-full bg-(--color-background-2) border border-gray-400 rounded-lg shadow-lg max-h-48 overflow-y-auto z-50">
+                                    {users.map((user) => (
+                                        <label
+                                            key={user.id}
+                                            className="flex items-center gap-2 px-3 py-2 hover:bg-(--color-block-item-2) dark:hover:bg-gray-700 cursor-pointer"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                value={user.id}
+                                                {...register("assignedUsers")}
+                                                className="w-4 h-4"
+                                            />
+                                            <span className="text-(--color-text)">{user.name}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* MAIN EDITOR */}
+                    <div className="text-lg min-h-[540px] md:mt-8 mt-6">
                         <MenuBar editor={editor} />
-                        {/* RichTextEditor */}
                         <RichTextEditor editor={editor} />
                     </div>
-                    <button type='submit'
-                        className='px-4 top-35 md:top-43 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
-                            font-semibold cursor-pointer shadow-lg rounded-md'
+
+                    {/* SUBMIT BTN */}
+                    <button
+                        type="submit"
+                        className="px-4 top-35 md:top-43 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
+                        font-semibold cursor-pointer shadow-lg rounded-md"
                         style={{
-                            pointerEvents: (loading? 'none' : 'auto'), 
-                            opacity: (loading?  0.7 : 1) 
-                        }}        
-                            >
-                        {loading? 'Creating...' : 
-                            'Create Task' 
-                        } 
+                            pointerEvents: loading ? "none" : "auto",
+                            opacity: loading ? 0.7 : 1,
+                        }}>
+                        {loading ? "Creating..." : "Create Task"}
                     </button>
+
                 </form>
-                <MessageLog setShowLog={setShowLog} showLog={showLog} message={(showLog == 1 ? 'Thêm nhiệm vụ thành công' : 'Thêm nhiệm vụ thất bại')}   /> 
+
+                <MessageLog
+                    setShowLog={setShowLog}
+                    showLog={showLog}
+                    message={showLog == 1 ? "Thêm nhiệm vụ thành công" : "Thêm nhiệm vụ thất bại"}
+                />
             </div>
         </WorkingLayout>
-    )
+    );
 }
-export default CreateTask
+
+export default CreateTask;

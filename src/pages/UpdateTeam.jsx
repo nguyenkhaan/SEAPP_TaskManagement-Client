@@ -15,6 +15,7 @@ import ParamServices from "../services/urlParams";
 import TeamServies from "../services/teamServices";
 import UrlError from "./URLError";
 function UpdateTeam() {
+    const [loading , setLoading] = useState(false) 
     const teamID = ParamServices.getID() 
     if (!teamID || isNaN(teamID)) return <UrlError />; 
     const {
@@ -76,11 +77,17 @@ function UpdateTeam() {
             );
             return responseData;
         },
+        onMutate: () => {
+            setLoading(true) 
+            setShowLog(0) 
+        }, 
         onSuccess: async (responseData) => {
+            setLoading(false) 
             await queryClient.invalidateQueries(["teams"]);
             setShowLog(1);
         },
         onError: () => {
+            setLoading(false) 
             setShowLog(-1);
         },
     });
@@ -105,6 +112,32 @@ function UpdateTeam() {
             );
         }
     }, [teamQueryData]);
+    const handleReset = () => {
+        updateTeamMutation.reset() 
+        if (!teamQueryData) return;
+        
+        // Reset ảnh về ảnh gốc
+        const original = teamQueryData.data.teamData;
+    
+        setImage(null); // vì ảnh upload mới sẽ bị hủy
+        setPreviewImage(original.icon || null);
+    
+        // Reset tên team
+        setValue("teamName", original.name);
+    
+        // Reset description trong editor
+        if (editor) {
+            editor.commands.setContent(
+                original.description || "<p>Describe your team...</p>"
+            );
+        }
+    
+        setShowLog(0);
+    
+        setLoading(false);
+        alert('Canceled updating...')
+    };
+    
     if (teamQueryPending || !teamQueryData) return <LoadingModal />;
     return (
         <WorkingLayout>
@@ -177,8 +210,9 @@ function UpdateTeam() {
                                 className="font-md text-black cursor-pointer text-lg md:text-2xl bg-gray-200 rounded-md md:rounded-2xl px-4 md:px-8 md:py-3 py-2"
                                 initial={{ scale: 1 }}
                                 whileHover={{ scale: 1.05 }}
+                                onClick={handleReset}
                                 type="button">
-                                Go Back
+                                Cancel 
                             </motion.button>
                         </Link>
 
@@ -188,8 +222,13 @@ function UpdateTeam() {
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2, ease: "easeInOut" }}
                             type="submit"
+                            style={{
+                                pointerEvents: (loading ? 'none' : 'auto'),
+                                opacity: (loading ? 0.7 : 1)
+                            }}
                             form="update-team-form">
-                            Update Team
+                            {loading ? 'Updating...' : 'Update Team'}
+
                         </motion.button>
                     </div>
                 </div>

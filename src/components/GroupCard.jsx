@@ -84,25 +84,6 @@ function GroupCard({
                         {groupDesc}
                     </p>
                 </div>
-
-                <ul
-                    className="
-                    border-t border-t-gray-400 pt-2
-                    flex items-center justify-between
-                    md:text-[12px] text-[10px]
-                    text-(--color-text-desc)
-                    pb-2
-                "
-                >
-                    <li>
-                        <i className="fa-regular fa-user mr-1"></i>
-                        Team leader
-                    </li>
-                    <li>
-                        <i className="fa-regular fa-user mr-1"></i>
-                        Team member
-                    </li>
-                </ul>
             </div>
         </article>
     );

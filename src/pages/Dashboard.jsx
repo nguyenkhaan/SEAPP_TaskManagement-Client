@@ -9,6 +9,30 @@ import TaskStatus from "./DashboardComponents/TaskStatus";
 import GroupStatus from "./DashboardComponents/GroupStatus";
 import LoadingModal from "./LoadingModal";
 import TaskServices from "../services/TaskServices";
+import Audio from "./DashboardComponents/Audio";
+const lofis = [
+    {
+      id: 'bg-1',
+      title: "Lavender Hills",
+      url: "https://media.istockphoto.com/id/498425333/photo/lavender-farm-at-nabowla-tasmania-australia.jpg?s=612x612&w=0&k=20&c=_a6QP4dLxXc9Fl9bO1AKL0001p93-cFYm3iZZAlPH00="
+    },
+    {
+      id: 'bg-2',
+      title: "Rain",
+      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsryAw11SRwU9lmsjcWueYwSuVpyKBOsh8rA&s"
+    },
+    {
+      id: 'bg-3',
+      title: "Campfire",
+      url: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Campfire_Pinecone.png"
+    },
+    {
+      id: 'bg-4',
+      title: "Beautiful World",
+      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOMkQz2Ai-xiukqtPIlLTrDk78hXQTZLOYHQ&s"
+    }
+  ];
+  
 function Dashboard() {
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
@@ -56,30 +80,11 @@ function Dashboard() {
                         </h2>
                         <div className="items-center md:justify-evenly max-md:w-full max-md:justify-between max-md:pr-2 flex gap-6">
                             <ul className="flex items-center justify-start gap-1">
-                                <li
-                                    title="Kamen Rider Build"
-                                    className="rounded-lg bg-black w-9 h-9 bg-center bg-cover bg-no-repeat"
-                                    style={{
-                                        backgroundImage: `url(https://i.redd.it/flv2i4x4nuce1.jpeg)`,
-                                    }}></li>
-                                <li
-                                    title="Kamen Rider Gavv"
-                                    className="rounded-lg bg-black w-9 h-9 bg-center bg-cover bg-no-repeat"
-                                    style={{
-                                        backgroundImage: `url(https://pm1.aminoapps.com/9472/17d9cb84a1e07834a78cc6175b3f2a77fd1aa772r1-712-596_hq.jpg)`,
-                                    }}></li>
-                                <li
-                                    title="Kimetsu no Yaiba"
-                                    className="rounded-lg bg-black w-9 h-9 bg-center bg-cover bg-no-repeat"
-                                    style={{
-                                        backgroundImage: `url(https://i.pinimg.com/736x/51/ed/74/51ed74680dfb6a17e0c12eaffef7f6c1.jpg)`,
-                                    }}></li>
-                                <li
-                                    title="One Piece"
-                                    className="rounded-lg bg-black w-9 h-9 bg-center bg-cover bg-no-repeat"
-                                    style={{
-                                        backgroundImage: `url(https://cdn-media.sforum.vn/storage/app/media/ctv_seo8/nh%C3%A2n%20v%E1%BA%ADt%20ch%C3%ADnh%20c%E1%BB%A7a%20one%20piece/nhan-vat-chinh-cua-one-piece-1.jpg)`,
-                                    }}></li>
+                                {
+                                    lofis.map((lofi) => {
+                                        return <Audio id={lofi.id} title={lofi.title} url={lofi.url}  /> 
+                                    })
+                                }
                             </ul>
                             <button
                                 className="w-[98px] h-9 bg-white text-(--color-primary) border-2 border-(--color-primary) rounded-lg cursor-pointer font-medium text-[14px]"

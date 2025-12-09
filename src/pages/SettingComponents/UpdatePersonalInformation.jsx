@@ -9,7 +9,6 @@ import PersonalInput from "./PersonalInput";
 import WorkingModal from "../../components/WorkingModal";
 import PasswordConfirmModal from "../../components/PasswordConfirmModal";
 import MessageLog from "../../components/MessageLog";
-import BirthdayInput from "./BirthdayInput";
 import UserService from "../../services/userServices";
 import LoadingModal from "../LoadingModal";
 
@@ -20,7 +19,6 @@ function UpdatePersonalInformation({ avatar }) {
     const [newEmail, setNewEmail] = useState("");
     const nameRef = useRef(null);
     const emailRef = useRef(null);
-    const phoneRef = useRef(null);
 
     //Ham React Query
     const queryClient = useQueryClient();
@@ -43,7 +41,12 @@ function UpdatePersonalInformation({ avatar }) {
                 setShowLog(-1);
             }
         },
+        onMutate: () => {
+            setLoading(true) 
+            setShowLog(0) 
+        }, 
         onSuccess: () => {
+            setLoading(false) 
             queryClient.invalidateQueries(["user"]); //Fetch lai du lieu user => Update lai du lieu
         },
     });
@@ -52,12 +55,18 @@ function UpdatePersonalInformation({ avatar }) {
         mutationFn: async ({ email, password }) => {
             return await UserService.updateEmail({ email, password });
         },
+        onMutate: () => {
+            setShowLog(0) 
+            setLoading(true) 
+        }, 
         onSuccess: () => {
+            setLoading(false) 
             setShowLog(1);
             setPasswordModal(false);
             queryClient.invalidateQueries(["user"]);
         },
         onError: () => {
+            setLoading(false) 
             setShowLog(-1);
         },
     });
@@ -65,9 +74,7 @@ function UpdatePersonalInformation({ avatar }) {
     const updateInfo = () => {
         const newInfo = {
             name: nameRef.current.value,
-            // birthDay: birthdayRef.current.value,
             email: emailRef.current.value,
-            phoneNumber: phoneRef.current.value,
         };
     };
     const handleInformationClick = () => {
@@ -83,7 +90,6 @@ function UpdatePersonalInformation({ avatar }) {
         //Không đổi email → update bình thường
         updateInformation.mutate({
             name: nameRef.current.value,
-            phoneNumber: phoneRef.current.value,
         });
     };
 
@@ -117,8 +123,16 @@ function UpdatePersonalInformation({ avatar }) {
                                 type: "spring",
                                 stiffness: 220,
                                 damping: 12,
-                            }}>
-                            Save Changes
+                            }}
+                            style={{
+                                pointerEvents: (loading? 'none' : 'auto'), 
+                                opacity: (loading ? 0.7 : 1)
+                            }}
+                            
+                            >
+                            {
+                                (loading? 'Saved...': 'Save Changes') 
+                            }
                         </motion.button>
                     </div>
                 </>

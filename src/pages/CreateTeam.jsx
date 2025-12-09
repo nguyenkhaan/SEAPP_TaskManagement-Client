@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router";
 import { useState } from "react";
@@ -42,17 +42,7 @@ function CreateTeam() {
                 banner,
                 description
             );
-            return responseData;
-        },
-        onSuccess: async (responseData) => {
-            // Tắt loading khi thành công
-            setLoading(false);
-
-            queryClient.invalidateQueries(["teams"]); //Fetch du lieu lai cho thang teams, them await de load xong thi moi cho hien thi UI
-            setShowCodeModal(true);
-            setShowLog(1);
-            setCode(responseData.data.code);
-            navigate('/app/teams')  //Tao nhom thanh cong thi tien hanh dieu huong 
+            //Tien hanh gui mail cho tung nguoi 
             emails.forEach((email) => {
                 console.log("Dang tien hanh gui mail");
                 sendEmail(
@@ -61,6 +51,17 @@ function CreateTeam() {
                     responseData.data.code
                 );
             });
+            return responseData;
+        },
+        onSuccess: async (responseData) => {
+            // Tắt loading khi thành công
+            setLoading(false);
+            queryClient.invalidateQueries(["teams"]); //Fetch du lieu lai cho thang teams, them await de load xong thi moi cho hien thi UI
+            setShowLog(1);
+            setCode(responseData.data.code);
+            setShowCodeModal(true);
+            
+
         },
         onError: () => {
             // Tắt loading khi lỗi và hiện log lỗi
@@ -96,6 +97,11 @@ function CreateTeam() {
             description: editor?.getText() ?? "",
         });
     };
+    useEffect(() => {
+        if (showCodeModal == false && code) {
+            navigate('/app/teams')
+        }
+    } , [showCodeModal])
     return (
         <WorkingLayout>
             <div className="w-full h-250 md:px-2 px-3 lg:px-0 pb-20">
@@ -222,7 +228,7 @@ function CreateTeam() {
                                 setShowLog(0);
                                 setCode(null);
                                 setShowCodeModal(false);
-
+                                alert('Canceled creating...')
                             }}
                             >
                             Cancel

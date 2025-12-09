@@ -178,6 +178,9 @@ function ViewTeam({
             const responseData = await TeamServies.refreshCode(currentTeamID)
             return responseData
         }, 
+        onMutate: () => {
+            setIsRefreshCode(true)
+        }, 
         onSuccess: () => {
             setIsRefreshCode(false) 
             queryClient.invalidateQueries([`team-${currentTeamID}`])
@@ -185,6 +188,7 @@ function ViewTeam({
         onError: () => {} 
     })
     const handleCode = () => {
+        setIsRefreshCode(false) 
         setShowCode(!showCode)
     }
 
@@ -205,6 +209,7 @@ function ViewTeam({
                     leaderName={teamQueryData.data.leader.name}
                     iconUrl={teamQueryData.data.teamData.icon}
                     teamID={ParamServices.getID()}
+                    viceLeaderName = {teamQueryData.data.viceLeader ? teamQueryData.data.viceLeader.name : null}
                 />
                 {/* Description */}
                 <div className="flex cursor-pointer items-center mt-6 md:mt-8 text-lg md:text-xl font-md text-(--color-text-desc) justify-start gap-3">
@@ -287,14 +292,14 @@ function ViewTeam({
                         <button 
                             className="mt-2 rounded-md py-3 px-6 font-semibold bg-(--color-primary) text-white cursor-pointer shadow-md"
                             onClick={() => {
-                                setIsRefreshCode(false) 
                                 updateCodeMutation.mutate() //Tien hanh update code 
                             }}
                             style={{
-                                pointerEvents: (isRefreshCode? 'none' : 'auto')
+                                pointerEvents: isRefreshCode ? "none" : "auto",
+                                opacity: isRefreshCode ? 0.7 : 1,
                             }}
                         >
-                            Làm mới
+                            {isRefreshCode? 'Refreshing...' : 'Refresh'}
                         </button>
                     </div>
                 ) : (
@@ -308,22 +313,22 @@ function ViewTeam({
                             style={{
                                 color: `var(${getStatusColor("Completed")})`,
                             }}>
-                            Completed:{" "}
-                            {teamTaskStatisticData.data.data.compltedTasks}
+                            Completed:
+                            {" " + (teamTaskStatisticData.data.data.compltedTasks ? teamTaskStatisticData.data.data.compltedTasks : 0)}
                         </li>
                         <li
                             style={{
                                 color: `var(${getStatusColor("in progress")})`,
                             }}>
-                            Progress:{" "}
-                            {teamTaskStatisticData.data.data.inProgressTasks}
+                            Progress:
+                            {" " + (teamTaskStatisticData.data.data.inProgressTasks ? teamTaskStatisticData.data.data.inProgressTasks : 0)}
                         </li>
                         <li
                             style={{
                                 color: `var(${getStatusColor("not started")})`,
                             }}>
-                            To Do:{" "}
-                            {teamTaskStatisticData.data.data.toDoTasks}
+                            To Do:
+                            {" " + (teamTaskStatisticData.data.data.toDoTasks? teamTaskStatisticData.data.data.toDoTasks : 0)}
                         </li>
                     </ul>
                     <div className="flex items-center gap-4">

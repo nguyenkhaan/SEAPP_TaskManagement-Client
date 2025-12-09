@@ -57,11 +57,6 @@ function TeamMember({
                         );
                     })}
             </ul>
-            <div className="px-2 w-full">
-                <button className="w-full h-[62px] rounded-md border-2 font-md text-(--color-primary) border-dashed font-semibold text-2xl border-(--color-primary) cursor-pointer">
-                    + Add Member
-                </button>
-            </div>
         </article>
     );
 }

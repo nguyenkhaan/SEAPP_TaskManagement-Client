@@ -7,6 +7,7 @@ import MessageLog from "../../components/MessageLog";
 import SectionSetting from "./SectionSettings";
 import UserService from "../../services/userServices";
 function UpdatePassword() {
+    const [loading, setLoading] = useState(false);
     const updatePasswordMutation = useMutation({
         mutationFn: async ({ oldPassword, newPassword }) => {
             const responseData = await UserService.changePassword(
@@ -15,10 +16,16 @@ function UpdatePassword() {
             );
             console.log("Log ra tu setting password", responseData);
         },
+        onMutate: () => {
+            setLoading(true);
+            setShowLog(0);
+        },
         onSuccess: () => {
+            setLoading(false);
             setShowLog(1);
         },
         onError: () => {
+            setLoading(false);
             setShowLog(-1);
         },
     });
@@ -42,11 +49,13 @@ function UpdatePassword() {
         setShowLog(-1);
     };
     return (
-        <SectionSetting header="Change Password" description="Enhance your account security by updating your password regularly. Create a strong, new password to protect your data and ensure continued safe access to your account.">
+        <SectionSetting
+            header="Change Password"
+            description="Enhance your account security by updating your password regularly. Create a strong, new password to protect your data and ensure continued safe access to your account.">
             <>
                 <form
                     id="change-password-form"
-                    className="w-full grid grid-rows-2 md:grid-cols-1 items-center justify-between gap-y-4 md:gap-x-16"
+                    className="w-full grid grid-rows-1 md:grid-cols-2 items-center justify-between gap-y-4 md:gap-x-16"
                     onSubmit={handleSubmit}>
                     <div>
                         <label className="font-md text-lg md:text-xl text-(--color-text)">
@@ -87,8 +96,12 @@ function UpdatePassword() {
                             type: "spring",
                             stiffness: 220,
                             damping: 12,
+                        }}
+                        style={{
+                            pointerEvents: loading ? "none" : "auto",
+                            opacity: loading ? 0.7 : 1,
                         }}>
-                        Save Changes
+                        {loading ? "Saved..." : "Save changes"}
                     </motion.button>
                 </div>
             </>

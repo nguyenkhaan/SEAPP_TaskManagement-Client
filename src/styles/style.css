@@ -108,3 +108,23 @@
 [data-app-theme="dark"] .avatar-info {
     color: white; 
 }
+
+/* Calendar popup text */
+.react-calendar,
+.react-calendar__viewContainer,
+.react-calendar__navigation button,
+.react-calendar__tile {
+  color: var(--color-text) !important;
+}
+.react-calendar__tile:hover {
+    background-color: var(--color-block-item-2) !important;
+}
+
+/* Nếu background calendar bạn muốn giữ theme */
+.react-calendar {
+  background: var(--color-background-2) !important;
+}
+.react-calendar__tile--active {
+    background: #2563eb !important; /* màu xanh primary */
+    color: white !important;
+}

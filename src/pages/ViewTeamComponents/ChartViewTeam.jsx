@@ -33,8 +33,8 @@ function ChartViewTeam({
                                 ['.MuiChartsLegend-series']: {
                                     gap: '7px',
                                     fontSize: (window.innerWidth <= 768? 16 : 18),
-                                    fontWeight: 500
-
+                                    fontWeight: 500, 
+                                    color: 'var(--color-text)'
                                 },
                             },
                         },
