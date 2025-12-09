@@ -20,24 +20,23 @@ function Dashboard() {
             return () => clearTimeout(id);
         }
     }, []);
-    const [isPlaying , setIsPlaying] = useState(false) 
+    const [isPlaying, setIsPlaying] = useState(false);
     const musicClick = () => {
-        const audio = document.getElementById('bg-audio')
-        if (audio) 
-        {
-            if (!isPlaying) audio.play() 
-                else audio.pause() 
-            setIsPlaying(!isPlaying)
-
-        }
-    }
-    const musicDoubleClick = () => {
-        const audio = document.getElementById('bg-audio') 
+        const audio = document.getElementById("bg-audio");
         if (audio) {
-            setIsPlaying(false) 
-            audio.stop() 
+            if (!isPlaying) audio.play();
+            else audio.pause();
+            setIsPlaying(!isPlaying);
         }
-    }
+    };
+    const musicDoubleClick = () => {
+        const audio = document.getElementById("bg-audio");
+        if (audio) {
+            setIsPlaying(false);
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    };
     const { data, isPending, error } = useQuery({
         queryKey: ["task-overview"],
         queryFn: async () => {
@@ -82,11 +81,10 @@ function Dashboard() {
                                         backgroundImage: `url(https://cdn-media.sforum.vn/storage/app/media/ctv_seo8/nh%C3%A2n%20v%E1%BA%ADt%20ch%C3%ADnh%20c%E1%BB%A7a%20one%20piece/nhan-vat-chinh-cua-one-piece-1.jpg)`,
                                     }}></li>
                             </ul>
-                            <button 
+                            <button
                                 className="w-[98px] h-9 bg-white text-(--color-primary) border-2 border-(--color-primary) rounded-lg cursor-pointer font-medium text-[14px]"
                                 onClick={musicClick}
-                                onDoubleClick={musicDoubleClick}
-                                >
+                                onDoubleClick={musicDoubleClick}>
                                 <i class="fa-solid fa-headphones mr-2"></i>
                                 Music
                             </button>
