@@ -233,7 +233,7 @@ export default function LeftContent() {
                         color="#403D3D"
                         border="true"
                         icon="google"
-                        action={login}
+                        action={() => login()}
                     />
                 </div>
             </div>
