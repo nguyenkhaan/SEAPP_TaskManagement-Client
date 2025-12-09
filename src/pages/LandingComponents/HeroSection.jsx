@@ -26,7 +26,7 @@ function HeroSection() {
                     </h2>
                     {/* paragraph */}
                     <p
-                        className=" block xl:w-170 lg:w-100 w-screen lg:px-0 md:px-3 px-5 text-(--color-text) xl:pt-6 lg:pt-5 md:pt-4 pt-1 lg:text-start text-center lg:text-2xl md:text-[22px] text-[20px] mx-auto">
+                        className=" block xl:w-170 lg:w-100 max-sm:w-screen lg:px-0 md:px-3 px-5 text-(--color-text) xl:pt-6 lg:pt-5 md:pt-4 pt-1 lg:text-start text-center lg:text-2xl md:text-[22px] text-[20px] max-sm:mx-auto">
                         The ultimate task management solution for teams and
                         individuals. Stay organized, meet deadlines, and achieve
                         your goals with NoTask.
