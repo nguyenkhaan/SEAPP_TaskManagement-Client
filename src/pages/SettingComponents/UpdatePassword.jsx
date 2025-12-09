@@ -46,7 +46,7 @@ function UpdatePassword() {
             <>
                 <form
                     id="change-password-form"
-                    className="w-full grid grid-rows-2 md:grid-cols-2 items-center justify-between gap-y-4 md:gap-x-16"
+                    className="w-full grid grid-rows-2 md:grid-cols-1 items-center justify-between gap-y-4 md:gap-x-16"
                     onSubmit={handleSubmit}>
                     <div>
                         <label className="font-md text-lg md:text-xl text-(--color-text)">

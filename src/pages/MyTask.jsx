@@ -19,12 +19,12 @@ function MyTask() {
         queryKey: ["tasks-me"],
         queryFn: async () => {
             const responseData = await TeamServies.getAllTeamInfo();
-            const myData = await TaskServices.getTaskGroupByTeam() 
-            console.log('Log ra tu My Tasks: ' , myData.data.data.teams) 
-            return myData.data
+            const myData = await TaskServices.getTaskGroupByTeam();
+            console.log("Log ra tu My Tasks: ", myData.data.data.teams);
+            return myData.data;
         },
-        gcTime: 8 * 1000 * 60, 
-        staleTime: 8 * 1000 * 60 
+        gcTime: 8 * 1000 * 60,
+        staleTime: 8 * 1000 * 60,
     });
 
     if (!data || isPending) return <LoadingModal />;
@@ -36,24 +36,26 @@ function MyTask() {
                     <h2 className="font-md text-[28px] md:text-[40px] text-(--color-text)">
                         My Tasks
                     </h2>
-                    <div className="md:w-11 md:h-11 w-10 h-10 bg-(--color-primary) rounded-md md:rounded-lg flex items-center justify-center">
-                        <i class="fa-solid fa-filter font-semibold text-white text-xl md:text-2xl"></i>
-                    </div>
                 </div>
                 <span className="block font-md text-base max-md:px-6 md:text-xl text-(--color-text)">
                     Manage and monitor your tasks
                 </span>
                 <div className="flex w-full min-h-30 flex-col md:items-start items-center justify-start mt-6 gap-6 md:gap-7">
-                    {data.data.teams.map((taskByGroup, index) => {
-                        return (<TaskByGroup
-                            width={"100%"}
-                            groupTitle={taskByGroup.teamName}
-                            description={taskByGroup.teamDescription}
-                            leaderName={taskByGroup.leader.name}
-                            teamID={taskByGroup.teamId}
-                            tasks = {taskByGroup.tasks}
-                        /> ) 
-                    })}
+                    {data.data.teams.length === 0 ? (
+                        <p className="text-(--color-text) md:text-xl text-base w-full text-center italic">You haven't joined any team</p>
+                    ) : (
+                        data.data.teams.map((taskByGroup, index) => (
+                            <TaskByGroup
+                                key={index}
+                                width="100%"
+                                groupTitle={taskByGroup.teamName}
+                                description={taskByGroup.teamDescription}
+                                leaderName={taskByGroup.leader.name}
+                                teamID={taskByGroup.teamId}
+                                tasks={taskByGroup.tasks}
+                            />
+                        ))
+                    )}
                 </div>
             </div>
         </WorkingLayout>

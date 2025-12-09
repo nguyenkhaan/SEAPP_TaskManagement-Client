@@ -23,7 +23,7 @@ import { useMutation , useQueryClient } from '@tanstack/react-query'
 import ParamServices from '../services/urlParams'
 import MessageLog from '../components/MessageLog'
 function CreateTask() {
-
+    const [loading , setLoading] = useState(false) 
     const { day, month, year, weekDay } = getCurrentDate()
     const [data, setData] = useState({})
     const [dueTime , setDueTime] = useState(new Date()) 
@@ -80,16 +80,21 @@ function CreateTask() {
     const createTaskMutation = useMutation({
         mutationFn : async ({title , description , dueTime , important , urgent}) => {
             const responseData = await TaskServices.createTask(teamID , title , description , dueTime , important , urgent)
-            console.log('Log ra tu create task' , responseData)
             return responseData
         }, 
+        onMutate: () => {
+            setLoading(true) 
+            setShowLog(false)
+        }, 
         onSuccess: (data) => {
+            setLoading(false) 
             setShowLog(1) 
             // Lat nua coi nen update lai cai cached query nao 
             queryClient.invalidateQueries([`team-tasks-${teamID}`])
             queryClient.invalidateQueries([`tasks-me`])
         },  
         onError: (data) => {
+            setLoading(false) 
             setShowLog(-1) 
         }
     })
@@ -144,8 +149,15 @@ function CreateTask() {
                     </div>
                     <button type='submit'
                         className='px-4 top-35 md:top-43 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
-                            font-semibold cursor-pointer shadow-lg rounded-md'>
-                        Create Task
+                            font-semibold cursor-pointer shadow-lg rounded-md'
+                        style={{
+                            pointerEvents: (loading? 'none' : 'auto'), 
+                            opacity: (loading?  0.7 : 1) 
+                        }}        
+                            >
+                        {loading? 'Creating...' : 
+                            'Create Task' 
+                        } 
                     </button>
                 </form>
                 <MessageLog setShowLog={setShowLog} showLog={showLog} message={(showLog == 1 ? 'Thêm nhiệm vụ thành công' : 'Thêm nhiệm vụ thất bại')}   /> 

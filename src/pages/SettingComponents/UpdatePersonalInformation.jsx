@@ -14,11 +14,11 @@ import UserService from "../../services/userServices";
 import LoadingModal from "../LoadingModal";
 
 function UpdatePersonalInformation({ avatar }) {
+    const [loading , setLoading] = useState(false) 
     const [showLog, setShowLog] = useState(0); //0 dai dien cho false, nen ta set lai thanh false cung se la 0
     const [passwordModal, setPasswordModal] = useState(false);
     const [newEmail, setNewEmail] = useState("");
     const nameRef = useRef(null);
-    const birthdayRef = useRef(null);
     const emailRef = useRef(null);
     const phoneRef = useRef(null);
 
@@ -92,7 +92,7 @@ function UpdatePersonalInformation({ avatar }) {
         <>
             <SectionSetting>
                 <>
-                    <form className="w-full grid grid-rows-4 md:grid-cols-2 md:grid-rows-2 gap-x-18 gap-y-4 md:gap-y-6">
+                    <form className="w-full grid grid-rows-4 md:grid-cols-2 md:grid-rows-1 gap-x-18 gap-y-4 md:gap-y-6">
                         <PersonalInput
                             ref={nameRef}
                             title="Full Name"
@@ -102,12 +102,6 @@ function UpdatePersonalInformation({ avatar }) {
                             ref={emailRef}
                             title="Email Address"
                             value={data.email}
-                        />
-                        <BirthdayInput ref={birthdayRef} />
-                        <PersonalInput
-                            ref={phoneRef}
-                            title="Phone number"
-                            value={"09992828283"}
                         />
                     </form>
                     <div className="w-full flex items-center mt-4 justify-end">

@@ -15,7 +15,10 @@ import sendEmail from "../services/sendEmail";
 import ImageUpload from "./TextEditorComponents/ImageUpload";
 import TeamServies from "../services/teamServices";
 import Modal from "../components/modal";
+import { useNavigate } from "react-router";
 function CreateTeam() {
+    const navigate = useNavigate() 
+    const [loading, setLoading] = useState(false);
     const [emails, setEmails] = useState([]);
     const [focused, setFocused] = useState(false);
     const [showCodeModal, setShowCodeModal] = useState(false);
@@ -31,6 +34,8 @@ function CreateTeam() {
             banner = null,
             description = "",
         }) => {
+            // Bật loading khi bắt đầu mutation
+            setLoading(true);
             const responseData = await TeamServies.createTeam(
                 name,
                 icon,
@@ -40,18 +45,26 @@ function CreateTeam() {
             return responseData;
         },
         onSuccess: async (responseData) => {
-            queryClient.invalidateQueries(["teams"]); //Fetch du lieu lai cho thang teams, them await de load xong thi moi cho hien thi UI 
+            // Tắt loading khi thành công
+            setLoading(false);
+
+            queryClient.invalidateQueries(["teams"]); //Fetch du lieu lai cho thang teams, them await de load xong thi moi cho hien thi UI
             setShowCodeModal(true);
             setShowLog(1);
             setCode(responseData.data.code);
+            navigate('/app/teams')  //Tao nhom thanh cong thi tien hanh dieu huong 
             emails.forEach((email) => {
-                console.log('Dang tien hanh gui mail')
+                console.log("Dang tien hanh gui mail");
                 sendEmail(
-                    email , responseData.data.data.teamName , responseData.data.code  
-                )
-            })
+                    email,
+                    responseData.data.data?.teamName,
+                    responseData.data.code
+                );
+            });
         },
         onError: () => {
+            // Tắt loading khi lỗi và hiện log lỗi
+            setLoading(false);
             setShowLog(-1);
         },
     });
@@ -75,14 +88,13 @@ function CreateTeam() {
         mode: "onSubmit",
     });
     const onSubmit = async (data) => {
-        
         createTeamMutation.mutate({
-            name: data.teamName, 
-            icon : image, 
-            banner: null, 
-            description: editor.getText() //Chu y: Ham mutation chi nhan vao 1 tham so duy nhat 
-        })      
-       
+            name: data.teamName,
+            icon: image,
+            banner: null,
+            // an toàn hơn nếu editor chưa sẵn sàng
+            description: editor?.getText() ?? "",
+        });
     };
     return (
         <WorkingLayout>
@@ -96,7 +108,7 @@ function CreateTeam() {
                             Fill in the details below to set up your new team
                         </span>
                     </div>
-                    
+
                     <div className="flex items-center justify-between gap-2">
                         <Link to="/app/teams">
                             <motion.button
@@ -120,11 +132,10 @@ function CreateTeam() {
                                 ease: "easeInOut",
                             }}
                             onClick={() => {
-                                if (code) setShowCodeModal(true) 
-                            }}
-                            >
-                                <i class="fa-solid fa-cloud"></i>
-                            </motion.div>
+                                if (code) setShowCodeModal(true);
+                            }}>
+                            <i class="fa-solid fa-cloud"></i>
+                        </motion.div>
                     </div>
                 </div>
 
@@ -204,7 +215,16 @@ function CreateTeam() {
                                 duration: 0.2,
                                 ease: "easeInOut",
                                 transition: "all",
-                            }}>
+                            }}
+                            onClick={() => {
+                                createTeamMutation.reset();
+                                setLoading(false);
+                                setShowLog(0);
+                                setCode(null);
+                                setShowCodeModal(false);
+
+                            }}
+                            >
                             Cancel
                         </motion.button>
                         <motion.button
@@ -217,8 +237,12 @@ function CreateTeam() {
                                 transition: "all",
                             }}
                             type="submit"
+                            style={{
+                                pointerEvents: (loading ? 'none' : 'auto'),
+                                opacity: (loading ? 0.7 : 1)
+                            }}
                             form="create-team-form">
-                            Create Team
+                            {!loading ? "Create Team" : "Creating..."}
                         </motion.button>
                     </div>
                 </div>

@@ -22,9 +22,6 @@ function TaskByGroupViewTeam({ width = "100%", height = "100%", teamID }) {
                 <h2 className="md:text-[32px] text-[24px] font-medium">
                     {data.data.data.tasks.length} Tasks 
                 </h2>
-                <div className=" rounded-md md:rounded-lg md:h-11 md:w-11 w-9 h-9 bg-(--color-primary) flex items-center justify-center absolute text-white text-base font-medium right-4 top-5 md:top-7 md:text-xl shadow-lg cursor-pointer">
-                    <i class="fa-solid fa-filter"></i>
-                </div>
             </div>
             <ul className="w-full flex-1 2xl:px-3 md:px-0 overflow-y-scroll overflow-x-hidden wrapper h-full flex flex-col items-center pb-6">
                 {data.data.data.tasks.map((task) => {

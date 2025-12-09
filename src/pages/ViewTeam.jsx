@@ -27,6 +27,7 @@ function ViewTeam({
     const currentTeamID = ParamServices.getID();
     if (!currentTeamID || isNaN(currentTeamID)) return <UrlError />;
     const [showLog, setShowLog] = useState(0);
+    const [isRefreshCode , setIsRefreshCode] = useState(false) 
     const [showDesc, setShowDesc] = useState(false);
     const [showChart, setShowChart] = useState(false);
     const [showCode, setShowCode] = useState(false);
@@ -178,6 +179,7 @@ function ViewTeam({
             return responseData
         }, 
         onSuccess: () => {
+            setIsRefreshCode(false) 
             queryClient.invalidateQueries([`team-${currentTeamID}`])
         }, 
         onError: () => {} 
@@ -285,7 +287,11 @@ function ViewTeam({
                         <button 
                             className="mt-2 rounded-md py-3 px-6 font-semibold bg-(--color-primary) text-white cursor-pointer shadow-md"
                             onClick={() => {
+                                setIsRefreshCode(false) 
                                 updateCodeMutation.mutate() //Tien hanh update code 
+                            }}
+                            style={{
+                                pointerEvents: (isRefreshCode? 'none' : 'auto')
                             }}
                         >
                             Làm mới

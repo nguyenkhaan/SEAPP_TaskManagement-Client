@@ -43,7 +43,7 @@ function ViewTask() {
 
             setTimeout(() => {
                 navigate(`/app/view-team?id=${data.teamId}`);
-            }, 1800);
+            }, 800);
         },
         onError: () => {
             setShowLog(-1);

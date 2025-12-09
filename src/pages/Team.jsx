@@ -61,11 +61,6 @@ function Team() {
                     Manage and collaborate with your friends
                 </h2>
 
-                <input
-                    className="md:w-[602px] md:text-lg w-full md:h-[42px] mt-2 h-9 md:rounded-xl rounded-lg px-5 text-(--color-text) font-medium shadow-[0_4px_10px_rgba(0,0,0,0.1)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] outline-none transition-all duration-300 bg-(--color-search)"
-                    placeholder="Enter your teamm"
-                />
-
                 <div className="mt-8 md:border  overflow-y-scroll wrapper border(--color-border) rounded-md py-5 px-4 min-h-[700px] w-full">
                     <div className="w-full flex items-center justify-end gap-3 mb-3">
                         <input
