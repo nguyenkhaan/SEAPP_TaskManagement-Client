@@ -103,7 +103,7 @@ export default function LeftContent() {
                 setLoading(true);
                 const responseData = await loginGoogleSuccess(tokenResponse);
                 // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
-                setShowLog(true); //Tien hanh in ra Log message
+                setShowLog(2); //Tien hanh in ra Log message
                 Cookies.set("user", responseData.data.token, {
                     secure: true,
                     expires: 7,
@@ -245,7 +245,7 @@ export default function LeftContent() {
                 showLog={showLog}
                 setShowLog={setShowLog}
                 message={
-                    showLog == 1 ? "Plaease your email !!!" : "Đăng ký thất bại"
+                    showLog == 1 ? "Plaease your email !!!" : (showLog == 2? "Đăng nhập thành công" : "Đăng ký thất bại") 
                 }
             />
         </div>
