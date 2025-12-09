@@ -148,7 +148,7 @@ function CreateTask() {
                         Create Task
                     </button>
                 </form>
-                <MessageLog setShowLog={setShowLog} showLog={showLog} message={showLog == 1 ? 'Thêm nhiệm vụ thành công' : 'Thêm nhiệm vụ thất bại'}   /> 
+                <MessageLog setShowLog={setShowLog} showLog={showLog} message={(showLog == 1 ? 'Thêm nhiệm vụ thành công' : 'Thêm nhiệm vụ thất bại')}   /> 
             </div>
         </WorkingLayout>
     )
