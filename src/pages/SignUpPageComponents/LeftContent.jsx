@@ -16,6 +16,7 @@ import checkLogin from "../../services/checkLogin";
 import Spinner from "../../components/Spinner";
 import useSound from "use-sound";
 import { loginGoogleSuccess } from "../../services/loginGoogle";
+import Cookies from "js-cookie";
 export default function LeftContent() {
     const soundUrl = 'sound/pop.mp3'
     const [play] = useSound(soundUrl , {
