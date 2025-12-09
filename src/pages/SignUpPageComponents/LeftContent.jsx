@@ -31,6 +31,7 @@ export default function LeftContent() {
         formState: { errors },
     } = formHandleMethod;
     const [registered, setRegistered] = useState(false);
+    const [isLogin , setIsLogin] = useState(false) 
     const [logMessages, setLogMessages] = useState([]);
     const checkPolicy = useRef(null);
     const [showLog, setShowLog] = useState(0);
@@ -87,17 +88,54 @@ export default function LeftContent() {
         }
     }, [registered]);
 
+
     const login = useGoogleLogin({
+        //Tao them code de ngan chan nguoi khac login them tai khoan vao
         onSuccess: async (tokenResponse) => {
-            const userInfo = await axios
-                .get("https://www.googleapis.com/oauth2/v3/userinfo", {
-                    headers: {
-                        Authorization: `Bearer ${tokenResponse.access_token}`,
-                    },
-                })
-                .then((res) => res.data);
+            if (checkLogin()) {
+                alert("Vui lòng đăng xuất trước khi sử dụng lại dịch vụ");
+                return;
+            }
+            setLoading(true);
+            try {
+                setLoading(true);
+                const responseData = await loginGoogleSuccess(tokenResponse);
+                // console.log(responseData) //Du lieu gui ve duoc tu dong bien thanh object va nam trong truogn data
+                setShowLog(true); //Tien hanh in ra Log message
+                Cookies.set("user", responseData.data.token, {
+                    secure: true,
+                    expires: 7,
+                }); //Tien hanh luu JWT token vao trong storage
+                // console.log("Da luu token vao trong storage");
+
+                
+                setIsLogin(true);
+            } catch (error) {
+                setShowLog(-1);
+                if (error.response?.status == 400) console.log("Bad Request");
+                if (error.response?.status == 401)
+                    console.log("Unauthorized");
+                if (error.response?.status == 403) console.log("Forbidden");
+            }
+            finally{
+                setLoading(false);
+            }
         },
+        onError: (error) => {
+            setShowLog(-1);
+            setLoading(false);
+        },
+        flow: "auth-code",
+        scope: "openid email profile",
     });
+    useEffect(() => {
+        if (isLogin) {
+            const timeOutID = setTimeout(() => {
+                navigate("/app/dashboard");
+            }, 4000); //Chuyen dia diem sau 4000s
+            return () => clearTimeout(timeOutID);
+        }
+    }, [isLogin]);
     return (
         <div className="h-full w-full relative bg-(--color-background-1) px-6 md:px-[100px] pt-10 md:pt-15 pb-10">
             {/* Go back home */}
