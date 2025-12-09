@@ -2,7 +2,7 @@ import React from "react";
 import { useContext , createContext } from "react";
 import { useState } from "react";
 import useSound from "use-sound";
-
+import { useCallback , useMemo } from "react";
 const SoundContext = createContext() 
 
 function SoundProvider({children})
@@ -26,12 +26,21 @@ function SoundProvider({children})
             setIsPlaying(false) 
         }
     } 
-    const toggleMusic = () => {
-        if (isPlaying) stopPlayMusic() 
-            else playMusic() 
-    }
+    const toggleSound = useCallback(() => {
+        if (isPlaying) {
+          stop();
+          setIsPlaying(false);
+        } else {
+          play();
+          setIsPlaying(true);
+        }
+      }, [isPlaying, play, stop]);
+      const value = useMemo(() => ({
+        isPlaying,
+        toggleSound,
+      }), [isPlaying, toggleSound]);
     return (
-        <SoundContext.Provider value={{playMusic , stopPlayMusic , toggleMusic}}>   
+        <SoundContext.Provider value={value}>   
             {children}
         </SoundContext.Provider>
     )

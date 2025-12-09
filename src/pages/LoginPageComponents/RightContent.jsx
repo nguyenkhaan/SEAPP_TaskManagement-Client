@@ -17,6 +17,7 @@ import LoadingHandle from "../../services/loadingHandle";
 import MessageLog from "../../components/MessageLog";
 import Cookies from "js-cookie";
 import checkLogin from "../../services/checkLogin";
+import useSound from "use-sound";
 export default function RightContent() {
     const formHandleMethod = useForm({
         mode: "onSubmit",
@@ -27,6 +28,9 @@ export default function RightContent() {
     const [isLoading, setIsLoading] = useState(false); //Bien isLoading
     const [showLog, setShowLog] = useState(0); //Bien dung de nhay messageLog, ban dau ca 2 deu dat la false vi khong co gi de tai
     const [isLogin, setIsLogin] = useState(false);
+    const [play] = useSound('sound/pop.mp3' , {
+        volume: 0.5 
+    })
     const navigate = useNavigate();
     const {
         handleSubmit,
@@ -169,7 +173,7 @@ export default function RightContent() {
                 </div>
 
                 <div className="flex items-center text-(--color-text) font-[Inter] font-medium mb-5">
-                    <Checkbox style={{color: 'var(--color-text)'}}/>
+                    <Checkbox style={{color: 'var(--color-text)'}} onChange={play}  />
                     <p className="text-(--color-text)">Remember me</p>
                    
                         <Link className="ml-auto cursor-pointer hover:underline" to={'/forgot-password'}>Forgot password?</Link>
