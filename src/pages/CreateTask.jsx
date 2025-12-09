@@ -69,7 +69,7 @@ function CreateTask() {
         content: '<p>Hello world</p>',
         editorProps: {
             attributes: {
-                class: 'w-full h-[500px] border-2 overflow-y-auto rounded-md px-3 bg-slate-50 py-2 text-base border-slate-200  bg-white text-black outline-0'
+                class: 'w-full h-[500px] border-2 overflow-y-auto rounded-md px-3 bg-slate-50 py-2 text-base border-slate-200  bg-(--color-block-item-2) text-black outline-0'
             }
         }
     })
@@ -127,7 +127,7 @@ function CreateTask() {
                         <div className='flex-1'>
                             <TitleInput formHandle={formHandle} onTitleChange={(value) => setTitle(value)} />
                             <PriorityChoice formHandle={formHandle} onPriorityChange={value => setPriority(value)} />
-                            <p className='mt-4 text-black'>Status: <span className='text-(--color-not-started)'>Not started</span></p>
+                            <p className='mt-4 text-(--color-text)'>Status: <span className='text-(--color-not-started)'>Not started</span></p>
                             <div className='w-full mb-4 mt-2 flex max-md:flex-col items-start xl:items-center justify-between'>
                                 <DateInput value={dueTime} onChange={setDueTime} /> 
                                 <p className='text-sm text-(--color-text-desc) mt-4'>Created On <span>{day}/{month}/{year}</span></p>
