@@ -69,7 +69,7 @@ function CreateTask() {
         content: '<p>Hello world</p>',
         editorProps: {
             attributes: {
-                class: 'w-full h-[500px] border-2 overflow-y-auto rounded-md px-3 bg-slate-50 py-2 text-base border-slate-200  bg-(--color-block-item-2) text-black outline-0'
+                class: 'w-full h-[500px] border-2 overflow-y-auto rounded-md px-3 py-2 text-base border-slate-200  bg-(--color-block-item-2) text-black outline-0'
             }
         }
     })
