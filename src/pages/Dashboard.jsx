@@ -9,10 +9,8 @@ import TaskStatus from "./DashboardComponents/TaskStatus";
 import GroupStatus from "./DashboardComponents/GroupStatus";
 import LoadingModal from "./LoadingModal";
 import TaskServices from "../services/TaskServices";
-import { useSoundContext } from "../layouts/SoundContext";
 function Dashboard() {
     const [isLoading, setIsLoading] = useState(false);
-    const {playMusic , toggleMusic} = useSoundContext() 
     useEffect(() => {
         const prevPage = document.referrer; //Fix bug gay ra loi lap vo ha
         if (prevPage.includes("/login") || prevPage.includes("/register"))
@@ -22,7 +20,24 @@ function Dashboard() {
             return () => clearTimeout(id);
         }
     }, []);
+    const [isPlaying , setIsPlaying] = useState(false) 
+    const musicClick = () => {
+        const audio = document.getElementById('bg-audio')
+        if (audio) 
+        {
+            if (!isPlaying) audio.play() 
+                else audio.pause() 
+            setIsPlaying(!isPlaying)
 
+        }
+    }
+    const musicDoubleClick = () => {
+        const audio = document.getElementById('bg-audio') 
+        if (audio) {
+            setIsPlaying(false) 
+            audio.stop() 
+        }
+    }
     const { data, isPending, error } = useQuery({
         queryKey: ["task-overview"],
         queryFn: async () => {
@@ -69,7 +84,8 @@ function Dashboard() {
                             </ul>
                             <button 
                                 className="w-[98px] h-9 bg-white text-(--color-primary) border-2 border-(--color-primary) rounded-lg cursor-pointer font-medium text-[14px]"
-                                onClick={toggleMusic}
+                                onClick={musicClick}
+                                onDoubleClick={musicDoubleClick}
                                 >
                                 <i class="fa-solid fa-headphones mr-2"></i>
                                 Music

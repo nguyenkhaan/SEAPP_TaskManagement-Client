@@ -23,9 +23,7 @@ createRoot(document.getElementById('root')).render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <GoogleOAuthProvider clientId={CLIENT_ID}>
-          <SoundProvider>
             <App />
-          </SoundProvider>
         </GoogleOAuthProvider>
       </QueryClientProvider>
     </StrictMode>
