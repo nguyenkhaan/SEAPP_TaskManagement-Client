@@ -50,6 +50,7 @@ function ViewTeam({
             const responseData = await TeamServies.getTeamInfoFromId(
                 currentTeamID
             );
+            // console.log(responseData)
             // console.log(responseData.data);
             return responseData; //icon, name, banner, description
             //leader -> data.data.leader (id , email , name)

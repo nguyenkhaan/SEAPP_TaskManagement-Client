@@ -49,7 +49,7 @@ function UpdateTeam() {
             : "<p>Describe your team...</p>",
         editorProps: {
             attributes: {
-                class: "text-sm md:text-[18px] h-42 md:h-47 overflow-y-scroll w-full border border-[#757070] bg-(--color-block-item-2) font-md rounded-[10px] py-3 px-3 md:px-5",
+                class: "text-sm md:text-[18px] h-42 md:h-47 overflow-y-scroll w-full border border-[#757070]  text(--color-text-desc) bg-(--color-block-item-2) font-md rounded-[10px] py-3 px-3 md:px-5",
             },
         },
     });
@@ -164,7 +164,7 @@ function UpdateTeam() {
                         </div>
 
                         <div>
-                            <h3 className="font-md text-lg md:text-xl mb-2">
+                            <h3 className="font-md text-lg md:text-xl mb-2 text-(--color-text)">
                                 Description
                             </h3>
                             <EditorContent editor={editor} />
