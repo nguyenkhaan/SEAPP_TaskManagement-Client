@@ -42,7 +42,7 @@ function MyTask() {
                 </span>
                 <div className="flex w-full min-h-30 flex-col md:items-start items-center justify-start mt-6 gap-6 md:gap-7">
                     {data.data.teams.length === 0 ? (
-                        <p className="text-(--color-text) md:text-xl text-base w-full text-center italic">You haven't joined any team</p>
+                        <p className="text-(--color-text) md:text-xl text-base w-full text-center italic">You haven't joined any teams</p>
                     ) : (
                         data.data.teams.map((taskByGroup, index) => (
                             <TaskByGroup

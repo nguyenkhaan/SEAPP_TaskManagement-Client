@@ -21,7 +21,7 @@ function HeroSection() {
                         Manage your Task
                         <span className=" text-(--color-primary) lg:block mt-2">
                             {" "}
-                            Efforlessly
+                            Effortlessly
                         </span>
                     </h2>
                     {/* paragraph */}

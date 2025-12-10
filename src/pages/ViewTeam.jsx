@@ -304,7 +304,8 @@ function ViewTeam() {
                     </ul>
 
                     <div className="flex items-center gap-4">
-                        <Link to={`/app/create-task?id=${currentTeamID}`}>
+                        {teamQueryData.data.role == 'leader' || teamQueryData.data.role == 'vice-leader'? 
+                        (<Link to={`/app/create-task?id=${currentTeamID}`}>
                             <motion.button className="font-md text-white cursor-pointer text-sm xl:text-xl rounded-md bg-(--color-primary) px-6 py-3 shadow-lg"
                                 initial={{scale: 1}} 
                                 whileHover={{scale: 1.1}} 
@@ -313,7 +314,7 @@ function ViewTeam() {
                             >
                                 + Create Task
                             </motion.button>
-                        </Link>
+                        </Link>) : <></>} 
 
                         <div className="flex items-center gap-3">
                             {teamQueryData.data.role == "leader" ||
