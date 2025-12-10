@@ -19,15 +19,6 @@ function Landing()
 
 
     } , [])
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        if (isLoading) {
-            const id = setTimeout(() => setIsLoading(false), 1800)
-            return () => clearTimeout(id)
-        }
-    }, []);
-
     const pageContent = (
         <div className='bg-(--color-background-1) overflow-x-hidden'>
             <HeroSection />
@@ -41,7 +32,7 @@ function Landing()
         <LandingPageLayout children={pageContent}></LandingPageLayout>
     )
     return (
-        pageContent
+        currentPage
     )
 }
 export default Landing
