@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TwoColumnLayout from "../layouts/TwoColumnLayout";
 import LeftContent from "./SignUpPageComponents/LeftContent";
 import RightContent from "./SignUpPageComponents/RightContent";
-import { checkLogin } from "../utils/auth";
+import checkLogin from "../services/checkLogin";
 
 export default function SignUpPage() {
     const navigate = useNavigate();
