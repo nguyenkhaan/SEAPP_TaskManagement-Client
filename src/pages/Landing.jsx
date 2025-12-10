@@ -20,7 +20,7 @@ function Landing()
 
     } , [])
     const pageContent = (
-        <div className='bg-(--color-background-1) overflow-x-hidden'>
+        <div className='bg-(--color-background-1) w-full overflow-x-hidden'>
             <HeroSection />
             <FeatureSection />
             <StepsSection />
