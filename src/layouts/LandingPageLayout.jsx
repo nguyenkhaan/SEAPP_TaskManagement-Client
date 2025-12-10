@@ -8,7 +8,7 @@ function LandingPageLayout({ children }) {
   return (
     <>
       <Navbar />
-      <main className="w-full min-h-100 bg-yellow-500 mt-18">
+      <main className="w-screen overflow-x-hidden min-h-100 bg-yellow-500 mt-18">
         {children}
       </main>
       <Footer />
