@@ -12,9 +12,16 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import TeamServies from "../services/teamServices";
 import LoadingModal from "./LoadingModal";
 import MessageLog from "../components/MessageLog";
+import NotifyModal from "../components/NotifyModal";
 function Team() {
     const [showModal, setShowModal] = useState(false);
     const [showLog, setShowLog] = useState(0);
+    const [isCreating, setIsCreating] = useState(false);
+    const [modalState, setModalState] = useState ({
+        isOpen: false,
+        isSuccess: false,
+        content: ""
+    });
     const { data, isPending, error } = useQuery({
         queryKey: ["teams"],
         queryFn: async () => {
@@ -42,18 +49,35 @@ function Team() {
             )
                 setShowLog(2);
             else setShowLog(1);
+            setModalState({
+                isOpen: true,
+                isSuccess: true,
+                content: "Joined team successfully!"
+            })
         },
         onError: () => {
             setShowLog(-1);
+            setModalState({
+                isOpen: true,
+                isSuccess: false,
+                content: error.message || "Your code maybe invalid or disconnect to network"
+            })
         },
     });
     const joinRef = useRef(null);
     const handleJoinTeam = () => {
         const code = joinRef.current.value;
         if (!code) return;
+        setIsCreating(true);
         joinTeamMutation.mutate(code);
+        
         // console.log(code)
     };
+
+    const closeModal = () => {
+        setModalState(prev => ({...prev, isOpen: false}))
+        setIsCreating(false);
+    }
 
     if (isPending || !data) return <LoadingModal />;
     return (
@@ -74,11 +98,14 @@ function Team() {
                             maxLength={8}
                             ref={joinRef}
                         />
-                        <button
-                            className="w-10 h-10 text-white font-bold bg-(--color-primary) rounded-xl cursor-pointer"
+                        <motion.button
+                            className={`w-10 h-10 text-white font-bold bg-(--color-primary) rounded-xl ${isCreating ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                            initial={{scale: 1}}
+                            whileHover={isCreating ? {} : {scale: 1.05}}
+                            disabled={isCreating}
                             onClick={handleJoinTeam}>
                             <i class="fa-solid fa-plus"></i>
-                        </button>
+                        </motion.button>
                     </div>
                     <div className="w-full flex items-center justify-between gap-3">
                         <GroupStastic
@@ -123,7 +150,7 @@ function Team() {
                 </div>
                 <Link to={"/app/create-team"}>
                     <motion.button
-                        className="absolute bg-(--color-primary) text-sm md:text-xl shadow-lg text-white font-medium md:px-5 md:py-4 py-3 px-2 rounded-md md:rounded-xl top-3 2xl:right-1.5 z-9999 right-10 cursor-pointer"
+                        className={`absolute bg-(--color-primary) text-sm md:text-xl shadow-lg text-white font-medium md:px-5 md:py-4 py-3 px-2 rounded-md md:rounded-xl top-3 2xl:right-1.5 right-10 cursor-pointer`}
                         initial={{ scale: 1 }}
                         whileHover={{ scale: 1.08 }}
                         transition={{
@@ -137,6 +164,12 @@ function Team() {
                 </Link>
             </div>
             {showModal && <Modal showModal={setShowModal} code={makeCode(8)} />}
+            {modalState.isOpen && (
+                <NotifyModal
+                    isSuccess={modalState.isSuccess}
+                    content={modalState.content}
+                    onClose={closeModal} />
+            )}
             <MessageLog
                 showLog={showLog}
                 setShowLog={setShowLog}
