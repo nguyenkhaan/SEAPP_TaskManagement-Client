@@ -98,7 +98,7 @@ function CreateTask() {
         queryKey: [`teams-user-assign-${teamID}`],
         queryFn: async () => {
             const responseData = await AssignServies.getAllUserToAssign(teamID);
-            console.log(responseData.data.data);
+            // console.log(responseData.data.data);
             return responseData;
         },
     });
@@ -157,7 +157,7 @@ function CreateTask() {
             setShowLog(0);
         },
         onSuccess: (data) => {
-            console.log('Du lieu sau khi tao task: ' , data) 
+            // console.log('Du lieu sau khi tao task: ' , data) 
             setLoading(false);
             setShowLog(1);
 
@@ -189,10 +189,6 @@ function CreateTask() {
             urgent: data.urgent,
             assignIds: data.assignedUsers 
         });
-        console.log(
-            "Danh sach nguoi dung duoc gan du lieu la: ",
-            data.assignedUsers
-        );
     };
 
     return (

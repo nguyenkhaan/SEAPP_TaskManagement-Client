@@ -44,7 +44,7 @@ function CreateTeam() {
             );
             //Tien hanh gui mail cho tung nguoi 
             emails.forEach((email) => {
-                console.log("Dang tien hanh gui mail");
+                // console.log("Dang tien hanh gui mail");
                 sendEmail(
                     email,
                     responseData.data.data?.teamName,
