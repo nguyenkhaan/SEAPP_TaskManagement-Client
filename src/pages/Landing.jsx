@@ -15,8 +15,8 @@ function Landing()
 {
     useEffect(() => {
         testing()   //Chay ham de test thu    //Chay test da thanh cong 
-        alert('Máy chủ miễn phí nên có thể “ngủ” nếu không hoạt động trong vài phút. Mong mọi người thông cảm.');
-        alert('Nếu điện thoại đang ở chế độ tối, hãy chuyển sang chế độ sáng để trải nghiệm đầy đủ giao diện dark theme của web nha');
+        alert('Máy chủ miễn phí nên đôi khi sẽ “ngủ” nếu không hoạt động trong vài phút. Mong mọi người thông cảm.\n\nNếu điện thoại đang ở chế độ tối, hãy chuyển sang chế độ sáng để trải nghiệm đầy đủ giao diện dark theme của web. Thankyou mn lots of love ^^');
+
 
     } , [])
     const [isLoading, setIsLoading] = useState(true);
