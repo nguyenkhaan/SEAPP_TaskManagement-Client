@@ -24,10 +24,11 @@ function ViewTeam({
     groupDesc = "Xin chao cac ban",
     groupTasks = [], //Danh sach group Tasks
 }) {
+    const [loading, setLoading] = useState(false);
     const currentTeamID = ParamServices.getID();
     if (!currentTeamID || isNaN(currentTeamID)) return <UrlError />;
     const [showLog, setShowLog] = useState(0);
-    const [isRefreshCode , setIsRefreshCode] = useState(false) 
+    const [isRefreshCode, setIsRefreshCode] = useState(false)
     const [showDesc, setShowDesc] = useState(false);
     const [showChart, setShowChart] = useState(false);
     const [showCode, setShowCode] = useState(false);
@@ -94,9 +95,14 @@ function ViewTeam({
             const responseData = await TeamServies.leaveGroup(teamID);
             return responseData;
         },
+        onMutate: () => {
+            setLoading(true);
+            setShowLog(0);
+        },
         onSuccess: async (data) => {
             queryClient.invalidateQueries(["teams"]);
             setShowLog(1);
+            setLoading(false);
             setTimeout(() => {
                 navigate("/app/teams");
             }, 200);
@@ -107,9 +113,14 @@ function ViewTeam({
             const responseData = await TeamServies.deleteTeam(teamID);
             return responseData;
         },
+        onMutate: () => {
+            setLoading(true);
+            setShowLog(0);
+        },
         onSuccess: async (data) => {
             queryClient.invalidateQueries(["teams"]);
             setShowLog(2);
+            setLoading(false);
             setTimeout(() => {
                 navigate("/app/teams");
             }, 200);
@@ -147,7 +158,7 @@ function ViewTeam({
                 },
                 {
                     label: "No",
-                    onClick: () => {}, //Khong lam gi ca
+                    onClick: () => { }, //Khong lam gi ca
                 },
             ],
             overlayClassName: "bg-black",
@@ -167,7 +178,7 @@ function ViewTeam({
                 },
                 {
                     label: "No",
-                    onClick: () => {},
+                    onClick: () => { },
                 },
             ],
         });
@@ -177,19 +188,19 @@ function ViewTeam({
         mutationFn: async () => {
             const responseData = await TeamServies.refreshCode(currentTeamID)
             return responseData
-        }, 
+        },
         onMutate: () => {
             setIsRefreshCode(true)
-        }, 
+        },
         onSuccess: () => {
             queryClient.invalidateQueries([`team-${currentTeamID}`])
-            setIsRefreshCode(false) 
-        }, 
-        onError: () => {} 
+            setIsRefreshCode(false)
+        },
+        onError: () => { }
     })
     const handleCode = () => {
         setShowCode(!showCode)
-        setIsRefreshCode(false) 
+        setIsRefreshCode(false)
     }
 
     if (
@@ -209,7 +220,7 @@ function ViewTeam({
                     leaderName={teamQueryData.data.leader.name}
                     iconUrl={teamQueryData.data.teamData.icon}
                     teamID={ParamServices.getID()}
-                    viceLeaderName = {teamQueryData.data.viceLeader ? teamQueryData.data.viceLeader.name : null}
+                    viceLeaderName={teamQueryData.data.viceLeader ? teamQueryData.data.viceLeader.name : null}
                 />
                 {/* Description */}
                 <div className="flex cursor-pointer items-center mt-6 md:mt-8 text-lg md:text-xl font-md text-(--color-text-desc) justify-start gap-3">
@@ -289,7 +300,7 @@ function ViewTeam({
                                 {teamQueryData.data.teamData.code}
                             </span>
                         </span>
-                        <button 
+                        <button
                             className="mt-2 rounded-md py-3 px-6 font-semibold bg-(--color-primary) text-white cursor-pointer shadow-md"
                             onClick={() => {
                                 updateCodeMutation.mutate() //Tien hanh update code 
@@ -299,7 +310,7 @@ function ViewTeam({
                                 opacity: isRefreshCode ? 0.7 : 1,
                             }}
                         >
-                            {isRefreshCode? 'Refreshing...' : 'Refresh'}
+                            {isRefreshCode ? 'Refreshing...' : 'Refresh'}
                         </button>
                     </div>
                 ) : (
@@ -328,7 +339,7 @@ function ViewTeam({
                                 color: `var(${getStatusColor("not started")})`,
                             }}>
                             To Do:
-                            {" " + (teamTaskStatisticData.data.data.toDoTasks? teamTaskStatisticData.data.data.toDoTasks : 0)}
+                            {" " + (teamTaskStatisticData.data.data.toDoTasks ? teamTaskStatisticData.data.data.toDoTasks : 0)}
                         </li>
                     </ul>
                     <div className="flex items-center gap-4">
@@ -350,13 +361,22 @@ function ViewTeam({
                             <button
                                 className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
                                 onClick={handleDeleteTeam}
+                                style={{
+                                    pointerEvents: loading ? "none" : "auto",
+                                    opacity: loading ? 0.7 : 1,
+                                }}
                                 title="Delete Group">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                             <button
                                 className="md:w-11 md:h-11 h-10 w-10 shadow-md rounded-md cursor-pointer font-bold bg-white text-(--color-primary)"
                                 onClick={handleLeaveTeam}
-                                title="Leave group">
+                                title="Leave group"
+                                style={{
+                                    pointerEvents: loading ? "none" : "auto",
+                                    opacity: loading ? 0.7 : 1,
+                                }}
+                            >
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </button>
                         </div>

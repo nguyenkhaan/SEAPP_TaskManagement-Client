@@ -31,12 +31,12 @@ function AssignedBox({ data, pending, error, formHandle }) {
     const [showUsersDropdown, setShowUsersDropdown] = useState(false);
     if (pending || !data)
         return (
-            <button className="w-full bg-(--color-background-2) cursor-pointer border border-gray-400 rounded-lg px-3 py-2 text-left text-(--color-text)">
+            <button className="w-64 bg-(--color-background-2) cursor-pointer border border-gray-400 rounded-lg px-3 py-2 text-left text-(--color-text)">
                 Loading User to Assign...
             </button>
         );
     if (error) {
-        <button className="w-full bg-(--color-background-2) cursor-pointer border border-gray-400 rounded-lg px-3 py-2 text-left text-(--color-text)">
+        <button className="w-64 bg-(--color-background-2) cursor-pointer border border-gray-400 rounded-lg px-3 py-2 text-left text-(--color-text)">
             Error while loading Users
         </button>;
     }
