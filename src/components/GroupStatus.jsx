@@ -21,7 +21,7 @@ function GroupStatus({
             <div className="flex-3 flex-col flex items-start justify-between ">
                 <div className="pt-3">
                     <Link to={`/app/view-task?id=${taskID}`}>
-                        <h3 className="text-base line-clam-1 hover:underline text-left text-black font-[Montserrat] font-medium">
+                        <h3 className="text-base line-clam-1 hover:underline text-left text-(--color-text) font-[Montserrat] font-medium">
                             {title}
                         </h3>
                     </Link>
@@ -66,6 +66,9 @@ function GroupStatus({
                         },
                         [`& .${gaugeClasses.referenceArc}`]: {
                             fill: theme.palette.text.disabled,
+                        },
+                        [`& .${gaugeClasses.valueText} text`]: {
+                            fill: "var(--color-text)", // <-- change text color
                         },
                     })}
                 />

@@ -14,7 +14,10 @@ function Landing()
 //Kich thuoc cua layout la 1440px, landing page lay w-full = 1440px, moi section cugn lay w-full 1440px 
 {
     useEffect(() => {
-        // testing()   //Chay ham de test thu    //Chay test da thanh cong 
+        testing()   //Chay ham de test thu    //Chay test da thanh cong 
+        alert('Máy chủ miễn phí nên có thể “ngủ” nếu không hoạt động trong vài phút. Mong mọi người thông cảm.');
+        alert('Nếu điện thoại đang ở chế độ tối, hãy chuyển sang chế độ sáng để trải nghiệm đầy đủ giao diện dark theme của web nha');
+
     } , [])
     const [isLoading, setIsLoading] = useState(true);
 
