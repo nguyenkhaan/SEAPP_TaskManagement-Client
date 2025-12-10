@@ -13,8 +13,8 @@ import Audio from "./DashboardComponents/Audio";
 const lofis = [
     {
       id: 'bg-1',
-      title: "Lavender Hills",
-      url: "https://media.istockphoto.com/id/498425333/photo/lavender-farm-at-nabowla-tasmania-australia.jpg?s=612x612&w=0&k=20&c=_a6QP4dLxXc9Fl9bO1AKL0001p93-cFYm3iZZAlPH00="
+      title: "Futari no Kimochi",
+      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1YH06HT26fTEuoR7NnZ9YQ7Cy20g3az9Kdg&s"
     },
     {
       id: 'bg-2',
