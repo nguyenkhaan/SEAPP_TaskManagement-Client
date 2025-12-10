@@ -41,7 +41,7 @@ function Landing()
         <LandingPageLayout children={pageContent}></LandingPageLayout>
     )
     return (
-        <Loading children={currentPage} isLoading={isLoading} /> 
+        pageContent
     )
 }
 export default Landing
