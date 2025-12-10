@@ -113,7 +113,7 @@ function TeamMemberItem({
                 return (
                     <>
                         <li className="px-3 py-2 hover:bg-(--color-block-item-2) cursor-pointer">
-                            Dell co quyen
+                            Không sử dụng được
                         </li>
                     </>
                 );

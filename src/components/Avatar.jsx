@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import { useQuery , useQueryClient , useMutation } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import UserService from "../services/userServices";
 function Avatar({
     width = 86,
@@ -19,18 +19,18 @@ function Avatar({
             const responseData = await UserService.getUserInfo() //Tiep tuc fix o day 
             return responseData
         },
-        staleTime: 1000 * 5 * 60, 
-        gcTime: 1000 * 8 * 60 ,
+        staleTime: 1000 * 5 * 60,
+        gcTime: 1000 * 8 * 60,
         refetchOnWindowFocus: false,
         retry: 5
     });
 
-    const queryClient = useQueryClient() 
+    const queryClient = useQueryClient()
 
     const avatarUpdateMutation = useMutation({  //Ham dung de update avatar 
         mutationFn: async (avatarFile) => {
-            UserService.updateUserAvatar(avatarFile) 
-        }, 
+            UserService.updateUserAvatar(avatarFile)
+        },
         onSuccess: () => {
             queryClient.invalidateQueries(['user'])
         },
@@ -50,7 +50,7 @@ function Avatar({
         if (data) {
             setPreview(data.avatar_url) //Dat cai nay lai tro thanh user avatar hien tai 
         }
-    } , [data])
+    }, [data])
 
     useEffect(() => {
         if (avatar) {
@@ -73,10 +73,9 @@ function Avatar({
             <figure
                 className={`relative bg-center bg-cover bg-no-repeat border-0 rounded-full cursor-pointer`}
                 style={{
-                    backgroundImage: `url(${
-                        (preview? preview : 
-                        "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg") 
-                    })`,
+                    backgroundImage: `url(${(preview ? preview :
+                            "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg")
+                        })`,
                     width,
                     height,
                     ...style,
@@ -93,10 +92,10 @@ function Avatar({
                 className="top-full cursor-text w-[173px] text-base font-semibold avatar-info"
                 onClick={stop}
                 style={{ ...style }}>
-                <span className="text-center w-[173px] line-clamp-2 wrap-break-word overflow-hidden font-[Montserrat]">
+                <span className="text-center w-[178px] line-clamp-2 wrap-break-word overflow-hidden font-[Montserrat]">
                     {data.name}
                 </span>
-                <span className="text-center font-normal wrap-break-word text-[14px] line-clamp-2">
+                <span className="text-center font-normal text-[14px] line-clamp-2 break-all [word-break:keep-all]">
                     {data.email}
                 </span>
             </div>

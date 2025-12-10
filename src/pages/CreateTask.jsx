@@ -199,7 +199,7 @@ function CreateTask() {
                     <Link
                         onClick={() => {
                             if (window.history.length > 1) navigate(-1);
-                            else navigate("/app/dashboard");
+                            else navigate("/app/view-team?id=" + teamID);
                         }}>
                         <span className="cursor-pointer text-lg text-(--color-primary) underline font-semibold">
                             Go back
