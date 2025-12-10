@@ -24,7 +24,7 @@ function WorkingNavbar({
     return (
         <>
             {/* NAVBAR */}
-            <nav className='w-screen md:h-25 h-29 left-0 max-sm:flex-col z-[99999] bg-(--color-background-2) fixed top-0 shadow-lg md:gap-12 md:pt-9 md:px-[60px] md:py-8 py-3 flex md:items-center items-start justify-between'>
+            <nav className='w-screen lg:h-25 h-20 left-0 max-sm:flex-col z-[99999] bg-(--color-background-2) fixed top-0 shadow-lg md:gap-12 md:pt-9 md:px-[60px] md:py-8 py-3 flex md:items-center items-start justify-between'>
                 
                 {/* LOGO + NÚT MỞ SIDEBAR (chỉ hiện khi < 2XL) */}
                 <div className='flex-1 max-md:ml-4 flex items-center gap-4'>
@@ -45,7 +45,7 @@ function WorkingNavbar({
                 </div>
 
                 {/* Ô Search */}
-                <div className='flex-4 md:w-[720px] xl:w-full max-md:px-4 h-11 relative'>
+                <div className='flex-4 md:w-[720px] hidden lg:block xl:w-full max-md:px-4 h-11 relative'>
                     <input
                         className='w-full md:h-full text-(--color-text) md:text-base text-lg font-semibold md:rounded-lg px-5 shadow-[0_4px_10px_rgba(0,0,0,0.15)] focus:shadow-[0_6px_14px_rgba(0,0,0,0.15)] bg-(--color-search) outline-none transition-all duration-300 rounded-md max-md:py-2'
                         placeholder='Search your task here...'

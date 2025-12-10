@@ -44,9 +44,10 @@ function AssignedUsersListBox({ assignData, isLoading }) {
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className="w-full h-11 px-4 bg-(--color-background-2) border border-gray-500 rounded-lg text-(--color-text) flex items-center justify-between"
-            >
-                <span className="truncate">{assignData.data.data.length} users assigned</span>
+                className="w-full h-11 px-4 bg-(--color-background-2) border border-gray-500 rounded-lg text-(--color-text) flex items-center justify-between">
+                <span className="truncate">
+                    {assignData.data.data.length} users assigned
+                </span>
                 <span className="text-sm">▼</span>
             </button>
 
@@ -55,8 +56,7 @@ function AssignedUsersListBox({ assignData, isLoading }) {
                     {assignData.data.data.map((user) => (
                         <div
                             key={user.id}
-                            className="px-3 py-2 cursor-pointer hover:bg-(--color-background-3) text-(--color-text)"
-                        >
+                            className="px-3 py-2 cursor-pointer hover:bg-(--color-background-3) text-(--color-text)">
                             {user.name}
                         </div>
                     ))}
@@ -150,8 +150,7 @@ function ViewTask() {
                 <Link to={`/app/view-team?id=${data.teamId}`}>
                     <span
                         className="absolute cursor-pointer top-12 md:top-5 right-10 text-lg text-(--color-primary) underline font-semibold"
-                        title="Go back"
-                    >
+                        title="Go back">
                         Go back
                     </span>
                 </Link>
@@ -162,8 +161,7 @@ function ViewTask() {
                         style={{
                             backgroundImage:
                                 "url(https://img.lovepik.com/bg/20231226/Captivating-Blue-Sky-Background-with-Beautiful-Clouds_2490674_wh1200.png)",
-                        }}
-                    ></div>
+                        }}></div>
 
                     <div className="flex-1">
                         <h2 className="font-semibold text-xl md:text-2xl text-(--color-text)">
@@ -195,8 +193,9 @@ function ViewTask() {
 
                 <div
                     className="w-full mt-6 h-[540px] border-2 overflow-y-auto rounded-md bg-(--color-background-2) p-4 text-(--color-text)"
-                    dangerouslySetInnerHTML={{ __html: purify(data.data.description) }}
-                ></div>
+                    dangerouslySetInnerHTML={{
+                        __html: purify(data.data.description),
+                    }}></div>
 
                 <div className="w-full mt-5 items-center h-6 flex justify-end gap-4 font-semibold text-white">
                     <Link
@@ -204,27 +203,28 @@ function ViewTask() {
                         style={{
                             pointerEvents: loading ? "none" : "auto",
                             opacity: loading ? 0.7 : 1,
-                        }}
-                    >
+                        }}>
                         <div
                             className="w-9 h-9 cursor-pointer bg-(--color-primary) rounded-lg flex items-center justify-center"
-                            title="Edit"
-                        >
+                            title="Edit">
                             <i className="fa-regular fa-pen-to-square"></i>
                         </div>
                     </Link>
 
-                    <div
-                        className="w-9 h-9 cursor-pointer bg-(--color-primary) rounded-lg flex items-center justify-center"
-                        title="Xóa task"
-                        onClick={handleDelete}
-                        style={{
-                            pointerEvents: loading ? "none" : "auto",
-                            opacity: loading ? 0.7 : 1,
-                        }}
-                    >
-                        <i className="fa-solid fa-trash"></i>
-                    </div>
+                    {data.canDelete ? (
+                        <div
+                            className="w-9 h-9 cursor-pointer bg-(--color-primary) rounded-lg flex items-center justify-center"
+                            title="Xóa task"
+                            onClick={handleDelete}
+                            style={{
+                                pointerEvents: loading ? "none" : "auto",
+                                opacity: loading ? 0.7 : 1,
+                            }}>
+                            <i className="fa-solid fa-trash"></i>
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                 </div>
 
                 <MessageLog

@@ -139,7 +139,9 @@ function UpdateTask() {
             const responseData = await TaskServices.getTaskDetail(
                 currentTaskID
             );
+            console.log('Noi dung chi tiet cua task la: ' , responseData) 
             setCanAssign(responseData.data.canAssign)
+            setAssignedUsers(responseData.data.assignIds)
             return responseData;
         },
         refetchOnWindowFocus: false 
@@ -213,7 +215,7 @@ function UpdateTask() {
         onSuccess: (data) => {
             queryClient.invalidateQueries([`team-tasks-${data.data.teamId}`]);
             setShowLog(1);
-            setLoading(false);
+            setLoading(false); 
         },
         onError: () => {
             setLoading(false);

@@ -4,7 +4,8 @@ import { Gauge, gaugeClasses } from "@mui/x-charts";
 import getStatusColor from "../services/getStatusColor";
 import { Link } from "react-router";
 import { getStatusString, getPriorityString } from "../services/getStatusColor";
-
+import purify from "../services/purify";
+import htmlToText from "../services/htmlToText";
 function GroupStatus({
     title = "Default Title",
     description = "",
@@ -25,7 +26,7 @@ function GroupStatus({
                         </h3>
                     </Link>
                     <p className="text-(--color-text-desc) mt-1 md:text-[14px] text-[12px] md:line-clamp-2 line-clamp-3 text-wrap w-full leading-tight">
-                        {description}
+                        {htmlToText(purify(description))}
                     </p>
                 </div>
                 <div>

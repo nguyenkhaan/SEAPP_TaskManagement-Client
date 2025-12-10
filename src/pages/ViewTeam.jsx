@@ -36,10 +36,7 @@ function ViewTeam() {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    const {
-        data: teamQueryData,
-        isPending: teamQueryPending,
-    } = useQuery({
+    const { data: teamQueryData, isPending: teamQueryPending } = useQuery({
         queryKey: [`team-${currentTeamID}`],
         queryFn: async () => {
             return await TeamServies.getTeamInfoFromId(currentTeamID);
@@ -48,17 +45,15 @@ function ViewTeam() {
         gcTime: 1000 * 8 * 60,
     });
 
-    const {
-        data: teamTaskStatisticData,
-        isPending: teamTaskStatisticPending,
-    } = useQuery({
-        queryKey: [`team-task-stastic-${currentTeamID}`],
-        queryFn: async () => {
-            return await TaskServices.getTaskStatisticByTeam(currentTeamID);
-        },
-        staleTime: 1000 * 8 * 60,
-        gcTime: 1000 * 8 * 60,
-    });
+    const { data: teamTaskStatisticData, isPending: teamTaskStatisticPending } =
+        useQuery({
+            queryKey: [`team-task-stastic-${currentTeamID}`],
+            queryFn: async () => {
+                return await TaskServices.getTaskStatisticByTeam(currentTeamID);
+            },
+            staleTime: 1000 * 8 * 60,
+            gcTime: 1000 * 8 * 60,
+        });
 
     // ────────────────────────────────────────────────
     // MUTATION: LEAVE TEAM
@@ -194,9 +189,13 @@ function ViewTeam() {
                 {/* DESCRIPTION */}
                 <div className="flex cursor-pointer items-center mt-6 md:mt-8 text-lg md:text-xl font-md text-(--color-text-desc) gap-3">
                     {showDesc ? (
-                        <i className="fa-solid fa-caret-down" onClick={handleDescription}></i>
+                        <i
+                            className="fa-solid fa-caret-down"
+                            onClick={handleDescription}></i>
                     ) : (
-                        <i className="fa-solid fa-caret-right" onClick={handleDescription}></i>
+                        <i
+                            className="fa-solid fa-caret-right"
+                            onClick={handleDescription}></i>
                     )}
                     <span onClick={handleDescription}>Description</span>
                 </div>
@@ -210,27 +209,41 @@ function ViewTeam() {
                 {/* CHART */}
                 <div className="flex cursor-pointer text-lg items-center mt-4 md:text-xl font-md text-(--color-text-desc) gap-3">
                     {showChart ? (
-                        <i className="fa-solid fa-caret-down" onClick={handleChart}></i>
+                        <i
+                            className="fa-solid fa-caret-down"
+                            onClick={handleChart}></i>
                     ) : (
-                        <i className="fa-solid fa-caret-right" onClick={handleChart}></i>
+                        <i
+                            className="fa-solid fa-caret-right"
+                            onClick={handleChart}></i>
                     )}
                     <span onClick={handleChart}>Thống kê</span>
                 </div>
 
                 {showChart && (
                     <ChartViewTeam
-                        completed={teamTaskStatisticData.data.data.completedPercentage}
-                        inProgress={teamTaskStatisticData.data.data.inProgressPercentage}
-                        notStarted={teamTaskStatisticData.data.data.toDoPercentage}
+                        completed={
+                            teamTaskStatisticData.data.data.completedPercentage
+                        }
+                        inProgress={
+                            teamTaskStatisticData.data.data.inProgressPercentage
+                        }
+                        notStarted={
+                            teamTaskStatisticData.data.data.toDoPercentage
+                        }
                     />
                 )}
 
                 {/* CODE */}
                 <div className="flex cursor-pointer text-lg items-center mt-4 md:text-xl font-md text-(--color-text-desc) gap-3">
                     {showCode ? (
-                        <i className="fa-solid fa-caret-down" onClick={handleCode}></i>
+                        <i
+                            className="fa-solid fa-caret-down"
+                            onClick={handleCode}></i>
                     ) : (
-                        <i className="fa-solid fa-caret-right" onClick={handleCode}></i>
+                        <i
+                            className="fa-solid fa-caret-right"
+                            onClick={handleCode}></i>
                     )}
                     <span onClick={handleCode}>Team Code</span>
                 </div>
@@ -246,8 +259,7 @@ function ViewTeam() {
                                     navigator.clipboard.writeText(
                                         teamQueryData.data.teamData.code
                                     )
-                                }
-                            >
+                                }>
                                 {teamQueryData.data.teamData.code}
                             </span>
                         </span>
@@ -258,65 +270,97 @@ function ViewTeam() {
                             style={{
                                 pointerEvents: isRefreshCode ? "none" : "auto",
                                 opacity: isRefreshCode ? 0.7 : 1,
-                            }}
-                        >
+                            }}>
                             {isRefreshCode ? "Refreshing..." : "Refresh"}
                         </button>
                     </div>
                 )}
 
                 {/* STATS */}
-                <div className="w-full mt-5 rounded-md shadow-lg bg-(--color-box-item) p-6 flex md:flex-row flex-col md:items-center gap-4">
+                <div className="w-full mt-5 rounded-md shadow-lg bg-(--color-box-item) p-6 flex justify-between md:flex-row flex-col md:items-center gap-4">
                     <ul className="flex items-center gap-5 font-md text-base md:text-lg">
-                        <li style={{ color: `var(${getStatusColor("Completed")})` }}>
-                            Completed: {teamTaskStatisticData.data.data.compltedTasks || 0}
+                        <li
+                            style={{
+                                color: `var(${getStatusColor("Completed")})`,
+                            }}>
+                            Completed:{" "}
+                            {teamTaskStatisticData.data.data.compltedTasks || 0}
                         </li>
-                        <li style={{ color: `var(${getStatusColor("in progress")})` }}>
-                            Progress: {teamTaskStatisticData.data.data.inProgressTasks || 0}
+                        <li
+                            style={{
+                                color: `var(${getStatusColor("in progress")})`,
+                            }}>
+                            Progress:{" "}
+                            {teamTaskStatisticData.data.data.inProgressTasks ||
+                                0}
                         </li>
-                        <li style={{ color: `var(${getStatusColor("not started")})` }}>
-                            To Do: {teamTaskStatisticData.data.data.toDoTasks || 0}
+                        <li
+                            style={{
+                                color: `var(${getStatusColor("not started")})`,
+                            }}>
+                            To Do:{" "}
+                            {teamTaskStatisticData.data.data.toDoTasks || 0}
                         </li>
                     </ul>
 
                     <div className="flex items-center gap-4">
                         <Link to={`/app/create-task?id=${currentTeamID}`}>
-                            <button className="font-md text-white text-sm xl:text-xl rounded-md bg-(--color-primary) px-6 py-3 shadow-lg">
+                            <motion.button className="font-md text-white cursor-pointer text-sm xl:text-xl rounded-md bg-(--color-primary) px-6 py-3 shadow-lg"
+                                initial={{scale: 1}} 
+                                whileHover={{scale: 1.1}} 
+                                transition={{duration: 0.3 , ease: 'easeInOut'}}
+                            
+                            >
                                 + Create Task
-                            </button>
+                            </motion.button>
                         </Link>
 
                         <div className="flex items-center gap-3">
-                            <Link to={`/app/update-team?id=${currentTeamID}`}>
+                            {teamQueryData.data.role == "leader" ||
+                            teamQueryData.data.role == "vice-leader" ? (
+                                <Link
+                                    to={`/app/update-team?id=${currentTeamID}`}>
+                                    <button
+                                        title="Edit"
+                                        className="md:w-11 md:h-11 w-10 h-10 shadow-md rounded-md cursor-pointer hover:opacity-70 bg-white text-(--color-primary)">
+                                        <i className="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </Link>
+                            ) : (
+                                <></>
+                            )}
+
+                            {teamQueryData.data.role == "leader" ? (
                                 <button
-                                    title="Edit"
-                                    className="md:w-11 md:h-11 w-10 h-10 shadow-md rounded-md bg-white text-(--color-primary)"
-                                >
-                                    <i className="fa-solid fa-pen-to-square"></i>
+                                    className="md:w-11 md:h-11 w-10 h-10 shadow-md rounded-md hover:opacity-70 cursor-pointer bg-white text-(--color-primary)"
+                                    onClick={handleDeleteTeam}
+                                    style={{
+                                        pointerEvents: loading
+                                            ? "none"
+                                            : "auto",
+                                        opacity: loading ? 0.7 : 1,
+                                    }}>
+                                    <i className="fa-solid fa-trash"></i>
                                 </button>
-                            </Link>
+                            ) : (
+                                <></>
+                            )}
 
-                            <button
-                                className="md:w-11 md:h-11 w-10 h-10 shadow-md rounded-md bg-white text-(--color-primary)"
-                                onClick={handleDeleteTeam}
-                                style={{
-                                    pointerEvents: loading ? "none" : "auto",
-                                    opacity: loading ? 0.7 : 1,
-                                }}
-                            >
-                                <i className="fa-solid fa-trash"></i>
-                            </button>
-
-                            <button
-                                className="md:w-11 md:h-11 w-10 h-10 shadow-md rounded-md bg-white text-(--color-primary)"
-                                onClick={handleLeaveTeam}
-                                style={{
-                                    pointerEvents: loading ? "none" : "auto",
-                                    opacity: loading ? 0.7 : 1,
-                                }}
-                            >
-                                <i className="fa-solid fa-right-from-bracket"></i>
-                            </button>
+                            {teamQueryData.data.role != "leader" ? (
+                                <button
+                                    className="md:w-11 md:h-11 w-10 h-10 shadow-md rounded-md hover:opacity-70 cursor-pointer bg-white text-(--color-primary)"
+                                    onClick={handleLeaveTeam}
+                                    style={{
+                                        pointerEvents: loading
+                                            ? "none"
+                                            : "auto",
+                                        opacity: loading ? 0.7 : 1,
+                                    }}>
+                                    <i className="fa-solid fa-right-from-bracket"></i>
+                                </button>
+                            ) : (
+                                <></>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -326,27 +370,31 @@ function ViewTeam() {
                     className="w-full h-[730px] mt-8 overflow-hidden relative"
                     onTouchStart={handleTouchStart}
                     onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                >
+                    onTouchEnd={handleTouchEnd}>
                     <div
                         className="flex max-md:w-[200%] h-full md:gap-10 duration-300 ease-in-out py-6 md:px-2 px-1"
                         style={{
                             transform:
                                 window.innerWidth <= 768
-                                    ? `translateX(calc(${view === "group" ? "0%" : "-50%"} + ${dragX}px))`
+                                    ? `translateX(calc(${
+                                          view === "group" ? "0%" : "-50%"
+                                      } + ${dragX}px))`
                                     : view === "group"
                                     ? "translateX(0)"
                                     : "translateX(-50%)",
-                            transition: isDragging ? "none" : "transform 0.25s ease-out",
-                        }}
-                    >
+                            transition: isDragging
+                                ? "none"
+                                : "transform 0.25s ease-out",
+                        }}>
                         <motion.div
                             className="max-md:w-1/2 w-[614px] h-full flex items-center justify-center"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ duration: 0.1 }}
-                        >
-                            <TaskByGroupViewTeam width="100%" teamID={currentTeamID} />
+                            transition={{ duration: 0.1 }}>
+                            <TaskByGroupViewTeam
+                                width="100%"
+                                teamID={currentTeamID}
+                            />
                         </motion.div>
 
                         <div className="max-md:w-1/2 w-[340px] h-full flex items-center justify-center">
@@ -363,7 +411,11 @@ function ViewTeam() {
                 <MessageLog
                     showLog={showLog}
                     setShowLog={setShowLog}
-                    message={showLog == 1 ? "Rời nhóm thành công" : "Rời nhóm thất bại"}
+                    message={
+                        showLog == 1
+                            ? "Rời nhóm thành công"
+                            : "Rời nhóm thất bại"
+                    }
                 />
             </div>
         </WorkingLayout>

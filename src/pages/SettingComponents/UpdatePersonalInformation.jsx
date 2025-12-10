@@ -98,7 +98,7 @@ function UpdatePersonalInformation({ avatar }) {
         <>
             <SectionSetting>
                 <>
-                    <form className="w-full grid grid-rows-4 md:grid-cols-2 md:grid-rows-1 gap-x-18 gap-y-4 md:gap-y-6">
+                    <form className="w-full grid grid-rows-2 md:grid-cols-2 md:grid-rows-1 gap-x-18 gap-y-4 md:gap-y-6">
                         <PersonalInput
                             ref={nameRef}
                             title="Full Name"

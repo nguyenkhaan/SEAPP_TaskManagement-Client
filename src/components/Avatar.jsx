@@ -69,7 +69,7 @@ function Avatar({
     const stop = (e) => e.stopPropagation();
     if (isLoading) return <></>
     return (
-        <div className="inline-flex flex-col justify-start items-center">
+        <div className="inline-flex flex-row gap-3 lg:gap-0 lg:flex-col justify-start items-center">
             <figure
                 className={`relative bg-center bg-cover bg-no-repeat border-0 rounded-full cursor-pointer`}
                 style={{

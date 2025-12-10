@@ -70,17 +70,18 @@ function WorkingSidebar({ showSidebar = false, setShowSidebar = null }) {
             </ul>
         </motion.div>
     );
+    //Side bar trne man hinh dien thoai 
     const sidebarSmall = (
         <motion.div
             initial={{ x: "-100%" }} // lúc mới mount sẽ nằm ngoài màn hình bên trái
             animate={{ x: showSidebar ? "0%" : "-100%" }} // true thì chạy vào, false thì chạy ra
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="w-[365px] 2xl:block h-[868px] z-9999999 rounded-2xl bg-(--color-primary) fixed left-0 top-42 pt-30 shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
-            <div className="top-0 -translate-y-1/4 translate-x-1/2 absolute">
+            className="w-[365px] 2xl:block h-[868px] z-9999999 top-20 rounded-2xl bg-(--color-primary) fixed left-0 pt-6 shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
+            <div className="flex items-center justify-start pl-6 pt-6">
                 <Avatar style={{ color: "white", pointerEvents: "none" }} />
             </div>
 
-            <ul className="w-full flex items-center justify-between flex-col gap-2 mt-6">
+            <ul className="w-full flex items-center justify-between flex-col gap-2 mt-4">
                 {menuItems.map((item, index) => {
                     const isActive = location.pathname === item.path;
 
@@ -98,6 +99,6 @@ function WorkingSidebar({ showSidebar = false, setShowSidebar = null }) {
             </ul>
         </motion.div>
     );
-    return window.innerWidth <= 1280 ? sidebarSmall : sideBarLarge;
+    return window.innerWidth <= 1024 ? sidebarSmall : sideBarLarge;
 }
 export default WorkingSidebar;
