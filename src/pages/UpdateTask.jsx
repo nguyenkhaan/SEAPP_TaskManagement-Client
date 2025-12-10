@@ -139,6 +139,8 @@ function UpdateTask() {
             const responseData = await TaskServices.getTaskDetail(
                 currentTaskID
             );
+            console.log('Log ra tu update task: ' , responseData.data)
+            console.log('Kha nang gan lai: ' , responseData.data.canAssign)
             setCanAssign(responseData.data.canAssign)
             return responseData;
         },
