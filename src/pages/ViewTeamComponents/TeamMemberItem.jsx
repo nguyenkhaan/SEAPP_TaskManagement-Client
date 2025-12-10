@@ -129,7 +129,7 @@ function TeamMemberItem({
                     backgroundColor: "var(--color-primary)", // thay vì bg-(--color-primary)
                     backgroundImage: `url(${
                         avatar_url ||
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT69Z3V7elu8UwGZHfS7lP_ii2zpEjB8DvLKm_Rq76k_XDuoSg_VC7y27g1iUYc4wl1Whc&usqp=CAU"
+                        "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg"
                     })`,
                 }}
             />

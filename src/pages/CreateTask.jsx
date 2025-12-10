@@ -196,11 +196,7 @@ function CreateTask() {
             <div className="w-full min-h-[890px] md:h-[990px] border p-6 2xl:pt-6 rounded-xl border-gray-500 mb-10">
                 {/* Go Back */}
                 <div className="w-full inline-flex items-center justify-end mb-3">
-                    <Link
-                        onClick={() => {
-                            if (window.history.length > 1) navigate(-1);
-                            else navigate("/app/view-team?id=" + teamID);
-                        }}>
+                    <Link to={'/app/view-team?id=' + teamID}>
                         <span className="cursor-pointer text-lg text-(--color-primary) underline font-semibold">
                             Go back
                         </span>
@@ -259,7 +255,7 @@ function CreateTask() {
                     {/* SUBMIT BTN */}
                     <button
                         type="submit"
-                        className="px-4 top-35 md:top-43 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
+                        className="px-4 top-40 md:top-44 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 
                         font-semibold cursor-pointer shadow-lg rounded-md"
                         style={{
                             pointerEvents: loading ? "none" : "auto",
