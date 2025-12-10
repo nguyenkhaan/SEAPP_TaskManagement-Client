@@ -20,6 +20,16 @@ class ParamServices
         
         return token 
     }
+    static getTeamID() 
+    {
+        const params = new URLSearchParams(window.location.search) 
+        const id = params.get('team_id') 
+        if (id !== null) {
+            window.history.replaceState({}, "", `?team_id=${id}`);
+        }
+        
+        return id 
+    }
 } 
 
 export default ParamServices 

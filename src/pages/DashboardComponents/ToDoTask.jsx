@@ -56,6 +56,7 @@ function TodoTask({ todoTasks = [] }) {
                                 title={todo.title}
                                 description={todo.description}
                                 status={todo.status}
+                                taskID = {todo.taskId}
                             />
                         );
                     })

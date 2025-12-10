@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import getStatusColor from '../../services/getStatusColor'
 import { getPriorityString , getStatusString } from '../../services/getStatusColor'
+import { Link } from 'react-router'
 import purify from '../../services/purify'
 import htmlToText from '../../services/htmlToText'
 function ToDoItem({
@@ -12,7 +13,8 @@ function ToDoItem({
     urgent = false, 
     status = '', 
     title = '', 
-    description = ''  
+    description = '' , 
+    taskID = 0 
 }) {
     const color = getStatusColor(status)
     return (
@@ -25,7 +27,9 @@ function ToDoItem({
                 flex flex-col justify-between relative'>
             <div className='flex w-full items-start justify-between gap-3 flex-1 h-full'>
                 <div className='flex-2 min-w-0'>
-                    <h2 className='font-semibold text-base line-clamp-2 text-(--color-text)'>{title}</h2>
+                    <Link to={`/app/view-task?id=${taskID}`}>
+                       <h2 className='font-semibold text-base line-clamp-2 text-(--color-text) hover:underline'>{title}</h2>
+                    </Link>
                     <p className='text-(--color-text-desc) font-normal text-[12px] mt-1 md:mt-0 md:text-[14px] line-clamp-3'>{htmlToText(purify(description))}</p>
                 </div>
                 <div className='flex-1 flex items-center justify-end h-full'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import WorkingLayout from "../layouts/WorkingLayout";
 import StarterKit from "@tiptap/starter-kit";
 import { useEditor } from "@tiptap/react";
@@ -19,6 +19,7 @@ import MessageLog from "../components/MessageLog";
 import LoadingModal from "./LoadingModal";
 import ListBox from "../components/ListBox";
 import UrlError from "./URLError";
+import AssignServies from "../services/assignServices";
 
 const optionMap = {
     completed: { value: "completed", label: "Completed" },
@@ -26,27 +27,52 @@ const optionMap = {
     "to do": { value: "to do", label: "Not Started" },
 };
 
-
-function UserMultiSelect({ users, selectedUserIds, setSelectedUserIds }) {
+// ================= UserMultiSelect =================
+function UserMultiSelect({
+    users,
+    selectedUserIds,
+    setSelectedUserIds,
+    loading,
+    error,
+}) {
     const [open, setOpen] = useState(false);
+    const ref = useRef(null);
 
     const toggleUser = (id) => {
-        if (selectedUserIds.includes(id)) {
-            setSelectedUserIds(selectedUserIds.filter((u) => u !== id));
-        } else {
-            setSelectedUserIds([...selectedUserIds, id]);
-        }
+        setSelectedUserIds((prev) =>
+            prev.includes(id) ? prev.filter((u) => u !== id) : [...prev, id]
+        );
     };
+    if (loading || !users)
+        return (
+            <button className="w-full bg-(--color-background-2) cursor-pointer border border-gray-400 rounded-lg px-3 py-2 text-left text-(--color-text)">
+                Loading User to Assign...
+            </button>
+        );
+    if (error) {
+        <button className="w-full bg-(--color-background-2) cursor-pointer border border-gray-400 rounded-lg px-3 py-2 text-left text-(--color-text)">
+            Error while loading Users
+        </button>;
+    }
+    // Close dropdown when click outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (ref.current && !ref.current.contains(event.target)) {
+                setOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () =>
+            document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     return (
-        <div className="relative w-full max-w-xs mt-4">
-            <p className="mb-2 text-(--color-text)">Assign to:</p>
-
+        <div ref={ref} className="relative w-full max-w-xs mt-4">
+            <p className="mb-2 text-(--color-text)">Assign members:</p>
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className="w-full h-11 px-4 bg-(--color-background-2) border border-gray-500 rounded-lg text-(--color-text) flex items-center justify-between"
-            >
+                className="w-full h-11 px-4 bg-(--color-background-2) border border-gray-500 rounded-lg text-(--color-text) flex items-center justify-between">
                 <span className="truncate">
                     {selectedUserIds.length === 0
                         ? "Select users..."
@@ -56,19 +82,22 @@ function UserMultiSelect({ users, selectedUserIds, setSelectedUserIds }) {
             </button>
 
             {open && (
-                <div className="absolute mt-1 w-full cursor-pointer bg-(--color-background-2) border border-gray-500 z-9999999 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                <div className="absolute mt-1 w-full bg-(--color-background-2) z-999999 cursor-pointer border border-gray-500 rounded-lg shadow-lg max-h-48 overflow-y-auto">
                     {users.map((user) => (
                         <label
                             key={user.id}
-                            className="flex items-center px-3 py-2 cursor-pointer hover:bg-(--color-block-item-2)"
-                        >
+                            htmlFor={`user-${user.userID}`}
+                            className="flex items-center px-3 py-2 cursor-pointer hover:bg-(--color-block-item-2)">
                             <input
                                 type="checkbox"
-                                checked={selectedUserIds.includes(user.id)}
-                                onChange={() => toggleUser(user.id)}
+                                id={`user-${user.userID}`}
+                                checked={selectedUserIds.includes(user.userID)}
+                                onChange={() => toggleUser(user.userID)}
                                 className="mr-2"
                             />
-                            <span className="text-(--color-text)">{user.name}</span>
+                            <span className="text-(--color-text)">
+                                {user.name}
+                            </span>
                         </label>
                     ))}
                 </div>
@@ -77,26 +106,18 @@ function UserMultiSelect({ users, selectedUserIds, setSelectedUserIds }) {
     );
 }
 
-
+// ================= UpdateTask Component =================
 function UpdateTask() {
     const [loading, setLoading] = useState(false);
     const [searchParams] = useSearchParams();
     const currentTaskID = Number(searchParams.get("id"));
-
     if (!currentTaskID || isNaN(currentTaskID)) return <UrlError />;
-
-    // Query task data
-    const { data: task, isPending, isFetching } = useQuery({
-        queryKey: [`tasks-${currentTaskID}`, currentTaskID],
-        queryFn: async () => {
-            return await TaskServices.getTaskDetail(currentTaskID);
-        },
-        refetchOnWindowFocus: false,
-    });
+    const [loadMemberErro , setLoadMemberError] = useState(false) 
 
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const formHandle = useForm({ mode: "all" });
-    const { register, handleSubmit } = formHandle;
+    const { handleSubmit } = formHandle;
 
     const [selectedOptions, setSelectedOptions] = useState(null);
     const [dueTime, setDueTime] = useState(new Date());
@@ -104,17 +125,46 @@ function UpdateTask() {
     const [title, setTitle] = useState("Default Title");
     const [showLog, setShowLog] = useState(0);
 
-    const sampleUsers = [
-        { id: 1, name: "Kha Nguyen" },
-        { id: 2, name: "Minh Tran" },
-        { id: 3, name: "Lan Pham" },
-        { id: 4, name: "Ngoc Le" },
-        { id: 4, name: "Ngoc Le" },
-        { id: 4, name: "Ngoc Le" },
-        { id: 4, name: "Ngoc Le" },
-
-    ];
+    // State quản lý assign members
     const [assignedUsers, setAssignedUsers] = useState([]);
+    const [allUsers, setAllUsers] = useState([]);
+
+    const {
+        data: task,
+        isPending,
+        isFetching,
+    } = useQuery({
+        queryKey: [`tasks-${currentTaskID}`, currentTaskID],
+        queryFn: async () => {
+            const responseData = await TaskServices.getTaskDetail(
+                currentTaskID
+            );
+            return responseData;
+        },
+    });
+
+    // Lấy danh sách user của team và gán assignedUsers
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+
+                const res = await AssignServies.getAllUserToAssignByTaskID(
+                    currentTaskID 
+                );
+                const users = res.data.data || [];
+                setAllUsers(users);
+                const assigned = users
+                    .filter((u) => u.assigned)
+                    .map((u) => u.id);
+                setAssignedUsers(assigned);
+
+            } catch (error) {
+                setLoadMemberError(true) 
+                alert("Failed to fetch assign users. Please try again");
+            }
+        };
+        fetchUsers();
+    }, [currentTaskID]); // Chỉ chạy 1 lần khi taskID thay đổi
 
     const editor = useEditor({
         extensions: [
@@ -123,7 +173,7 @@ function UpdateTask() {
             Highlight,
             Image.configure({ allowBase64: true, resize: { enabled: true } }),
         ],
-        content: task ? task.data.data.description : "<p>Loading...</p>",
+        content: "<p>Loading...</p>",
         editorProps: {
             attributes: {
                 class: "w-full h-[500px] border-2 bg-(--color-background-2) overflow-y-auto rounded-md px-3 py-2 text-base border-slate-200 text-(--color-text)",
@@ -131,19 +181,29 @@ function UpdateTask() {
         },
     });
 
-    const queryClient = useQueryClient();
+    // Set content editor khi task load xong
+    useEffect(() => {
+        if (task && editor) {
+            const t = task.data.data;
+            setTitle(t.title);
+            setDueTime(new Date(t.dueTime));
+            setSelectedOptions(optionMap[t.status]);
+            editor.commands.setContent(t.description);
+        }
+    }, [task, editor]);
+
     const updateMutation = useMutation({
-        mutationFn: async (payload) => {
-            return await TaskServices.updateTask(
+        mutationFn: async (payload) =>
+            TaskServices.updateTask(
                 currentTaskID,
                 payload.title,
                 payload.description,
                 new Date(payload.dueTime).toISOString(),
                 payload.important,
                 payload.urgent,
-                payload.status
-            );
-        },
+                payload.status,
+                payload.assignIds
+            ),
         onMutate: () => {
             setLoading(true);
             setShowLog(0);
@@ -167,22 +227,11 @@ function UpdateTask() {
             important: formData.important,
             urgent: formData.urgent,
             status: selectedOptions?.value || task.data.data.status,
-
-            // Bạn có thể gửi assignedUsers vào API của bạn
-            assignedUsers, //Bien dung de chua cac users 
+            assignIds : assignedUsers,
         });
     };
 
-    useEffect(() => {
-        if (task) {
-            const t = task.data.data;
-            setTitle(t.title);
-            setDueTime(new Date(t.dueTime));
-            setSelectedOptions(optionMap[t.status]);
-        }
-    }, [task]);
-
-    if (isPending || isFetching || task === undefined) return <LoadingModal />;
+    if (isPending || isFetching || !task) return <LoadingModal />;
 
     return (
         <WorkingLayout>
@@ -198,14 +247,12 @@ function UpdateTask() {
                 <form className="relative" onSubmit={handleSubmit(onSubmit)}>
                     <div className="flex max-md:flex-col items-start gap-6">
                         <DefaultImageUpload />
-
                         <div className="flex-1">
                             <TitleInput
                                 formHandle={formHandle}
                                 onTitleChange={setTitle}
                                 defaultValue={task.data.data.title}
                             />
-
                             <PriorityChoice
                                 formHandle={formHandle}
                                 onPriorityChange={setPriority}
@@ -213,23 +260,27 @@ function UpdateTask() {
                                 urgent={task.data.data.urgent}
                             />
 
-                            {/* STATUS */}
-                            <p className="mt-4 mb-1 text-(--color-text)">Status:</p>
+                            <p className="mt-4 mb-1 text-(--color-text)">
+                                Status:
+                            </p>
                             <ListBox
                                 selectedOption={selectedOptions}
                                 setSelectedOption={setSelectedOptions}
                             />
 
-                            {/* MULTI SELECT USERS */}
                             <UserMultiSelect
-                                users={sampleUsers}
+                                users={allUsers}
                                 selectedUserIds={assignedUsers}
                                 setSelectedUserIds={setAssignedUsers}
+                                loading={isPending}
+                                error={loadMemberErro}
                             />
 
-                            {/* DATE */}
                             <div className="w-full mb-4 mt-4 flex max-md:flex-col">
-                                <DateInput value={dueTime} onChange={setDueTime} />
+                                <DateInput
+                                    value={dueTime}
+                                    onChange={setDueTime}
+                                />
                             </div>
                         </div>
                     </div>
@@ -245,8 +296,7 @@ function UpdateTask() {
                             pointerEvents: loading ? "none" : "auto",
                             opacity: loading ? 0.7 : 1,
                         }}
-                        className="px-4 top-35 md:top-43 right-0 absolute py-3 text-white bg-(--color-primary) mt-4 font-semibold shadow-lg rounded-md"
-                    >
+                        className="px-4 top-35 md:top-43 right-0 cursor-pointer absolute py-3 text-white bg-(--color-primary) mt-4 font-semibold shadow-lg rounded-md">
                         {loading ? "Updating..." : "Update"}
                     </button>
                 </form>

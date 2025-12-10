@@ -34,7 +34,6 @@ function TaskByGroupViewTeam({ width = "100%", height = "100%", teamID }) {
                             taskTitle={task.title}
                             dueTime={task.dueTime}
                             status={task.status}     
-                            saved = {1}   
                             teamID={teamID}                
                         
                         />

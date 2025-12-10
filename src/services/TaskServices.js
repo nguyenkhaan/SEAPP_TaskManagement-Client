@@ -59,10 +59,12 @@ class TaskServices {
         description,
         dueTime,
         important,
-        urgent
+        urgent, 
+        assignIds = [] 
     ) {
         const token = this.getUserToken();
         try {
+            console.log(assignIds)
             const responseData = await api.post(
                 `/tasks/teams/${teamID}/tasks`,
                 {
@@ -71,6 +73,7 @@ class TaskServices {
                     dueTime,
                     important,
                     urgent,
+                    assignIds
                 },
                 {
                     headers: {
@@ -106,17 +109,18 @@ class TaskServices {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            console.log(responseData)
             return responseData;
         } catch (err) {
             console.log(err);
             throw err;
         }
     }
-    static async updateTask(taskID , title , description , dueTime , important , urgent , status) {
+    static async updateTask(taskID , title , description , dueTime , important , urgent , status , assignIds) {
         const token = this.getUserToken() 
         try {
             const responseData = await api.put(`/tasks/${taskID}` , {
-                title , description , dueTime , important , urgent , status
+                title , description , dueTime , important , urgent , status , assignIds
             } , {
                 headers : {
                     'Authorization' : `Bearer ${token}`
