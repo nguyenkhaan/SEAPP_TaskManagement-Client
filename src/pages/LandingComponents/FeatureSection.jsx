@@ -30,7 +30,7 @@ function FeatureSection() {
       <h2 data-aos='zoom-in' className="mt-2 lg:text-7xl md:text-5xl text-3xl text-(--color-primary) text-center w-full font-[Montserrat]">
         Stay Progress
       </h2>
-      <span data-aos='zoom-in' className="block lg:w-full md:w-[600px] w-[400px] mx-auto text-center lg:text-2xl md:text-xl 2xl:text-3xl text-lg text-(--color-text) mt-6 mb-18">
+      <span data-aos='zoom-in' className="block lg:w-full md:w-[600px] mx-auto text-center lg:text-2xl md:text-xl 2xl:text-3xl text-lg text-(--color-text) mt-6 mb-18">
         Powerful features designed to help you manage collaborate with teams and
         achieve more.
       </span>

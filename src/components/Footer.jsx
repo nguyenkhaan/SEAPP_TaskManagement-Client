@@ -37,11 +37,11 @@ const customerSupports = [
 ]
 export default function Footer() {
     return (
-        <footer className='w-screen relative px-16 h-120 pt-18 '>
+        <footer className='w-screen relative px-6 h-120 pt-18 '>
             <div className='grid grid-cols-12 lg:pb-0 pb-5 border-b border-(--color-border) justify-between'>
                 <div className='lg:col-span-6 col-span-12 flex items-start flex-col justify-start'>
                     <Logo width={220} height={58} />
-                    <p className='w-[440px] text-base md:text-lg xl:text-xl lg:h-[168px] h-[100px] text-(--color-text-desc)'>The ultimate task management solution for modern teams.</p>
+                    <p className='text-base md:text-lg xl:text-xl lg:h-[168px] h-[100px] text-(--color-text-desc)'>The ultimate task management solution for modern teams.</p>
                 </div>
                 <div className='lg:col-span-2 col-span-4'>
                     <FooterList
