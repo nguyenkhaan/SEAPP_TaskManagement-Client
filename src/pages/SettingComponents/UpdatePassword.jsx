@@ -21,12 +21,12 @@ function UpdatePassword() {
             setShowLog(0);
         },
         onSuccess: () => {
-            setLoading(false);
             setShowLog(1);
+            setLoading(false);
         },
         onError: () => {
-            setLoading(false);
             setShowLog(-1);
+            setLoading(false);
         },
     });
     const [showLog, setShowLog] = useState(0);

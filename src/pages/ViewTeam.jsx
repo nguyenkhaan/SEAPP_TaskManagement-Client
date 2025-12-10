@@ -182,14 +182,14 @@ function ViewTeam({
             setIsRefreshCode(true)
         }, 
         onSuccess: () => {
-            setIsRefreshCode(false) 
             queryClient.invalidateQueries([`team-${currentTeamID}`])
+            setIsRefreshCode(false) 
         }, 
         onError: () => {} 
     })
     const handleCode = () => {
-        setIsRefreshCode(false) 
         setShowCode(!showCode)
+        setIsRefreshCode(false) 
     }
 
     if (

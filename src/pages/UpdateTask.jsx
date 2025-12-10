@@ -211,9 +211,9 @@ function UpdateTask() {
             setShowLog(0);
         },
         onSuccess: (data) => {
-            setLoading(false);
             queryClient.invalidateQueries([`team-tasks-${data.data.teamId}`]);
             setShowLog(1);
+            setLoading(false);
         },
         onError: () => {
             setLoading(false);

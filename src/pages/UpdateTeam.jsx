@@ -14,6 +14,7 @@ import LoadingModal from "./LoadingModal";
 import ParamServices from "../services/urlParams";
 import TeamServies from "../services/teamServices";
 import UrlError from "./URLError";
+import { useNavigate } from "react-router";
 function UpdateTeam() {
     const [loading , setLoading] = useState(false) 
     const teamID = ParamServices.getID() 
@@ -35,7 +36,7 @@ function UpdateTeam() {
         },
         refetchOnWindowFocus: false 
     });
-
+    const navigate = useNavigate() 
     const [image, setImage] = useState(null);
     const [reRender, setReRender] = useState(true);
     const [previewImage, setPreviewImage] = useState(null);
@@ -82,13 +83,16 @@ function UpdateTeam() {
             setShowLog(0) 
         }, 
         onSuccess: async (responseData) => {
-            setLoading(false) 
             await queryClient.invalidateQueries(["teams"]);
             setShowLog(1);
+            setLoading(false) 
+            setTimeout(() => {
+                navigate(`/app/view-team?id=${teamID}`)
+            } , 500)
         },
         onError: () => {
-            setLoading(false) 
             setShowLog(-1);
+            setLoading(false) 
         },
     });
 

@@ -112,16 +112,16 @@ function ViewTask() {
             setShowLog(0);
         },
         onSuccess: (resData) => {
-            setLoading(false);
             queryClient.invalidateQueries([`team-tasks-${1}`]);
             setShowLog(1);
+            setLoading(false);
             setTimeout(() => {
                 navigate(`/app/view-team?id=${data.teamId}`);
             }, 800);
         },
         onError: () => {
-            setLoading(false);
             setShowLog(-1);
+            setLoading(false);
         },
     });
 

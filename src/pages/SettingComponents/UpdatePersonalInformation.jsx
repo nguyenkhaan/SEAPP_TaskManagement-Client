@@ -46,8 +46,8 @@ function UpdatePersonalInformation({ avatar }) {
             setShowLog(0) 
         }, 
         onSuccess: () => {
-            setLoading(false) 
             queryClient.invalidateQueries(["user"]); //Fetch lai du lieu user => Update lai du lieu
+            setLoading(false) 
         },
     });
 
@@ -60,14 +60,14 @@ function UpdatePersonalInformation({ avatar }) {
             setLoading(true) 
         }, 
         onSuccess: () => {
-            setLoading(false) 
             setShowLog(1);
             setPasswordModal(false);
+            setLoading(false) 
             queryClient.invalidateQueries(["user"]);
         },
         onError: () => {
-            setLoading(false) 
             setShowLog(-1);
+            setLoading(false) 
         },
     });
 
