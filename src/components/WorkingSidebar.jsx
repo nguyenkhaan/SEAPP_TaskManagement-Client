@@ -99,6 +99,6 @@ function WorkingSidebar({ showSidebar = false, setShowSidebar = null }) {
             </ul>
         </motion.div>
     );
-    return window.innerWidth <= 1024 ? sidebarSmall : sideBarLarge;
+    return window.innerWidth <= 1536 ? sidebarSmall : sideBarLarge;
 }
 export default WorkingSidebar;

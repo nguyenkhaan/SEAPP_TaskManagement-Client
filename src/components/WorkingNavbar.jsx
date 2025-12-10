@@ -33,7 +33,7 @@ function WorkingNavbar({
                     <button
                         className="2xl:hidden p-3 rounded-lg bg-gray-100 shadow cursor-pointer"
                         onClick={() => {
-                            if (window.innerWidth <= 1280) {
+                            if (window.innerWidth <= 1536) {
                                 setShowSidebar(!showSidebar) 
                             }
                         }}
