@@ -84,15 +84,15 @@ function UpdateTeam() {
         }, 
         onSuccess: async (responseData) => {
             await queryClient.invalidateQueries(["teams"]);
-            setShowLog(1);
             setLoading(false) 
+            setShowLog(1);
             setTimeout(() => {
                 navigate(`/app/view-team?id=${teamID}`)
             } , 500)
         },
         onError: () => {
-            setShowLog(-1);
             setLoading(false) 
+            setShowLog(-1);
         },
     });
 

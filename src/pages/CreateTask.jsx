@@ -159,9 +159,9 @@ function CreateTask() {
         onSuccess: (data) => {
             // console.log('Du lieu sau khi tao task: ' , data) 
             
+            setLoading(false);
             queryClient.invalidateQueries([`team-tasks-${teamID}`]);
             queryClient.invalidateQueries([`tasks-me`]);
-            setLoading(false);
             setShowLog(1);
 
             formHandle.reset({

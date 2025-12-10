@@ -56,10 +56,10 @@ function CreateTeam() {
         onSuccess: async (responseData) => {
             // Tắt loading khi thành công
             queryClient.invalidateQueries(["teams"]); //Fetch du lieu lai cho thang teams, them await de load xong thi moi cho hien thi UI
-            setShowLog(1);
+            setLoading(false);
             setCode(responseData.data.code);
             setShowCodeModal(true);
-            setLoading(false);
+            setShowLog(1);
 
         },
         onError: () => {
