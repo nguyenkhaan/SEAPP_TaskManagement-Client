@@ -107,13 +107,13 @@ function Team() {
                             <i class="fa-solid fa-plus"></i>
                         </motion.button>
                     </div>
-                    <div className="w-full flex items-center justify-between gap-3">
+                    <div className="w-full flex items-center justify-start gap-3">
                         <GroupStastic
                             stasticNumber={data.data.teamData.length}
                             title="Total Teams"
                             Color="#7f7373"
                         />
-                        <GroupStastic
+                        {/* <GroupStastic
                             stasticNumber={20}  //Bo sung them cai nay 
                             title="Total Tasks"
                             Color="#bd7d7e"
@@ -122,7 +122,7 @@ function Team() {
                             stasticNumber={39}  //B sung them cai nay 
                             title="Working Tasks"
                             Color="#109628"
-                        />
+                        /> */}
                     </div>
                     {data.data.teamData.length == 0 ? (
                         <p className="w-full text-center text-base md:text-xl italic mt-6 md:mt-8 text-(--color-text)">

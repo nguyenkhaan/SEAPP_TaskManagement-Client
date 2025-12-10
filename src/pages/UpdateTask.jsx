@@ -128,7 +128,7 @@ function UpdateTask() {
     // State quản lý assign members
     const [assignedUsers, setAssignedUsers] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
-
+    const [canAssign , setCanAssign] = useState(false) 
     const {
         data: task,
         isPending,
@@ -139,8 +139,10 @@ function UpdateTask() {
             const responseData = await TaskServices.getTaskDetail(
                 currentTaskID
             );
+            setCanAssign(responseData.data.canAssign)
             return responseData;
         },
+        refetchOnWindowFocus: false 
     });
 
     // Lấy danh sách user của team và gán assignedUsers
@@ -268,13 +270,13 @@ function UpdateTask() {
                                 setSelectedOption={setSelectedOptions}
                             />
 
-                            <UserMultiSelect
+                            {canAssign ? <UserMultiSelect
                                 users={allUsers}
                                 selectedUserIds={assignedUsers}
                                 setSelectedUserIds={setAssignedUsers}
                                 loading={isPending}
                                 error={loadMemberErro}
-                            />
+                            /> : <></>}
 
                             <div className="w-full mb-4 mt-4 flex max-md:flex-col">
                                 <DateInput
