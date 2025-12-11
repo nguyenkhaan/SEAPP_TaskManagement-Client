@@ -67,6 +67,8 @@ git clone https://github.com/RinWasBusted/SEAPP_TaskManagement-Server-
 
 **Note**: This Repo is configed for Deloy. If you want to run Development. You must fix the `BASE URL` variables in `api.js` file. 
 
+If you has any question in this step. Please [contact](https://www.facebook.com/kha.an.907155) for more informations. 
+
 ### 3. Docker  
 - Build and run with Docker Compose up 
 ```bash
