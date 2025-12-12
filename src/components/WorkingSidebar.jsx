@@ -76,7 +76,7 @@ function WorkingSidebar({ showSidebar = false, setShowSidebar = null }) {
             initial={{ x: "-100%" }} // lúc mới mount sẽ nằm ngoài màn hình bên trái
             animate={{ x: showSidebar ? "0%" : "-100%" }} // true thì chạy vào, false thì chạy ra
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="w-[365px] 2xl:block h-[868px] z-9999999 top-20 rounded-2xl bg-(--color-primary) fixed left-0 pt-6 shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
+            className="w-[365px] 2xl:block h-[868px] z-9999999 top-24 rounded-2xl bg-(--color-primary) fixed left-0 pt-6 shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
             <div className="flex items-center justify-start pl-6 pt-6">
                 <Avatar style={{ color: "white", pointerEvents: "none" }} />
             </div>
